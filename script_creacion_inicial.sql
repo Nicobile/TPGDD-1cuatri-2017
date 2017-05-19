@@ -42,7 +42,7 @@ U_Admin [bit] not null DEFAULT 0,
 )
 go
 
-/*RolporFunciones */
+/*RolporUsuario */
 create table [GDD].RolporUsuario(
 [IdUsuario] INTEGER,
 [IdRol] INTEGER,
