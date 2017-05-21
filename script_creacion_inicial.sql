@@ -20,14 +20,15 @@ create table [PUSH_IT_TO_THE_LIMIT].Funcionalidad(
 IdFun int identity (1,1) primary key,
 Descripcion varchar(140) not null,
 )
-go
+
 
 /*Rol*/
 create table [PUSH_IT_TO_THE_LIMIT].Rol(
 IdRol int identity(1,1) primary key,
 Nombre varchar(50) not null,
+Estado bit not null default 1,
 )
-go
+
 
 /*RolporFunciones*/
 create table [PUSH_IT_TO_THE_LIMIT].RolporFunciones(
@@ -35,7 +36,7 @@ create table [PUSH_IT_TO_THE_LIMIT].RolporFunciones(
 [IdFun] INTEGER,
  PRIMARY KEY (IdRol, IdFun)
 )
-go
+
 
 /*Usuario FALTA CONTRASEÑA DEFAULT QUE ES W23A CREO QUE EN SHA256*/
 create table [PUSH_IT_TO_THE_LIMIT].Usuario(
@@ -46,7 +47,7 @@ Habilitado [bit] not null default 1,
 Intentos [tinyint] default 0,
 U_Admin [bit] not null DEFAULT 0,
 )
-go
+
 
 /*RolporUsuario */
 create table [PUSH_IT_TO_THE_LIMIT].RolporUsuario(
@@ -54,7 +55,7 @@ create table [PUSH_IT_TO_THE_LIMIT].RolporUsuario(
 [IdRol] INTEGER,
  PRIMARY KEY (IdUsuario, IdRol)
 )
-go
+
 
 /*Cliente */
 create table [PUSH_IT_TO_THE_LIMIT].Cliente(
@@ -68,8 +69,9 @@ Codigo_postal int not null,
 Fecha_de_nacimiento datetime not null,
 DNI numeric(18,0) unique not null,
 IdUsuario int not null references [PUSH_IT_TO_THE_LIMIT].Usuario,
+Estado bit not null default 1 , 
 )
-go
+
 
 /*Facturacion cliente*/
 create table [PUSH_IT_TO_THE_LIMIT].FacturacionCliente(
@@ -78,23 +80,13 @@ Fecha_inicio_de_factura datetime /*notnull*/,                        /*En la tab
 Fecha_fin_de_factura datetime /*notnull*/,
 IdCliente int not null references [PUSH_IT_TO_THE_LIMIT].Cliente,
 Importe_total_de_factura numeric(18,2) not null,
-Viajes_facturados numeric(18,0) not null,               /*MUCHACHOS, CREO QUE ACA LA PIFIAMOS, QUE VIAJES FACTURADOS DEBERIA SER LA PK DE REGISTRO DE VIAJE, PORQUE ESTO CREO QUE VENDRIA A SER EL DETALLE*/
+Viajes_facturados numeric(18,0) not null,   
+       /*MUCHACHOS, CREO QUE ACA LA PIFIAMOS, QUE VIAJES FACTURADOS DEBERIA SER LA PK DE REGISTRO DE VIAJE, PORQUE ESTO CREO QUE VENDRIA A SER EL DETALLE*/
 )
-go
 
-/*Registro de viaje*/
-create table [PUSH_IT_TO_THE_LIMIT].RegistroViaje(
-IdViaje int identity(1,1) primary key,
-/*IdChofer int not null references [GDD].Chofer,*/                          /*Descomentar una vez creada la tabla chofer*/
-Automovil int not null,                                                     /*No estoy seguro*/
-IdFactura int not null references [PUSH_IT_TO_THE_LIMIT].FacturacionCliente,
-/*IdTurno int not null references [GDD].Turno,*/                            /*Descomentar una vez creada la tabla turno*/
-Cantidad_de_km_viaje numeric(18,0) not null, 
-Fecha_hora_inicio_de_viaje datetime not null,
-Fecha_hora_fin_de_viaje datetime not null,              /*ACA PODRIAMOS SEPARAR LA FECHA DE LA HORA (SOLO SUGERENCIA)*/
-IdCliente int not null references [PUSH_IT_TO_THE_LIMIT].Cliente,
-)
-go
+
+
+
 
 /* Creo tabla Chofer*/
 CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[Chofer] (
@@ -106,8 +98,9 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[Chofer] (
 	[chofer_mail] VARCHAR(50) ,
 	[chofer_fechaDeNacimiento]	DATETIME ,
 	--[chofer_idUsuario] seria una FK , depues hay que ponerla con el resto de las FK
+	IdUsuario int unique not null references [PUSH_IT_TO_THE_LIMIT].Usuario,
 )
-go
+
 
 /* Creo Tabla Turno*/
 CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[Turno](
@@ -116,19 +109,19 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[Turno](
 	[turno_hora_fin] NUMERIC(18,0) NOT NULL,
 	[turno_descripcion] VARCHAR(255),
 	[turno_valor_kilometro] NUMERIC(18,2),
-	[turno_precio_base] NUMERIC(18,2),
-	[turno_habilitado] BIT DEFAULT 1,
+	[turno_precio_base] NUMERIC(18,2) not null,
+	[turno_habilitado] BIT not null DEFAULT 1,
 )
 
-go
+
 
 
 /*Rendicion Viaje*/
 CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[RendicionViaje](
 	[rendicion_id] INT IDENTITY(1,1) PRIMARY KEY,
 	[rendicion_fecha] DATETIME NOT NULL,
-	--[chofer_dni] INT NOT NULL REFERENCES [PUSH_IT_TO_THE_LIMIT].[Chofer],					FK
-	--[turno_id] INT NOT NULL REFERENCES [PUSH_IT_TO_THE_LIMIT].[Turno],					FK
+	[chofer_dni] numeric(18,0) NOT NULL REFERENCES [PUSH_IT_TO_THE_LIMIT].[Chofer],					
+	[turno_id] int NOT NULL REFERENCES [PUSH_IT_TO_THE_LIMIT].[Turno],					
 	[rendicion_importe_total] NUMERIC(18,2) NOT NULL,    
 )
 
@@ -137,9 +130,9 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[Auto](
 	[auto_patente] VARCHAR(8) PRIMARY KEY,
 	[auto_marca] VARCHAR(255) NOT NULL,
 	[auto_modelo] VARCHAR(255) NOT NULL,
-	--[chofer_dni] INT NOT NULL REFERENCES [PUSH_IT_TO_THE_LIMIT].[Chofer],					FK
-	--[turno_id] INT NOT NULL REFERENCES [PUSH_IT_TO_THE_LIMIT].[Turno],					FK
-	[auto_estado] BIT DEFAULT 1,
+	[chofer_dni] numeric(18,0) NOT NULL REFERENCES [PUSH_IT_TO_THE_LIMIT].[Chofer],					
+	[turno_id] INT NOT NULL REFERENCES [PUSH_IT_TO_THE_LIMIT].[Turno],					
+	[auto_estado] BIT not null DEFAULT 1,
 	[auto_licencia] VARCHAR(26),
 	[auto_rodado] VARCHAR(10),
 )
@@ -149,4 +142,16 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[AutoporTurno](
 [auto_patente] VARCHAR(8),
 [turno_id] INTEGER,
  PRIMARY KEY (auto_patente, turno_id)
+)
+/*Registro de viaje*/
+create table [PUSH_IT_TO_THE_LIMIT].RegistroViaje(
+IdViaje int identity(1,1) primary key,
+IdChofer NUMERIC(18,0) not null references [PUSH_IT_TO_THE_LIMIT].Chofer,                        
+Automovil VARCHAR(8) not null references[PUSH_IT_TO_THE_LIMIT].[Auto],                                              
+IdFactura int not null references [PUSH_IT_TO_THE_LIMIT].FacturacionCliente,
+IdTurno int not null references [PUSH_IT_TO_THE_LIMIT].Turno,                            
+Cantidad_de_km_viaje numeric(18,0) not null, 
+Fecha_hora_inicio_de_viaje datetime not null,
+Fecha_hora_fin_de_viaje datetime not null,              /*ACA PODRIAMOS SEPARAR LA FECHA DE LA HORA (SOLO SUGERENCIA)*/
+IdCliente int not null references [PUSH_IT_TO_THE_LIMIT].Cliente,
 )
