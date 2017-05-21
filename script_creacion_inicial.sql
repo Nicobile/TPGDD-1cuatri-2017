@@ -13,6 +13,48 @@ go
 /*si no lo encuentra en la tabla de catalogo sys.schema lo crea*/
 
 
+/* Eliminamos tablas si ya existen*/
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.Funcionalidad'))
+    DROP TABLE PUSH_IT_TO_THE_LIMIT.Funcionalidad
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.Rol'))
+    DROP TABLE PUSH_IT_TO_THE_LIMIT.Rol
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.RolporFunciones'))
+    DROP TABLE PUSH_IT_TO_THE_LIMIT.RolporFunciones
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.Usuario'))
+    DROP TABLE PUSH_IT_TO_THE_LIMIT.Usuario
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.RolporUsuario'))
+    DROP TABLE PUSH_IT_TO_THE_LIMIT.RolporUsuario
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.Cliente'))
+    DROP TABLE PUSH_IT_TO_THE_LIMIT.Cliente
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.Factura'))
+    DROP TABLE PUSH_IT_TO_THE_LIMIT.Factura
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.Chofer'))
+    DROP TABLE PUSH_IT_TO_THE_LIMIT.Chofer
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.Turno'))
+    DROP TABLE PUSH_IT_TO_THE_LIMIT.Turno
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.RendicionViaje'))
+    DROP TABLE PUSH_IT_TO_THE_LIMIT.RendicionViaje
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.Auto'))
+    DROP TABLE PUSH_IT_TO_THE_LIMIT.Auto
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.AutoporTurno'))
+    DROP TABLE PUSH_IT_TO_THE_LIMIT.AutoporTurno
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.RegistroViaje'))
+    DROP TABLE PUSH_IT_TO_THE_LIMIT.RegistroViaje
+
+
 /* Creacion de tablas*/
 
 /* Funcionalidad*/
@@ -153,5 +195,31 @@ create table [PUSH_IT_TO_THE_LIMIT].RegistroViaje(
 	[viaje_fecha_hora_fin] DATETIME NOT NULL,              /*ACA PODRIAMOS SEPARAR LA FECHA DE LA HORA (SOLO SUGERENCIA)*/
 	[cliente_id] INT NOT NULL ,--references [PUSH_IT_TO_THE_LIMIT].Cliente,
 )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
