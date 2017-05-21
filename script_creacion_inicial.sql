@@ -122,3 +122,31 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[Turno](
 
 go
 
+
+/*Rendicion Viaje*/
+CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[RendicionViaje](
+	[rendicion_id] INT IDENTITY(1,1) PRIMARY KEY,
+	[rendicion_fecha] DATETIME NOT NULL,
+	--[chofer_dni] INT NOT NULL REFERENCES [PUSH_IT_TO_THE_LIMIT].[Chofer],					FK
+	--[turno_id] INT NOT NULL REFERENCES [PUSH_IT_TO_THE_LIMIT].[Turno],					FK
+	[rendicion_importe_total] NUMERIC(18,2) NOT NULL,    
+)
+
+/*Auto*/
+CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[Auto](
+	[auto_patente] VARCHAR(8) PRIMARY KEY,
+	[auto_marca] VARCHAR(255) NOT NULL,
+	[auto_modelo] VARCHAR(255) NOT NULL,
+	--[chofer_dni] INT NOT NULL REFERENCES [PUSH_IT_TO_THE_LIMIT].[Chofer],					FK
+	--[turno_id] INT NOT NULL REFERENCES [PUSH_IT_TO_THE_LIMIT].[Turno],					FK
+	[auto_estado] BIT DEFAULT 1,
+	[auto_licencia] VARCHAR(26),
+	[auto_rodado] VARCHAR(10),
+)
+
+/*Auto por Turno*/
+CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[AutoporTurno](
+[auto_patente] VARCHAR(8),
+[turno_id] INTEGER,
+ PRIMARY KEY (auto_patente, turno_id)
+)
