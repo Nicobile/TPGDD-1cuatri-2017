@@ -125,9 +125,7 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].Factura(
 	)
 
 
-
-
-
+	
 /* Creo tabla Chofer*/
 CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[Chofer] (
 	[chofer_dni]  NUMERIC(18,0) PRIMARY KEY,
@@ -171,7 +169,7 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[Auto](
 	[auto_marca] VARCHAR(255) NOT NULL,
 	[auto_modelo] VARCHAR(255) NOT NULL,
 	[chofer_dni] numeric(18,0) NOT NULL,-- REFERENCES [PUSH_IT_TO_THE_LIMIT].[Chofer],					
-	[turno_id] INT NOT NULL,-- REFERENCES [PUSH_IT_TO_THE_LIMIT].[Turno],					
+	--[turno_id] INT NOT NULL,-- REFERENCES [PUSH_IT_TO_THE_LIMIT].[Turno],					
 	[auto_estado] BIT not null DEFAULT 1,
 	[auto_licencia] VARCHAR(26) NOT NULL,
 	[auto_rodado] VARCHAR(10),
@@ -195,6 +193,55 @@ create table [PUSH_IT_TO_THE_LIMIT].RegistroViaje(
 	[viaje_fecha_hora_fin] DATETIME NOT NULL,              /*ACA PODRIAMOS SEPARAR LA FECHA DE LA HORA (SOLO SUGERENCIA)*/
 	[cliente_id] INT NOT NULL ,--references [PUSH_IT_TO_THE_LIMIT].Cliente,
 )
+
+/* Agregamos las FKs */
+
+--Creamos las fk de RolporFunciones
+ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RolporFunciones] ADD CONSTRAINT RolporFunciones_Funcionalidad FOREIGN KEY (funcionalidad_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Funcionalidad](funcionalidad_id)
+
+ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RolporFunciones] ADD CONSTRAINT RolporFunciones_Rol FOREIGN KEY (rol_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Rol](rol_id)
+
+--Creamos las Fk de RolporUSuario
+ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RolporUsuario] ADD CONSTRAINT RolporUsuario_Rol FOREIGN KEY (rol_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Rol](rol_id)
+
+ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RolporUsuario] ADD CONSTRAINT RolporUsuario_Usuario FOREIGN KEY (usuario_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Usuario](usuario_id)
+
+--Creamos la fk de chofer
+ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[Chofer] ADD CONSTRAINT Chofer_Usuario FOREIGN KEY (usuario_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Usuario](usuario_id)
+
+--Creamos las fks de Registro
+ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RegistroViaje] ADD CONSTRAINT RegistroViaje_Chofer FOREIGN KEY (chofer_dni) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Chofer](chofer_dni)
+
+ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RegistroViaje] ADD CONSTRAINT RegistroViaje_Factura FOREIGN KEY (factura_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Factura](factura_id)
+
+ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RegistroViaje] ADD CONSTRAINT RegistroViaje_Turno FOREIGN KEY (turno_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Turno](Turno_id)
+
+ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RegistroViaje] ADD CONSTRAINT RegistroViaje_Cliente FOREIGN KEY (cliente_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Cliente](Cliente_id)
+
+--Creamos la fk de Cliente
+ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[Cliente] ADD CONSTRAINT Cliente_Usuario FOREIGN KEY (usuario_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Usuario](usuario_id)
+
+--Creamos la fks de RendicionViaje 
+ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RendicionViaje] ADD CONSTRAINT RendicionViaje_Chofer FOREIGN KEY (chofer_dni) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Chofer](chofer_dni)
+
+ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RendicionViaje] ADD CONSTRAINT RendicionViaje_Turno FOREIGN KEY (Turno_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Turno](Turno_id)
+
+--Creamos la fk de factura 
+ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[Factura] ADD CONSTRAINT Factura_Cliente FOREIGN KEY (cliente_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Cliente](cliente_id)
+
+--Creamos las Fk de Auto
+ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RendicionViaje] ADD CONSTRAINT Auto_Chofer FOREIGN KEY (chofer_dni) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Chofer](chofer_dni)
+
+--Creamos las fks de AutoporTurno
+ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[AutoporTurno] ADD CONSTRAINT AutoporTurno_Auto FOREIGN KEY (auto_patente) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Auto](auto_patente)
+
+ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[AutoporTurno] ADD CONSTRAINT AutoporTurno_Turno FOREIGN KEY (Turno_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Turno](turno_id)
+
+
+
+
+
+
 
 
 
