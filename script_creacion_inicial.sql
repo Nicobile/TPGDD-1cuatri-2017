@@ -191,7 +191,7 @@ create table [PUSH_IT_TO_THE_LIMIT].RegistroViaje(
 	[factura_id] INT NOT NULL ,--references [PUSH_IT_TO_THE_LIMIT].Factura,
 	[turno_id] INT NOT NULL ,--references [PUSH_IT_TO_THE_LIMIT].Turno,                            
 	[viaje_cantidad_km] NUMERIC(18,0) NOT NULL, 
-	[viaje_rendicion] numeric(10,0),
+	[rendicion_id] INT,
 	[viaje_fecha] DATETIME NOT NULL,
 	[viaje_hora_inicio] time not null,
 	[viaje_hora_fin] TIME NOT NULL,              /*ACA PODRIAMOS SEPARAR LA FECHA DE LA HORA (SOLO SUGERENCIA)*/
@@ -221,6 +221,8 @@ ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RegistroViaje] ADD CONSTRAINT RegistroViaje_
 ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RegistroViaje] ADD CONSTRAINT RegistroViaje_Turno FOREIGN KEY (turno_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Turno](Turno_id)
 
 ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RegistroViaje] ADD CONSTRAINT RegistroViaje_Cliente FOREIGN KEY (cliente_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Cliente](Cliente_id)
+
+ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RegistroViaje] ADD CONSTRAINT RegistroViaje_RendicionViaje FOREIGN KEY (rendicion_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[RendicionViaje](rendicion_id)
 
 --Creamos la fk de Cliente
 ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[Cliente] ADD CONSTRAINT Cliente_Usuario FOREIGN KEY (usuario_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Usuario](usuario_id)
