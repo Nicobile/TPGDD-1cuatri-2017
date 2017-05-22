@@ -179,7 +179,7 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[Auto](
 	[auto_marca] VARCHAR(255) NOT NULL,
 	[auto_modelo] VARCHAR(255) NOT NULL,
 	[chofer_dni] numeric(18,0) NOT NULL,-- REFERENCES [PUSH_IT_TO_THE_LIMIT].[Chofer],					
-	--[turno_id] INT NOT NULL,-- REFERENCES [PUSH_IT_TO_THE_LIMIT].[Turno],					
+					
 	[auto_estado] BIT not null DEFAULT 1,
 	[auto_licencia] VARCHAR(26) NOT NULL,
 	[auto_rodado] VARCHAR(10),
@@ -201,7 +201,7 @@ create table [PUSH_IT_TO_THE_LIMIT].RegistroViaje(
 	[viaje_cantidad_km] NUMERIC(18,0) NOT NULL, 
 	[rendicion_id] INT,
 	[viaje_fecha] VARCHAR(15) NOT NULL,--LO CAMBIO DE DATETIME A VARCHAR POR QUE LA FUNCION QUE USO EN LA MIGRACION PARA OBTENER SOLO LA FECHA RETORNA UN VARCHAR, LO MISMO PARA HORA INICIO Y FIN
-	[viaje_hora_inicio] VARCHAR(10) NOT NULL,
+	[viaje_hora_inicio] VARCHAR(10) not null ,
 	[viaje_hora_fin] VARCHAR(10)  ,--IMPORTANTE :LE SAQUE EL NOT NULL POR QUE EN LA TABLA MAESTRA NO HAY , SI NO HAY QUE PONERLE UN DEFAULT
 	[cliente_id] INT NOT NULL ,--references [PUSH_IT_TO_THE_LIMIT].Cliente,
 )
