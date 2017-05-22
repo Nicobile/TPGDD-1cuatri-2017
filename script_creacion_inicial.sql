@@ -381,7 +381,7 @@ order by usuario_ID
 
 
 /*RegistroViaje*/
-insert into [PUSH_IT_TO_THE_LIMIT].RegistroViaje (viaje_automovil, chofer_dni, cliente_id, viaje_rendicion, turno_id, viaje_cantidad_km, viaje_fecha, factura_id)
+insert into [PUSH_IT_TO_THE_LIMIT].RegistroViaje (viaje_automovil, chofer_dni, cliente_id, rendicion_id, turno_id, viaje_cantidad_km, viaje_fecha, factura_id)
 select distinct  a.auto_patente, ch.chofer_dni, cl.cliente_id, r.rendicion_id, t.turno_id, m.Viaje_Cant_Kilometros, m.Viaje_Fecha, f.factura_id
 from [PUSH_IT_TO_THE_LIMIT].[Auto] a, [PUSH_IT_TO_THE_LIMIT].Chofer ch, [PUSH_IT_TO_THE_LIMIT].Cliente cl, [PUSH_IT_TO_THE_LIMIT].RendicionViaje r, [PUSH_IT_TO_THE_LIMIT].Turno t, gd_esquema.Maestra m, gd_esquema.Maestra m2, [PUSH_IT_TO_THE_LIMIT].Factura f
 where m.Viaje_Cant_Kilometros is not null
