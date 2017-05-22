@@ -1,4 +1,3 @@
-
 use [GD1C2017]
 go
 /*Creacion del Schema*/
@@ -308,13 +307,6 @@ where Cliente_Dni is not null
 order by cast(Cliente_Dni as varchar(255))
 
 
-/*choferporusuario*/
-insert into [PUSH_IT_TO_THE_LIMIT].RolporUsuario( usuario_Id, rol_id)
-select distinct u.usuario_ID, r.rol_ID
-from [PUSH_IT_TO_THE_LIMIT].Usuario u, [PUSH_IT_TO_THE_LIMIT].Chofer c, [PUSH_IT_TO_THE_LIMIT].Rol r
-where u.usuario_name = cast(c.chofer_dni as varchar(255))
-and r.rol_nombre = ('Chofer')
-
 
 
 /*Cliente*/
@@ -382,6 +374,17 @@ select distinct u.usuario_ID, r.rol_ID
 from [PUSH_IT_TO_THE_LIMIT].Usuario u, [PUSH_IT_TO_THE_LIMIT].Cliente c, [PUSH_IT_TO_THE_LIMIT].Rol r
 where u.usuario_name = cast(c.cliente_dni as varchar(255))
 and r.rol_nombre = ('Cliente')
+
+
+
+
+/*choferporusuario*/
+insert into [PUSH_IT_TO_THE_LIMIT].RolporUsuario( usuario_Id, rol_id)
+select distinct u.usuario_ID, r.rol_ID
+from [PUSH_IT_TO_THE_LIMIT].Usuario u, [PUSH_IT_TO_THE_LIMIT].Chofer c, [PUSH_IT_TO_THE_LIMIT].Rol r
+where u.usuario_name = cast(c.chofer_dni as varchar(255))
+and r.rol_nombre = ('Chofer')
+
 
 /*RendicionViaje*/  
 insert into [PUSH_IT_TO_THE_LIMIT].RendicionViaje( chofer_dni, rendicion_fecha, rendicion_importe_total, rendicion_numero, turno_id)
