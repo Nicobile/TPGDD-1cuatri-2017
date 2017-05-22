@@ -15,32 +15,23 @@ go
 
 /* Eliminamos tablas si ya existen*/
 
-IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.Funcionalidad'))
-    DROP TABLE PUSH_IT_TO_THE_LIMIT.Funcionalidad
-
-IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.Rol'))
-    DROP TABLE PUSH_IT_TO_THE_LIMIT.Rol
-
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.RolporFunciones'))
     DROP TABLE PUSH_IT_TO_THE_LIMIT.RolporFunciones
-
-IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.Usuario'))
-    DROP TABLE PUSH_IT_TO_THE_LIMIT.Usuario
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.RolporUsuario'))
     DROP TABLE PUSH_IT_TO_THE_LIMIT.RolporUsuario
 
-IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.Cliente'))
-    DROP TABLE PUSH_IT_TO_THE_LIMIT.Cliente
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.AutoporTurno'))
+    DROP TABLE PUSH_IT_TO_THE_LIMIT.AutoporTurno
+	
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.RegistroViaje'))
+    DROP TABLE PUSH_IT_TO_THE_LIMIT.RegistroViaje
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.Factura'))
     DROP TABLE PUSH_IT_TO_THE_LIMIT.Factura
 
-IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.Chofer'))
-    DROP TABLE PUSH_IT_TO_THE_LIMIT.Chofer
-
-IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.Turno'))
-    DROP TABLE PUSH_IT_TO_THE_LIMIT.Turno
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.Cliente'))
+    DROP TABLE PUSH_IT_TO_THE_LIMIT.Cliente
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.RendicionViaje'))
     DROP TABLE PUSH_IT_TO_THE_LIMIT.RendicionViaje
@@ -48,11 +39,28 @@ IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_TH
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.Auto'))
     DROP TABLE PUSH_IT_TO_THE_LIMIT.Auto
 
-IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.AutoporTurno'))
-    DROP TABLE PUSH_IT_TO_THE_LIMIT.AutoporTurno
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.Chofer'))
+    DROP TABLE PUSH_IT_TO_THE_LIMIT.Chofer
 
-IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.RegistroViaje'))
-    DROP TABLE PUSH_IT_TO_THE_LIMIT.RegistroViaje
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.Usuario'))
+    DROP TABLE PUSH_IT_TO_THE_LIMIT.Usuario
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.Funcionalidad'))
+    DROP TABLE PUSH_IT_TO_THE_LIMIT.Funcionalidad
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.Rol'))
+    DROP TABLE PUSH_IT_TO_THE_LIMIT.Rol
+		
+
+	
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.Turno'))
+    DROP TABLE PUSH_IT_TO_THE_LIMIT.Turno
+
+
+
+
+
+
 
 
 /* Creacion de tablas*/
@@ -136,8 +144,8 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[Chofer] (
 	[chofer_telefono] NUMERIC(18,0) UNIQUE,
 	[chofer_mail] VARCHAR(50) ,
 	[chofer_fecha_Nacimiento] DATETIME NOT NULL,
-	[usuario_id] INT,-- seria una FK , depues hay que ponerla con el resto de las FK
-	--IdUsuario int unique not null references [PUSH_IT_TO_THE_LIMIT].Usuario, Hay que hacerlo con las otras fks
+	[usuario_id] INT,
+	
 )
 
 
@@ -192,9 +200,9 @@ create table [PUSH_IT_TO_THE_LIMIT].RegistroViaje(
 	[turno_id] INT NOT NULL ,--references [PUSH_IT_TO_THE_LIMIT].Turno,                            
 	[viaje_cantidad_km] NUMERIC(18,0) NOT NULL, 
 	[rendicion_id] INT,
-	[viaje_fecha] DATETIME NOT NULL,
-	[viaje_hora_inicio] time not null,
-	[viaje_hora_fin] TIME NOT NULL,              /*ACA PODRIAMOS SEPARAR LA FECHA DE LA HORA (SOLO SUGERENCIA)*/
+	[viaje_fecha] VARCHAR(15) NOT NULL,--LO CAMBIO DE DATETIME A VARCHAR POR QUE LA FUNCION QUE USO EN LA MIGRACION PARA OBTENER SOLO LA FECHA RETORNA UN VARCHAR, LO MISMO PARA HORA INICIO Y FIN
+	[viaje_hora_inicio] VARCHAR(10) NOT NULL,
+	[viaje_hora_fin] VARCHAR(10)  ,--IMPORTANTE :LE SAQUE EL NOT NULL POR QUE EN LA TABLA MAESTRA NO HAY , SI NO HAY QUE PONERLE UN DEFAULT
 	[cliente_id] INT NOT NULL ,--references [PUSH_IT_TO_THE_LIMIT].Cliente,
 )
 
@@ -277,14 +285,6 @@ insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones (rol_id, funcionalidad_id) va
 
 
 
-/*Cliente*/
-insert into [PUSH_IT_TO_THE_LIMIT].Cliente (cliente_nombre, cliente_apellido,cliente_dni, cliente_telefono,cliente_direccion,cliente_mail,cliente_fecha_nacimiento, usuario_id)
-select distinct m.Cliente_Nombre, m.Cliente_Apellido, m.Cliente_Dni, m.Cliente_Telefono, m.Cliente_Direccion, m.Cliente_Mail, m.Cliente_Fecha_Nac, u.usuario_ID
-from gd_esquema.Maestra m, [PUSH_IT_TO_THE_LIMIT].Usuario u
-where  cast( m.Cliente_Dni as varchar(255)) = u.usuario_name
-order by usuario_ID
-
-
 /*Usuarios*/
 
 
@@ -308,14 +308,6 @@ where Cliente_Dni is not null
 order by cast(Cliente_Dni as varchar(255))
 
 
-						/*RolporUsuario*/
-/*clienteporusuario*/
-insert into [PUSH_IT_TO_THE_LIMIT].RolporUsuario( usuario_Id, rol_id)
-select distinct u.usuario_ID, r.rol_ID
-from [PUSH_IT_TO_THE_LIMIT].Usuario u, [PUSH_IT_TO_THE_LIMIT].Cliente c, [PUSH_IT_TO_THE_LIMIT].Rol r
-where u.usuario_name = cast(c.cliente_dni as varchar(255))
-and r.rol_nombre = ('Cliente')
-
 /*choferporusuario*/
 insert into [PUSH_IT_TO_THE_LIMIT].RolporUsuario( usuario_Id, rol_id)
 select distinct u.usuario_ID, r.rol_ID
@@ -323,31 +315,26 @@ from [PUSH_IT_TO_THE_LIMIT].Usuario u, [PUSH_IT_TO_THE_LIMIT].Chofer c, [PUSH_IT
 where u.usuario_name = cast(c.chofer_dni as varchar(255))
 and r.rol_nombre = ('Chofer')
 
-/*RendicionViaje*/  
-insert into [PUSH_IT_TO_THE_LIMIT].RendicionViaje( chofer_dni, rendicion_fecha, rendicion_importe_total, rendicion_numero, turno_id)
-select distinct c.chofer_direccion, m.Rendicion_Fecha, sum(m.Rendicion_Importe), m.Rendicion_Nro, t.turno_id
-from gd_esquema.Maestra m,  [PUSH_IT_TO_THE_LIMIT].Chofer c, [PUSH_IT_TO_THE_LIMIT].Turno t
-where m.Rendicion_Fecha is not null
-and m.Chofer_Dni = c.chofer_dni
-and m.Turno_Hora_Inicio = t.turno_hora_inicio
-group by Rendicion_Nro, c.chofer_dni, t.turno_id, m.Rendicion_Fecha
-order by Rendicion_Nro
+
+
+/*Cliente*/
+insert into [PUSH_IT_TO_THE_LIMIT].Cliente (cliente_nombre, cliente_apellido,cliente_dni, cliente_telefono,cliente_direccion,cliente_mail,cliente_fecha_nacimiento, usuario_id)
+select distinct m.Cliente_Nombre, m.Cliente_Apellido, m.Cliente_Dni, m.Cliente_Telefono, m.Cliente_Direccion, m.Cliente_Mail, m.Cliente_Fecha_Nac,u.usuario_id   
+from gd_esquema.Maestra m , [PUSH_IT_TO_THE_LIMIT].Usuario u
+where  cast( m.Cliente_Dni as varchar(255)) = u.usuario_name
+order by usuario_ID
+
+
+/*Chofer*/
+
+insert into [PUSH_IT_TO_THE_LIMIT].Chofer(chofer_nombre, chofer_apellido,chofer_dni, chofer_telefono,chofer_direccion,chofer_mail,chofer_fecha_nacimiento, usuario_id)
+select distinct m.chofer_Nombre, m.chofer_Apellido, m.chofer_dni, m.chofer_Telefono, m.chofer_Direccion, m.chofer_Mail, m.chofer_Fecha_Nac, u.usuario_ID
+from gd_esquema.Maestra m, [PUSH_IT_TO_THE_LIMIT].Usuario u
+where  cast( m.chofer_dni as varchar(255)) = u.usuario_name
+order by usuario_ID
 
 
 
-/*Auto*/
-insert into [PUSH_IT_TO_THE_LIMIT].Auto (auto_licencia, auto_marca, auto_modelo, auto_patente, auto_rodado, chofer_dni)
-select distinct m.Auto_Licencia, m.Auto_Marca, m.Auto_Modelo, m.Auto_Patente, m.Auto_Rodado, c.chofer_dni
-from gd_esquema.Maestra m, [PUSH_IT_TO_THE_LIMIT].Chofer c, [PUSH_IT_TO_THE_LIMIT].Turno t
-where m.Auto_Patente is not null
-and m.Chofer_Dni = c.chofer_dni
-
-/*AutosporTurno*/
-insert into [PUSH_IT_TO_THE_LIMIT].AutoporTurno (auto_patente, turno_id)
-select distinct  a.auto_patente, t.turno_id
-from gd_esquema.Maestra m, [PUSH_IT_TO_THE_LIMIT].[Auto] a, [PUSH_IT_TO_THE_LIMIT].Turno t
-where m.Auto_Patente = a.auto_patente
-and m.Turno_Hora_Inicio = t.turno_hora_inicio
 
 
 /*Turno*/
@@ -369,20 +356,46 @@ where Factura_Nro is not null
 and c.cliente_dni = m.Cliente_Dni
 order by Factura_Nro
 
-/*Chofer*/
-
-insert into [PUSH_IT_TO_THE_LIMIT].Chofer(chofer_nombre, chofer_apellido,chofer_dni, chofer_telefono,chofer_direccion,chofer_mail,chofer_fecha_nacimiento, usuario_id)
-select distinct m.chofer_Nombre, m.chofer_Apellido, m.chofer_dni, m.chofer_Telefono, m.chofer_Direccion, m.chofer_Mail, m.chofer_Fecha_Nac, u.usuario_ID
-from gd_esquema.Maestra m, [PUSH_IT_TO_THE_LIMIT].Usuario u
-where  cast( m.chofer_dni as varchar(255)) = u.usuario_name
-order by usuario_ID
 
 
 
+
+/*Auto*/
+insert into [PUSH_IT_TO_THE_LIMIT].Auto (auto_licencia, auto_marca, auto_modelo, auto_patente, auto_rodado, chofer_dni)
+select distinct m.Auto_Licencia, m.Auto_Marca, m.Auto_Modelo, m.Auto_Patente, m.Auto_Rodado, c.chofer_dni
+from gd_esquema.Maestra m, [PUSH_IT_TO_THE_LIMIT].Chofer c, [PUSH_IT_TO_THE_LIMIT].Turno t
+where m.Auto_Patente is not null
+and m.Chofer_Dni = c.chofer_dni
+
+/*AutosporTurno*/
+insert into [PUSH_IT_TO_THE_LIMIT].AutoporTurno (auto_patente, turno_id)
+select distinct  a.auto_patente, t.turno_id
+from gd_esquema.Maestra m, [PUSH_IT_TO_THE_LIMIT].[Auto] a, [PUSH_IT_TO_THE_LIMIT].Turno t
+where m.Auto_Patente = a.auto_patente
+and m.Turno_Hora_Inicio = t.turno_hora_inicio
+
+
+/*RolporUsuario*/
+/*clienteporusuario*/
+insert into [PUSH_IT_TO_THE_LIMIT].RolporUsuario( usuario_Id, rol_id)
+select distinct u.usuario_ID, r.rol_ID
+from [PUSH_IT_TO_THE_LIMIT].Usuario u, [PUSH_IT_TO_THE_LIMIT].Cliente c, [PUSH_IT_TO_THE_LIMIT].Rol r
+where u.usuario_name = cast(c.cliente_dni as varchar(255))
+and r.rol_nombre = ('Cliente')
+
+/*RendicionViaje*/  
+insert into [PUSH_IT_TO_THE_LIMIT].RendicionViaje( chofer_dni, rendicion_fecha, rendicion_importe_total, rendicion_numero, turno_id)
+select distinct c.chofer_dni, m.Rendicion_Fecha, sum(m.Rendicion_Importe), m.Rendicion_Nro, t.turno_id --tira error por que en vez de c.chofer_dni decia c.chofer_direccion
+from gd_esquema.Maestra m,  [PUSH_IT_TO_THE_LIMIT].Chofer c, [PUSH_IT_TO_THE_LIMIT].Turno t
+where m.Rendicion_Fecha is not null
+and m.Chofer_Dni = c.chofer_dni
+and m.Turno_Hora_Inicio = t.turno_hora_inicio
+group by Rendicion_Nro, c.chofer_dni, t.turno_id, m.Rendicion_Fecha,c.chofer_direccion
+order by Rendicion_Nro
 
 /*RegistroViaje*/
-insert into [PUSH_IT_TO_THE_LIMIT].RegistroViaje (viaje_automovil, chofer_dni, cliente_id, rendicion_id, turno_id, viaje_cantidad_km, viaje_fecha, factura_id)
-select distinct  a.auto_patente, ch.chofer_dni, cl.cliente_id, r.rendicion_id, t.turno_id, m.Viaje_Cant_Kilometros, m.Viaje_Fecha, f.factura_id
+insert into [PUSH_IT_TO_THE_LIMIT].RegistroViaje (viaje_automovil, chofer_dni, cliente_id, rendicion_id, turno_id, viaje_cantidad_km, viaje_fecha,viaje_hora_inicio, factura_id)
+select distinct  a.auto_patente, ch.chofer_dni, cl.cliente_id, r.rendicion_id, t.turno_id, m.Viaje_Cant_Kilometros,CONVERT(varchar(10),m.Viaje_Fecha,120) viajeFecha,STUFF(m.Viaje_Fecha,1,11,''), f.factura_id
 from [PUSH_IT_TO_THE_LIMIT].[Auto] a, [PUSH_IT_TO_THE_LIMIT].Chofer ch, [PUSH_IT_TO_THE_LIMIT].Cliente cl, [PUSH_IT_TO_THE_LIMIT].RendicionViaje r, [PUSH_IT_TO_THE_LIMIT].Turno t, gd_esquema.Maestra m, gd_esquema.Maestra m2, [PUSH_IT_TO_THE_LIMIT].Factura f
 where m.Viaje_Cant_Kilometros is not null
 and m.Auto_Patente = a.auto_patente
@@ -394,6 +407,4 @@ and m.Chofer_Dni = m2.Chofer_Dni
 and m.Cliente_Dni = m2.Cliente_Dni
 and m.Viaje_Fecha = m2.Viaje_Fecha
 and m2.Factura_Nro = f.factura_numero
-order by m.Viaje_Fecha
-
-
+order by viajeFecha
