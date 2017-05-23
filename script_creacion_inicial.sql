@@ -182,7 +182,7 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[Auto](
 	[auto_patente] VARCHAR(10) UNIQUE NOT NULL,
 	[auto_marca] VARCHAR(255) NOT NULL,
 	[auto_modelo] VARCHAR(255) NOT NULL,
-	[chofer_dni] numeric(18,0) NOT NULL,-- REFERENCES [PUSH_IT_TO_THE_LIMIT].[Chofer],									
+	--[chofer_id] int NOT NULL,-- REFERENCES [PUSH_IT_TO_THE_LIMIT].[Chofer],									
 	[auto_estado] BIT not null DEFAULT 1,
 	[auto_licencia] VARCHAR(26) NOT NULL,
 	[auto_rodado] VARCHAR(10),
@@ -190,9 +190,9 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[Auto](
 
 /*Auto por Turno*/
 CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[AutoporTurno](
-	[auto_patente] VARCHAR(10),
+	[auto_id] int,
 	[turno_id] INTEGER,
-	PRIMARY KEY (auto_patente, turno_id)
+	PRIMARY KEY (auto_id, turno_id)
 )
 /*Registro de viaje*/
 create table [PUSH_IT_TO_THE_LIMIT].RegistroViaje(
@@ -331,6 +331,8 @@ where  cast( m.Cliente_Dni as varchar(255)) = u.usuario_name
 order by usuario_ID
 
 
+
+
 /*Chofer*/
 
 insert into [PUSH_IT_TO_THE_LIMIT].Chofer(chofer_nombre, chofer_apellido,chofer_dni, chofer_telefono,chofer_direccion,chofer_mail,chofer_fecha_nacimiento, usuario_id)
@@ -338,48 +340,6 @@ select distinct m.chofer_Nombre, m.chofer_Apellido, m.chofer_dni, m.chofer_Telef
 from gd_esquema.Maestra m, [PUSH_IT_TO_THE_LIMIT].Usuario u
 where  cast( m.chofer_dni as varchar(255)) = u.usuario_name
 order by usuario_ID
-
-
-
-
-
-/*Turno*/
-
-insert into [PUSH_IT_TO_THE_LIMIT].Turno(turno_descripcion, turno_hora_fin, turno_hora_inicio, turno_precio_base, turno_valor_kilometro)
-select distinct Turno_Descripcion, Turno_Hora_Fin, Turno_Hora_Inicio, Turno_Precio_Base, Turno_Valor_Kilometro
-from gd_esquema.Maestra
-order by Turno_Hora_Inicio
-
-
-
-/*Factura*/
-insert into [PUSH_IT_TO_THE_LIMIT].Factura (cliente_id, factura_fecha_inicio, factura_fecha_fin, factura_numero, factura_importe_total)
-select distinct c.cliente_id, m.Factura_Fecha_Inicio, m.Factura_Fecha_Fin, m.Factura_Nro, ( select sum(m2.Turno_Precio_Base + ( m2.Viaje_Cant_Kilometros * m2.Turno_Valor_Kilometro))   
-																							 from gd_esquema.Maestra m2
-																							where m2.Factura_Nro = m.Factura_Nro)
-from  gd_esquema.Maestra m,[PUSH_IT_TO_THE_LIMIT].Cliente c
-where Factura_Nro is not null
-and c.cliente_dni = m.Cliente_Dni
-order by Factura_Nro
-
-
-
-
-
-/*Auto*/
-insert into [PUSH_IT_TO_THE_LIMIT].Auto (auto_licencia, auto_marca, auto_modelo, auto_patente, auto_rodado, chofer_dni)
-select distinct m.Auto_Licencia, m.Auto_Marca, m.Auto_Modelo, m.Auto_Patente, m.Auto_Rodado, c.chofer_dni
-from gd_esquema.Maestra m, [PUSH_IT_TO_THE_LIMIT].Chofer c, [PUSH_IT_TO_THE_LIMIT].Turno t
-where m.Auto_Patente is not null
-and m.Chofer_Dni = c.chofer_dni
-
-/*AutosporTurno*/
-insert into [PUSH_IT_TO_THE_LIMIT].AutoporTurno (auto_patente, turno_id)
-select distinct  a.auto_patente, t.turno_id
-from gd_esquema.Maestra m, [PUSH_IT_TO_THE_LIMIT].[Auto] a, [PUSH_IT_TO_THE_LIMIT].Turno t
-where m.Auto_Patente = a.auto_patente
-and m.Turno_Hora_Inicio = t.turno_hora_inicio
-
 
 /*RolporUsuario*/
 /*clienteporusuario*/
@@ -399,25 +359,63 @@ from [PUSH_IT_TO_THE_LIMIT].Usuario u, [PUSH_IT_TO_THE_LIMIT].Chofer c, [PUSH_IT
 where u.usuario_name = cast(c.chofer_dni as varchar(255))
 and r.rol_nombre = ('Chofer')
 
+/*Turno*/
+
+insert into [PUSH_IT_TO_THE_LIMIT].Turno(turno_descripcion, turno_hora_fin, turno_hora_inicio, turno_precio_base, turno_valor_kilometro)
+select distinct Turno_Descripcion, Turno_Hora_Fin, Turno_Hora_Inicio, Turno_Precio_Base, Turno_Valor_Kilometro
+from gd_esquema.Maestra
+order by Turno_Hora_Inicio
 
 
---EN RENDICION Y REGISTRO TIRA ERROR AL HACER LA MIGRACION PORQUE EL ID SE TIENE QUE OBTENER DESDE LA TABLA DE PUSH IT TO THE LIMIT
---Y NO DE SQUEMA (EN CHOFER POR AUTO TAMBIEN)
+
 
 /*RendicionViaje*/  
 insert into [PUSH_IT_TO_THE_LIMIT].RendicionViaje(chofer_id, rendicion_fecha, rendicion_importe_total, rendicion_numero, turno_id)
-select distinct c.chofer_id, m.Rendicion_Fecha, sum(m.Rendicion_Importe), m.Rendicion_Nro, t.turno_id --tira error por que en vez de c.chofer_dni decia c.chofer_direccion
+select distinct c.chofer_id, m.Rendicion_Fecha, sum(m.Rendicion_Importe), m.Rendicion_Nro, t.turno_id 
 from gd_esquema.Maestra m,  [PUSH_IT_TO_THE_LIMIT].Chofer c, [PUSH_IT_TO_THE_LIMIT].Turno t
 where m.Rendicion_Fecha is not null
 and m.Chofer_Dni = c.chofer_dni
 and m.Turno_Hora_Inicio = t.turno_hora_inicio
-group by Rendicion_Nro, c.chofer_dni, t.turno_id, m.Rendicion_Fecha,c.chofer_direccion
+group by Rendicion_Nro, c.chofer_id, t.turno_id, m.Rendicion_Fecha
 order by Rendicion_Nro
+
+
+
+/*Auto*/
+insert into [PUSH_IT_TO_THE_LIMIT].Auto (auto_licencia, auto_marca, auto_modelo, auto_patente, auto_rodado)
+select distinct m.Auto_Licencia, m.Auto_Marca, m.Auto_Modelo, m.Auto_Patente, m.Auto_Rodado
+from gd_esquema.Maestra m, [PUSH_IT_TO_THE_LIMIT].Turno t
+where m.Auto_Patente is not null
+
+
+/*AutosporTurno*/
+insert into [PUSH_IT_TO_THE_LIMIT].AutoporTurno (auto_id, turno_id)
+select distinct  a.auto_id, t.turno_id
+from gd_esquema.Maestra m, [PUSH_IT_TO_THE_LIMIT].[Auto] a, [PUSH_IT_TO_THE_LIMIT].Turno t
+where m.Auto_Patente = a.auto_patente
+and m.Turno_Hora_Inicio = t.turno_hora_inicio
+
+/*Chofer por Auto*/
+insert into [PUSH_IT_TO_THE_LIMIT].ChoferporAuto(chofer_id, auto_id)
+select distinct c.chofer_id, a.auto_id
+from  [PUSH_IT_TO_THE_LIMIT].[Chofer] c, [PUSH_IT_TO_THE_LIMIT].[Auto] a, gd_esquema.Maestra m
+where m.Chofer_Dni = c.chofer_dni
+and m.Auto_Patente = a.auto_patente
+
+/*Factura*/
+insert into [PUSH_IT_TO_THE_LIMIT].Factura (cliente_id, factura_fecha_inicio, factura_fecha_fin, factura_numero, factura_importe_total)
+select distinct c.cliente_id, m.Factura_Fecha_Inicio, m.Factura_Fecha_Fin, m.Factura_Nro, ( select sum(m2.Turno_Precio_Base + ( m2.Viaje_Cant_Kilometros * m2.Turno_Valor_Kilometro))   
+																							 from gd_esquema.Maestra m2
+																							where m2.Factura_Nro = m.Factura_Nro)
+from  gd_esquema.Maestra m,[PUSH_IT_TO_THE_LIMIT].Cliente c
+where Factura_Nro is not null
+and c.cliente_dni = m.Cliente_Dni
+order by Factura_Nro
 
 
 /*RegistroViaje*/
 insert into [PUSH_IT_TO_THE_LIMIT].RegistroViaje (viaje_automovil, chofer_id, cliente_id, rendicion_id, turno_id, viaje_cantidad_km, viaje_fecha,viaje_hora_inicio, factura_id)
-select distinct  a.auto_patente, ch.chofer_dni, cl.cliente_id, r.rendicion_id, t.turno_id, m.Viaje_Cant_Kilometros,CONVERT(varchar(10),m.Viaje_Fecha,120) viajeFecha,STUFF(m.Viaje_Fecha,1,11,''), f.factura_id
+select distinct  a.auto_id, ch.chofer_id, cl.cliente_id, r.rendicion_id, t.turno_id, m.Viaje_Cant_Kilometros,CONVERT(varchar(10),m.Viaje_Fecha,120) viajeFecha,STUFF(m.Viaje_Fecha,1,11,''), f.factura_id
 from [PUSH_IT_TO_THE_LIMIT].[Auto] a, [PUSH_IT_TO_THE_LIMIT].Chofer ch, [PUSH_IT_TO_THE_LIMIT].Cliente cl, [PUSH_IT_TO_THE_LIMIT].RendicionViaje r, [PUSH_IT_TO_THE_LIMIT].Turno t, gd_esquema.Maestra m, gd_esquema.Maestra m2, [PUSH_IT_TO_THE_LIMIT].Factura f
 where m.Viaje_Cant_Kilometros is not null
 and m.Auto_Patente = a.auto_patente
@@ -431,9 +429,4 @@ and m.Viaje_Fecha = m2.Viaje_Fecha
 and m2.Factura_Nro = f.factura_numero
 order by viajeFecha
 
-/*Chofer por Auto*/
-insert into [PUSH_IT_TO_THE_LIMIT].ChoferporAuto(chofer_id, auto_id)
-select distinct c.chofer_dni, a.auto_patente
-from  [PUSH_IT_TO_THE_LIMIT].[Chofer] c, [PUSH_IT_TO_THE_LIMIT].[Auto] a
-where m.Chofer_Dni = c.chofer_dni
-and m.Auto_Patente = a.auto_patente
+
