@@ -451,3 +451,50 @@ INSTEAD OF UPDATE AS
 
 			END
 	END
+	--Procedures
+
+	IF (OBJECT_ID('[PUSH_IT_TO_THE_LIMIT].InsertarFuncXRol') IS NOT NULL)
+    DROP FUNCTION [PUSH_IT_TO_THE_LIMIT].InsertarFuncXRol
+GO
+
+create proc [PUSH_IT_TO_THE_LIMIT].InsertarFuncXRol
+@rol int,
+@funcionalidad int
+as
+begin
+declare @respuesta numeric(18,0)
+begin tran ta
+begin try
+	insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones(rol_id,funcionalidad_id) values(@rol,@funcionalidad);
+	set @respuesta =(select rol_id,funcionalidad_id from [PUSH_IT_TO_THE_LIMIT].RolporFunciones where rol_id = @rol and funcionalidad_id = @funcionalidad)
+	select @respuesta as respuesta
+commit tran ta
+end try
+begin catch
+rollback tran ta
+set @respuesta=0
+select @respuesta as respuesta
+end catch
+end
+GO
+-------------------------------------------------------------
+create proc [PUSH_IT_TO_THE_LIMIT].InsertarRol
+@rol nvarchar(45),
+@estado bit
+as
+begin
+declare @respuesta numeric(18,0)
+begin tran ta
+begin try
+	insert into [PUSH_IT_TO_THE_LIMIT].Rol (rol_nombre,rol_estado) values(@rol,@estado);
+	set @respuesta =(select rol_id from [PUSH_IT_TO_THE_LIMIT].Rol where rol_nombre = @rol)
+	select @respuesta as respuesta
+commit tran ta
+end try
+begin catch
+rollback tran ta
+set @respuesta=0
+select @respuesta as respuesta
+end catch
+end
+GO
