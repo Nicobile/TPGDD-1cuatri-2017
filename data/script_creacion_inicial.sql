@@ -60,8 +60,10 @@ IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_TH
     DROP TABLE PUSH_IT_TO_THE_LIMIT.Turno
 
 
-
-
+/*Validacion Triggers*/
+IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.actualizacion_turno') IS NOT NULL
+		DROP TRIGGER PUSH_IT_TO_THE_LIMIT.actualizacion_turno
+Go
 
 
 
@@ -265,7 +267,6 @@ ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[ChoferporAuto] ADD CONSTRAINT ChoferporAuto_
 ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[ChoferporAuto] ADD CONSTRAINT ChoferporAuto_Auto FOREIGN KEY (auto_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Auto](auto_id)
 
 
-
 /*Migracion*/
 
 /*Rol*/
@@ -431,3 +432,22 @@ and m2.Factura_Nro = f.factura_numero
 order by viajeFecha
 
 
+/*Triggers*/
+--Agrego Trigger que lo que hace es cuando actualizan un turno lo deshabilita e inserta un nuevo simuando que actualizo el viejo
+GO
+CREATE TRIGGER actualizacion_turno
+ON [PUSH_IT_TO_THE_LIMIT].[Turno]
+INSTEAD OF UPDATE AS
+		
+	BEGIN
+		BEGIN
+		INSERT INTO [PUSH_IT_TO_THE_LIMIT].[Turno](turno_hora_inicio,turno_hora_fin,turno_descripcion,turno_valor_kilometro,turno_precio_base)
+				SELECT i.turno_hora_inicio,i.turno_hora_fin,i.turno_descripcion,i.turno_valor_kilometro,i.turno_precio_base FROM inserted i
+		END
+			BEGIN
+				UPDATE [PUSH_IT_TO_THE_LIMIT].[Turno]
+					SET turno_habilitado=0	
+						WHERE turno_id= (SELECT D.turno_id FROM deleted D)
+
+			END
+	END
