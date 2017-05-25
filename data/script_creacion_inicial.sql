@@ -65,6 +65,19 @@ IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.actualizacion_turno') IS NOT NULL
 		DROP TRIGGER PUSH_IT_TO_THE_LIMIT.actualizacion_turno
 Go
 
+IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.insertar_Turno') IS NOT NULL
+		DROP TRIGGER PUSH_IT_TO_THE_LIMIT.insertar_Turno
+Go
+
+/*Validacion Funciones y Procedimientos*/
+IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.InsertarFuncXRol') IS NOT NULL
+    DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.InsertarFuncXRol
+GO
+
+IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.InsertarRol') IS NOT NULL
+    DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.InsertarRol
+GO
+
 
 
 
@@ -451,33 +464,74 @@ INSTEAD OF UPDATE AS
 
 			END
 	END
-	--Procedures
 
-	IF (OBJECT_ID('[PUSH_IT_TO_THE_LIMIT].InsertarFuncXRol') IS NOT NULL)
-    DROP FUNCTION [PUSH_IT_TO_THE_LIMIT].InsertarFuncXRol
-GO
+--Agrego Trigger para evitar que al actualizar o cargar un nuevo turno se superpongan, voy chequeando que las franjas no se incluyan 
 
-create proc [PUSH_IT_TO_THE_LIMIT].InsertarFuncXRol
-@rol int,
-@funcionalidad int
-as
-begin
-declare @respuesta numeric(18,0)
-begin tran ta
-begin try
-	insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones(rol_id,funcionalidad_id) values(@rol,@funcionalidad);
-	set @respuesta =(select rol_id,funcionalidad_id from [PUSH_IT_TO_THE_LIMIT].RolporFunciones where rol_id = @rol and funcionalidad_id = @funcionalidad)
-	select @respuesta as respuesta
-commit tran ta
-end try
-begin catch
-rollback tran ta
-set @respuesta=0
-select @respuesta as respuesta
-end catch
-end
-GO
+Go
+CREATE TRIGGER insertar_Turno
+ON [PUSH_IT_TO_THE_LIMIT].[Turno]
+AFTER INSERT  AS 
+	BEGIN
+		IF(SELECT COUNT(*) FROM PUSH_IT_TO_THE_LIMIT.Turno T,inserted I 
+			WHERE ((I.turno_hora_inicio > T.turno_hora_inicio AND I.turno_hora_inicio < T.turno_hora_fin)
+				
+				OR( I.turno_hora_fin > T.turno_hora_inicio AND I.turno_hora_fin < T.turno_hora_fin)	)	
+				
+				AND I.turno_id <>T.turno_id	AND T.turno_habilitado = 1)> 0
+		
+				BEGIN
+					rollback transaction;
+					throw 51000,'El turno ingresado se superpone con otro',1;
+				END
+		
+		IF(SELECT COUNT(*) FROM PUSH_IT_TO_THE_LIMIT.Turno T,inserted I 
+			WHERE ((T.turno_hora_inicio > I.turno_hora_inicio AND T.turno_hora_inicio < I.turno_hora_fin)
+				
+				OR( T.turno_hora_fin > I.turno_hora_inicio AND T.turno_hora_fin < I.turno_hora_fin)	)	
+				
+				AND I.turno_id <>T.turno_id  AND T.turno_habilitado=1	)> 0
+								
+				BEGIN
+					rollback transaction;
+					throw 51000,'El turno ingresado se superpone con otro',1;
+				END
+
+
+		IF EXISTS (SELECT turno_hora_inicio,turno_hora_fin  FROM inserted 
+					WHERE turno_hora_inicio > turno_hora_fin 
+							OR turno_hora_inicio < 0 
+							OR turno_hora_fin>24)
+			BEGIN
+				rollback transaction;
+				throw 51000,'El horario ingresado es mayor a un dia o es invalido',1;
+			END
+
+	END
+
+--Procedures
+--Go
+--create proc [PUSH_IT_TO_THE_LIMIT].InsertarFuncXRol
+--@rol int,
+--@funcionalidad int
+--as
+--begin
+--declare @respuesta numeric(18,0)
+--begin tran ta
+--begin try
+--	insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones(rol_id,funcionalidad_id) values(@rol,@funcionalidad);
+--	set @respuesta =(select rol_id,funcionalidad_id from [PUSH_IT_TO_THE_LIMIT].RolporFunciones where rol_id = @rol and funcionalidad_id = @funcionalidad)
+--	select @respuesta as respuesta
+--commit tran ta
+--end try
+--begin catch
+--rollback tran ta
+--set @respuesta=0
+--select @respuesta as respuesta
+--end catch
+--end
+--GO
 -------------------------------------------------------------
+Go
 create proc [PUSH_IT_TO_THE_LIMIT].InsertarRol
 @rol nvarchar(45),
 @estado bit
