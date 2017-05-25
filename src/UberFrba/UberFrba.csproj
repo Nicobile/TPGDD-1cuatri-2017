@@ -56,17 +56,59 @@
     <Compile Include="Abm Chofer\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Cliente\AgregarCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Cliente\AgregarCliente.Designer.cs">
+      <DependentUpon>AgregarCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Cliente\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Abm Cliente\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Rol\Alta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\Alta.Designer.cs">
+      <DependentUpon>Alta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Rol\Baja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\Baja.Designer.cs">
+      <DependentUpon>Baja.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Rol\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Abm Rol\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Rol\HomeRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\HomeRol.Designer.cs">
+      <DependentUpon>HomeRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Rol\Listado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\Listado.Designer.cs">
+      <DependentUpon>Listado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Rol\ListadoModif.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\ListadoModif.Designer.cs">
+      <DependentUpon>ListadoModif.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Rol\Modificacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\Modificacion.Designer.cs">
+      <DependentUpon>Modificacion.cs</DependentUpon>
     </Compile>
     <Compile Include="Facturacion\Form1.cs">
       <SubType>Form</SubType>
@@ -79,6 +121,12 @@
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Home.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Home.Designer.cs">
+      <DependentUpon>Home.cs</DependentUpon>
     </Compile>
     <Compile Include="Listado Estadistico\Form1.cs">
       <SubType>Form</SubType>
@@ -100,6 +148,28 @@
     <Compile Include="Rendicion Viajes\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="SQLConnector.cs" />
+    <EmbeddedResource Include="Abm Rol\Alta.resx">
+      <DependentUpon>Alta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Rol\Baja.resx">
+      <DependentUpon>Baja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Rol\HomeRol.resx">
+      <DependentUpon>HomeRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Rol\Listado.resx">
+      <DependentUpon>Listado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Rol\ListadoModif.resx">
+      <DependentUpon>ListadoModif.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Rol\Modificacion.resx">
+      <DependentUpon>Modificacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Home.resx">
+      <DependentUpon>Home.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
