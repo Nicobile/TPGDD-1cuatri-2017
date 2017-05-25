@@ -454,15 +454,19 @@ INSTEAD OF UPDATE AS
 		
 	BEGIN
 		BEGIN
-		INSERT INTO [PUSH_IT_TO_THE_LIMIT].[Turno](turno_hora_inicio,turno_hora_fin,turno_descripcion,turno_valor_kilometro,turno_precio_base)
-				SELECT i.turno_hora_inicio,i.turno_hora_fin,i.turno_descripcion,i.turno_valor_kilometro,i.turno_precio_base FROM inserted i
-		END
-			BEGIN
-				UPDATE [PUSH_IT_TO_THE_LIMIT].[Turno]
+			UPDATE [PUSH_IT_TO_THE_LIMIT].[Turno]
 					SET turno_habilitado=0	
 						WHERE turno_id= (SELECT D.turno_id FROM deleted D)
+		END
 
-			END
+		BEGIN
+			if((SELECT turno_habilitado from inserted)=1)
+				BEGIN
+					INSERT INTO [PUSH_IT_TO_THE_LIMIT].[Turno](turno_hora_inicio,turno_hora_fin,turno_descripcion,turno_valor_kilometro,turno_precio_base)
+						SELECT i.turno_hora_inicio,i.turno_hora_fin,i.turno_descripcion,i.turno_valor_kilometro,i.turno_precio_base FROM inserted i
+				END
+		END
+			
 	END
 
 --Agrego Trigger para evitar que al actualizar o cargar un nuevo turno se superpongan, voy chequeando que las franjas no se incluyan 
