@@ -1,5 +1,6 @@
 use [GD1C2017]
 go
+
 /*Creacion del Schema*/
 IF NOT EXISTS (SELECT * FROM SYS.schemas
 				WHERE name = 'PUSH_IT_TO_THE_LIMIT'	)											
