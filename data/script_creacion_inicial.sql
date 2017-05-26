@@ -568,11 +568,11 @@ GO
 -------------------------------------------------------------
 Go
 create proc [PUSH_IT_TO_THE_LIMIT].InsertarRol
-@rol nvarchar(45),
+@rol nvarchar(100),
 @estado bit
 as
 begin
-declare @respuesta numeric(18,0)
+declare @respuesta int
 begin tran ta
 begin try
 	insert into [PUSH_IT_TO_THE_LIMIT].Rol (rol_nombre,rol_estado) values(@rol,@estado);
