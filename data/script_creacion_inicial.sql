@@ -100,9 +100,10 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].Rol(
 
 /*RolporFunciones*/
 CREATE TABLE [PUSH_IT_TO_THE_LIMIT].RolporFunciones(
-	[rol_id] INTEGER,
-	[funcionalidad_id] INTEGER,
-	PRIMARY KEY (rol_id, funcionalidad_id)
+	idFuncXRol int identity(1,1) NOT NULL,
+	[rol_id] INTEGER not null,
+	[funcionalidad_id] INTEGER not null,
+	--PRIMARY KEY (rol_id, funcionalidad_id)
 )
 
 
@@ -235,9 +236,9 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[ChoferporAuto](
 /* Agregamos las FKs */
 
 --Creamos las fk de RolporFunciones
-ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RolporFunciones] ADD CONSTRAINT RolporFunciones_Funcionalidad FOREIGN KEY (funcionalidad_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Funcionalidad](funcionalidad_id)
+--ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RolporFunciones] ADD CONSTRAINT RolporFunciones_Funcionalidad FOREIGN KEY (funcionalidad_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Funcionalidad](funcionalidad_id)
 
-ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RolporFunciones] ADD CONSTRAINT RolporFunciones_Rol FOREIGN KEY (rol_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Rol](rol_id)
+--ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RolporFunciones] ADD CONSTRAINT RolporFunciones_Rol FOREIGN KEY (rol_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Rol](rol_id)
 
 --Creamos las Fk de RolporUSuario
 ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RolporUsuario] ADD CONSTRAINT RolporUsuario_Rol FOREIGN KEY (rol_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Rol](rol_id)
@@ -543,27 +544,27 @@ AFTER INSERT  AS
 
 
 --Procedures
---Go
---create proc [PUSH_IT_TO_THE_LIMIT].InsertarFuncXRol
---@rol int,
---@funcionalidad int
---as
---begin
---declare @respuesta numeric(18,0)
---begin tran ta
---begin try
---	insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones(rol_id,funcionalidad_id) values(@rol,@funcionalidad);
---	set @respuesta =(select rol_id,funcionalidad_id from [PUSH_IT_TO_THE_LIMIT].RolporFunciones where rol_id = @rol and funcionalidad_id = @funcionalidad)
---	select @respuesta as respuesta
---commit tran ta
---end try
---begin catch
---rollback tran ta
---set @respuesta=0
---select @respuesta as respuesta
---end catch
---end
---GO
+Go
+create proc [PUSH_IT_TO_THE_LIMIT].InsertarFuncXRol
+@rol int,
+@funcionalidad int
+as
+begin
+declare @respuesta int
+begin tran ta
+begin try
+insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones(rol_id,funcionalidad_id) values(@rol,@funcionalidad);
+set @respuesta =(select idFuncXRol from [PUSH_IT_TO_THE_LIMIT].RolporFunciones   where rol_id = @rol and funcionalidad_id = @funcionalidad)
+select @respuesta as respuesta
+commit tran ta
+end try
+begin catch
+rollback tran ta
+set @respuesta=0
+select @respuesta as respuesta
+end catch
+end
+GO
 -------------------------------------------------------------
 Go
 create proc [PUSH_IT_TO_THE_LIMIT].InsertarRol
