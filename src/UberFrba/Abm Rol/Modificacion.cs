@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
-namespace FrbaHotel.ABM_de_Rol
+namespace UberFrba.ABM_de_Rol
 {
     public partial class Modificacion : Form
     {
