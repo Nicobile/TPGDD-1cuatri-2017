@@ -296,23 +296,41 @@ insert into [PUSH_IT_TO_THE_LIMIT].Rol (rol_nombre) values
 
 
 insert into [PUSH_IT_TO_THE_LIMIT].Funcionalidad (funcionalidad_descripcion) values
-('ABM de Rol'),
-('Registro de usuarios'),
-('ABM de Clientes'),
-('ABM de Automoviles'),
-('ABM de turnos'),
-('ABM de choferes'),
-('Registro de viajes'),
-('Rendicion de viajes'),
-('Facturacion de clientes'),
-('Listado estadistico');
+('ABM de Rol'),                            --1
+('Registro de usuarios'),                  --2
+('ABM de Clientes'),                       --3
+('ABM de Automoviles'),                    --4
+('ABM de turnos'),                         --5
+('ABM de choferes'),                       --6
+('Registro de viajes'),                    --7
+('Rendicion de viajes'),                   --8
+('Facturacion de clientes'),               --9
+('Listado estadistico');                   --10
 
 
 /*RolXFuncionalidad*/
+/*
 insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones (rol_id, funcionalidad_id) values
-(1,1), (1,2), (1,3), (1,4),(1,5),(1,6),(1,7),(2,8),(3,9),(1,10),(2,10),(3,10);/* no estoy muy seguro de esta*/
+(1,1), (1,2), (1,3), (1,4),(1,5),(1,6),(1,7),(2,8),(3,9),(1,10),(2,10),(3,10); */
 
+/*RolXFuncionalidad*/
+--Administrativo
+insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones (rol_id,funcionalidad_id)
+	select distinct R.rol_id, F.funcionalidad_id from [PUSH_IT_TO_THE_LIMIT].Rol R,[PUSH_IT_TO_THE_LIMIT].Funcionalidad F
+	where R.rol_nombre = 'Administrativo' and
+			F.funcionalidad_descripcion in ('ABM de Rol','Registro de usuarios','ABM de Clientes','ABM de Automoviles','ABM de turnos','ABM de choferes','Registro de viajes','Listado estadistico');
 
+--Chofer
+insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones (rol_id,funcionalidad_id)
+	select distinct R.rol_id, F.funcionalidad_id from [PUSH_IT_TO_THE_LIMIT].Rol R,[PUSH_IT_TO_THE_LIMIT].Funcionalidad F
+	where R.rol_nombre = 'Chofer' and
+			F.funcionalidad_descripcion in ('Rendicion de viajes','Listado estadistico');
+
+--Cliente
+insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones (rol_id,funcionalidad_id)
+	select distinct R.rol_id, F.funcionalidad_id from [PUSH_IT_TO_THE_LIMIT].Rol R,[PUSH_IT_TO_THE_LIMIT].Funcionalidad F
+	where R.rol_nombre = 'Cliente' and
+			F.funcionalidad_descripcion in ('Facturacion de clientes','Listado estadistico');
 
 /*Usuarios*/
 
