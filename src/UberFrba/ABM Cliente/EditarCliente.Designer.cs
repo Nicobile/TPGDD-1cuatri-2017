@@ -1,4 +1,4 @@
-namespace MercadoEnvio.ABM_Cliente
+namespace UberFrba.ABM_Cliente
 {
     partial class EditarCliente
     {

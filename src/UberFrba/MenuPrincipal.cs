@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using UberFrba.DataProvider;
 
-namespace MercadoEnvio
+namespace UberFrba
 {
     public partial class MenuPrincipal : Form
     {

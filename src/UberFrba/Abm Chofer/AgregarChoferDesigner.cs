@@ -1,6 +1,6 @@
-namespace MercadoEnvio.ABM_Empresa
+namespace UberFrba.ABM_Chofer
 {
-    partial class AgregarEmpresa
+    partial class AgregarChofer
     {
         /// <summary>
         /// Required designer variable.

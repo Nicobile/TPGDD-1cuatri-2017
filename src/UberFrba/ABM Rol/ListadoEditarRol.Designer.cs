@@ -1,4 +1,4 @@
-namespace MercadoEnvio.ABM_Rol
+namespace UberFrba.ABM_Rol
 {
     partial class ListadoEditarRol
     {

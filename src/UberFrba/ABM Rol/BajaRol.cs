@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using MercadoEnvio.DataProvider;
+using UberFrba.DataProvider;
 
-namespace MercadoEnvio.ABM_Rol
+namespace UberFrba.ABM_Rol
 {
 
     public partial class BajaRol : Form

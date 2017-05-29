@@ -1,4 +1,4 @@
-namespace MercadoEnvio.Registro_de_Usuario
+namespace UberFrba.Registro_de_Usuario
 {
     partial class RegistrarUsuario
     {

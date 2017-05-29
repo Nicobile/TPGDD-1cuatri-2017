@@ -1,5 +1,5 @@
 using System.Windows.Forms;
-namespace MercadoEnvio.ABM_Empresa
+namespace UberFrba.ABM_Chofer
 {
     partial class FiltroEmpresa
     {

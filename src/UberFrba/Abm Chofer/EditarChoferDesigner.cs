@@ -1,6 +1,6 @@
-namespace MercadoEnvio.ABM_Empresa
+namespace UberFrba.ABM_Chofer
 {
-    partial class EditarEmpresa
+    partial class EditarChofer
     {
         /// <summary>
         /// Required designer variable.

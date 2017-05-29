@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 using UberFrba.Modelo;
 using UberFrba.DataProvider;
 
-namespace MercadoEnvio.ABM_Cliente
+namespace UberFrba.ABM_Cliente
 {
     public partial class FiltroCliente : Form
     {

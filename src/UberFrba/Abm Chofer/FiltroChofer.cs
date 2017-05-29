@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
-namespace MercadoEnvio.ABM_Empresa
+namespace UberFrba.ABM_Chofer
 {
     public partial class FiltroEmpresa : Form
     {
@@ -96,7 +96,7 @@ namespace MercadoEnvio.ABM_Empresa
             if (e.ColumnIndex == dataGridView_Empresa.Columns["Modificar"].Index && e.RowIndex >= 0)
             {
                 String idEmpresaAModificar = dataGridView_Empresa.Rows[e.RowIndex].Cells["emp_id"].Value.ToString();
-                new EditarEmpresa(idEmpresaAModificar).ShowDialog();
+                new EditarChofer(idEmpresaAModificar).ShowDialog();
                 CargarEmpresas();
                 return;
             }

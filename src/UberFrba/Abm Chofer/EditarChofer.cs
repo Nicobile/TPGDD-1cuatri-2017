@@ -7,20 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using MercadoEnvio.Modelo;
-using MercadoEnvio.Exceptions;
-using MercadoEnvio.DataProvider;
+using UberFrba.Modelo;
+using UberFrba.Exceptions;
+using UberFrba.DataProvider;
 
-namespace MercadoEnvio.ABM_Empresa
+namespace UberFrba.ABM_Chofer
 {
-    public partial class EditarEmpresa : Form
+    public partial class EditarChofer : Form
     {
         private int idEmpresa;
         private int idContacto = 0;
         private int idUsuario = 0;
         private DBMapper mapper = new DBMapper();
 
-        public EditarEmpresa(String idEmpresa)
+        public EditarChofer(String idEmpresa)
         {
             InitializeComponent();
             this.idEmpresa = Convert.ToInt32(idEmpresa);

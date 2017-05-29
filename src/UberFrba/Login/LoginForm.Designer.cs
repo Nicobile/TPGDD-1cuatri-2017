@@ -1,4 +1,4 @@
-namespace MercadoEnvio.Login
+namespace UberFrba.Login
 {
     partial class LoginForm
     {

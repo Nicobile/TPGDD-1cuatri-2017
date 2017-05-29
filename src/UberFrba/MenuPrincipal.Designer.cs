@@ -1,4 +1,4 @@
-﻿namespace MercadoEnvio
+﻿namespace UberFrba
 {
     partial class MenuPrincipal
     {

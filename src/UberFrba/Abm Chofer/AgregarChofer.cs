@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using MercadoEnvio.Modelo;
-using MercadoEnvio.Exceptions;
-using MercadoEnvio.DataProvider;
+using UberFrba.Modelo;
+using UberFrba.Exceptions;
+using UberFrba.DataProvider;
 
-namespace MercadoEnvio.ABM_Empresa
+namespace UberFrba.ABM_Chofer
 {
-    public partial class AgregarEmpresa : Form
+    public partial class AgregarChofer : Form
     {
         private String username;
         private String contrasena;
@@ -22,7 +22,7 @@ namespace MercadoEnvio.ABM_Empresa
         private int idUsuario;
         private int idEmpresa;
 
-        public AgregarEmpresa(String username, String contrasena)
+        public AgregarChofer(String username, String contrasena)
         {
             InitializeComponent();
             this.username = username;

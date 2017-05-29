@@ -12,7 +12,7 @@ using UberFrba.Exceptions;
 using UberFrba.ABM_Cliente;
 using UberFrba.DataProvider;
 
-namespace MercadoEnvio.ABM_Cliente
+namespace UberFrba.ABM_Cliente
 {
     public partial class EditarCliente : Form
     {
