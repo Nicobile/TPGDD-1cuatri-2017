@@ -1,6 +1,6 @@
 namespace UberFrba.ABM_Chofer
 {
-    partial class AgregarChofer
+    partial class AgregarEmpresa
     {
         /// <summary>
         /// Required designer variable.

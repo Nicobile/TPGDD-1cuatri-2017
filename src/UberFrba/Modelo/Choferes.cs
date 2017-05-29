@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace UberFrba.Modelo
 {
-    class Chofer : Objeto, Mapeable
+    class Choferes : Objeto, Mapeable
     {/* getters y setters*/
         private int id;
         private String numeroDeDocumento;

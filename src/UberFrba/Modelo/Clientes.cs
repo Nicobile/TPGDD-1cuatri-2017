@@ -16,11 +16,12 @@ namespace UberFrba.Modelo
         private String mail;
         private String telefono;
         private String direccion;
+        private String tipoDeDocumento;
         private DateTime fechaDeNacimiento;
-        private Boolean activo;
         private Boolean activo;
         private int idUsuario;
         private int idContacto;
+        private DateTime fechaDeAlta;
 
         public void SetId(int id)
         {

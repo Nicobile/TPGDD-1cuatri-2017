@@ -121,7 +121,7 @@ namespace UberFrba
         public int CrearCliente(Clientes cliente)
         {
 
-            if (!esClienteUnico(cliente.GetTipoDeDocumento(), cliente.GetNumeroDeDocumento()))
+            if (!esClienteUnico(cliente.GetTipoDeDocumento(), cliente.GetId()))
                 throw new ClienteYaExisteException();
 
             return this.Crear(cliente);
@@ -130,7 +130,7 @@ namespace UberFrba
 
         /** Empresas **/
 
-        public int CrearChofer(Chofer chofer)
+        public int CrearChofer(Choferes chofer)
         {
 
 
@@ -174,11 +174,11 @@ namespace UberFrba
 
         /** Empresas **/
 
-        public Empresas ObtenerChofer(int idChofer)
+        public Choferes ObtenerChofer(int idChofer)
         {
-            Chofer objeto = new Choferes();
+            Choferes objeto = new Choferes();
             Type clase = objeto.GetType();
-            return (Choferes)this.Obtener(idEmpresa, clase);
+            return (Choferes)this.Obtener(idChofer, clase);
         }
 
         /** Contacto **/
@@ -422,16 +422,6 @@ namespace UberFrba
         */
 
         /** Clientes **/
-
-        private bool esClienteUnico(String numeroDeDocumento)
-        {
-            query = "SELECT COUNT(*) PUSH-IT-TO-THE-LIMIT.Cliente  AND cliente_dni = @numeroDeDocumento";
-            parametros.Clear();
-
-            parametros.Add(new SqlParameter("@numeroDeDocumento", Convert.ToDecimal(numeroDeDocumento)));
-            return ControlDeUnicidad(query, parametros);
-        }
-
         private bool esClienteUnico(String numeroDeDocumento, int idCliente)
         {
             query = "SELECT COUNT(*) FROM PUSH-IT-TO-THE-LIMIT.Cliente WHERE  AND cliente_dni = @numeroDeDocumento AND cliente_id != @idCliente";
@@ -442,6 +432,17 @@ namespace UberFrba
             return ControlDeUnicidad(query, parametros);
         }
 
+
+        private bool esClienteUnico(String numeroDeDocumento)
+        {
+            query = "SELECT COUNT(*) PUSH-IT-TO-THE-LIMIT.Cliente  AND cliente_dni = @numeroDeDocumento";
+            parametros.Clear();
+
+            parametros.Add(new SqlParameter("@numeroDeDocumento", Convert.ToDecimal(numeroDeDocumento)));
+            return ControlDeUnicidad(query, parametros);
+        }
+
+      
         /** Empresas **/
 
         private bool esChoferUnico(String numeroDocumento)
