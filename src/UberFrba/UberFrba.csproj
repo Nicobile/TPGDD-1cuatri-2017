@@ -50,65 +50,91 @@
     <Compile Include="Abm Automovil\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Chofer\Form1.cs">
+    <Compile Include="Abm Chofer\AgregarChofer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Chofer\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Abm Cliente\Form1.cs">
+    <Compile Include="Abm Chofer\AgregarChoferDesigner.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Cliente\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Abm Rol\Alta.cs">
+    <Compile Include="Abm Chofer\EditarChofer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Rol\Alta.Designer.cs">
-      <DependentUpon>Alta.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Abm Rol\Baja.cs">
+    <Compile Include="Abm Chofer\EditarChoferDesigner.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Rol\Baja.Designer.cs">
-      <DependentUpon>Baja.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Abm Rol\HomeRol.cs">
+    <Compile Include="Abm Chofer\FiltroChofer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Rol\HomeRol.Designer.cs">
-      <DependentUpon>HomeRol.cs</DependentUpon>
+    <Compile Include="Abm Chofer\FiltroChofer.Designer.cs">
+      <DependentUpon>FiltroChofer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Rol\Listado.cs">
+    <Compile Include="Abm Cliente\AgregarChoferDesigner.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Rol\Listado.Designer.cs">
-      <DependentUpon>Listado.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Abm Rol\ListadoModif.cs">
+    <Compile Include="Abm Cliente\AgregarCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Rol\ListadoModif.Designer.cs">
-      <DependentUpon>ListadoModif.cs</DependentUpon>
+    <Compile Include="Abm Cliente\AgregarCliente.Designer.cs">
+      <DependentUpon>AgregarCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Rol\Modificacion.cs">
+    <Compile Include="Abm Cliente\EditarCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Rol\Modificacion.Designer.cs">
-      <DependentUpon>Modificacion.cs</DependentUpon>
+    <Compile Include="Abm Cliente\EditarCliente.Designer.cs">
+      <DependentUpon>EditarCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Cliente\FiltroCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Cliente\FiltroCliente.Designer.cs">
+      <DependentUpon>FiltroCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Rol\AgregarRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\AgregarRol.Designer.cs">
+      <DependentUpon>AgregarRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Rol\BajaRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\BajaRol.Designer.cs">
+      <DependentUpon>BajaRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Rol\EditarRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\EditarRol.Designer.cs">
+      <DependentUpon>EditarRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Rol\ListadoEditarRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\ListadoEditarRol.Designer.cs">
+      <DependentUpon>ListadoEditarRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Rol\RolForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\RolForm.Designer.cs">
+      <DependentUpon>RolForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataProvider\ConnectionManager.cs" />
+    <Compile Include="DataProvider\DBMapper.cs" />
+    <Compile Include="DataProvider\QueryBuilder.cs" />
+    <Compile Include="DataProvider\QueryHelper.cs" />
+    <Compile Include="DateConfig.cs" />
+    <Compile Include="Exceptions\CampoVacioException.cs" />
+    <Compile Include="Exceptions\ChoferYaExisteException.cs" />
+    <Compile Include="Exceptions\ClienteYaExisteException.cs" />
+    <Compile Include="Exceptions\FechaPasadaException.cs" />
+    <Compile Include="Exceptions\FormatoInvalidoException.cs" />
+    <Compile Include="Exceptions\TelefonoYaExisteException.cs" />
     <Compile Include="Facturacion\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Facturacion\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Home.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Home.Designer.cs">
-      <DependentUpon>Home.cs</DependentUpon>
     </Compile>
     <Compile Include="Listado Estadistico\Form1.cs">
       <SubType>Form</SubType>
@@ -116,35 +142,23 @@
     <Compile Include="Listado Estadistico\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login\cambioPass.cs">
+    <Compile Include="Login\CambiarContrasena.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login\cambioPass.Designer.cs">
-      <DependentUpon>cambioPass.cs</DependentUpon>
+    <Compile Include="Login\CambiarContrasena.Designer.cs">
+      <DependentUpon>CambiarContrasena.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login\IntermediaCliente.cs">
+    <Compile Include="Login\ElegirRol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login\IntermediaCliente.Designer.cs">
-      <DependentUpon>IntermediaCliente.cs</DependentUpon>
+    <Compile Include="Login\ElegirRol.Designer.cs">
+      <DependentUpon>ElegirRol.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login\IntermediaUsuarioConRol.cs">
+    <Compile Include="Login\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login\IntermediaUsuarioConRol.Designer.cs">
-      <DependentUpon>IntermediaUsuarioConRol.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Login\IntermediaUsuarioConRoles.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Login\IntermediaUsuarioConRoles.Designer.cs">
-      <DependentUpon>IntermediaUsuarioConRoles.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Login\Login.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Login\Login.Designer.cs">
-      <DependentUpon>Login.cs</DependentUpon>
+    <Compile Include="Login\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Login\MainFuncionalidades.cs">
       <SubType>Form</SubType>
@@ -152,8 +166,22 @@
     <Compile Include="Login\MainFuncionalidades.Designer.cs">
       <DependentUpon>MainFuncionalidades.cs</DependentUpon>
     </Compile>
+    <Compile Include="MenuPrincipal.cs" />
+    <Compile Include="MenuPrincipal.Designer.cs">
+      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\Choferes.cs" />
+    <Compile Include="Modelo\Clientes.cs" />
+    <Compile Include="Modelo\Mapeable.cs" />
+    <Compile Include="Modelo\Objeto.cs" />
+    <Compile Include="Modelo\Usuarios.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistrarUsuario.Designer.cs" />
+    <Compile Include="Registro de Usuario\RegistrarUsuario.cs" />
+    <Compile Include="Registro de Usuario\RegistrarUsuario.Designer.cs">
+      <DependentUpon>RegistrarUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Registro Viajes\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -166,45 +194,56 @@
     <Compile Include="Rendicion Viajes\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="SQLConnector.cs" />
-    <EmbeddedResource Include="Abm Rol\Alta.resx">
-      <DependentUpon>Alta.cs</DependentUpon>
+    <Compile Include="UsuarioSesion.cs" />
+    <Compile Include="Utils\HashSha256.cs" />
+    <Compile Include="Utils\Utils.cs" />
+    <EmbeddedResource Include="Abm Chofer\AgregarChofer.resx">
+      <DependentUpon>AgregarChofer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Rol\Baja.resx">
-      <DependentUpon>Baja.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Chofer\EditarChofer.resx">
+      <DependentUpon>EditarChofer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Rol\HomeRol.resx">
-      <DependentUpon>HomeRol.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Chofer\FiltroChofer.resx">
+      <DependentUpon>FiltroChofer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Rol\Listado.resx">
-      <DependentUpon>Listado.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Cliente\AgregarCliente.resx">
+      <DependentUpon>AgregarCliente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Rol\ListadoModif.resx">
-      <DependentUpon>ListadoModif.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Cliente\EditarCliente.resx">
+      <DependentUpon>EditarCliente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Rol\Modificacion.resx">
-      <DependentUpon>Modificacion.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Cliente\FiltroCliente.resx">
+      <DependentUpon>FiltroCliente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Home.resx">
-      <DependentUpon>Home.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Rol\AgregarRol.resx">
+      <DependentUpon>AgregarRol.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login\cambioPass.resx">
-      <DependentUpon>cambioPass.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Rol\BajaRol.resx">
+      <DependentUpon>BajaRol.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login\IntermediaCliente.resx">
-      <DependentUpon>IntermediaCliente.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Rol\EditarRol.resx">
+      <DependentUpon>EditarRol.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login\IntermediaUsuarioConRol.resx">
-      <DependentUpon>IntermediaUsuarioConRol.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Rol\ListadoEditarRol.resx">
+      <DependentUpon>ListadoEditarRol.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login\IntermediaUsuarioConRoles.resx">
-      <DependentUpon>IntermediaUsuarioConRoles.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Rol\RolForm.resx">
+      <DependentUpon>RolForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login\Login.resx">
-      <DependentUpon>Login.cs</DependentUpon>
+    <EmbeddedResource Include="Login\CambiarContrasena.resx">
+      <DependentUpon>CambiarContrasena.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\ElegirRol.resx">
+      <DependentUpon>ElegirRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\MainFuncionalidades.resx">
       <DependentUpon>MainFuncionalidades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuPrincipal.resx">
+      <DependentUpon>MenuPrincipal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -215,6 +254,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Registro de Usuario\RegistrarUsuario.resx">
+      <DependentUpon>RegistrarUsuario.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
