@@ -13,11 +13,11 @@ namespace UberFrba.Modelo
     class Choferes : Objeto, Mapeable
     {/* getters y setters*/
         private int id;
-        private String numeroDeDocumento;
+        private int DNI;
         private String nombre;
         private String apellido;
         private String mail;
-        private String telefono;
+        private int telefono;
         private String direccion;
         private DateTime fechaDeNacimiento;
         private Boolean activo;
@@ -28,7 +28,7 @@ namespace UberFrba.Modelo
         private DBMapper mapper = new DBMapper();
         
 
-        public void SetId(int id)
+        public void SetId(int id) // Deberia haber una excepcion por ID repetido ya que es unique
         {
             this.id = id;
         }
@@ -38,7 +38,109 @@ namespace UberFrba.Modelo
             return this.id;
         }
 
-    
+
+        public void SetDNI(int DNI) // Deberia haber una excepcion por DNI repetido ya que es unique
+        {
+            if (DNI.Equals(int.MinValue )) // Campo vacio en INT??
+                throw new CampoVacioException("DNI");
+            this.DNI = DNI;
+        }
+
+        public int GetDNI() 
+        {
+            return this.DNI;
+        }
+
+        public void SetNombre(String nombre)
+        {
+            if (nombre == "")
+                throw new CampoVacioException("Nombre");
+            this.nombre = nombre;
+        }
+
+        public String GetNombre()
+        {
+            return this.nombre;
+        }
+
+
+        public void SetApellido(String apellido)
+        {
+            if (apellido == "")
+                throw new CampoVacioException("Apellido");
+            this.apellido = apellido;
+        }
+
+        public String GetApellido()
+        {
+            return this.apellido;
+        }
+
+
+        public void SetMail(String mail)
+        {
+            this.mail = mail;
+        }
+
+        public String GetMail()
+        {
+            this.mail = mail;
+        }
+
+
+        public void SetTelefono(int telefono) // Deberia haber una excepcion por telefono repetido ya que es unique
+        {
+            if (telefono == "") // Campo vacio en INT??
+                throw new CampoVacioException("Telefono");
+            this.telefono = telefono;
+        }
+
+        public int GetTelefono()
+        {
+            this.telefono = telefono;
+        }
+
+
+        public void SetDireccion(String direccion)
+        {
+            if (direccion == "")
+                throw new CampoVacioException("Direccion");
+            this.direccion = direccion;
+        }
+
+        public int GetDireccion()
+        {
+            this.direccion = direccion;
+        }
+
+
+        public void SetFechaDeNacimiento(DateTime fechaDeNacimiento)
+        {
+            if (fechaDeNacimiento.Equals(DateTime.MinValue))
+                throw new CampoVacioException("Fecha De Nacimiento");
+
+            if (!esFechaPasada(fechaDeNacimiento)) // Revisar funcion
+                throw new FechaPasadaException();
+
+            this.fechaDeNacimiento = fechaDeNacimiento;
+        }
+
+        public DateTime GetFechaDeNacimiento()
+        {
+            this.fechaDeNacimiento = fechaDeNacimiento;
+        }
+
+
+        public void SetActivo(Boolean chofer_activo)
+        {
+            this.activo = chofer_activo;
+        }
+
+        public Boolean GetActivo()
+        {
+            return this.activo;
+        }
+
 
         public void SetIdUsuario(int idUsuario)
         {
@@ -56,53 +158,73 @@ namespace UberFrba.Modelo
 
         string Mapeable.GetQueryCrear()
         {
-            return "NET_A_CERO.pr_crear_empresa";
+            return "PUSH_IT_TO_THE_LIMIT.crear_chofer";
         }
 
         string Mapeable.GetQueryModificar()
         {
             if (activo == true)
             {
-                return "UPDATE NET_A_CERO.Empresas SET emp_razon_social = @razon_social, emp_ciudad = @ciudad, emp_cuit = @cuit, emp_nombre_contacto = @nombre_contacto, emp_rubro = @rubro, emp_fecha_alta = @fecha_alta, emp_activo = @activo WHERE emp_id = @id" +
-                    " UPDATE NET_A_CERO.Usuarios SET usr_intentos = 0 WHERE usr_id = (SELECT emp_usr_id FROM NET_A_CERO.Empresas WHERE emp_id = @id) ";
+                return "UPDATE PUSH_IT_TO_THE_LIMIT.Choferes 
+                                                            SET chofer_dni = @DNI, 
+                                                                chofer_nombre = @nombre, 
+                                                                chofer_apellido = @apellido, 
+                                                                chofer_mail = @mail, 
+                                                                chofer_direccion = @direccion, 
+                                                                chofer_fechaDeNacimiento = @fechaDeNacimiento, 
+                                                                chofer_activo = @activo 
+                                                            WHERE chofer_id =  @id" + " UPDATE PUSH_IT_TO_THE_LIMIT.Usuarios SET usr_intentos = 0
+                                                                                                                             WHERE usr_id =  (SELECT chofer_id_usuario FROM PUSH_IT_TO_THE_LIMIT.Choferes
+                                                                                                                                WHERE chofer_id = @id) ";
             }
             else
             {
-                return "UPDATE NET_A_CERO.Empresas SET emp_razon_social = @razon_social, emp_ciudad = @ciudad, emp_cuit = @cuit, emp_nombre_contacto = @nombre_contacto, emp_rubro = @rubro, emp_fecha_alta = @fecha_alta, emp_activo = @activo WHERE emp_id = @id";
+                return "UPDATE PUSH_IT_TO_THE_LIMIT.Choferes
+                                                            SET chofer_dni = @DNI, 
+                                                                chofer_nombre = @nombre, 
+                                                                chofer_apellido = @apellido, 
+                                                                chofer_mail = @mail, 
+                                                                chofer_direccion = @direccion, 
+                                                                chofer_fechaDeNacimiento = @fechaDeNacimiento, 
+                                                                chofer_activo = @activo 
+                                                            WHERE chofer_id = @id";
             }
 
         }
 
         public string GetQueryObtener()
         {
-            return "SELECT * FROM NET_A_CERO.Empresas WHERE emp_id = @id";
+            return "SELECT * FROM PUSH_IT_TO_THE_LIMIT.Choferes WHERE chofer_id = @id";
         }
 
         IList<System.Data.SqlClient.SqlParameter> Mapeable.GetParametros()
         {
             IList<SqlParameter> parametros = new List<SqlParameter>();
-            parametros.Add(new SqlParameter("@razon_social", this.razonSocial));
-            parametros.Add(new SqlParameter("@ciudad", this.ciudad));
-            parametros.Add(new SqlParameter("@cuit", this.cuit));
-            parametros.Add(new SqlParameter("@nombre_contacto", this.nombreDeContacto));
-            parametros.Add(new SqlParameter("@rubro", this.rubro));
-            parametros.Add(new SqlParameter("@fecha_alta", this.fechaDeCreacion));
+            parametros.Add(new SqlParameter("@DNI", this.DNI));
+            parametros.Add(new SqlParameter("@nombre", this.nombre));
+            parametros.Add(new SqlParameter("@apellido", this.apellido));
+            parametros.Add(new SqlParameter("@mail", this.mail));
+            parametros.Add(new SqlParameter("@telefono", this.telefono));
+            parametros.Add(new SqlParameter("@direccion", this.direccion));
+            parametros.Add(new SqlParameter("@fechaDeNacimiento", this.fechaDeNacimiento));
             parametros.Add(new SqlParameter("@activo", true));
-            parametros.Add(new SqlParameter("@cont_id", this.idContacto));
+            // faltara el usuario_id como parametro?
+
+
             return parametros;
         }
 
         public void CargarInformacion(SqlDataReader reader)
         {
-            this.razonSocial = Convert.ToString(reader["emp_razon_social"]);
-            this.ciudad = Convert.ToString(reader["emp_ciudad"]);
-            this.cuit = Convert.ToString(reader["emp_cuit"]);
-            this.nombreDeContacto = Convert.ToString(reader["emp_nombre_contacto"]);
-            this.rubro = Convert.ToInt32(reader["emp_rubro"]);
-            this.fechaDeCreacion = Convert.ToDateTime(reader["emp_fecha_alta"]);
-            this.activo = Convert.ToBoolean(reader["emp_activo"]);
-            this.idUsuario = Convert.ToInt32(reader["emp_usr_id"]);
-            this.idContacto = Convert.ToInt32(reader["emp_cont_id"]);
+            this.DNI = Convert.ToInt32(reader["chofer_dni"]);
+            this.nombre = Convert.ToString(reader["chofer_nombre"]);
+            this.apellido = Convert.ToString(reader["chofer_apellido"]);
+            this.mail = Convert.ToString(reader["chofer_mail"]);
+            this.direccion = Convert.ToString(reader["chofer_direccion"]);
+            this.telefono = Convert.ToInt32(reader["chofer_telefono"]);
+            this.fechaDeNacimiento = Convert.ToDateTime(reader["chofer_fechaDeNacimiento"]);
+            this.activo = Convert.ToBoolean(reader["chofer_activo"]);
+            this.idUsuario = Convert.ToInt32(reader["chofer_id_usuario"]);
         }
 
         #endregion
