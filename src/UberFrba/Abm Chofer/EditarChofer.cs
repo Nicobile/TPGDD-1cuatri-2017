@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using MercadoEnvio.Modelo;
-using MercadoEnvio.Exceptions;
-using MercadoEnvio.DataProvider;
+using UberFrba.Modelo;
+using UberFrba.Exceptions;
+using UberFrba.DataProvider;
 
-namespace MercadoEnvio.ABM_Empresa
+namespace UberFrba.ABM_Chofer
 {
-    public partial class EditarEmpresa : Form
+    public partial class EditarChofer : Form
     {
         private int idEmpresa;
         private int idContacto = 0;
@@ -36,7 +36,7 @@ namespace MercadoEnvio.ABM_Empresa
         {
             Empresas empresa = mapper.ObtenerEmpresa(idEmpresa);
             Contacto contacto = mapper.ObtenerContacto(empresa.GetIdContacto());
-            
+
             idUsuario = empresa.GetIdUsuario();
             idContacto = empresa.GetIdContacto();
 
@@ -55,8 +55,8 @@ namespace MercadoEnvio.ABM_Empresa
             textBox_Departamento.Text = contacto.GetDepartamento();
             textBox_Localidad.Text = contacto.GetLocalidad();
             textBox_CodigoPostal.Text = contacto.GetCodigoPostal();
-                              
-            }
+
+        }
 
         private void CargarRubros()
         {
@@ -124,7 +124,7 @@ namespace MercadoEnvio.ABM_Empresa
             try
             {
                 Empresas empresa = new Empresas();
-                
+
                 empresa.SetRazonSocial(razonSocial);
                 empresa.SetCiudad(ciudad);
                 empresa.SetCuit(cuit);

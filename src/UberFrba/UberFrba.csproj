@@ -53,14 +53,14 @@
     <Compile Include="Abm Chofer\AgregarChofer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Chofer\AgregarChoferDesigner.cs">
-      <SubType>Form</SubType>
+    <Compile Include="Abm Chofer\AgregarChofer.Designer.cs">
+      <DependentUpon>AgregarChofer.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Chofer\EditarChofer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Chofer\EditarChoferDesigner.cs">
-      <SubType>Form</SubType>
+    <Compile Include="Abm Chofer\EditarChofer.Designer.cs">
+      <DependentUpon>EditarChofer.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Chofer\FiltroChofer.cs">
       <SubType>Form</SubType>
@@ -265,6 +265,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

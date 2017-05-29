@@ -13,11 +13,11 @@ namespace UberFrba.Modelo
     class Choferes : Objeto, Mapeable
     {/* getters y setters*/
         private int id;
-        private int DNI;
+        private String DNI;
         private String nombre;
         private String apellido;
         private String mail;
-        private int telefono;
+        private String telefono;
         private String direccion;
         private DateTime fechaDeNacimiento;
         private Boolean activo;
@@ -39,14 +39,14 @@ namespace UberFrba.Modelo
         }
 
 
-        public void SetDNI(int DNI) // Deberia haber una excepcion por DNI repetido ya que es unique
+        public void SetDNI(String DNI) // Deberia haber una excepcion por DNI repetido ya que es unique
         {
-            if (DNI.Equals(int.MinValue )) // Campo vacio en INT??
+            if (DNI == "") // Campo vacio en INT??
                 throw new CampoVacioException("DNI");
             this.DNI = DNI;
         }
 
-        public int GetDNI() 
+        public String GetDNI() 
         {
             return this.DNI;
         }
@@ -84,20 +84,20 @@ namespace UberFrba.Modelo
 
         public String GetMail()
         {
-            this.mail = mail;
+            return  this.mail;
         }
 
 
-        public void SetTelefono(int telefono) // Deberia haber una excepcion por telefono repetido ya que es unique
+        public void SetTelefono(String telefono) // Deberia haber una excepcion por telefono repetido ya que es unique
         {
             if (telefono == "") // Campo vacio en INT??
                 throw new CampoVacioException("Telefono");
             this.telefono = telefono;
         }
 
-        public int GetTelefono()
+        public String GetTelefono()
         {
-            this.telefono = telefono;
+            return this.telefono;
         }
 
 
@@ -108,9 +108,9 @@ namespace UberFrba.Modelo
             this.direccion = direccion;
         }
 
-        public int GetDireccion()
+        public string GetDireccion()
         {
-            this.direccion = direccion;
+           return this.direccion;
         }
 
 
@@ -127,7 +127,7 @@ namespace UberFrba.Modelo
 
         public DateTime GetFechaDeNacimiento()
         {
-            this.fechaDeNacimiento = fechaDeNacimiento;
+           return this.fechaDeNacimiento;
         }
 
 

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,31 +7,28 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using MercadoEnvio.Modelo;
-using MercadoEnvio.Exceptions;
-using MercadoEnvio.DataProvider;
+using UberFrba.Modelo;
+using UberFrba.Exceptions;
+using UberFrba.DataProvider;
 
-namespace MercadoEnvio.ABM_Empresa
+namespace UberFrba.ABM_Chofer
 {
-    public partial class AgregarEmpresa : Form
+    public partial class AgregarChofer : Form
     {
         private String username;
         private String contrasena;
         private DBMapper mapper = new DBMapper();
-        private int idContacto;
         private int idUsuario;
-        private int idEmpresa;
 
-        public AgregarEmpresa(String username, String contrasena)
+        public AgregarChofer(String username, String contrasena)
         {
             InitializeComponent();
             this.username = username;
             this.contrasena = contrasena;
-            this.idContacto = 0;
             this.idUsuario = 0;
         }
 
-        private void AgregarEmpresa_Load(object sender, EventArgs e)
+        private void AgregarChofer_Load(object sender, EventArgs e)
         {
             CargarRubros();
         }
@@ -39,24 +36,16 @@ namespace MercadoEnvio.ABM_Empresa
         private void button_Guardar_Click(object sender, EventArgs e)
         {
             // Guarda en variables todos los campos de entrada
-            String razonSocial = textBox_RazonSocial.Text;
-            String ciudad = textBox_Ciudad.Text;
-            String cuit = textBox_CUIT.Text;
-            String nombreDeContacto = textBox_NombreDeContacto.Text;
-            String rubro = comboBox_Rubro.Text;
-            DateTime fechaDeCreacion;
-            DateTime.TryParse(textBox_FechaDeCreacion.Text, out fechaDeCreacion);
-
-            String mail = textBox_Mail.Text;
-            String telefono = textBox_Telefono.Text;
-            String calle = textBox_Calle.Text;
-            String numeroCalle = textBox_Numero.Text;
-            String piso = textBox_Piso.Text;
-            String departamento = textBox_Departamento.Text;
-            String localidad = textBox_Localidad.Text;
-            String codigoPostal = textBox_CodigoPostal.Text;
-            
-
+            String Nombre = textBox_Nombre.Text;
+            String Apellido = textBox_Apellido.Text;
+            String DNI = textBox_DNI.Text;
+            String Direccion = textBox_Direccion.Text;
+            String Telefono = textBox_Telefono.Text;
+            String Mail = textBox_Mail.Text;
+            DateTime fechaDeNacimiento;
+            DateTime.TryParse(textBox_FechaDeNacimiento.Text, out fechaDeNacimiento);
+           
+           /*
             // Crea una contacto y se guarda su id
             Contacto contacto = new Contacto();
             try
@@ -69,7 +58,7 @@ namespace MercadoEnvio.ABM_Empresa
                 contacto.SetDepartamento(departamento);
                 contacto.SetLocalidad(localidad);
                 contacto.SetCodigoPostal(codigoPostal);
-                
+
             }
             catch (CampoVacioException exception)
             {
@@ -81,29 +70,28 @@ namespace MercadoEnvio.ABM_Empresa
                 MessageBox.Show("Los datos fueron mal ingresados en: " + exception.Message);
                 return;
             }
-            
+
             // Controla que no se haya creado ya el contacto
             if (this.idContacto == 0)
             {
                 this.idContacto = mapper.CrearContacto(contacto);
             }
-            
-            // Crea empresa
+            */
+
+            // Crea Chofer
             try
             {
-                Empresas empresa = new Empresas();
-               
-                empresa.SetRazonSocial(razonSocial);
-                empresa.SetCiudad(ciudad);
-                empresa.SetCuit(cuit);
-                empresa.SetNombreDeContacto(nombreDeContacto);
-                empresa.SetRubro(rubro);
-                empresa.SetFechaDeCreacion(fechaDeCreacion);
-                empresa.SetIdUsuario(idUsuario);
-                empresa.SetActivo(true);
-                empresa.SetIdContacto(idContacto);
-                
-                idEmpresa = mapper.CrearEmpresa(empresa);
+                Choferes chofer = new Choferes();
+
+                chofer.SetNombre(Nombre);
+                chofer.SetApellido(Apellido);
+                chofer.SetDNI(DNI);
+                chofer.SetDireccion(Direccion);
+                chofer.SetTelefono(Telefono);
+                chofer.SetMail(Mail);
+                chofer.SetFechaDeNacimiento(fechaDeNacimiento);
+
+                idChofer = mapper.CrearEmpresa(chofer);
                 if (idEmpresa > 0) MessageBox.Show("Se agrego la empresa correctamente");
             }
             catch (CampoVacioException exceptionCampoVacio)
@@ -172,20 +160,20 @@ namespace MercadoEnvio.ABM_Empresa
             DataTable rubros = new DataTable();
             data_adapter.Fill(rubros);
 
-            comboBox_Rubro.ValueMember = "rubro_id";
-            comboBox_Rubro.DisplayMember = "rubro_desc_larga";
-            comboBox_Rubro.DataSource = rubros;
-            comboBox_Rubro.SelectedIndex = -1;
+            comboBox_Direccion.ValueMember = "rubro_id";
+            comboBox_Direccion.DisplayMember = "rubro_desc_larga";
+            comboBox_Direccion.DataSource = rubros;
+            comboBox_Direccion.SelectedIndex = -1;
         }
 
         private void button_Limpiar_Click(object sender, EventArgs e)
         {
-            textBox_RazonSocial.Text = "";
-            textBox_Ciudad.Text = "";
-            textBox_CUIT.Text = "";
-            textBox_NombreDeContacto.Text = "";
-            comboBox_Rubro.SelectedIndex = -1;
-            textBox_FechaDeCreacion.Text = "";
+            textBox_Nombre.Text = "";
+            textBox_Mail.Text = "";
+            textBox_DNI.Text = "";
+            textBox_Apellido.Text = "";
+            comboBox_Direccion.SelectedIndex = -1;
+            textBox_FechaDeNacimiento.Text = "";
             textBox_Mail.Text = "";
             textBox_Telefono.Text = "";
             textBox_Calle.Text = "";
@@ -219,13 +207,13 @@ namespace MercadoEnvio.ABM_Empresa
 
         private void button_FechaDeCreacion_Click(object sender, EventArgs e)
         {
-            monthCalendar_FechaDeCreacion.Visible = true;
+            monthCalendar_FechaDeNacimiento.Visible = true;
         }
 
         private void monthCalendar_FechaDeCreacion_DateSelected(object sender, System.Windows.Forms.DateRangeEventArgs e)
         {
-            textBox_FechaDeCreacion.Text = e.Start.ToShortDateString();
-            monthCalendar_FechaDeCreacion.Visible = false;
+            textBox_FechaDeNacimiento.Text = e.Start.ToShortDateString();
+            monthCalendar_FechaDeNacimiento.Visible = false;
         }
     }
 }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,9 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
-namespace MercadoEnvio.ABM_Empresa
+namespace UberFrba.ABM_Chofer
 {
-    public partial class FiltroEmpresa : Form
+    public partial class FiltroChofer : Form
     {
         private DBMapper mapper = new DBMapper();
 
@@ -46,9 +46,9 @@ namespace MercadoEnvio.ABM_Empresa
             botonColumnaModificar.Name = "Modificar";
             botonColumnaModificar.UseColumnTextForButtonValue = true;
             dataGridView_Empresa.Columns.Add(botonColumnaModificar);
-          
+
         }
-        
+
         private void CargarColumnaEliminar()
         {
             if (dataGridView_Empresa.Columns.Contains("Eliminar"))
