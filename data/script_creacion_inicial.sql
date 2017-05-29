@@ -605,3 +605,12 @@ select @respuesta as respuesta
 end catch
 end
 GO
+
+
+pr_crear_usuario
+
+pr_crear_usuario_con_valores
+
+chofer_estado
+
+pr_agregar_rol_a_usuario
