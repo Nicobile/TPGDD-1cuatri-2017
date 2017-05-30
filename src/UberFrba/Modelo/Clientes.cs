@@ -10,18 +10,17 @@ namespace UberFrba.Modelo
     class Clientes : Objeto, Mapeable
     {/*faltan getters y setters*/
         private int id;
+        private String DNI; 
         private String nombre;
-        private String apellido;
-        private String numeroDeDocumento;    
+        private String apellido;   
         private String mail;
         private String telefono;
         private String direccion;
-        private String tipoDeDocumento;
+        private String codigoPostal;
         private DateTime fechaDeNacimiento;
         private Boolean activo;
         private int idUsuario;
-        private int idContacto;
-        private DateTime fechaDeAlta;
+
 
         public void SetId(int id)
         {
@@ -32,6 +31,28 @@ namespace UberFrba.Modelo
         {
             return this.id;
         }
+
+
+        public void SetDNI(String DNI)
+        {
+            if (DNI == "")
+                throw new CampoVacioException("DNI");
+
+            if (!esNumero(DNI))
+                throw new FormatoInvalidoException("DNI, Ingrese todos los numeros seguidos.");
+            SetDNIChofer(DNI); 
+        }
+
+        private void SetDNICliente(string DNI)
+        {
+            this.DNI = Convert.ToInt32(DNI);
+        }
+
+        public String GetDNI() 
+        {
+            return Convert.ToString(this.DNI);
+        }
+
 
         public void SetNombre(String nombre)
         {
@@ -45,6 +66,7 @@ namespace UberFrba.Modelo
             return this.nombre;
         }
 
+
         public void SetApellido(String apellido)
         {
             if (apellido == "")
@@ -57,31 +79,74 @@ namespace UberFrba.Modelo
             return this.apellido;
         }
 
-        public void SetTipoDeDocumento(String tipoDeDocumento)
+
+        public void SetMail(String mail)
         {
-            this.tipoDeDocumento = tipoDeDocumento;
+            this.mail = mail;
         }
 
-        public String GetTipoDeDocumento()
+        public String GetMail()
         {
-            return this.tipoDeDocumento;
+            return  this.mail;
         }
 
-        public void SetNumeroDeDocumento(String numeroDeDocumento)
+
+        public void SetTelefono(String telefono)
         {
-            if (numeroDeDocumento == "")
-                throw new CampoVacioException("Numero de documento");
+           if (telefono == "")
+                throw new CampoVacioException("Telefono"); 
 
-            if (!esNumero(numeroDeDocumento))
-                throw new FormatoInvalidoException("Numero de documento. Ingrese todos los numeros seguidos.");
+            if (!esNumero(telefono))
+            throw new FormatoInvalidoException("Telefono, Ingrese todos los numeros seguidos.");    
 
-            this.numeroDeDocumento = numeroDeDocumento;
+            SetTelefonoCliente(telefono);
         }
 
-        public String GetNumeroDeDocumento()
+        private void SetTelefonoCliente(string telefono)
         {
-            return this.numeroDeDocumento;
+            this.telefono = Convert.ToInt32(telefono);
         }
+
+        public String GetTelefono()
+        {
+            return Convert.ToString(this.telefono);
+        }
+
+
+        public void SetDireccion(String direccion)
+        {
+            if (direccion == "")
+                throw new CampoVacioException("Direccion");
+            this.direccion = direccion;
+        }
+
+        public string GetDireccion()
+        {
+           return this.direccion;
+        }
+
+
+        public void SetCodigoPostal(String codigoPostal)
+        {
+            if (codigoPostal == "")
+                throw new CampoVacioException("Codigo Postal"); 
+
+            if (!esNumero(codigoPostal))
+                throw new FormatoInvalidoException("Codigo Postal, Ingrese todos los numeros seguidos.");    
+
+            SetCPCliente(codigoPostal);
+        }
+
+        private void SetCPCliente(string codigoPostal)
+        {
+            this.codigoPostal = Convert.ToInt32(codigoPostal);
+        }
+
+        public String GetCodigoPostal()
+        {
+            return Convert.ToString(this.codigoPostal);
+        }
+
 
         public void SetFechaDeNacimiento(DateTime fechaDeNacimiento)
         {
@@ -99,15 +164,17 @@ namespace UberFrba.Modelo
             return this.fechaDeNacimiento;
         }
 
-        public void SetFechaDeAlta (DateTime fechaDeAlta)
+
+        public void SetActivo(Boolean activo)
         {
-            this.fechaDeAlta = fechaDeAlta;
+            this.activo = activo;
         }
 
-        public DateTime GetFechaDeAlta()
+        public Boolean GetActivo()
         {
-            return this.fechaDeAlta;
+            return this.activo;
         }
+
 
         public void SetIdUsuario(int idUsuario)
         {
@@ -119,32 +186,12 @@ namespace UberFrba.Modelo
             return this.idUsuario;
         }
 
-        public void SetIdContacto(int idContacto)
-        {
-            this.idContacto = idContacto;
-        }
-
-        public int GetIdContacto()
-        {
-            return this.idContacto;
-        }
-
-        public void SetActivo(Boolean cli_activo)
-        {
-            this.activo = cli_activo;
-        }
-
-        public Boolean GetActivo()
-        {
-            return this.activo;
-        }
-
 
         #region Miembros de Comunicable
 
         string Mapeable.GetQueryCrear()
         {
-            return "NET_A_CERO.pr_crear_cliente";
+            return "PUSH_IT_TO_THE_LIMIT.pr_crear_cliente";
         }
 
         string Mapeable.GetQueryModificar()
@@ -152,12 +199,12 @@ namespace UberFrba.Modelo
             if (activo == true)
             {
                
-                return "UPDATE NET_A_CERO.Clientes SET cli_nombre = @nombre, cli_apellido = @apellido, cli_dni = @documento, cli_tipo_dni = @tipo_de_documento, cli_fecha_nac = @fecha_nacimiento, cli_activo = @activo WHERE cli_id = @id " +
-                " UPDATE NET_A_CERO.Usuarios SET usr_intentos = 0 WHERE usr_id = (SELECT cli_usr_id FROM NET_A_CERO.Clientes WHERE cli_id = @id) ";
+                return "UPDATE PUSH_IT_TO_THE_LIMIT.Clientes SET cli_nombre = @nombre, cli_apellido = @apellido, cli_dni = @documento, cli_mail = @mail, cli_telefono = @telefono, cli_direccion = @direccion, cli_codigoPostal = @codigoPostal, cli_fecha_nac = @fecha_nacimiento, cli_activo = @activo WHERE cli_id = @id " +
+                " UPDATE PUSH_IT_TO_THE_LIMIT.Usuarios SET usr_intentos = 0 WHERE usr_id = (SELECT cli_usr_id FROM PUSH_IT_TO_THE_LIMIT.Clientes WHERE cli_id = @id) ";
             }
             else
             {
-                return "UPDATE NET_A_CERO.Clientes SET cli_nombre = @nombre, cli_apellido = @apellido, cli_dni = @documento, cli_tipo_dni = @tipo_de_documento, cli_fecha_nac = @fecha_nacimiento, cli_activo = @activo WHERE cli_id = @id";
+                return "UPDATE PUSH_IT_TO_THE_LIMIT.Clientes SET cli_nombre = @nombre, cli_apellido = @apellido, cli_dni = @documento, cli_mail = @mail, cli_telefono = @telefono, cli_direccion = @direccion, cli_codigoPostal = @codigoPostal, cli_fecha_nac = @fecha_nacimiento, cli_activo = @activo WHERE cli_id = @id";
             }
 
             
@@ -165,7 +212,7 @@ namespace UberFrba.Modelo
 
         string Mapeable.GetQueryObtener()
         {
-            return "SELECT * FROM NET_A_CERO.Clientes WHERE cli_id = @id";
+            return "SELECT * FROM PUSH_IT_TO_THE_LIMIT.Clientes WHERE cli_id = @id";
         }
 
         IList<System.Data.SqlClient.SqlParameter> Mapeable.GetParametros()
@@ -174,11 +221,13 @@ namespace UberFrba.Modelo
             parametros.Clear();
             parametros.Add(new SqlParameter("@nombre", this.nombre));
             parametros.Add(new SqlParameter("@apellido", this.apellido));
-            parametros.Add(new SqlParameter("@documento", this.numeroDeDocumento));
-            parametros.Add(new SqlParameter("@tipo_de_documento", this.tipoDeDocumento));
+            parametros.Add(new SqlParameter("@documento", this.DNI));
+            parametros.Add(new SqlParameter("@mail", this.mail));
+            parametros.Add(new SqlParameter("@telefono", this.telefono));
+            parametros.Add(new SqlParameter("@direccion", this.direccion));
+            parametros.Add(new.SqlParameter("@codigoPostal", this.codigoPostal));
             parametros.Add(new SqlParameter("@fecha_nacimiento", this.fechaDeNacimiento));
             parametros.Add(new SqlParameter("@activo", this.activo));
-            parametros.Add(new SqlParameter("@cont_id", this.idContacto));
             return parametros;
         }
 
@@ -186,15 +235,18 @@ namespace UberFrba.Modelo
         {
             this.nombre = Convert.ToString(reader["cli_nombre"]);
             this.apellido = Convert.ToString(reader["cli_apellido"]);
-            this.numeroDeDocumento = Convert.ToString(reader["cli_dni"]);
-            this.tipoDeDocumento = Convert.ToString(reader["cli_tipo_dni"]);
+            this.DNI = Convert.ToInt32(reader["cli_dni"]);
+            this.mail = Convert.ToString(reader["cli_mail"]);
+            this.telefono = Convert.ToInt32(reader["cli_telefono"]);
+            this.direccion = Convert.ToString(reader["cli_direccion"]);
+            this.codigoPostal = Convert.ToInt32(reader["cli_codigoPostal"]);
             this.fechaDeNacimiento = Convert.ToDateTime(reader["cli_fecha_nac"]);
-            this.fechaDeAlta = Convert.ToDateTime(reader["cli_fecha_alta"]);
             this.activo = Convert.ToBoolean(reader["cli_activo"]);
             this.idUsuario = Convert.ToInt32(reader["cli_usr_id"]);
-            this.idContacto = Convert.ToInt32(reader["cli_cont_id"]);
         }
 
         #endregion
     }
 }
+
+private String codigoPostal;
