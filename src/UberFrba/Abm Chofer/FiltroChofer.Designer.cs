@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 namespace UberFrba.ABM_Chofer
 {
-    partial class FiltroEmpresa
+    partial class FiltroChofer
     {
         /// <summary>
         /// Required designer variable.
@@ -32,26 +32,26 @@ namespace UberFrba.ABM_Chofer
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox_Mail = new System.Windows.Forms.TextBox();
-            this.textBox_Cuit = new System.Windows.Forms.TextBox();
+            this.textBox_DNI = new System.Windows.Forms.TextBox();
+            this.textBox_Apellido = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox_RazonSocial = new System.Windows.Forms.TextBox();
+            this.textBox_Nombre = new System.Windows.Forms.TextBox();
             this.button_Buscar = new System.Windows.Forms.Button();
             this.button_Limpiar = new System.Windows.Forms.Button();
             this.button_Cancelar = new System.Windows.Forms.Button();
-            this.dataGridView_Empresa = new System.Windows.Forms.DataGridView();
+            this.dataGridView_Chofer = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Empresa)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Chofer)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.textBox_Mail);
-            this.groupBox1.Controls.Add(this.textBox_Cuit);
+            this.groupBox1.Controls.Add(this.textBox_DNI);
+            this.groupBox1.Controls.Add(this.textBox_Apellido);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.textBox_RazonSocial);
+            this.groupBox1.Controls.Add(this.textBox_Nombre);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(368, 101);
@@ -66,46 +66,46 @@ namespace UberFrba.ABM_Chofer
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(26, 13);
             this.label4.TabIndex = 6;
-            this.label4.Text = "Mail";
+            this.label4.Text = "DNI";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(6, 48);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(32, 13);
+            this.label3.Size = new System.Drawing.Size(44, 13);
             this.label3.TabIndex = 5;
-            this.label3.Text = "CUIT";
+            this.label3.Text = "Apellido";
             // 
-            // textBox_Mail
+            // textBox_DNI
             // 
-            this.textBox_Mail.Location = new System.Drawing.Point(77, 71);
-            this.textBox_Mail.Name = "textBox_Mail";
-            this.textBox_Mail.Size = new System.Drawing.Size(285, 20);
-            this.textBox_Mail.TabIndex = 4;
+            this.textBox_DNI.Location = new System.Drawing.Point(77, 71);
+            this.textBox_DNI.Name = "textBox_DNI";
+            this.textBox_DNI.Size = new System.Drawing.Size(285, 20);
+            this.textBox_DNI.TabIndex = 4;
             // 
-            // textBox_Cuit
+            // textBox_Apellido
             // 
-            this.textBox_Cuit.Location = new System.Drawing.Point(77, 45);
-            this.textBox_Cuit.Name = "textBox_Cuit";
-            this.textBox_Cuit.Size = new System.Drawing.Size(285, 20);
-            this.textBox_Cuit.TabIndex = 3;
+            this.textBox_Apellido.Location = new System.Drawing.Point(77, 45);
+            this.textBox_Apellido.Name = "textBox_Apellido";
+            this.textBox_Apellido.Size = new System.Drawing.Size(285, 20);
+            this.textBox_Apellido.TabIndex = 3;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(6, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 13);
+            this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Razon Social";
+            this.label1.Text = "Nombre";
             // 
-            // textBox_RazonSocial
+            // textBox_Nombre
             // 
-            this.textBox_RazonSocial.Location = new System.Drawing.Point(77, 19);
-            this.textBox_RazonSocial.Name = "textBox_RazonSocial";
-            this.textBox_RazonSocial.Size = new System.Drawing.Size(285, 20);
-            this.textBox_RazonSocial.TabIndex = 0;
+            this.textBox_Nombre.Location = new System.Drawing.Point(77, 19);
+            this.textBox_Nombre.Name = "textBox_Nombre";
+            this.textBox_Nombre.Size = new System.Drawing.Size(285, 20);
+            this.textBox_Nombre.TabIndex = 0;
             // 
             // button_Buscar
             // 
@@ -139,33 +139,33 @@ namespace UberFrba.ABM_Chofer
             // 
             // dataGridView_Empresa
             // 
-            this.dataGridView_Empresa.AllowUserToAddRows = false;
-            this.dataGridView_Empresa.AllowUserToDeleteRows = false;
-            this.dataGridView_Empresa.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView_Empresa.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_Empresa.Location = new System.Drawing.Point(12, 155);
-            this.dataGridView_Empresa.Name = "dataGridView_Empresa";
-            this.dataGridView_Empresa.ReadOnly = true;
-            this.dataGridView_Empresa.Size = new System.Drawing.Size(1068, 199);
-            this.dataGridView_Empresa.TabIndex = 4;
-            this.dataGridView_Empresa.CellClick += new DataGridViewCellEventHandler(dataGridView_Empresa_CellClick);
+            this.dataGridView_Chofer.AllowUserToAddRows = false;
+            this.dataGridView_Chofer.AllowUserToDeleteRows = false;
+            this.dataGridView_Chofer.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridView_Chofer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_Chofer.Location = new System.Drawing.Point(12, 155);
+            this.dataGridView_Chofer.Name = "dataGridView_Empresa";
+            this.dataGridView_Chofer.ReadOnly = true;
+            this.dataGridView_Chofer.Size = new System.Drawing.Size(1068, 199);
+            this.dataGridView_Chofer.TabIndex = 4;
+            this.dataGridView_Chofer.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Empresa_CellClick);
             // 
-            // FiltroEmpresa
+            // FiltroChofer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1092, 366);
-            this.Controls.Add(this.dataGridView_Empresa);
+            this.Controls.Add(this.dataGridView_Chofer);
             this.Controls.Add(this.button_Cancelar);
             this.Controls.Add(this.button_Limpiar);
             this.Controls.Add(this.button_Buscar);
             this.Controls.Add(this.groupBox1);
-            this.Name = "FiltroEmpresa";
+            this.Name = "FiltroChofer";
             this.Text = "Filtro de empresas";
             this.Load += new System.EventHandler(this.FiltroEmpresa_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Empresa)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Chofer)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -175,13 +175,13 @@ namespace UberFrba.ABM_Chofer
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox_Mail;
-        private System.Windows.Forms.TextBox textBox_Cuit;
+        private System.Windows.Forms.TextBox textBox_DNI;
+        private System.Windows.Forms.TextBox textBox_Apellido;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox_RazonSocial;
+        private System.Windows.Forms.TextBox textBox_Nombre;
         private System.Windows.Forms.Button button_Buscar;
         private System.Windows.Forms.Button button_Limpiar;
         private System.Windows.Forms.Button button_Cancelar;
-        private System.Windows.Forms.DataGridView dataGridView_Empresa;
+        private System.Windows.Forms.DataGridView dataGridView_Chofer;
     }
 }

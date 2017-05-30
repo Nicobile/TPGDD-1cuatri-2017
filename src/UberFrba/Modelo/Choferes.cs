@@ -13,11 +13,11 @@ namespace UberFrba.Modelo
     class Choferes : Objeto, Mapeable
     {/* getters y setters*/
         private int id;
-        private String DNI;
+        private int DNI;
         private String nombre;
         private String apellido;
         private String mail;
-        private String telefono;
+        private int telefono;
         private String direccion;
         private DateTime fechaDeNacimiento;
         private Boolean activo;
@@ -42,13 +42,18 @@ namespace UberFrba.Modelo
         public void SetDNI(String DNI) // Deberia haber una excepcion por DNI repetido ya que es unique
         {
             if (DNI == "") // Campo vacio en INT??
-                throw new CampoVacioException("DNI");
-            this.DNI = DNI;
+                throw new CampoVacioException("DNI");               
+            SetDNIChofer(DNI);  
+        }
+
+        private void SetDNIChofer(string DNI)
+        {
+            this.DNI = Convert.ToInt32(DNI);
         }
 
         public String GetDNI() 
         {
-            return this.DNI;
+            return Convert.ToString(this.DNI);
         }
 
         public void SetNombre(String nombre)
@@ -90,14 +95,19 @@ namespace UberFrba.Modelo
 
         public void SetTelefono(String telefono) // Deberia haber una excepcion por telefono repetido ya que es unique
         {
-            if (telefono == "") // Campo vacio en INT??
-                throw new CampoVacioException("Telefono");
-            this.telefono = telefono;
+           if (telefono == "") // Campo vacio en INT??
+                throw new CampoVacioException("Telefono"); 
+            SetTelefonoChofer(telefono);
+        }
+
+        private void SetTelefonoChofer(string telefono)
+        {
+            this.telefono = Convert.ToInt32(telefono);
         }
 
         public String GetTelefono()
         {
-            return this.telefono;
+            return Convert.ToString(this.telefono);
         }
 
 
@@ -165,29 +175,12 @@ namespace UberFrba.Modelo
         {
             if (activo == true)
             {
-                return "UPDATE PUSH_IT_TO_THE_LIMIT.Choferes 
-                                                            SET chofer_dni = @DNI, 
-                                                                chofer_nombre = @nombre, 
-                                                                chofer_apellido = @apellido, 
-                                                                chofer_mail = @mail, 
-                                                                chofer_direccion = @direccion, 
-                                                                chofer_fechaDeNacimiento = @fechaDeNacimiento, 
-                                                                chofer_activo = @activo 
-                                                            WHERE chofer_id =  @id" + " UPDATE PUSH_IT_TO_THE_LIMIT.Usuarios SET usr_intentos = 0
-                                                                                                                             WHERE usr_id =  (SELECT chofer_id_usuario FROM PUSH_IT_TO_THE_LIMIT.Choferes
-                                                                                                                                WHERE chofer_id = @id) ";
+                return "UPDATE PUSH_IT_TO_THE_LIMIT.Choferes SET chofer_dni = @DNI, chofer_nombre = @nombre, chofer_apellido = @apellido, chofer_mail = @mail, chofer_direccion = @direccion, chofer_fechaDeNacimiento = @fechaDeNacimiento, chofer_activo = @activo WHERE chofer_id =  @id" +
+                       " UPDATE PUSH_IT_TO_THE_LIMIT.Usuarios SET usr_intentos = 0  WHERE usr_id =  (SELECT chofer_id_usuario FROM PUSH_IT_TO_THE_LIMIT.Choferes WHERE chofer_id = @id)";
             }
             else
             {
-                return "UPDATE PUSH_IT_TO_THE_LIMIT.Choferes
-                                                            SET chofer_dni = @DNI, 
-                                                                chofer_nombre = @nombre, 
-                                                                chofer_apellido = @apellido, 
-                                                                chofer_mail = @mail, 
-                                                                chofer_direccion = @direccion, 
-                                                                chofer_fechaDeNacimiento = @fechaDeNacimiento, 
-                                                                chofer_activo = @activo 
-                                                            WHERE chofer_id = @id";
+                return "UPDATE PUSH_IT_TO_THE_LIMIT.Choferes SET chofer_dni = @DNI, chofer_nombre = @nombre,  chofer_apellido = @apellido, chofer_mail = @mail,  chofer_direccion = @direccion, chofer_fechaDeNacimiento = @fechaDeNacimiento, chofer_activo = @activo WHERE chofer_id = @id";
             }
 
         }

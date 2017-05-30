@@ -14,73 +14,73 @@ namespace UberFrba.ABM_Chofer
     {
         private DBMapper mapper = new DBMapper();
 
-        public FiltroEmpresa()
+        public FiltroChofer()
         {
             InitializeComponent();
         }
 
         private void FiltroEmpresa_Load(object sender, EventArgs e)
         {
-            CargarEmpresas();
+            CargarChoferes();
             OcultarColumnasQueNoDebenVerse();
         }
 
         private void OcultarColumnasQueNoDebenVerse()
         {
-            dataGridView_Empresa.Columns["emp_id"].Visible = false;
+            dataGridView_Chofer.Columns["emp_id"].Visible = false;
         }
 
-        private void CargarEmpresas()
+        private void CargarChoferes()
         {
-            dataGridView_Empresa.DataSource = mapper.SelectEmpresasParaFiltro();
+            dataGridView_Chofer.DataSource = mapper.SelectChoferParaFiltro();
             CargarColumnaModificacion();
             CargarColumnaEliminar();
         }
 
         private void CargarColumnaModificacion()
         {
-            if (dataGridView_Empresa.Columns.Contains("Modificar"))
-                dataGridView_Empresa.Columns.Remove("Modificar");
+            if (dataGridView_Chofer.Columns.Contains("Modificar"))
+                dataGridView_Chofer.Columns.Remove("Modificar");
             DataGridViewButtonColumn botonColumnaModificar = new DataGridViewButtonColumn();
             botonColumnaModificar.Text = "Modificar";
             botonColumnaModificar.Name = "Modificar";
             botonColumnaModificar.UseColumnTextForButtonValue = true;
-            dataGridView_Empresa.Columns.Add(botonColumnaModificar);
+            dataGridView_Chofer.Columns.Add(botonColumnaModificar);
 
         }
 
         private void CargarColumnaEliminar()
         {
-            if (dataGridView_Empresa.Columns.Contains("Eliminar"))
-                dataGridView_Empresa.Columns.Remove("Eliminar");
+            if (dataGridView_Chofer.Columns.Contains("Eliminar"))
+                dataGridView_Chofer.Columns.Remove("Eliminar");
             DataGridViewButtonColumn botonColumnaEliminar = new DataGridViewButtonColumn();
             botonColumnaEliminar.Text = "Eliminar";
             botonColumnaEliminar.Name = "Eliminar";
             botonColumnaEliminar.UseColumnTextForButtonValue = true;
-            dataGridView_Empresa.Columns.Add(botonColumnaEliminar);
+            dataGridView_Chofer.Columns.Add(botonColumnaEliminar);
         }
 
         private void button_Buscar_Click(object sender, EventArgs e)
         {
             String filtro = CalcularFiltro();
-            dataGridView_Empresa.DataSource = mapper.SelectEmpresasParaFiltroConFiltro(filtro);
+            dataGridView_Chofer.DataSource = mapper.SelectChoferesParaFiltroConFiltro(filtro);
         }
 
         private String CalcularFiltro()
         {
             String filtro = "";
-            if (textBox_RazonSocial.Text != "") filtro += "AND " + "emp.emp_razon_social LIKE '" + textBox_RazonSocial.Text + "%'";
-            if (textBox_Cuit.Text != "") filtro += "AND " + "emp.emp_cuit LIKE '" + textBox_Cuit.Text + "%'";
-            if (textBox_Mail.Text != "") filtro += "AND " + "cont.cont_mail LIKE '" + textBox_Mail.Text + "%'";
+            if (textBox_Nombre.Text != "") filtro += "AND " + "emp.emp_razon_social LIKE '" + textBox_Nombre.Text + "%'";
+            if (textBox_Apellido.Text != "") filtro += "AND " + "emp.emp_cuit LIKE '" + textBox_Apellido.Text + "%'";
+            if (textBox_DNI.Text != "") filtro += "AND " + "cont.cont_mail LIKE '" + textBox_DNI.Text + "%'";
             return filtro;
         }
 
         private void button_Limpiar_Click(object sender, EventArgs e)
         {
-            textBox_RazonSocial.Text = "";
-            textBox_Cuit.Text = "";
-            textBox_Mail.Text = "";
-            CargarEmpresas();
+            textBox_Nombre.Text = "";
+            textBox_Apellido.Text = "";
+            textBox_DNI.Text = "";
+            CargarChoferes();
         }
 
         private void button_Cancelar_Click(object sender, EventArgs e)
@@ -93,19 +93,19 @@ namespace UberFrba.ABM_Chofer
         private void dataGridView_Empresa_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             // Controla que la celda que se clickeo fue la de modificar
-            if (e.ColumnIndex == dataGridView_Empresa.Columns["Modificar"].Index && e.RowIndex >= 0)
+            if (e.ColumnIndex == dataGridView_Chofer.Columns["Modificar"].Index && e.RowIndex >= 0)
             {
-                String idEmpresaAModificar = dataGridView_Empresa.Rows[e.RowIndex].Cells["emp_id"].Value.ToString();
-                new EditarEmpresa(idEmpresaAModificar).ShowDialog();
-                CargarEmpresas();
+                String idChoferAModificar = dataGridView_Chofer.Rows[e.RowIndex].Cells["chofer_id"].Value.ToString();
+                new EditarChofer(idChoferAModificar).ShowDialog();
+                CargarChoferes();
                 return;
             }
-            if (e.ColumnIndex == dataGridView_Empresa.Columns["Eliminar"].Index && e.RowIndex >= 0)
+            if (e.ColumnIndex == dataGridView_Chofer.Columns["Eliminar"].Index && e.RowIndex >= 0)
             {
-                String idEmpresaAEliminar = dataGridView_Empresa.Rows[e.RowIndex].Cells["emp_id"].Value.ToString();
-                Boolean resultado = mapper.EliminarEmpresa(Convert.ToInt32(idEmpresaAEliminar), "Empresas");
+                String idEmpresaAEliminar = dataGridView_Chofer.Rows[e.RowIndex].Cells["chofer_id"].Value.ToString();
+                Boolean resultado = mapper.EliminarChofer(Convert.ToInt32(idEmpresaAEliminar), "Chofer");
                 if (resultado) MessageBox.Show("Se elimino correctamente");
-                CargarEmpresas();
+                CargarChoferes();
                 return;
             }
         }

@@ -164,6 +164,7 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[Chofer] (
 	[chofer_telefono] NUMERIC(18,0) UNIQUE,
 	[chofer_mail] VARCHAR(50) ,
 	[chofer_fecha_Nacimiento] DATETIME NOT NULL,
+	[chofer_activo] [bit] NOT NULL DEFAULT 1,
 	[usuario_id] INT,
 	
 )
@@ -606,7 +607,7 @@ end catch
 end
 GO
 
-
+/*
 pr_crear_usuario
 
 pr_crear_usuario_con_valores
@@ -614,3 +615,33 @@ pr_crear_usuario_con_valores
 chofer_estado
 
 pr_agregar_rol_a_usuario
+*/
+
+
+
+
+
+------------------------------------------------
+--Procedure para crear un chofer 
+GO
+create proc [PUSH_IT_TO_THE_LIMIT].crear_chofer
+    @Nombre nvarchar(255),
+    @Apellido varchar(50),
+    @DNI numeric(18,0),
+    @Direccion varchar(255),
+    @Telefono numeric(18,0),
+    @Mail varchar(50),
+	@Fecha_Nacimiento datetime,
+	@Activo bit,
+	@id int OUTPUT
+AS
+BEGIN
+    INSERT INTO [PUSH_IT_TO_THE_LIMIT].Chofer
+        (chofer_dni, chofer_nombre, chofer_apellido, chofer_direccion, chofer_telefono, chofer_mail, chofer_fecha_Nacimiento,chofer_activo) 
+    VALUES 
+        (@Nombre, @Apellido, @DNI, @Direccion, @Telefono, @Mail, @Fecha_Nacimiento,@Activo)
+    SET @id = SCOPE_IDENTITY(); 
+END
+GO
+
+GO

@@ -15,87 +15,56 @@ namespace UberFrba.ABM_Chofer
 {
     public partial class EditarChofer : Form
     {
-        private int idEmpresa;
+        private int idChofer;
         private int idContacto = 0;
         private int idUsuario = 0;
         private DBMapper mapper = new DBMapper();
 
-        public EditarEmpresa(String idEmpresa)
+        public EditarChofer(String idChofer)
         {
             InitializeComponent();
-            this.idEmpresa = Convert.ToInt32(idEmpresa);
+            this.idChofer = Convert.ToInt32(idChofer);
         }
 
         private void EditarEmpresa_Load(object sender, EventArgs e)
         {
-            CargarRubros();
+         
             CargarDatos();
         }
 
         private void CargarDatos()
         {
-            Empresas empresa = mapper.ObtenerEmpresa(idEmpresa);
-            Contacto contacto = mapper.ObtenerContacto(empresa.GetIdContacto());
+            Choferes chofer = mapper.ObtenerChofer(idChofer);
+           
 
-            idUsuario = empresa.GetIdUsuario();
-            idContacto = empresa.GetIdContacto();
+            idUsuario = chofer.GetIdUsuario();
 
-            textBox_RazonSocial.Text = empresa.GetRazonSocial();
-            textBox_Ciudad.Text = empresa.GetCiudad();
-            textBox_CUIT.Text = empresa.GetCuit();
-            textBox_NombreDeContacto.Text = empresa.GetNombreDeContacto();
-            comboBox_Rubro.Text = empresa.GetRubro();
-            textBox_FechaDeCreacion.Text = Convert.ToString(empresa.GetFechaDeCreacion());
-            textBox_Mail.Text = contacto.GetMail();
-            textBox_Telefono.Text = contacto.GetTelefono();
-            checkBox_Habilitado.Checked = Convert.ToBoolean(mapper.SelectFromWhere("usr_activo", "Usuarios", "usr_id", empresa.GetIdUsuario()));
-            textBox_Calle.Text = contacto.GetCalle();
-            textBox_Numero.Text = contacto.GetNumeroCalle();
-            textBox_Piso.Text = contacto.GetPiso();
-            textBox_Departamento.Text = contacto.GetDepartamento();
-            textBox_Localidad.Text = contacto.GetLocalidad();
-            textBox_CodigoPostal.Text = contacto.GetCodigoPostal();
+
+            textBox_Nombre.Text = chofer.GetNombre();
+            textBox_Mail.Text = chofer.GetMail();
+            textBox_DNI.Text = chofer.GetDNI();
+            textBox_Apellido.Text = chofer.GetApellido();
+            textBox_FechaDeNacimiento.Text = Convert.ToString(chofer.GetFechaDeNacimiento());
+            textBox_Telefono.Text = chofer.GetTelefono();
+            checkBox_Habilitado.Checked = Convert.ToBoolean(mapper.SelectFromWhere("usuario_activo", "Usuario", "usuario_id", chofer.GetIdUsuario()));
 
         }
 
-        private void CargarRubros()
-        {
-            string query = "SELECT rubro_id, rubro_desc_larga from NET_A_CERO.Rubros";
-
-            SqlCommand cmd = new SqlCommand(query, ConnectionManager.Instance.getConnection());
-
-            SqlDataAdapter data_adapter = new SqlDataAdapter(cmd);
-            DataTable rubros = new DataTable();
-            data_adapter.Fill(rubros);
-
-            comboBox_Rubro.ValueMember = "rubro_id";
-            comboBox_Rubro.DisplayMember = "rubro_desc_larga";
-            comboBox_Rubro.DataSource = rubros;
-            comboBox_Rubro.SelectedIndex = -1;
-        }
 
         private void button_Guardar_Click(object sender, EventArgs e)
         {
             // Guarda en variables todos los campos de entrada
-            String razonSocial = textBox_RazonSocial.Text;
-            String ciudad = textBox_Ciudad.Text;
-            String cuit = textBox_CUIT.Text;
-            String nombreDeContacto = textBox_NombreDeContacto.Text;
-            String rubro = comboBox_Rubro.Text;
-            DateTime fechaDeCreacion;
-            DateTime.TryParse(textBox_FechaDeCreacion.Text, out fechaDeCreacion);
-            String mail = textBox_Mail.Text;
+            String Nombre = textBox_Nombre.Text;
+            String Mail = textBox_Mail.Text;
+            String DNI = textBox_DNI.Text;
+            String Apellido = textBox_Apellido.Text;
+            DateTime fechaDeNacimiento;
+            DateTime.TryParse(textBox_FechaDeNacimiento.Text, out fechaDeNacimiento);
             String telefono = textBox_Telefono.Text;
-            String calle = textBox_Calle.Text;
-            String numero = textBox_Numero.Text;
-            String piso = textBox_Piso.Text;
-            String departamento = textBox_Departamento.Text;
-            String localidad = textBox_Localidad.Text;
-            String codigoPostal = textBox_CodigoPostal.Text;
-            Boolean activo = checkBox_Habilitado.Checked; //La variable activo que esta en el checkbox es para saber si esta habilitado a nivel usuario
+            Boolean activo = checkBox_Habilitado.Checked; //La variable activo que esta en el checkbox es para saber si esta habilitado a nivel usuario --> ESTO QUE HICO EL PIBE NO ME CABE NI UN POCO
             Boolean pudoModificar;
 
-            // Update contacto
+    /*        // Update contacto
             Contacto contacto = new Contacto();
             try
             {
@@ -119,25 +88,23 @@ namespace UberFrba.ABM_Chofer
                 MessageBox.Show("Datos mal ingresados en: " + exception.Message);
                 return;
             }
-
+            */
             // Update empresa
             try
             {
-                Empresas empresa = new Empresas();
+                Choferes chofer = new Choferes();
 
-                empresa.SetRazonSocial(razonSocial);
-                empresa.SetCiudad(ciudad);
-                empresa.SetCuit(cuit);
-                empresa.SetNombreDeContacto(nombreDeContacto);
-                empresa.SetRubro(rubro);
-                empresa.SetFechaDeCreacion(fechaDeCreacion);
-                empresa.SetIdContacto(idContacto);
-                empresa.SetActivo(true);
+                chofer.SetNombre(Nombre);
+                chofer.SetApellido(Mail);
+                chofer.SetDNI(DNI);
+                chofer.SetApellido(Apellido);
+                chofer.SetFechaDeNacimiento(fechaDeNacimiento);
+                chofer.SetActivo(true);
 
                 mapper.ActualizarEstadoUsuario(idUsuario, activo);
 
-                pudoModificar = mapper.Modificar(idEmpresa, empresa);
-                if (pudoModificar) MessageBox.Show("La empresa se modifico correctamente");
+                pudoModificar = mapper.Modificar(idChofer, chofer);
+                if (pudoModificar) MessageBox.Show("Chofer modificado correctamente");
             }
             catch (CampoVacioException exception)
             {
@@ -151,10 +118,11 @@ namespace UberFrba.ABM_Chofer
             }
             catch (TelefonoYaExisteException exception)
             {
-                MessageBox.Show("Telefono ya existe");
+                MessageBox.Show("Telefono ya existe" + exception.Message);
                 return;
             }
-            catch (CuitYaExisteException exception)
+                /*Como antes, faltan estas excepciones, despues las veo son las 2 de la matina y estoy cansadito
+     /*       catch (CuitYaExisteException exception)
             {
                 MessageBox.Show("Cuit ya existe");
                 return;
@@ -163,10 +131,10 @@ namespace UberFrba.ABM_Chofer
             {
                 MessageBox.Show("RazonSocial ya existe");
                 return;
-            }
+            } */
             catch (FechaPasadaException exception)
             {
-                MessageBox.Show("Fecha no valida");
+                MessageBox.Show("Fecha no valida" + exception.Message);
                 return;
             }
 
@@ -190,7 +158,7 @@ namespace UberFrba.ABM_Chofer
 
         private void monthCalendar_FechaDeCreacion_DateSelected(object sender, System.Windows.Forms.DateRangeEventArgs e)
         {
-            textBox_FechaDeCreacion.Text = e.Start.ToShortDateString();
+            textBox_FechaDeNacimiento.Text = e.Start.ToShortDateString();
             monthCalendar_FechaDeCreacion.Visible = false;
         }
     }

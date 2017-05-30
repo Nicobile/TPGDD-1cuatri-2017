@@ -137,16 +137,6 @@ namespace UberFrba
             return this.Crear(chofer);
         }
 
-        /** Contacto **/
-
-        public int CrearContacto(Contacto contacto)
-        {
-            return this.Crear(contacto);
-        }
-
-
-
-
         /*
         *
         *   GET TABLE QUERYS
@@ -182,7 +172,7 @@ namespace UberFrba
         }
 
         /** Contacto **/
-
+/*
         public Contacto ObtenerContacto(int idContacto)
         {
             Contacto objeto = new Contacto();
@@ -191,7 +181,7 @@ namespace UberFrba
         }
 
 
-
+*/
 
         /* 
         * 
@@ -267,7 +257,7 @@ namespace UberFrba
             query = "UPDATE PUSH-IT-TO-THE-LIMIT.Chofer SET usuario_id = @idUsuario WHERE chofer_id = @idChofer";
             parametros.Clear();
             parametros.Add(new SqlParameter("@idUsuario", idUsuario));
-            parametros.Add(new SqlParameter("@idChofer", idEmpresa));
+            parametros.Add(new SqlParameter("@idChofer", idChofer));
             command = QueryBuilder.Instance.build(query, parametros);
             int filasAfectadas = command.ExecuteNonQuery();
             if (filasAfectadas == 1) return true;
@@ -371,14 +361,14 @@ namespace UberFrba
                 , "cli.usuario_id = usr.usuario_id  AND cli.cliente_estado= 1 " + filtro);
         }
 
-        /** Empresas **/
+        /** Choferes **/
 
         public DataTable SelectChoferParaFiltro()
         {
-            return this.SelectEmpresasParaFiltroConFiltro("");
+            return this.SelectChoferesParaFiltroConFiltro("");
         }
 
-        public DataTable SelectEmpresasParaFiltroConFiltro(String filtro)
+        public DataTable SelectChoferesParaFiltroConFiltro(String filtro)
         {
             return this.SelectDataTable("c.chofer_id, usr.usuario_name Username, c.chofer_nombre 'Nombre', c.chofer_dni 'DNI', c.chofer_apellido 'Apellido', c.chofer_direccion 'Direccion', c.chofer_telefono 'Telefono',c.chofer_mail 'Mail',c.chofer_fecha_Nacimiento 'Fecha Nacimiento', usr.usuario_estado 'Habilitado' "
               , "PUSH-IT-TO-THE-LIMIT.Chofer c, PUSH-IT-TO-THE-LIMIT.Usuarios usr"
@@ -443,14 +433,14 @@ namespace UberFrba
         }
 
       
-        /** Empresas **/
+        /** Choferes **/
 
         private bool esChoferUnico(String numeroDocumento)
         {
             query = "SELECT COUNT(*) PUSH-IT-TO-THE-LIMIT.Chofer  AND cliente_dni = @numeroDeDocumento";
             parametros.Clear();
 
-            parametros.Add(new SqlParameter("@numeroDeDocumento", Convert.ToDecimal(numeroDeDocumento)));
+            parametros.Add(new SqlParameter("@numeroDeDocumento", Convert.ToDecimal(numeroDocumento)));
             return ControlDeUnicidad(query, parametros);
         }
 
@@ -460,7 +450,7 @@ namespace UberFrba
             parametros.Clear();
 
             parametros.Add(new SqlParameter("@numeroDeDocumento", numeroDeDocumento));
-            parametros.Add(new SqlParameter("@idChofer", idCliente));
+            parametros.Add(new SqlParameter("@idChofer", idChofer));
             return ControlDeUnicidad(query, parametros);
         }
 

@@ -19,6 +19,7 @@ namespace UberFrba.ABM_Chofer
         private String contrasena;
         private DBMapper mapper = new DBMapper();
         private int idUsuario;
+        private int idChofer;
 
         public AgregarChofer(String username, String contrasena)
         {
@@ -28,11 +29,11 @@ namespace UberFrba.ABM_Chofer
             this.idUsuario = 0;
         }
 
-        private void AgregarChofer_Load(object sender, EventArgs e)
+   /*     private void AgregarChofer_Load(object sender, EventArgs e)
         {
             CargarRubros();
         }
-
+        */
         private void button_Guardar_Click(object sender, EventArgs e)
         {
             // Guarda en variables todos los campos de entrada
@@ -91,8 +92,8 @@ namespace UberFrba.ABM_Chofer
                 chofer.SetMail(Mail);
                 chofer.SetFechaDeNacimiento(fechaDeNacimiento);
 
-                idChofer = mapper.CrearEmpresa(chofer);
-                if (idEmpresa > 0) MessageBox.Show("Se agrego la empresa correctamente");
+                idChofer = mapper.CrearChofer(chofer);
+                if (idChofer > 0) MessageBox.Show("Chofer agregado correctamente");
             }
             catch (CampoVacioException exceptionCampoVacio)
             {
@@ -109,16 +110,19 @@ namespace UberFrba.ABM_Chofer
                 MessageBox.Show("Telefono ya existe");
                 return;
             }
-            catch (CuitYaExisteException exceptionCuit)
+
+          /*Excepciones no creadas, hay que verlo tambien, realmente quiero estar muerto*/
+
+          /*  catch (CuitYaExisteException exceptionCuit)
             {
                 MessageBox.Show("Cuit ya existe");
                 return;
-            }
+            }                             
             catch (RazonSocialYaExisteException exceptionRazonSocial)
             {
                 MessageBox.Show("RazonSocial ya existe");
                 return;
-            }
+            } */
             catch (FechaPasadaException exceptionFecha)
             {
                 MessageBox.Show("Fecha no valida");
@@ -129,11 +133,11 @@ namespace UberFrba.ABM_Chofer
             if (idUsuario == 0)
             {
                 idUsuario = CrearUsuario();
-                Boolean resultado = mapper.AsignarUsuarioAEmpresa(idEmpresa, idUsuario);
+                Boolean resultado = mapper.AsignarUsuarioAChofer(idChofer, idUsuario);
                 if (resultado) MessageBox.Show("El usuario fue creado correctamente");
             }
 
-            mapper.AsignarRolAUsuario(this.idUsuario, "Empresa");
+            mapper.AsignarRolAUsuario(this.idUsuario, "Chofer");
 
             VolverAlMenuPrincipal();
         }
@@ -150,7 +154,7 @@ namespace UberFrba.ABM_Chofer
             }
         }
 
-        private void CargarRubros()
+       /* private void CargarRubros()
         {
             string query = "SELECT rubro_id, rubro_desc_larga from NET_A_CERO.Rubros";
 
@@ -165,23 +169,18 @@ namespace UberFrba.ABM_Chofer
             comboBox_Direccion.DataSource = rubros;
             comboBox_Direccion.SelectedIndex = -1;
         }
-
+        */
         private void button_Limpiar_Click(object sender, EventArgs e)
         {
             textBox_Nombre.Text = "";
             textBox_Mail.Text = "";
             textBox_DNI.Text = "";
             textBox_Apellido.Text = "";
-            comboBox_Direccion.SelectedIndex = -1;
+            textBox_Direccion.Text = "";
             textBox_FechaDeNacimiento.Text = "";
             textBox_Mail.Text = "";
             textBox_Telefono.Text = "";
-            textBox_Calle.Text = "";
-            textBox_Numero.Text = "";
-            textBox_Piso.Text = "";
-            textBox_Departamento.Text = "";
-            textBox_CodigoPostal.Text = "";
-            textBox_Localidad.Text = "";
+
         }
 
         private void button_Cancelar_Click(object sender, EventArgs e)

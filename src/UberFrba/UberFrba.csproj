@@ -68,9 +68,7 @@
     <Compile Include="Abm Chofer\FiltroChofer.Designer.cs">
       <DependentUpon>FiltroChofer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Cliente\AgregarChoferDesigner.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Abm Cliente\AgregarChoferDesigner.cs" />
     <Compile Include="Abm Cliente\AgregarCliente.cs">
       <SubType>Form</SubType>
     </Compile>

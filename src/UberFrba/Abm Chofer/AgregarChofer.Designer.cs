@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.monthCalendar_FechaDeNacimiento = new System.Windows.Forms.MonthCalendar();
             this.textBox_Direccion = new System.Windows.Forms.TextBox();
             this.textBox_Telefono = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -44,10 +45,10 @@
             this.textBox_DNI = new System.Windows.Forms.TextBox();
             this.textBox_Nombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.monthCalendar_FechaDeNacimiento = new System.Windows.Forms.MonthCalendar();
             this.button_Guardar = new System.Windows.Forms.Button();
             this.button_Cancelar = new System.Windows.Forms.Button();
             this.button_Limpiar = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,6 +76,14 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos";
+            // 
+            // monthCalendar_FechaDeNacimiento
+            // 
+            this.monthCalendar_FechaDeNacimiento.Location = new System.Drawing.Point(176, -17);
+            this.monthCalendar_FechaDeNacimiento.Name = "monthCalendar_FechaDeNacimiento";
+            this.monthCalendar_FechaDeNacimiento.TabIndex = 5;
+            this.monthCalendar_FechaDeNacimiento.Visible = false;
+            this.monthCalendar_FechaDeNacimiento.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar_FechaDeCreacion_DateSelected);
             // 
             // textBox_Direccion
             // 
@@ -198,17 +207,9 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre";
             // 
-            // monthCalendar_FechaDeNacimiento
-            // 
-            this.monthCalendar_FechaDeNacimiento.Location = new System.Drawing.Point(176, -17);
-            this.monthCalendar_FechaDeNacimiento.Name = "monthCalendar_FechaDeNacimiento";
-            this.monthCalendar_FechaDeNacimiento.TabIndex = 5;
-            this.monthCalendar_FechaDeNacimiento.Visible = false;
-            this.monthCalendar_FechaDeNacimiento.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar_FechaDeCreacion_DateSelected);
-            // 
             // button_Guardar
             // 
-            this.button_Guardar.Location = new System.Drawing.Point(273, 227);
+            this.button_Guardar.Location = new System.Drawing.Point(273, 242);
             this.button_Guardar.Name = "button_Guardar";
             this.button_Guardar.Size = new System.Drawing.Size(100, 30);
             this.button_Guardar.TabIndex = 2;
@@ -218,7 +219,7 @@
             // 
             // button_Cancelar
             // 
-            this.button_Cancelar.Location = new System.Drawing.Point(15, 227);
+            this.button_Cancelar.Location = new System.Drawing.Point(15, 242);
             this.button_Cancelar.Name = "button_Cancelar";
             this.button_Cancelar.Size = new System.Drawing.Size(100, 30);
             this.button_Cancelar.TabIndex = 3;
@@ -228,7 +229,7 @@
             // 
             // button_Limpiar
             // 
-            this.button_Limpiar.Location = new System.Drawing.Point(135, 227);
+            this.button_Limpiar.Location = new System.Drawing.Point(135, 242);
             this.button_Limpiar.Name = "button_Limpiar";
             this.button_Limpiar.Size = new System.Drawing.Size(100, 30);
             this.button_Limpiar.TabIndex = 4;
@@ -236,21 +237,31 @@
             this.button_Limpiar.UseVisualStyleBackColor = true;
             this.button_Limpiar.Click += new System.EventHandler(this.button_Limpiar_Click);
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(17, 224);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(174, 13);
+            this.label14.TabIndex = 6;
+            this.label14.Text = "* Debe completar todos los campos";
+            // 
             // AgregarChofer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(392, 282);
+            this.ClientSize = new System.Drawing.Size(392, 308);
+            this.Controls.Add(this.label14);
             this.Controls.Add(this.button_Limpiar);
             this.Controls.Add(this.button_Cancelar);
             this.Controls.Add(this.button_Guardar);
             this.Controls.Add(this.groupBox1);
             this.Name = "AgregarChofer";
             this.Text = "Agregar Chofer";
-            this.Load += new System.EventHandler(this.AgregarChofer_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -276,5 +287,6 @@
         private System.Windows.Forms.TextBox textBox_Telefono;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox_Direccion;
+        private System.Windows.Forms.Label label14;
     }
 }
