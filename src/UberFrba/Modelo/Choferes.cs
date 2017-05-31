@@ -39,11 +39,14 @@ namespace UberFrba.Modelo
         }
 
 
-        public void SetDNI(String DNI) // Deberia haber una excepcion por DNI repetido ya que es unique
+        public void SetDNI(String DNI)
         {
-            if (DNI == "") // Campo vacio en INT??
-                throw new CampoVacioException("DNI");               
-            SetDNIChofer(DNI);  
+            if (DNI == "")
+                throw new CampoVacioException("DNI");
+
+            if (!esNumero(DNI))
+                throw new FormatoInvalidoException("DNI, Ingrese todos los numeros seguidos.");
+            SetDNIChofer(DNI); 
         }
 
         private void SetDNIChofer(string DNI)
@@ -55,6 +58,7 @@ namespace UberFrba.Modelo
         {
             return Convert.ToString(this.DNI);
         }
+
 
         public void SetNombre(String nombre)
         {
@@ -93,10 +97,14 @@ namespace UberFrba.Modelo
         }
 
 
-        public void SetTelefono(String telefono) // Deberia haber una excepcion por telefono repetido ya que es unique
+        public void SetTelefono(String telefono)
         {
-           if (telefono == "") // Campo vacio en INT??
+           if (telefono == "")
                 throw new CampoVacioException("Telefono"); 
+
+            if (!esNumero(telefono))
+            throw new FormatoInvalidoException("Telefono, Ingrese todos los numeros seguidos.");    
+
             SetTelefonoChofer(telefono);
         }
 
@@ -175,12 +183,12 @@ namespace UberFrba.Modelo
         {
             if (activo == true)
             {
-                return "UPDATE PUSH_IT_TO_THE_LIMIT.Choferes SET chofer_dni = @DNI, chofer_nombre = @nombre, chofer_apellido = @apellido, chofer_mail = @mail, chofer_direccion = @direccion, chofer_fechaDeNacimiento = @fechaDeNacimiento, chofer_activo = @activo WHERE chofer_id =  @id" +
+                return "UPDATE PUSH_IT_TO_THE_LIMIT.Choferes SET chofer_dni = @DNI, chofer_nombre = @nombre, chofer_apellido = @apellido, chofer_mail = @mail, chofer_direccion = @direccion, chofer_telefono = @telefono, chofer_fechaDeNacimiento = @fechaDeNacimiento, chofer_activo = @activo WHERE chofer_id =  @id" +
                        " UPDATE PUSH_IT_TO_THE_LIMIT.Usuarios SET usr_intentos = 0  WHERE usr_id =  (SELECT chofer_id_usuario FROM PUSH_IT_TO_THE_LIMIT.Choferes WHERE chofer_id = @id)";
             }
             else
             {
-                return "UPDATE PUSH_IT_TO_THE_LIMIT.Choferes SET chofer_dni = @DNI, chofer_nombre = @nombre,  chofer_apellido = @apellido, chofer_mail = @mail,  chofer_direccion = @direccion, chofer_fechaDeNacimiento = @fechaDeNacimiento, chofer_activo = @activo WHERE chofer_id = @id";
+                return "UPDATE PUSH_IT_TO_THE_LIMIT.Choferes SET chofer_dni = @DNI, chofer_nombre = @nombre, chofer_apellido = @apellido, chofer_mail = @mail, chofer_direccion = @direccion, chofer_telefono = @telefono, chofer_fechaDeNacimiento = @fechaDeNacimiento, chofer_activo = @activo WHERE chofer_id = @id";
             }
 
         }

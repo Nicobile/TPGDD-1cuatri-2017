@@ -7,18 +7,19 @@ namespace UberFrba.Modelo
 {
     class Usuarios
     {
-        private Decimal id;
+        private int id;
         private String username;
         private String password;
         private Boolean activo;
-        private Boolean is_admin;
+        private int intentos;
+        private Boolean admin;
 
-        public void SetId(Decimal id)
+        public void SetId(int id)
         {
             this.id = id;
         }
 
-        public Decimal GetId()
+        public int GetId()
         {
             return this.id;
         }
@@ -53,15 +54,29 @@ namespace UberFrba.Modelo
             return this.activo;
         }
 
-        public void Setis_admin(Boolean activo)
+
+         public void SetIntentos(int intentos)
         {
-            this.is_admin = activo;
+            this.intentos = intentos;
         }
 
-        public Boolean Getis_admin()
+        public int GetIntentos()
         {
-            return this.is_admin;
+            return this.intentos;
+        }
+
+
+        public void SetAdmin(Boolean activo)
+        {
+            this.admin = activo;
+        }
+
+        public Boolean GetAdmin()
+        {
+            return this.admin;
         }
 
     }
 }
+
+ // Habra que hacerles las querys como a Chofer y Cliente?
