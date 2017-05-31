@@ -52,14 +52,14 @@ namespace UberFrba.Login
             IList<SqlParameter> parametros = new List<SqlParameter>();
             parametros.Add(new SqlParameter("@username", UsuarioSesion.Usuario.nombre));
             parametros.Add(new SqlParameter("@pass", HashSha256.getHash(textBoxContraseña.Text)));
-            String nuevaPass = "UPDATE PUSH-IT-TO-THE-LIMIT.Usuario SET usuario_password = @pass WHERE usuario_name = @username";
+            String nuevaPass = "UPDATE PUSH_IT_TO_THE_LIMIT.Usuario SET usuario_password = @pass WHERE usuario_name = @username";
             QueryBuilder.Instance.build(nuevaPass, parametros).ExecuteNonQuery();
 
             // Asigna el rol
             parametros.Clear();
             parametros.Add(new SqlParameter("@username", UsuarioSesion.Usuario.nombre));
 
-            String consultaRoles = "SELECT COUNT(rol_id) from PUSH-IT-TO-THE-LIMIT.RolporUsuario WHERE (SELECT usuario_id FROM PUSH-IT-TO-THE-LIMIT.Usuario WHERE usuario_name = @username) = usuario_id";
+            String consultaRoles = "SELECT COUNT(rol_id) from PUSH_IT_TO_THE_LIMIT.RolporUsuario WHERE (SELECT usuario_id FROM PUSH_IT_TO_THE_LIMIT.Usuario WHERE usuario_name = @username) = usuario_id";
             int cantidadDeRoles = (int)QueryBuilder.Instance.build(consultaRoles, parametros).ExecuteScalar();
 
             if (cantidadDeRoles > 1)
@@ -72,7 +72,7 @@ namespace UberFrba.Login
             {
                 parametros.Clear();
                 parametros.Add(new SqlParameter("@username", UsuarioSesion.Usuario.nombre));
-                String rolDeUsuario = "SELECT r.rol_nombre FROM PUSH-IT-TO-THE-LIMIT.Rol r, PUSH-IT-TO-THE-LIMIT.RolporUsuario ru, PUSH-IT-TO-THE-LIMIT.Usuario u WHERE r.rol_id = ru.rol_id and ru.usuario_id = u.usuario_id and u.usuario_name = @username";
+                String rolDeUsuario = "SELECT r.rol_nombre FROM PUSH_IT_TO_THE_LIMIT.Rol r, PUSH_IT_TO_THE_LIMIT.RolporUsuario ru, PUSH_IT_TO_THE_LIMIT.Usuario u WHERE r.rol_id = ru.rol_id and ru.usuario_id = u.usuario_id and u.usuario_name = @username";
                 String rolUser = (String)QueryBuilder.Instance.build(rolDeUsuario, parametros).ExecuteScalar();
 
                 UsuarioSesion.Usuario.rol = rolUser;
