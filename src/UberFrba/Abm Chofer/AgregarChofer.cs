@@ -129,7 +129,7 @@ namespace UberFrba.ABM_Chofer
                 return;
             }
 
-            // Si la empresa lo crea el admin, crea un nuevo usuario predeterminado.
+            // Si al chofer lo crea el admin, crea un nuevo usuario predeterminado.
             if (idUsuario == 0)
             {
                 idUsuario = CrearUsuario();
@@ -144,7 +144,7 @@ namespace UberFrba.ABM_Chofer
 
         private int CrearUsuario()
         {
-            if (username == "empresaCreadaPorAdmin")
+            if (username == "choferCreadoPorAdmin")
             {
                 return mapper.CrearUsuario(); //Se crean con los parametros default
             }

@@ -259,7 +259,7 @@
             this.Controls.Add(this.button_Guardar);
             this.Name = "EditarChofer";
             this.Text = "Editar Empresa";
-            this.Load += new System.EventHandler(this.EditarEmpresa_Load);
+            this.Load += new System.EventHandler(this.EditarChofer_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

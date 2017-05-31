@@ -19,7 +19,7 @@ namespace UberFrba.ABM_Chofer
             InitializeComponent();
         }
 
-        private void FiltroEmpresa_Load(object sender, EventArgs e)
+        private void FiltroChofer_Load(object sender, EventArgs e)
         {
             CargarChoferes();
             OcultarColumnasQueNoDebenVerse();
@@ -90,7 +90,7 @@ namespace UberFrba.ABM_Chofer
             this.Close();
         }
 
-        private void dataGridView_Empresa_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView_Chofer_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             // Controla que la celda que se clickeo fue la de modificar
             if (e.ColumnIndex == dataGridView_Chofer.Columns["Modificar"].Index && e.RowIndex >= 0)
@@ -102,8 +102,8 @@ namespace UberFrba.ABM_Chofer
             }
             if (e.ColumnIndex == dataGridView_Chofer.Columns["Eliminar"].Index && e.RowIndex >= 0)
             {
-                String idEmpresaAEliminar = dataGridView_Chofer.Rows[e.RowIndex].Cells["chofer_id"].Value.ToString();
-                Boolean resultado = mapper.EliminarChofer(Convert.ToInt32(idEmpresaAEliminar), "Chofer");
+                String idChoferAEliminar = dataGridView_Chofer.Rows[e.RowIndex].Cells["chofer_id"].Value.ToString();
+                Boolean resultado = mapper.EliminarChofer(Convert.ToInt32(idChoferAEliminar), "Chofer");
                 if (resultado) MessageBox.Show("Se elimino correctamente");
                 CargarChoferes();
                 return;

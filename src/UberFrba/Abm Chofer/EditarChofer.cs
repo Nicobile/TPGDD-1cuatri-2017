@@ -26,7 +26,7 @@ namespace UberFrba.ABM_Chofer
             this.idChofer = Convert.ToInt32(idChofer);
         }
 
-        private void EditarEmpresa_Load(object sender, EventArgs e)
+        private void EditarChofer_Load(object sender, EventArgs e)
         {
          
             CargarDatos();
@@ -89,7 +89,7 @@ namespace UberFrba.ABM_Chofer
                 return;
             }
             */
-            // Update empresa
+            // Update chofer
             try
             {
                 Choferes chofer = new Choferes();

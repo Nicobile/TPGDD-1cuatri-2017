@@ -137,18 +137,18 @@ namespace UberFrba.ABM_Chofer
             this.button_Cancelar.UseVisualStyleBackColor = true;
             this.button_Cancelar.Click += new System.EventHandler(this.button_Cancelar_Click);
             // 
-            // dataGridView_Empresa
+            // dataGridView_Chofer
             // 
             this.dataGridView_Chofer.AllowUserToAddRows = false;
             this.dataGridView_Chofer.AllowUserToDeleteRows = false;
             this.dataGridView_Chofer.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView_Chofer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Chofer.Location = new System.Drawing.Point(12, 155);
-            this.dataGridView_Chofer.Name = "dataGridView_Empresa";
+            this.dataGridView_Chofer.Name = "dataGridView_Chofer";
             this.dataGridView_Chofer.ReadOnly = true;
             this.dataGridView_Chofer.Size = new System.Drawing.Size(1068, 199);
             this.dataGridView_Chofer.TabIndex = 4;
-            this.dataGridView_Chofer.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Empresa_CellClick);
+            this.dataGridView_Chofer.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Chofer_CellClick);
             // 
             // FiltroChofer
             // 
@@ -161,8 +161,8 @@ namespace UberFrba.ABM_Chofer
             this.Controls.Add(this.button_Buscar);
             this.Controls.Add(this.groupBox1);
             this.Name = "FiltroChofer";
-            this.Text = "Filtro de empresas";
-            this.Load += new System.EventHandler(this.FiltroEmpresa_Load);
+            this.Text = "Filtro de Choferes";
+            this.Load += new System.EventHandler(this.FiltroChofer_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Chofer)).EndInit();
