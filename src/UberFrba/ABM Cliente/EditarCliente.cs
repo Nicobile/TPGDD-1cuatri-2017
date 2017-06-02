@@ -51,7 +51,7 @@ namespace UberFrba.ABM_Cliente
 
             textBox_Nombre.Text = cliente.GetNombre();
             textBox_Apellido.Text = cliente.GetApellido();
-            textBox_NumeroDeDoc.Text = cliente.GetNumeroDeDocumento();
+            textBox_NumeroDeDoc.Text = cliente.GetDNI();
             textBox_FechaDeNacimiento.Text = Convert.ToString(cliente.GetFechaDeNacimiento());
             textBox_Mail.Text = cliente.GetMail();
             textBox_Telefono.Text = cliente.GetTelefono();
@@ -88,7 +88,7 @@ namespace UberFrba.ABM_Cliente
                 
                 cliente.SetNombre(nombre);
                 cliente.SetApellido(apellido);
-                cliente.SetNumeroDeDocumento(numeroDeDocumento);
+                cliente.SetDNI(numeroDeDocumento);
                 
                 cliente.SetFechaDeNacimiento(fechaDeNacimiento);
                 cliente.setMail(mail);

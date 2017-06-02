@@ -140,12 +140,6 @@
     <Compile Include="Listado Estadistico\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login\CambiarContrasena.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Login\CambiarContrasena.Designer.cs">
-      <DependentUpon>CambiarContrasena.cs</DependentUpon>
-    </Compile>
     <Compile Include="Login\ElegirRol.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -225,9 +219,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\RolForm.resx">
       <DependentUpon>RolForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Login\CambiarContrasena.resx">
-      <DependentUpon>CambiarContrasena.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\ElegirRol.resx">
       <DependentUpon>ElegirRol.cs</DependentUpon>

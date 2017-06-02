@@ -75,7 +75,7 @@ namespace UberFrba.ABM_Cliente
                 
                 cliente.SetNombre(nombre);
                 cliente.SetApellido(apellido);
-                cliente.SetNumeroDeDocumento(numeroDeDocumento);
+                cliente.SetDNI(numeroDeDocumento);
 
                 cliente.SetFechaDeNacimiento(fechaDeNacimiento);
                 cliente.setMail(mail);

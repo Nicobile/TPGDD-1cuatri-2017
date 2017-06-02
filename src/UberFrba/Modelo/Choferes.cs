@@ -183,12 +183,12 @@ namespace UberFrba.Modelo
         {
             if (activo == true)
             {
-                return "UPDATE PUSH_IT_TO_THE_LIMIT.Choferes SET chofer_dni = @DNI, chofer_nombre = @nombre, chofer_apellido = @apellido, chofer_mail = @mail, chofer_direccion = @direccion, chofer_telefono = @telefono, chofer_fechaDeNacimiento = @fechaDeNacimiento, chofer_activo = @activo WHERE chofer_id =  @id" +
+                return "UPDATE PUSH_IT_TO_THE_LIMIT.Choferes SET chofer_dni = @DNI, chofer_nombre = @nombre, chofer_apellido = @apellido, chofer_mail = @mail, chofer_direccion = @direccion, chofer_telefono = @telefono, chofer_fechaDeNacimiento = @fechaDeNacimiento, chofer_activo = @activo, usuario_id = @usuario_id @ WHERE chofer_id =  @id" +
                        " UPDATE PUSH_IT_TO_THE_LIMIT.Usuarios SET usr_intentos = 0  WHERE usr_id =  (SELECT chofer_id_usuario FROM PUSH_IT_TO_THE_LIMIT.Choferes WHERE chofer_id = @id)";
             }
             else
             {
-                return "UPDATE PUSH_IT_TO_THE_LIMIT.Choferes SET chofer_dni = @DNI, chofer_nombre = @nombre, chofer_apellido = @apellido, chofer_mail = @mail, chofer_direccion = @direccion, chofer_telefono = @telefono, chofer_fechaDeNacimiento = @fechaDeNacimiento, chofer_activo = @activo WHERE chofer_id = @id";
+                return "UPDATE PUSH_IT_TO_THE_LIMIT.Choferes SET chofer_dni = @DNI, chofer_nombre = @nombre, chofer_apellido = @apellido, chofer_mail = @mail, chofer_direccion = @direccion, chofer_telefono = @telefono, chofer_fechaDeNacimiento = @fechaDeNacimiento, chofer_activo = @activo, usuario_id = @usuario_id WHERE chofer_id = @id";
             }
 
         }
@@ -208,8 +208,9 @@ namespace UberFrba.Modelo
             parametros.Add(new SqlParameter("@telefono", this.telefono));
             parametros.Add(new SqlParameter("@direccion", this.direccion));
             parametros.Add(new SqlParameter("@fechaDeNacimiento", this.fechaDeNacimiento));
+            parametros.Add(new SqlParameter("@usuario_id",this.idUsuario));
             parametros.Add(new SqlParameter("@activo", true));
-            // faltara el usuario_id como parametro?
+            // faltara el usuario_id como parametro? LISTO
 
 
             return parametros;

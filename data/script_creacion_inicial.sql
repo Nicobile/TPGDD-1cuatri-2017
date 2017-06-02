@@ -82,6 +82,9 @@ IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.crear_chofer') IS NOT NULL
     DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.crear_chofer
 GO
 
+IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.crear_cliente') IS NOT NULL
+    DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.crear_chofer
+GO
 
 
 /* Creacion de tablas*/
@@ -636,13 +639,40 @@ create proc [PUSH_IT_TO_THE_LIMIT].crear_chofer
     @Mail varchar(50),
 	@Fecha_Nacimiento datetime,
 	@Activo bit,
+	@User_id int,
 	@id int OUTPUT
 AS
 BEGIN
     INSERT INTO [PUSH_IT_TO_THE_LIMIT].Chofer
-        (chofer_dni, chofer_nombre, chofer_apellido, chofer_direccion, chofer_telefono, chofer_mail, chofer_fecha_Nacimiento,chofer_activo) 
+        (chofer_nombre, chofer_apellido,chofer_dni,  chofer_direccion, chofer_telefono, chofer_mail, chofer_fecha_Nacimiento,chofer_activo,usuario_id) 
     VALUES 
-        (@Nombre, @Apellido, @DNI, @Direccion, @Telefono, @Mail, @Fecha_Nacimiento,@Activo)
+        (@Nombre, @Apellido, @DNI, @Direccion, @Telefono, @Mail, @Fecha_Nacimiento,@Activo,@User_id)
+    SET @id = SCOPE_IDENTITY(); 
+END
+GO
+
+GO
+
+--Procedure para crear un cliente
+GO
+create proc [PUSH_IT_TO_THE_LIMIT].crear_cliente
+    @Nombre nvarchar(255),
+    @Apellido varchar(255),
+	@Mail varchar(255),
+	@Telefono numeric(18,0),
+	@Direccion varchar(255),
+	@Codigo_Postal int,
+	@Fecha_Nacimiento datetime,
+    @DNI numeric(18,0),
+	@Activo bit,
+	@User_id int,
+	@id int OUTPUT
+AS
+BEGIN
+    INSERT INTO [PUSH_IT_TO_THE_LIMIT].Cliente
+        (cliente_nombre, cliente_apellido, cliente_mail,  cliente_telefono, cliente_direccion, cliente_codigo_postal, cliente_fecha_nacimiento,cliente_dni,cliente_estado,usuario_id) 
+    VALUES 
+        (@Nombre, @Apellido, @Mail, @Telefono, @Direccion, @Codigo_Postal, @Fecha_Nacimiento,@DNI,@Activo,@User_id)
     SET @id = SCOPE_IDENTITY(); 
 END
 GO
