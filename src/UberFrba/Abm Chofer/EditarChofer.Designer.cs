@@ -33,6 +33,8 @@
             this.button_Limpiar = new System.Windows.Forms.Button();
             this.checkBox_Habilitado = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox_Telefono = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.textBox_Direccion = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -47,8 +49,6 @@
             this.textBox_DNI = new System.Windows.Forms.TextBox();
             this.textBox_Nombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox_Telefono = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -116,6 +116,22 @@
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos";
+            // 
+            // textBox_Telefono
+            // 
+            this.textBox_Telefono.Location = new System.Drawing.Point(112, 175);
+            this.textBox_Telefono.Name = "textBox_Telefono";
+            this.textBox_Telefono.Size = new System.Drawing.Size(250, 20);
+            this.textBox_Telefono.TabIndex = 21;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 177);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(49, 13);
+            this.label2.TabIndex = 20;
+            this.label2.Text = "Telefono";
             // 
             // textBox_Direccion
             // 
@@ -231,22 +247,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 177);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 13);
-            this.label2.TabIndex = 20;
-            this.label2.Text = "Telefono";
-            // 
-            // textBox_Telefono
-            // 
-            this.textBox_Telefono.Location = new System.Drawing.Point(112, 175);
-            this.textBox_Telefono.Name = "textBox_Telefono";
-            this.textBox_Telefono.Size = new System.Drawing.Size(250, 20);
-            this.textBox_Telefono.TabIndex = 21;
-            // 
             // EditarChofer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -258,7 +258,7 @@
             this.Controls.Add(this.button_Cancelar);
             this.Controls.Add(this.button_Guardar);
             this.Name = "EditarChofer";
-            this.Text = "Editar Empresa";
+            this.Text = "Editar Chofer";
             this.Load += new System.EventHandler(this.EditarChofer_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

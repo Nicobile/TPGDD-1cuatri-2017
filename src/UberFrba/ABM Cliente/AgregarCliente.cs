@@ -37,14 +37,14 @@ namespace UberFrba.ABM_Cliente
 
         private void AgregarCliente_Load(object sender, EventArgs e)
         {
-            CargarDocumento();
+          //  CargarDocumento();
         }
 
-        public void CargarDocumento()
+     /*   public void CargarDocumento()
         {
-            comboBox_Dni.Items.Add("DNI - Documento Nacional de Identidad");
+            textBox_DNI.Add("DNI - Documento Nacional de Identidad");
       
-        }
+        } */
 
         private void button_Guardar_Click(object sender, EventArgs e)
         {
@@ -52,14 +52,14 @@ namespace UberFrba.ABM_Cliente
      
             String nombre = textBox_Nombre.Text;
             String apellido = textBox_Apellido.Text;
-            String numeroDeDocumento = textBox_NumeroDeDoc.Text;
+            String numeroDeDocumento = textBox_DNI.Text;
             DateTime fechaDeNacimiento;
             DateTime.TryParse(textBox_FechaDeNacimiento.Text, out fechaDeNacimiento);
             String mail = textBox_Mail.Text;
             String telefono = textBox_Telefono.Text;
             String direccion = textBox_Direccion.Text;
             String codigoPostal = textBox_CodigoPostal.Text;
-            Boolean activo = checkBox_Habilitado.Checked; //La variable activo que esta en el checkbox es para saber si esta habilitado a nivel usuario
+          //  Boolean activo = checkBox_Habilitado.Checked; //La variable activo que esta en el checkbox es para saber si esta habilitado a nivel usuario
 
             
             // Crear cliente
@@ -78,11 +78,11 @@ namespace UberFrba.ABM_Cliente
                 cliente.SetDNI(numeroDeDocumento);
 
                 cliente.SetFechaDeNacimiento(fechaDeNacimiento);
-                cliente.setMail(mail);
-                cliente.setTelefono(telefono);
+                cliente.SetMail(mail);
+                cliente.SetTelefono(telefono);
                 cliente.SetDireccion(direccion);
+                cliente.SetCodigoPostal(codigoPostal);
                 cliente.SetIdUsuario(idUsuario);
-                contacto.SetCodigoPostal(codigoPostal);
                 cliente.SetActivo(true); 
 
                 idCliente = mapper.CrearCliente(cliente);
@@ -143,15 +143,12 @@ namespace UberFrba.ABM_Cliente
         {
             textBox_Nombre.Text = "";
             textBox_Apellido.Text = "";
-            comboBox_TipoDeDocumento.SelectedIndex = -1;
-            textBox_NumeroDeDoc.Text = "";
+            textBox_DNI.Text = "";
             textBox_FechaDeNacimiento.Text = "";
             textBox_Mail.Text = "";
-            
             textBox_Direccion.Text = "";
-            
+            textBox_Telefono.Text = "";
             textBox_CodigoPostal.Text = "";
-            
         }      
 
         private void button_Cancelar_Click(object sender, EventArgs e)
@@ -186,6 +183,11 @@ namespace UberFrba.ABM_Cliente
         {
             textBox_FechaDeNacimiento.Text = e.Start.ToShortDateString();
             monthCalendar_FechaDeNacimiento.Visible = false;
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

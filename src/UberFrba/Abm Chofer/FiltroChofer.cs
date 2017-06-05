@@ -27,7 +27,8 @@ namespace UberFrba.ABM_Chofer
 
         private void OcultarColumnasQueNoDebenVerse()
         {
-            dataGridView_Chofer.Columns["emp_id"].Visible = false;
+            dataGridView_Chofer.Columns["usuario_id"].Visible = false;
+            dataGridView_Chofer.Columns["chofer_id"].Visible = false;
         }
 
         private void CargarChoferes()
@@ -69,9 +70,9 @@ namespace UberFrba.ABM_Chofer
         private String CalcularFiltro()
         {
             String filtro = "";
-            if (textBox_Nombre.Text != "") filtro += "AND " + "emp.emp_razon_social LIKE '" + textBox_Nombre.Text + "%'";
-            if (textBox_Apellido.Text != "") filtro += "AND " + "emp.emp_cuit LIKE '" + textBox_Apellido.Text + "%'";
-            if (textBox_DNI.Text != "") filtro += "AND " + "cont.cont_mail LIKE '" + textBox_DNI.Text + "%'";
+            if (textBox_Nombre.Text != "") filtro += "AND " + "chof.chofer_nombre LIKE '" + textBox_Nombre.Text + "%'";
+            if (textBox_Apellido.Text != "") filtro += "AND " + "chof.chofer_Apellido LIKE '" + textBox_Apellido.Text + "%'";
+            if (textBox_DNI.Text != "") filtro += "AND " + "chof.chofer_dni LIKE '" + textBox_DNI.Text + "%'";
             return filtro;
         }
 

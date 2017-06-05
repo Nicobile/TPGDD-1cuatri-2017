@@ -23,14 +23,14 @@ namespace UberFrba.ABM_Cliente
 
         private void FiltroCliente_Load(object sender, EventArgs e)
         {
-            CargarDocumento();
+          //  CargarDocumento();
             CargarClientes();
             OcultarColumnasQueNoDebenVerse();
         }
 
         private void CargarDocumento()
         {          
-            comboBox_Dni.Items.Add("DNI - Documento Nacional de Identidad");
+           // comboBox_Dni.Items.Add("DNI - Documento Nacional de Identidad");
                 
         }
 
@@ -79,8 +79,7 @@ namespace UberFrba.ABM_Cliente
             String filtro = "";
             if (textBox_Nombre.Text != "") filtro += "AND " + "cli.cliente_nombre LIKE '" + textBox_Nombre.Text + "%'";
             if (textBox_Apellido.Text != "") filtro += "AND " + "cli.cliente_apellido LIKE '" + textBox_Apellido.Text + "%'";
-            if (textBox_Mail.Text != "") filtro += "AND " + "cli.cli_mail LIKE '" + textBox_Mail.Text + "%'";
-            if (textBox_NumeroDeDoc.Text != "") filtro += "AND " + "cli.cli_dni LIKE '" + textBox_NumeroDeDoc.Text + "%'";
+            if (textBox_DNI.Text != "") filtro += "AND " + "cli.cliente_dni LIKE '" + textBox_DNI.Text + "%'";
             return filtro;
         }
 
@@ -88,9 +87,7 @@ namespace UberFrba.ABM_Cliente
         {
             textBox_Nombre.Text = "";
             textBox_Apellido.Text = "";
-            textBox_Mail.Text = "";
-            textBox_NumeroDeDoc.Text = "";
-            comboBox_TipoDeDoc.SelectedIndex = -1;
+            textBox_DNI.Text = "";
             CargarClientes();
         }
 

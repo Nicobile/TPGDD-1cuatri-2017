@@ -30,14 +30,10 @@ namespace UberFrba.ABM_Cliente
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox_NumeroDeDoc = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.comboBox_TipoDeDoc = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox_Mail = new System.Windows.Forms.TextBox();
+            this.textBox_DNI = new System.Windows.Forms.TextBox();
             this.textBox_Apellido = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_Nombre = new System.Windows.Forms.TextBox();
             this.button_Buscar = new System.Windows.Forms.Button();
@@ -50,14 +46,10 @@ namespace UberFrba.ABM_Cliente
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBox_NumeroDeDoc);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.comboBox_TipoDeDoc);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.textBox_Mail);
+            this.groupBox1.Controls.Add(this.textBox_DNI);
             this.groupBox1.Controls.Add(this.textBox_Apellido);
-            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.textBox_Nombre);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
@@ -67,30 +59,6 @@ namespace UberFrba.ABM_Cliente
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtro de busquedad";
             // 
-            // textBox_NumeroDeDoc
-            // 
-            this.textBox_NumeroDeDoc.Location = new System.Drawing.Point(262, 45);
-            this.textBox_NumeroDeDoc.Name = "textBox_NumeroDeDoc";
-            this.textBox_NumeroDeDoc.Size = new System.Drawing.Size(100, 20);
-            this.textBox_NumeroDeDoc.TabIndex = 9;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(183, 48);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(80, 13);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "Numero de doc";
-            // 
-            // comboBox_TipoDeDoc
-            // 
-            this.comboBox_TipoDeDoc.FormattingEnabled = true;
-            this.comboBox_TipoDeDoc.Location = new System.Drawing.Point(262, 19);
-            this.comboBox_TipoDeDoc.Name = "comboBox_TipoDeDoc";
-            this.comboBox_TipoDeDoc.Size = new System.Drawing.Size(100, 21);
-            this.comboBox_TipoDeDoc.TabIndex = 7;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -98,7 +66,7 @@ namespace UberFrba.ABM_Cliente
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(26, 13);
             this.label4.TabIndex = 6;
-            this.label4.Text = "Mail";
+            this.label4.Text = "DNI";
             // 
             // label3
             // 
@@ -109,28 +77,19 @@ namespace UberFrba.ABM_Cliente
             this.label3.TabIndex = 5;
             this.label3.Text = "Apellido";
             // 
-            // textBox_Mail
+            // textBox_DNI
             // 
-            this.textBox_Mail.Location = new System.Drawing.Point(77, 71);
-            this.textBox_Mail.Name = "textBox_Mail";
-            this.textBox_Mail.Size = new System.Drawing.Size(100, 20);
-            this.textBox_Mail.TabIndex = 4;
+            this.textBox_DNI.Location = new System.Drawing.Point(77, 71);
+            this.textBox_DNI.Name = "textBox_DNI";
+            this.textBox_DNI.Size = new System.Drawing.Size(285, 20);
+            this.textBox_DNI.TabIndex = 4;
             // 
             // textBox_Apellido
             // 
             this.textBox_Apellido.Location = new System.Drawing.Point(77, 45);
             this.textBox_Apellido.Name = "textBox_Apellido";
-            this.textBox_Apellido.Size = new System.Drawing.Size(100, 20);
+            this.textBox_Apellido.Size = new System.Drawing.Size(285, 20);
             this.textBox_Apellido.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(183, 22);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Tipo de doc";
             // 
             // label1
             // 
@@ -145,7 +104,7 @@ namespace UberFrba.ABM_Cliente
             // 
             this.textBox_Nombre.Location = new System.Drawing.Point(77, 19);
             this.textBox_Nombre.Name = "textBox_Nombre";
-            this.textBox_Nombre.Size = new System.Drawing.Size(100, 20);
+            this.textBox_Nombre.Size = new System.Drawing.Size(285, 20);
             this.textBox_Nombre.TabIndex = 0;
             // 
             // button_Buscar
@@ -189,7 +148,7 @@ namespace UberFrba.ABM_Cliente
             this.dataGridView_Cliente.RowTemplate.ReadOnly = true;
             this.dataGridView_Cliente.Size = new System.Drawing.Size(1068, 199);
             this.dataGridView_Cliente.TabIndex = 4;
-            this.dataGridView_Cliente.CellClick += new DataGridViewCellEventHandler(dataGridView_Cliente_CellClick);
+            this.dataGridView_Cliente.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Cliente_CellClick);
             // 
             // FiltroCliente
             // 
@@ -214,14 +173,10 @@ namespace UberFrba.ABM_Cliente
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox_NumeroDeDoc;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox_TipoDeDoc;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox_Mail;
+        private System.Windows.Forms.TextBox textBox_DNI;
         private System.Windows.Forms.TextBox textBox_Apellido;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox_Nombre;
         private System.Windows.Forms.Button button_Buscar;

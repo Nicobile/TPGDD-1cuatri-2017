@@ -89,9 +89,9 @@ namespace UberFrba.Modelo
             this.direccion = direccion;
         }
 
-        public int GetCodigoPostal()
+        public String GetDireccion()
         {
-            return this.codigoPostal;
+            return this.direccion;
         }
 
         public void SetCodigoPostal(String codPost)
@@ -105,9 +105,9 @@ namespace UberFrba.Modelo
             this.codigoPostal = Convert.ToInt32(codPost);
         }
 
-        public int GetDNI()
+        public int GetCodigoPostal()
         {
-            return this.DNI;
+            return this.codigoPostal;
         }
 
         public void SetDNI(String numeroDeDocumento)

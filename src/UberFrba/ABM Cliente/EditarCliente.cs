@@ -30,20 +30,19 @@ namespace UberFrba.ABM_Cliente
 
         private void EditarCliente_Load(object sender, EventArgs e)
         {
-            CargarDocumento(); 
+          //  CargarDocumento(); 
             CargarDatos();
         }
 
-        private void CargarDocumento()
+  /*      private void CargarDocumento()
         {
-            comboBox_Dni.Items.Add("DNI - Documento Nacional de Identidad");
+            comboBox_DNI.Items.Add("DNI - Documento Nacional de Identidad");
            
-        }
+        } */
 
         private void CargarDatos()
         {
             Clientes cliente = mapper.ObtenerCliente(idCliente);
-            Contacto contacto = mapper.ObtenerContacto(cliente.GetIdContacto());
 
             //Me guardo el id contacto y usuario
             idUsuario = cliente.GetIdUsuario();
@@ -51,14 +50,14 @@ namespace UberFrba.ABM_Cliente
 
             textBox_Nombre.Text = cliente.GetNombre();
             textBox_Apellido.Text = cliente.GetApellido();
-            textBox_NumeroDeDoc.Text = cliente.GetDNI();
+            textBox_DNI.Text = Convert.ToString(cliente.GetDNI());
             textBox_FechaDeNacimiento.Text = Convert.ToString(cliente.GetFechaDeNacimiento());
             textBox_Mail.Text = cliente.GetMail();
-            textBox_Telefono.Text = cliente.GetTelefono();
-            textBox_Calle.Text = cliente.GetDireccion();
-            textBox_CodigoPostal.Text = contacto.GetCodigoPostal();
+            textBox_Telefono.Text = Convert.ToString(cliente.GetTelefono());
+            textBox_Direccion.Text = cliente.GetDireccion();
+            textBox_CodigoPostal.Text = Convert.ToString(cliente.GetCodigoPostal());
 
-            checkBox_Habilitado.Checked = Convert.ToBoolean(mapper.SelectFromWhere("usuario_estado", "Usuario", "usuario_id", cliente.GetIdUsuario()));
+            checkBox_Habilitado.Checked = Convert.ToBoolean(mapper.SelectFromWhere("usuario_habilitado", "Usuario", "usuario_id", cliente.GetIdUsuario()));
         }
 
         private void button_Guardar_Click(object sender, EventArgs e)
@@ -67,7 +66,7 @@ namespace UberFrba.ABM_Cliente
             String nombre = textBox_Nombre.Text;
             String apellido = textBox_Apellido.Text;
            
-            String numeroDeDocumento = textBox_NumeroDeDoc.Text;
+            String numeroDeDocumento = textBox_DNI.Text;
             DateTime fechaDeNacimiento;
             DateTime.TryParse(textBox_FechaDeNacimiento.Text, out fechaDeNacimiento);
             String mail = textBox_Mail.Text;
@@ -91,11 +90,11 @@ namespace UberFrba.ABM_Cliente
                 cliente.SetDNI(numeroDeDocumento);
                 
                 cliente.SetFechaDeNacimiento(fechaDeNacimiento);
-                cliente.setMail(mail);
-                cliente.setTelefono(telefono);
+                cliente.SetMail(mail);
+                cliente.SetTelefono(telefono);
                 cliente.SetDireccion(direccion);
 
-                contacto.SetCodigoPostal(codigoPostal);
+                cliente.SetCodigoPostal(codigoPostal);
                 cliente.SetActivo(true); 
 
                 /** La fecha de alta no se actualiza en la DB **/
