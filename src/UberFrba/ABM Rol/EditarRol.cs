@@ -99,7 +99,7 @@ namespace UberFrba.ABM_Rol
             parametros.Clear();
             parametros.Add(new SqlParameter("@rol", rolAEditar));
 
-            String consulta = "SELECT COUNT(DISTINCT rol_nombre) FROM NET_A_CERO.Roles WHERE rol_nombre = @rol and rol_activo = 1";
+            String consulta = "SELECT COUNT(DISTINCT rol_nombre) FROM PUSH_IT_TO_THE_LIMIT.Rol WHERE rol_nombre = @rol and rol_estado = 1";
             int estadoRol = (int)QueryBuilder.Instance.build(consulta, parametros).ExecuteScalar();
 
             if (estadoRol == 1)
@@ -117,11 +117,11 @@ namespace UberFrba.ABM_Rol
             DataSet funcionalidades = new DataSet();
             SqlDataAdapter adapter = new SqlDataAdapter();
             parametros = new List<SqlParameter>();
-            command = QueryBuilder.Instance.build("SELECT DISTINCT func_nombre FROM NET_A_CERO.Funcionalidades", parametros);
+            command = QueryBuilder.Instance.build("SELECT DISTINCT funcionalidad_descripcion FROM PUSH_IT_TO_THE_LIMIT.Funcionalidad", parametros);
             adapter.SelectCommand = command;
             adapter.Fill(funcionalidades);
             checkedListBoxFuncionalidades.DataSource = funcionalidades.Tables[0].DefaultView;
-            checkedListBoxFuncionalidades.ValueMember = "func_nombre";
+            checkedListBoxFuncionalidades.ValueMember = "funcionalidad_descripcion";
             MarcarFuncionalidades();            
         }
 
@@ -136,9 +136,9 @@ namespace UberFrba.ABM_Rol
             {                
                 parametros.Clear();
                 parametros.Add(new SqlParameter("@rol", rolAEditar));
-                parametros.Add(new SqlParameter("@funcionalidad", funcionalidad.Row["func_nombre"] as String));
+                parametros.Add(new SqlParameter("@funcionalidad", funcionalidad.Row["funcionalidad_descripcion"] as String));
 
-                if (verificarSiLaTiene(funcionalidad.Row["func_nombre"] as String))
+                if (verificarSiLaTiene(funcionalidad.Row["funcionalidad_descripcion"] as String))
                 {
                     int i = checkedListBoxFuncionalidades.Items.IndexOf(funcionalidad);
                     funcionalidadesAMarcar.Add(i);
@@ -168,7 +168,7 @@ namespace UberFrba.ABM_Rol
             parametros.Add(new SqlParameter("@nombre_viejo", rolAEditar));
             parametros.Add(new SqlParameter("@nombre_nuevo", nuevoNombreRol));
 
-            String queryUpdateRol = "UPDATE NET_A_CERO.Roles SET rol_nombre = @nombre_nuevo WHERE rol_nombre = @nombre_viejo";
+            String queryUpdateRol = "UPDATE PUSH_IT_TO_THE_LIMIT.Rol SET rol_nombre = @nombre_nuevo WHERE rol_nombre = @nombre_viejo";
             QueryBuilder.Instance.build(queryUpdateRol, parametros).ExecuteNonQuery();
             
             MessageBox.Show("El rol " + rolAEditar + " fue renombrado como " + nuevoNombreRol);            
@@ -179,7 +179,7 @@ namespace UberFrba.ABM_Rol
 
             foreach (DataRowView funcionalidad in this.checkedListBoxFuncionalidades.CheckedItems)
             {
-                if (verificarSiLaTiene(funcionalidad.Row["func_nombre"] as String))
+                if (verificarSiLaTiene(funcionalidad.Row["funcionalidad_descripcion"] as String))
                 {
 
                 }
@@ -187,9 +187,9 @@ namespace UberFrba.ABM_Rol
                 {
                     parametros.Clear();
                     parametros.Add(new SqlParameter("@rol", rolAEditar));
-                    parametros.Add(new SqlParameter("@funcionalidad", funcionalidad.Row["func_nombre"] as String));
+                    parametros.Add(new SqlParameter("@funcionalidad", funcionalidad.Row["funcionalidad_descripcion"] as String));
 
-                    String queryRolXFuncionalidad = "INSERT INTO NET_A_CERO.Rol_x_Funcionalidad(func_id, rol_id) VALUES ((SELECT f.func_id FROM NET_A_CERO.Funcionalidades f WHERE f.func_nombre = @funcionalidad), (SELECT r.rol_id FROM NET_A_CERO.Roles r WHERE r.rol_nombre = @rol))";
+                    String queryRolXFuncionalidad = "INSERT INTO PUSH_IT_TO_THE_LIMIT.RolporFunciones(funcionalidad_id, rol_id) VALUES ((SELECT f.funcionalidad_id FROM PUSH_IT_TO_THE_LIMIT.Funcionalidad f WHERE f.funcionalidad_descripcion = @funcionalidad), (SELECT r.rol_id FROM PUSH_IT_TO_THE_LIMIT.Rol r WHERE r.rol_nombre = @rol))";
 
                     QueryBuilder.Instance.build(queryRolXFuncionalidad, parametros).ExecuteNonQuery();
                 }
@@ -202,7 +202,7 @@ namespace UberFrba.ABM_Rol
             parametros.Add(new SqlParameter("@rol", rolAEditar));
             parametros.Add(new SqlParameter("@funcionalidad", funcionalidad));
 
-            String queryCantidadRolXFuncionalidad = "SELECT COUNT(*) FROM NET_A_CERO.Rol_x_Funcionalidad rxf WHERE rxf.func_id = (SELECT f.func_id FROM NET_A_CERO.Funcionalidades f WHERE f.func_nombre = @funcionalidad) AND rxf.rol_id = (SELECT r.rol_id FROM NET_A_CERO.Roles r WHERE r.rol_nombre = @rol)";
+            String queryCantidadRolXFuncionalidad = "SELECT COUNT(*) FROM PUSH_IT_TO_THE_LIMIT.RolporFunciones rxf WHERE rxf.funcionalidad_id = (SELECT f.funcionalidad_id FROM PUSH_IT_TO_THE_LIMIT.Funcionalidad f WHERE f.funcionalidad_descripcion = @funcionalidad) AND rxf.rol_id = (SELECT r.rol_id FROM PUSH_IT_TO_THE_LIMIT.Rol r WHERE r.rol_nombre = @rol)";
             int tieneLaFuncionalidad = (int)QueryBuilder.Instance.build(queryCantidadRolXFuncionalidad, parametros).ExecuteScalar();
 
                 if (tieneLaFuncionalidad == 1)
@@ -227,9 +227,9 @@ namespace UberFrba.ABM_Rol
                 {
                     parametros.Clear();
                     parametros.Add(new SqlParameter("@rol", rolAEditar));
-                    parametros.Add(new SqlParameter("@funcionalidad", funcionalidad.Row["func_nombre"] as String));
+                    parametros.Add(new SqlParameter("@funcionalidad", funcionalidad.Row["funcionalidad_descripcion"] as String));
 
-                    String queryBorrarRolXFuncionalidad = "DELETE NET_A_CERO.Rol_x_Funcionalidad WHERE func_id = (SELECT f.func_id FROM NET_A_CERO.Funcionalidades f WHERE f.func_nombre = @funcionalidad) AND rol_id = (SELECT r.rol_id FROM NET_A_CERO.Roles r WHERE r.rol_nombre = @rol)";
+                    String queryBorrarRolXFuncionalidad = "DELETE PUSH_IT_TO_THE_LIMIT.RolporFunciones WHERE funcionalidad_id = (SELECT f.funcionalidad_id FROM PUSH_IT_TO_THE_LIMIT.Funcionalidad f WHERE f.funcionalidad_descripcion = @funcionalidad) AND rol_id = (SELECT r.rol_id FROM PUSH_IT_TO_THE_LIMIT.Rol r WHERE r.rol_nombre = @rol)";
 
                     QueryBuilder.Instance.build(queryBorrarRolXFuncionalidad, parametros).ExecuteNonQuery();
                 }
@@ -241,7 +241,7 @@ namespace UberFrba.ABM_Rol
             parametros.Clear();
             parametros.Add(new SqlParameter("@nombre", rolAEditar));
 
-            String queryHabilitarRol = "UPDATE NET_A_CERO.Roles SET rol_activo = 1 WHERE rol_nombre = @nombre";
+            String queryHabilitarRol = "UPDATE PUSH_IT_TO_THE_LIMIT.Roles SET rol_activo = 1 WHERE rol_nombre = @nombre";
 
             QueryBuilder.Instance.build(queryHabilitarRol, parametros).ExecuteNonQuery();
         }

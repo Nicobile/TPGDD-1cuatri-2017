@@ -89,7 +89,7 @@ namespace UberFrba
 
         public int CrearUsuario()
         {
-            query = "PUSH-IT-TO-THE-LIMIT.pr_crear_usuario";
+            query = "PUSH-IT_TO_THE_LIMIT.pr_crear_usuario";
             parametros.Clear();
             parametroOutput = new SqlParameter("@usr_id", SqlDbType.Int);
             parametroOutput.Direction = ParameterDirection.Output;
@@ -102,7 +102,7 @@ namespace UberFrba
 
         public int CrearUsuarioConValores(String username, String password)
         {
-            query = "PUSH-IT-TO-THE-LIMIT.pr_crear_usuario_con_valores";
+            query = "PUSH_IT_TO_THE_LIMIT.pr_crear_usuario_con_valores";
             parametros.Clear();
             parametroOutput = new SqlParameter("@usuario_id", SqlDbType.Int);
             parametroOutput.Direction = ParameterDirection.Output;
@@ -121,8 +121,8 @@ namespace UberFrba
         public int CrearCliente(Clientes cliente)
         {
 
-            if (!esClienteUnico(cliente.GetTipoDeDocumento(), cliente.GetId()))
-                throw new ClienteYaExisteException();
+     /*       if (!esClienteUnico(cliente.GetTipoDeDocumento(), cliente.GetId()))
+                throw new ClienteYaExisteException();    */
 
             return this.Crear(cliente);
 
@@ -194,7 +194,7 @@ namespace UberFrba
 
         public Boolean EliminarCliente(int id, String enDonde)
         {
-            query = "UPDATE PUSH-IT-TO-THE-LIMIT." + enDonde + " SET cliente_estado = 0 WHERE cliente_id = @id";
+            query = "UPDATE PUSH_IT_TO_THE_LIMIT." + enDonde + " SET cliente_estado = 0 WHERE cliente_id = @id";
             parametros.Clear();
             parametros.Add(new SqlParameter("@id", id));
             int filasAfectadas = QueryBuilder.Instance.build(query, parametros).ExecuteNonQuery();
@@ -204,7 +204,7 @@ namespace UberFrba
 
         public Boolean EliminarChofer(Decimal id, String enDonde)
         {
-            query = "UPDATE PUSH-IT-TO-THE-LIMIT." + enDonde + " SET chofer_estado = 0 WHERE chofer_id = @id";
+            query = "UPDATE PUSH_IT_TO_THE_LIMIT." + enDonde + " SET chofer_estado = 0 WHERE chofer_id = @id";
             parametros.Clear();
             parametros.Add(new SqlParameter("@id", id));
             int filasAfectadas = QueryBuilder.Instance.build(query, parametros).ExecuteNonQuery();
@@ -224,9 +224,9 @@ namespace UberFrba
         public Boolean ActualizarEstadoUsuario(Decimal id, bool activo)
         {
             if (activo)
-                query = "UPDATE PUSH-IT-TO-THE-LIMIT.Usuario SET usuario_estado= 1 WHERE usuario_id = @id";
+                query = "UPDATE PUSH_IT_TO_THE_LIMIT.Usuario SET usuario_estado= 1 WHERE usuario_id = @id";
             else
-                query = "UPDATE PUSH-IT-TO-THE-LIMIT.Usuario SET usuario_estado = 0 WHERE usuario_id = @id";
+                query = "UPDATE PUSH_IT_TO_THE_LIMIT.Usuario SET usuario_estado = 0 WHERE usuario_id = @id";
             parametros.Clear();
             parametros.Add(new SqlParameter("@id", id));
             int filasAfectadas = QueryBuilder.Instance.build(query, parametros).ExecuteNonQuery();
@@ -243,7 +243,7 @@ namespace UberFrba
 
         public Boolean AsignarUsuarioACliente(Decimal idCliente, Decimal idUsuario)
         {
-            query = "UPDATE PUSH-IT-TO-THE-LIMIT.Cliente SET usuario_id = @idUsuario WHERE cliente_id = @idCliente";
+            query = "UPDATE PUSH_IT_TO_THE_LIMIT.Cliente SET usuario_id = @idUsuario WHERE cliente_id = @idCliente";
             parametros.Clear();
             parametros.Add(new SqlParameter("@idUsuario", idUsuario));
             parametros.Add(new SqlParameter("@idCliente", idCliente));
@@ -254,7 +254,7 @@ namespace UberFrba
         }
         public Boolean AsignarUsuarioAChofer(Decimal idChofer, Decimal idUsuario)
         {
-            query = "UPDATE PUSH-IT-TO-THE-LIMIT.Chofer SET usuario_id = @idUsuario WHERE chofer_id = @idChofer";
+            query = "UPDATE PUSH_IT_TO_THE_LIMIT.Chofer SET usuario_id = @idUsuario WHERE chofer_id = @idChofer";
             parametros.Clear();
             parametros.Add(new SqlParameter("@idUsuario", idUsuario));
             parametros.Add(new SqlParameter("@idChofer", idChofer));
@@ -268,7 +268,7 @@ namespace UberFrba
         public Boolean AsignarRolAUsuario(Decimal idUsuario, String rol)
         {
             Decimal idRol = Convert.ToDecimal(this.SelectFromWhere("rol_id", "Rol", "rol_nombre", rol));
-            query = "PUSH-IT-TO-THE-LIMIT.pr_agregar_rol_a_usuario";
+            query = "PUSH_IT_TO_THE_LIMIT.pr_agregar_rol_a_usuario";
             parametros.Clear();
             parametros.Add(new SqlParameter("@usuario_id", idUsuario));
             parametros.Add(new SqlParameter("@rol_id", idRol));
@@ -289,7 +289,7 @@ namespace UberFrba
 
         public Object SelectFromWhere(String que, String deDonde, String param1, String param2)
         {
-            query = "SELECT " + que + " FROM PUSH-IT-TO-THE-LIMIT." + deDonde + " WHERE " + param1 + " = @" + param1;
+            query = "SELECT " + que + " FROM PUSH_IT_TO_THE_LIMIT." + deDonde + " WHERE " + param1 + " = @" + param1;
             parametros.Clear();
             parametros.Add(new SqlParameter("@" + param1, param2));
             return QueryBuilder.Instance.build(query, parametros).ExecuteScalar();
@@ -297,7 +297,7 @@ namespace UberFrba
 
         public Object SelectFromWhere(String que, String deDonde, String param1, Decimal param2)
         {
-            query = "SELECT " + que + " FROM PUSH-IT-TO-THE-LIMIT." + deDonde + " WHERE " + param1 + " = @" + param1;
+            query = "SELECT " + que + " FROM PUSH_IT_TO_THE_LIMIT." + deDonde + " WHERE " + param1 + " = @" + param1;
             parametros.Clear();
             parametros.Add(new SqlParameter("@" + param1, param2));
             return QueryBuilder.Instance.build(query, parametros).ExecuteScalar();
@@ -305,7 +305,7 @@ namespace UberFrba
 
         public Object SelectFromWhere(String que, String deDonde, String param1, int param2)
         {
-            query = "SELECT " + que + " FROM PUSH-IT-TO-THE-LIMIT." + deDonde + " WHERE " + param1 + " = @" + param1;
+            query = "SELECT " + que + " FROM PUSH_IT_TO_THE_LIMIT." + deDonde + " WHERE " + param1 + " = @" + param1;
             parametros.Clear();
             parametros.Add(new SqlParameter("@" + param1, param2));
             return QueryBuilder.Instance.build(query, parametros).ExecuteScalar();

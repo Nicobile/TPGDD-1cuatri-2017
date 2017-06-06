@@ -96,11 +96,11 @@ namespace UberFrba.Modelo
 
         public void SetCodigoPostal(String codPost)
         {
-         /*   if (codPost == "")
+            if (codPost == "")
                 throw new CampoVacioException("Codigo postal");
 
             if (!esNumero(codPost))
-                throw new FormatoInvalidoException("Codigo postal. Ingrese todos los numeros seguidos.");    --------> lo mismo que arriba */    
+                throw new FormatoInvalidoException("Codigo postal. Ingrese todos los numeros seguidos.");  
 
             this.codigoPostal = Convert.ToInt32(codPost);
         }

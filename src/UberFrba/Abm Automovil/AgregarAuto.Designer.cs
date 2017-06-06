@@ -40,6 +40,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.textBox_Chofer = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.button_Cancelar = new System.Windows.Forms.Button();
+            this.button_Limpiar = new System.Windows.Forms.Button();
+            this.button_Guardar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -152,15 +155,45 @@
             this.label14.TabIndex = 16;
             this.label14.Text = "* Debe completar todos los campos";
             // 
+            // button_Cancelar
+            // 
+            this.button_Cancelar.Location = new System.Drawing.Point(21, 242);
+            this.button_Cancelar.Name = "button_Cancelar";
+            this.button_Cancelar.Size = new System.Drawing.Size(100, 30);
+            this.button_Cancelar.TabIndex = 17;
+            this.button_Cancelar.Text = "Volver";
+            this.button_Cancelar.UseVisualStyleBackColor = true;
+            // 
+            // button_Limpiar
+            // 
+            this.button_Limpiar.Location = new System.Drawing.Point(143, 242);
+            this.button_Limpiar.Name = "button_Limpiar";
+            this.button_Limpiar.Size = new System.Drawing.Size(100, 30);
+            this.button_Limpiar.TabIndex = 18;
+            this.button_Limpiar.Text = "Limpiar";
+            this.button_Limpiar.UseVisualStyleBackColor = true;
+            // 
+            // button_Guardar
+            // 
+            this.button_Guardar.Location = new System.Drawing.Point(274, 242);
+            this.button_Guardar.Name = "button_Guardar";
+            this.button_Guardar.Size = new System.Drawing.Size(100, 30);
+            this.button_Guardar.TabIndex = 19;
+            this.button_Guardar.Text = "Guardar";
+            this.button_Guardar.UseVisualStyleBackColor = true;
+            // 
             // AgregarAuto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(392, 308);
+            this.Controls.Add(this.button_Guardar);
+            this.Controls.Add(this.button_Limpiar);
+            this.Controls.Add(this.button_Cancelar);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.groupBox1);
             this.Name = "AgregarAuto";
-            this.Text = "Form1";
+            this.Text = "Agregar Auto";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -182,6 +215,9 @@
         private System.Windows.Forms.TextBox textBox_Turno;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button button_Cancelar;
+        private System.Windows.Forms.Button button_Limpiar;
+        private System.Windows.Forms.Button button_Guardar;
 
     }
 }

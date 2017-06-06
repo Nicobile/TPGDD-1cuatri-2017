@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using UberFrba.DataProvider;
 
 
 namespace UberFrba.ABM_Rol
@@ -31,7 +32,7 @@ namespace UberFrba.ABM_Rol
             DataSet funcionalidades = new DataSet();
             SqlDataAdapter adapter = new SqlDataAdapter();
             parametros = new List<SqlParameter>();
-            command = QueryBuilder.Instance.build("SELECT DISTINCT funcIONALIDAD_DESCRIPCION FROM PUSH-IT-TO-THE-LIMIT.Funcionalidad", parametros);
+            command = QueryBuilder.Instance.build("SELECT DISTINCT funcionanlidad_descripcion FROM PUSH_IT_TO_THE_LIMIT.Funcionalidad", parametros);
             adapter.SelectCommand = command;
             adapter.Fill(funcionalidades);
             checkedListBoxFuncionalidades.DataSource = funcionalidades.Tables[0].DefaultView;
@@ -47,7 +48,7 @@ namespace UberFrba.ABM_Rol
 
         private void botonGuardar_Click(object sender, EventArgs e)
         {
-            String queryRol = "INSERT INTO PUSH-IT-TO-THE-LIMIT.Rol(rol_nombre, rol_estado) VALUES (@rol, 1)";
+            String queryRol = "INSERT INTO PUSH_IT_TO_THE_LIMIT.Rol(rol_nombre, rol_estado) VALUES (@rol, 1)";
             String nombreRol = this.textBoxRol.Text;
             parametros.Clear();
             parametros.Add(new SqlParameter("@rol", nombreRol));
@@ -59,7 +60,7 @@ namespace UberFrba.ABM_Rol
                 parametros.Add(new SqlParameter("@rol", nombreRol));
                 parametros.Add(new SqlParameter("@funcionalidad", funcionalidad.Row["funcionalidad_descripcion"] as String));
 
-                String queryRolFuncionalidad = "INSERT INTO PUSH-IT-TO-THE-LIMIT.RolporFunciones(funcionalidad_id, rol_id) VALUES ((SELECT funcionalidad_id FROM PUSH-IT-TO-THE-LIMIT.Funcionalidad WHERE funcionalidad_descripcion = @funcionalidad), (SELECT  rol_id FROM PUSH-IT-TO-THE-LIMIT.Rol WHERE rol_nombre = @rol))";
+                String queryRolFuncionalidad = "INSERT INTO PUSH_IT_TO_THE_LIMIT.RolporFunciones(funcionalidad_id, rol_id) VALUES ((SELECT funcionalidad_id FROM PUSH_IT_TO_THE_LIMIT.Funcionalidad WHERE funcionalidad_descripcion = @funcionalidad), (SELECT  rol_id FROM PUSH_IT_TO_THE_LIMIT.Rol WHERE rol_nombre = @rol))";
                                 
                 QueryBuilder.Instance.build(queryRolFuncionalidad, parametros).ExecuteNonQuery();                                
             }

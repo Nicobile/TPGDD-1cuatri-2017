@@ -86,6 +86,10 @@ IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.crear_cliente') IS NOT NULL
     DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.crear_chofer
 GO
 
+IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.crear_turno') IS NOT NULL
+    DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.crear_turno
+GO
+
 
 /* Creacion de tablas*/
 
@@ -629,7 +633,6 @@ pr_agregar_rol_a_usuario
 
 ------------------------------------------------
 --Procedure para crear un chofer 
-GO
 create proc [PUSH_IT_TO_THE_LIMIT].crear_chofer
     @Nombre nvarchar(255),
     @Apellido varchar(50),
@@ -651,10 +654,8 @@ BEGIN
 END
 GO
 
-GO
 
 --Procedure para crear un cliente
-GO
 create proc [PUSH_IT_TO_THE_LIMIT].crear_cliente
     @Nombre nvarchar(255),
     @Apellido varchar(255),
@@ -677,4 +678,21 @@ BEGIN
 END
 GO
 
+--Procedure para crear un turno
+CREATE PROCEDURE [PUSH_IT_TO_THE_LIMIT].crear_turno
+    @hora_inicio numeric(18,0),
+    @hora_fin numeric(18,0),
+    @descripcion nvarchar(255),
+    @valor_km numeric(18,2),
+    @precio_base numeric(18,2),
+    @habilitado bit,
+	@id int OUTPUT
+AS
+BEGIN
+    INSERT INTO PUSH_IT_TO_THE_LIMIT.Turno 
+        (turno_hora_inicio,turno_hora_fin,turno_descripcion,turno_valor_kilometro,turno_precio_base,turno_habilitado) 
+    VALUES 
+        (@hora_inicio,@hora_fin,@descripcion,@valor_km,@precio_base,@habilitado)
+    SET @id = SCOPE_IDENTITY(); 
+END
 GO

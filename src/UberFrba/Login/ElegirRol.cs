@@ -37,7 +37,7 @@ namespace UberFrba.Login
             parametros.Add(new SqlParameter("@username", UsuarioSesion.usuario.nombre));
             command = QueryBuilder.Instance.build("SELECT r.rol_nombre from PUSH_IT_TO_THE_LIMIT.Rol r, PUSH_IT_TO_THE_LIMIT.RolporUsuario ru WHERE r.rol_habilitado = 1 AND (SELECT usuario_id FROM PUSH_IT_TO_THE_LIMIT.Usuario WHERE usuario_name = @username) = ru.usuario_id AND r.rol_id = ru.rol_id ", parametros);
             adapter.SelectCommand = command;
-            adapter.Fill(rolesUsuario, "Roles");
+            adapter.Fill(rolesUsuario, "Rol");
             comboBoxRol.DataSource = rolesUsuario.Tables[0].DefaultView;
             comboBoxRol.ValueMember = "rol_nombre";
         }

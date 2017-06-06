@@ -78,7 +78,7 @@ namespace UberFrba.Login
                 if (primerInicio == "565339bc4d33d72817b583024112eb7f5cdf3e5eef0252d6ec1b9c9a94e12bb3") //  QUEDA PENDIENTE PONER ACA LA CONTRASEÑA QUE VIENE POR DEFECTO EN LA BASE!!!!!!!!!!!
                 {
                     this.Hide();
-                    new CambiarContrasena().ShowDialog();
+                    //new CambiarContrasena().ShowDialog();
                     this.Close();
                 }
 
