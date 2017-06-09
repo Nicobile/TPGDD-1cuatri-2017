@@ -43,7 +43,7 @@ namespace UberFrba.ABM_Rol
             parametros.Clear();
             parametros.Add(new SqlParameter("@activo", estadoRol));
 
-            command = QueryBuilder.Instance.build("SELECT DISTINCT * FROM PUSH_IT_TO_THE_LIMIT.Rol WHERE rol_activo = @activo", parametros);
+            command = QueryBuilder.Instance.build("SELECT * FROM PUSH_IT_TO_THE_LIMIT.Rol WHERE rol_estado = @activo", parametros);
             adapter.SelectCommand = command;
             adapter.Fill(roles);
             dataGridViewResultadosBusqueda.DataSource = roles.Tables[0].DefaultView;

@@ -241,7 +241,7 @@ namespace UberFrba.ABM_Rol
             parametros.Clear();
             parametros.Add(new SqlParameter("@nombre", rolAEditar));
 
-            String queryHabilitarRol = "UPDATE PUSH_IT_TO_THE_LIMIT.Roles SET rol_activo = 1 WHERE rol_nombre = @nombre";
+            String queryHabilitarRol = "UPDATE PUSH_IT_TO_THE_LIMIT.Rol SET rol_estado = 1 WHERE rol_nombre = @nombre";
 
             QueryBuilder.Instance.build(queryHabilitarRol, parametros).ExecuteNonQuery();
         }

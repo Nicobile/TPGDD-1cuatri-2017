@@ -51,22 +51,22 @@
     <Compile Include="Abm Automovil\AgregarAuto.Designer.cs">
       <DependentUpon>AgregarAuto.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Chofer\AgregarChofer.cs">
+    <Compile Include="ABM Chofer\AgregarChofer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Chofer\AgregarChofer.Designer.cs">
+    <Compile Include="ABM Chofer\AgregarChofer.Designer.cs">
       <DependentUpon>AgregarChofer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Chofer\EditarChofer.cs">
+    <Compile Include="ABM Chofer\EditarChofer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Chofer\EditarChofer.Designer.cs">
+    <Compile Include="ABM Chofer\EditarChofer.Designer.cs">
       <DependentUpon>EditarChofer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Chofer\FiltroChofer.cs">
+    <Compile Include="ABM Chofer\FiltroChofer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Chofer\FiltroChofer.Designer.cs">
+    <Compile Include="ABM Chofer\FiltroChofer.Designer.cs">
       <DependentUpon>FiltroChofer.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Cliente\AgregarCliente.cs">
@@ -197,13 +197,13 @@
     <EmbeddedResource Include="Abm Automovil\AgregarAuto.resx">
       <DependentUpon>AgregarAuto.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Chofer\AgregarChofer.resx">
+    <EmbeddedResource Include="ABM Chofer\AgregarChofer.resx">
       <DependentUpon>AgregarChofer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Chofer\EditarChofer.resx">
+    <EmbeddedResource Include="ABM Chofer\EditarChofer.resx">
       <DependentUpon>EditarChofer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Chofer\FiltroChofer.resx">
+    <EmbeddedResource Include="ABM Chofer\FiltroChofer.resx">
       <DependentUpon>FiltroChofer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Cliente\AgregarCliente.resx">

@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using UberFrba.DataProvider;
+using UberFrba;
 
 namespace UberFrba
 {
@@ -19,23 +20,19 @@ namespace UberFrba
         public MenuPrincipal()
         {
             InitializeComponent();
-            /*
-            funcionalidades.Add("Comprar/Ofertar", new Comprar_Ofertar.BuscadorPublicaciones());
-            funcionalidades.Add("Generar Publicacion", new Generar_Publicacion.GenerarPublicacion());
-            funcionalidades.Add("Editar Publicacion", new Editar_Publicacion.FiltrarPublicacion());
-            funcionalidades.Add("Calificar Vendedor", new Calificar_Vendedor.Listado());
-            funcionalidades.Add("ABM Rol", new ABM_Rol.RolForm());
-            funcionalidades.Add("Crear Empresa", new ABM_Empresa.AgregarEmpresa("empresaCreadaPorAdmin", "OK"));
-            funcionalidades.Add("Editar Empresa", new ABM_Empresa.FiltroEmpresa());
+
+            funcionalidades.Add("ABM de Rol", new ABM_Rol.RolForm());
+            funcionalidades.Add("Crear Chofer", new ABM_Chofer.AgregarChofer("ChoferCreadoPorAdmin", "OK"));
+            funcionalidades.Add("Editar Chofer", new ABM_Chofer.FiltroChofer());
             funcionalidades.Add("Crear Cliente", new ABM_Cliente.AgregarCliente("clienteCreadoPorAdmin", "OK"));
             funcionalidades.Add("Editar Cliente", new ABM_Cliente.FiltroCliente());
-            funcionalidades.Add("Agregar Visibilidad", new ABM_Visibilidad.AgregarVisibilidad());
+         /*   funcionalidades.Add("Agregar Visibilidad", new ABM_Visibilidad.AgregarVisibilidad());
             funcionalidades.Add("Editar Visibilidad", new ABM_Visibilidad.FiltroVisibilidad());
             funcionalidades.Add("Consulta de facturas", new Consulta_Facturas_Vendedor.ListadoFacturas()); 
             funcionalidades.Add("Listado Estadistico", new Listado_Estadistico.Estadisticas());
             funcionalidades.Add("Ver Historial", new Historial_Cliente.Historial());
-            funcionalidades.Add("Cambiar Contraseña", new Login.CambiarContrasena());
-                */         
+            funcionalidades.Add("Cambiar Contraseña", new Login.CambiarContrasena()); */
+        
         }
 
         private void MenuPrincipal_Load(object sender, EventArgs e)
@@ -51,7 +48,7 @@ namespace UberFrba
             adapter.SelectCommand = command;
             adapter.Fill(actions, "Funcionalidad");
             comboBoxAccion.DataSource = actions.Tables[0].DefaultView;
-            comboBoxAccion.ValueMember = "funcionalidad_nombre";
+            comboBoxAccion.ValueMember = "funcionalidad_descripcion";
 
         }
 

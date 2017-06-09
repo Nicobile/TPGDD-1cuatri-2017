@@ -32,7 +32,7 @@ namespace UberFrba.ABM_Rol
             DataSet funcionalidades = new DataSet();
             SqlDataAdapter adapter = new SqlDataAdapter();
             parametros = new List<SqlParameter>();
-            command = QueryBuilder.Instance.build("SELECT DISTINCT funcionanlidad_descripcion FROM PUSH_IT_TO_THE_LIMIT.Funcionalidad", parametros);
+            command = QueryBuilder.Instance.build("SELECT DISTINCT funcionalidad_descripcion FROM PUSH_IT_TO_THE_LIMIT.Funcionalidad", parametros);
             adapter.SelectCommand = command;
             adapter.Fill(funcionalidades);
             checkedListBoxFuncionalidades.DataSource = funcionalidades.Tables[0].DefaultView;

@@ -56,7 +56,7 @@ namespace UberFrba.ABM_Rol
             parametros.Clear();
             parametros.Add(new SqlParameter("@nombre", rolElegido));
 
-            String sql = "UPDATE PUSH_IT_TO_THE_LIMIT.Role SET rol_estado = 0 WHERE rol_nombre = @nombre";
+            String sql = "UPDATE PUSH_IT_TO_THE_LIMIT.Rol SET rol_estado = 0 WHERE rol_nombre = @nombre";
 
             int filasAfectadas = 0;
                         
