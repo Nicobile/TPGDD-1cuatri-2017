@@ -137,6 +137,14 @@ namespace UberFrba
             return this.Crear(chofer);
         }
 
+        /** Turnos **/
+        public int CrearTurno(Turnos turno)
+        {
+
+
+            return this.Crear(turno);
+        }
+
         /*
         *
         *   GET TABLE QUERYS
@@ -162,13 +170,21 @@ namespace UberFrba
             return (Clientes)this.Obtener(idCliente, clase);
         }
 
-        /** Empresas **/
+        /** Choferes **/
 
         public Choferes ObtenerChofer(int idChofer)
         {
             Choferes objeto = new Choferes();
             Type clase = objeto.GetType();
             return (Choferes)this.Obtener(idChofer, clase);
+        }
+
+        /** Turnos **/
+        public Turnos ObtenerTurnos(int idTurno)
+        {
+            Turnos objeto = new Turnos();
+            Type clase = objeto.GetType();
+            return (Turnos)this.Obtener(idTurno, clase);
         }
 
         /** Contacto **/

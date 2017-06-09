@@ -43,7 +43,7 @@ namespace UberFrba
             DataSet actions = new DataSet();
             SqlDataAdapter adapter = new SqlDataAdapter();
 
-            String funcionalidadesUsuario = "select f.funcionalidad_descripcion from PUSH_IT_TO_THE_LIMIT.ROL r, PUSH_IT_TO_THE_LIMIT.RolporFunciones fr, PUSH_IT_TO_THE_LIMIT.Funcionalidad f where r.rol_id = fr.rol_id and f.funcionalida_id = fr.funcionalidad_id and r.rol_nombre = @rol";
+            String funcionalidadesUsuario = "select f.funcionalidad_descripcion from PUSH_IT_TO_THE_LIMIT.ROL r, PUSH_IT_TO_THE_LIMIT.RolporFunciones fr, PUSH_IT_TO_THE_LIMIT.Funcionalidad f where r.rol_id = fr.rol_id and f.funcionalidad_id = fr.funcionalidad_id and r.rol_nombre = @rol";
             IList<SqlParameter> parametros = new List<SqlParameter>();
             parametros.Add(new SqlParameter("@rol", UsuarioSesion.Usuario.rol));
             command = QueryBuilder.Instance.build(funcionalidadesUsuario, parametros);

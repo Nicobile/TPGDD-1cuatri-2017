@@ -83,7 +83,7 @@ IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.crear_chofer') IS NOT NULL
 GO
 
 IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.crear_cliente') IS NOT NULL
-    DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.crear_chofer
+    DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.crear_cliente
 GO
 
 IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.crear_turno') IS NOT NULL
@@ -126,7 +126,7 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].RolporFunciones(
 CREATE TABLE [PUSH_IT_TO_THE_LIMIT].Usuario(
 	[usuario_id] INT IDENTITY(1,1) PRIMARY KEY,
 	[usuario_name] VARCHAR(255) UNIQUE NOT NULL,
-	[usuario_password] VARCHAR(50) NOT NULL,
+	[usuario_password] VARCHAR(255) NOT NULL,
 	[usuario_habilitado] [BIT] NOT NULL DEFAULT 1,
 	[usuario_intentos] [TINYINT] DEFAULT 0,
 	[usuario_admin] [BIT] NOT NULL DEFAULT 0,
@@ -353,7 +353,8 @@ insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones (rol_id,funcionalidad_id)
 
 /*Usuario Administrador*/
 insert into [PUSH_IT_TO_THE_LIMIT].Usuario (usuario_name, usuario_password) values
-('admin',HASHBYTES('SHA2_256','w23e'))
+('admin','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7')
+--('admin',HASHBYTES('SHA2_256','w23e'))
 
 /*Usuarios choferes*/
 insert into [PUSH_IT_TO_THE_LIMIT].Usuario (usuario_name, usuario_password)
@@ -392,15 +393,14 @@ where  cast( m.chofer_dni as varchar(255)) = u.usuario_name
 order by usuario_ID
 
 /*RolporUsuario*/
+insert into PUSH_IT_TO_THE_LIMIT.RolporUsuario(usuario_id, rol_id) 
+values (1,1)
 /*clienteporusuario*/
 insert into [PUSH_IT_TO_THE_LIMIT].RolporUsuario( usuario_Id, rol_id)
 select distinct u.usuario_ID, r.rol_ID
 from [PUSH_IT_TO_THE_LIMIT].Usuario u, [PUSH_IT_TO_THE_LIMIT].Cliente c, [PUSH_IT_TO_THE_LIMIT].Rol r
 where u.usuario_name = cast(c.cliente_dni as varchar(255))
 and r.rol_nombre = ('Cliente')
-
-
-
 
 /*choferporusuario*/
 insert into [PUSH_IT_TO_THE_LIMIT].RolporUsuario( usuario_Id, rol_id)

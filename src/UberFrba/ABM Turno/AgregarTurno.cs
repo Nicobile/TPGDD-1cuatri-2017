@@ -36,27 +36,25 @@ namespace UberFrba.ABM_Turno
             String HoraInicio = textBox_HoraInicio.Text;
             String HoraFin = textBox_HoraFin.Text;
             String Descripcion = textBox_Descripcion.Text;
+            String valorKilometro = textBox_ValorKilometro.Text;
             String PrecioBase = textBox_PrecioBase.Text;
-            Boolean Habilitado = checkBox_Habilitado.Focused;
-            String Mail = textBox_Mail.Text;
-            DateTime fechaDeNacimiento;
-            DateTime.TryParse(textBox_FechaDeNacimiento.Text, out fechaDeNacimiento);
+            Boolean Habilitado = checkBox_Habilitado.Checked;
+
 
             // Crea Chofer
             try
             {
                 Turnos turno = new Turnos();
 
-                chofer.SetNombre(HoraInicio);
-                chofer.SetApellido(HoraFin);
-                chofer.SetDNI(Descripcion);
-                chofer.SetDireccion(PrecioBase);
-                chofer.SetTelefono(Telefono);
-                chofer.SetMail(Mail);
-                chofer.SetFechaDeNacimiento(fechaDeNacimiento);
+                turno.SetHoraInicio(HoraInicio);
+                turno.SetHoraFin(HoraFin);
+                turno.SetDescripcion(Descripcion);
+                turno.SetValorKilometro(valorKilometro);
+                turno.SetPrecioBaseTurno(PrecioBase);
+                turno.SetActivo(Habilitado);
 
-                idChofer = mapper.CrearChofer(chofer);
-                if (idChofer > 0) MessageBox.Show("Chofer agregado correctamente");
+                idTurno = mapper.Crear(turno);
+                if (idTurno > 0) MessageBox.Show("Turno agregado correctamente");
             }
             catch (CampoVacioException exceptionCampoVacio)
             {
@@ -68,11 +66,7 @@ namespace UberFrba.ABM_Turno
                 MessageBox.Show("Los datos fueron mal ingresados en: " + exceptionFormato.Message);
                 return;
             }
-            catch (TelefonoYaExisteException exceptionTelefono)
-            {
-                MessageBox.Show("Telefono ya existe");
-                return;
-            }
+    
 
           /*Excepciones no creadas, hay que verlo tambien, realmente quiero estar muerto*/
 
@@ -86,14 +80,10 @@ namespace UberFrba.ABM_Turno
                 MessageBox.Show("RazonSocial ya existe");
                 return;
             } */
-            catch (FechaPasadaException exceptionFecha)
-            {
-                MessageBox.Show("Fecha no valida");
-                return;
-            }
+ 
 
-            // Si al chofer lo crea el admin, crea un nuevo usuario predeterminado.
-            if (idUsuario == 0)
+            // Si al turno lo crea el admin, crea un nuevo usuario predeterminado.
+   /*         if (idUsuario == 0)
             {
                 idUsuario = CrearUsuario();
                 Boolean resultado = mapper.AsignarUsuarioAChofer(idChofer, idUsuario);
@@ -101,10 +91,64 @@ namespace UberFrba.ABM_Turno
             }
 
             mapper.AsignarRolAUsuario(this.idUsuario, "Chofer");
-
+            */
             VolverAlMenuPrincipal();
         }
+   /*     private int CrearUsuario()
+        {
+            if (username == "choferCreadoPorAdmin")
+            {
+                return mapper.CrearUsuario(); //Se crean con los parametros default
+            }
+            else
+            {
+                return mapper.CrearUsuarioConValores(username, contrasena); //Si es por registro de usuario, segun los parametros dados
+            }
+        }
+    */
 
+       /* private void CargarRubros()
+        {
+            string query = "SELECT rubro_id, rubro_desc_larga from NET_A_CERO.Rubros";
+
+            SqlCommand cmd = new SqlCommand(query, ConnectionManager.Instance.getConnection());
+
+            SqlDataAdapter data_adapter = new SqlDataAdapter(cmd);
+            DataTable rubros = new DataTable();
+            data_adapter.Fill(rubros);
+
+            comboBox_Direccion.ValueMember = "rubro_id";
+            comboBox_Direccion.DisplayMember = "rubro_desc_larga";
+            comboBox_Direccion.DataSource = rubros;
+            comboBox_Direccion.SelectedIndex = -1;
+        }
+        */
+        private void button_Limpiar_Click(object sender, EventArgs e)
+        {
+            textBox_HoraInicio.Text = "";
+            textBox_HoraFin.Text = "";
+            textBox_Descripcion.Text = "";
+            textBox_ValorKilometro.Text = "";
+            textBox_PrecioBase.Text = "";
+            checkBox_Habilitado.Checked = false;
+
+        }
+
+        private void button_Cancelar_Click(object sender, EventArgs e)
+        {
+
+                VolverAlMenuPrincipal();
+
+        }
+
+        private void VolverAlMenuPrincipal()
+        {
+            this.Hide();
+            new MenuPrincipal().ShowDialog();
+            this.Close();
+        }
+
+    
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 

@@ -66,7 +66,7 @@ namespace UberFrba.Login
                 // Usuario logueado correctamente (intentos fallidos = 0)
                 parametros.Clear();
                 parametros.Add(new SqlParameter("@username", usuario));
-                String clearIntentosFallidos = "PUSH_IT_TO_THE_LIMIT.Usuario SET usuario_intentos = 0 WHERE usuario_name = @username";
+                String clearIntentosFallidos = "UPDATE PUSH_IT_TO_THE_LIMIT.Usuario SET usuario_intentos = 0 WHERE usuario_name = @username";
                 QueryBuilder.Instance.build(clearIntentosFallidos, parametros).ExecuteNonQuery();
 
                 // Se fija si es el primer inicio de sesion del usuario
@@ -85,7 +85,7 @@ namespace UberFrba.Login
                 parametros.Clear();
                 parametros.Add(new SqlParameter("@username", usuario));
 
-                String consultaRoles = "SELECT COUNT(rol_id) PUSH_IT_TO_THE_LIMIT.RolporUsuario WHERE (SELECT usuario_id FROM PUSH_IT_TO_THE_LIMIT.Usuario WHERE usuario_name = @username) = usuario_id";
+                String consultaRoles = "SELECT COUNT(rol_id) FROM PUSH_IT_TO_THE_LIMIT.RolporUsuario WHERE (SELECT usuario_id FROM PUSH_IT_TO_THE_LIMIT.Usuario WHERE usuario_name = 'admin') = usuario_id";
                 int cantidadDeRoles = (int)QueryBuilder.Instance.build(consultaRoles, parametros).ExecuteScalar();
 
                 if(cantidadDeRoles > 1)
