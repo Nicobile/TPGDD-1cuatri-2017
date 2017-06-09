@@ -34,7 +34,7 @@ namespace UberFrba.Registro_de_Usuario
             DataSet roles = new DataSet();
             SqlDataAdapter adapter = new SqlDataAdapter();
             parametros = new List<SqlParameter>();
-            command = QueryBuilder.Instance.build("SELECT DISTINCT rol_nombre FROM PUSH-IT-TO-THE-LIMIT.Rol WHERE rol_estado = 1 AND rol_nombre != 'Administrador'", parametros);
+            command = QueryBuilder.Instance.build("SELECT DISTINCT rol_nombre FROM PUSH_IT_TO_THE_LIMIT.Rol WHERE rol_estado = 1 AND rol_nombre != 'Administrador'", parametros);
             adapter.SelectCommand = command;
             adapter.Fill(roles, "Rol");
             comboBoxRol.DataSource = roles.Tables[0].DefaultView;
@@ -89,7 +89,7 @@ namespace UberFrba.Registro_de_Usuario
             parametros.Add(new SqlParameter("@username", usuario));
 
             // Buscamos si el username ya se encuentra registrado
-            String queryUsuario = "SELECT usuario_id FROM PUSH-IT-TO-THE-LIMIT.Usuario WHERE usuario_name= @username";
+            String queryUsuario = "SELECT usuario_id FROM PUSH_IT_TO_THE_LIMIT.Usuario WHERE usuario_name= @username";
 
             SqlDataReader reader = QueryBuilder.Instance.build(queryUsuario, parametros).ExecuteReader();
 
@@ -106,7 +106,7 @@ namespace UberFrba.Registro_de_Usuario
                UsuarioSesion.Usuario.nombre = usuario;
 
                 String idUsuario = "SELECT TOP 1 usuario_id"
-                                + " FROM PUSH-IT-TO-THE-LIMIT.Usuario"
+                                + " FROM PUSH_IT_TO_THE_LIMIT.Usuario"
                                 + " ORDER BY usruario_id DESC";
 
                 // Limpio parametros

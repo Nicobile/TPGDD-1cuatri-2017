@@ -90,6 +90,11 @@ IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.crear_turno') IS NOT NULL
     DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.crear_turno
 GO
 
+IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.pr_agregar_rol_a_usuario') IS NOT NULL
+    DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_agregar_rol_a_usuario
+GO
+
+
 
 /* Creacion de tablas*/
 
@@ -694,5 +699,19 @@ BEGIN
     VALUES 
         (@hora_inicio,@hora_fin,@descripcion,@valor_km,@precio_base,@habilitado)
     SET @id = SCOPE_IDENTITY(); 
+END
+GO
+
+
+--Procedure para agregarle un rol a un usuario
+CREATE PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_agregar_rol_a_usuario
+    @usuario_id int,
+    @rol_id int
+AS
+BEGIN
+    INSERT INTO PUSH_IT_TO_THE_LIMIT.RolporUsuario
+        (rol_id, usuario_id)
+    VALUES
+        (@rol_id, @usuario_id)
 END
 GO

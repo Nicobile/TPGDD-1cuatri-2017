@@ -79,7 +79,7 @@
             // 
             // monthCalendar_FechaDeNacimiento
             // 
-            this.monthCalendar_FechaDeNacimiento.Location = new System.Drawing.Point(176, 5);
+            this.monthCalendar_FechaDeNacimiento.Location = new System.Drawing.Point(189, 12);
             this.monthCalendar_FechaDeNacimiento.Name = "monthCalendar_FechaDeNacimiento";
             this.monthCalendar_FechaDeNacimiento.TabIndex = 5;
             this.monthCalendar_FechaDeNacimiento.Visible = false;

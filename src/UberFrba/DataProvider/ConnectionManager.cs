@@ -14,7 +14,7 @@ namespace UberFrba.DataProvider
     {
 
         private static String CONNECTION_STRING = "gd1C2017";
-        private static String SCHEMA = "PUSH-IT-TO-THE-LIMIT";
+        private static String SCHEMA = "PUSH_IT_TO_THE_LIMIT";
         private static String DATABASE = "GD1C2017";
         private static String USER_ID = "gd";
 

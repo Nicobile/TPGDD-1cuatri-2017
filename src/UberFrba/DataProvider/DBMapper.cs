@@ -89,9 +89,9 @@ namespace UberFrba
 
         public int CrearUsuario()
         {
-            query = "PUSH-IT_TO_THE_LIMIT.pr_crear_usuario";
+            query = "PUSH_IT_TO_THE_LIMIT.pr_crear_usuario";
             parametros.Clear();
-            parametroOutput = new SqlParameter("@usr_id", SqlDbType.Int);
+            parametroOutput = new SqlParameter("@usuario_id", SqlDbType.Int);
             parametroOutput.Direction = ParameterDirection.Output;
             parametros.Add(parametroOutput);
             command = QueryBuilder.Instance.build(query, parametros);
@@ -212,6 +212,15 @@ namespace UberFrba
             return false;
         }
 
+        public Boolean EliminarTurno(Decimal id, String enDonde)
+        {
+            query = "UPDATE PUSH_IT_TO_THE_LIMIT." + enDonde + " SET turno_habilitado = 0 WHERE turno_id = @id";
+            parametros.Clear();
+            parametros.Add(new SqlParameter("@id", id));
+            int filasAfectadas = QueryBuilder.Instance.build(query, parametros).ExecuteNonQuery();
+            if (filasAfectadas == 1) return true;
+            return false;
+        }
 
 
 
@@ -224,9 +233,9 @@ namespace UberFrba
         public Boolean ActualizarEstadoUsuario(Decimal id, bool activo)
         {
             if (activo)
-                query = "UPDATE PUSH_IT_TO_THE_LIMIT.Usuario SET usuario_estado= 1 WHERE usuario_id = @id";
+                query = "UPDATE PUSH_IT_TO_THE_LIMIT.Usuario SET usuario_habilitado = 1 WHERE usuario_id = @id";
             else
-                query = "UPDATE PUSH_IT_TO_THE_LIMIT.Usuario SET usuario_estado = 0 WHERE usuario_id = @id";
+                query = "UPDATE PUSH_IT_TO_THE_LIMIT.Usuario SET usuario_habilitado = 0 WHERE usuario_id = @id";
             parametros.Clear();
             parametros.Add(new SqlParameter("@id", id));
             int filasAfectadas = QueryBuilder.Instance.build(query, parametros).ExecuteNonQuery();
@@ -356,8 +365,8 @@ namespace UberFrba
         public DataTable SelectClientesParaFiltroConFiltro(String filtro)
         {
 
-            return this.SelectDataTable("cli.cliente_id, usr.usuario_name Username, cli.cliente_nombre Nombre, cli.cliente_apellido Apellido, cliente.cli_dni Documento, cli.cliente_dni ' Documento', cli.cliente_fecha_nacimiento 'Fecha de Nacimiento', usr.usuario_estado 'Habilitado', cli.cliente_mail Mail, cli.cliente_telefono Telefono, cli.cliente_direccion Direccion,  cli.cliente_codigo_postal 'Codigo Postal' "
-                , "PUSH-IT-TO-THE-LIMIT.Clientes cli, PUSH-IT-TO-THE-LIMIT.Usuarios usr"
+            return this.SelectDataTable("cli.cliente_id, usr.usuario_name Username, cli.cliente_nombre Nombre, cli.cliente_apellido Apellido, cli.cliente_dni Documento, cli.cliente_fecha_nacimiento 'Fecha de Nacimiento', usr.usuario_estado 'Habilitado', cli.cliente_mail Mail, cli.cliente_telefono Telefono, cli.cliente_direccion Direccion,  cli.cliente_codigo_postal 'Codigo Postal' "
+                , "PUSH_IT_TO_THE_LIMIT.Cliente cli, PUSH_IT_TO_THE_LIMIT.Usuario usr"
                 , "cli.usuario_id = usr.usuario_id  AND cli.cliente_estado= 1 " + filtro);
         }
 
@@ -371,10 +380,23 @@ namespace UberFrba
         public DataTable SelectChoferesParaFiltroConFiltro(String filtro)
         {
             return this.SelectDataTable("c.chofer_id, usr.usuario_name Username, c.chofer_nombre 'Nombre', c.chofer_dni 'DNI', c.chofer_apellido 'Apellido', c.chofer_direccion 'Direccion', c.chofer_telefono 'Telefono',c.chofer_mail 'Mail',c.chofer_fecha_Nacimiento 'Fecha Nacimiento', usr.usuario_estado 'Habilitado' "
-              , "PUSH-IT-TO-THE-LIMIT.Chofer c, PUSH-IT-TO-THE-LIMIT.Usuarios usr"
+              , "PUSH_IT_TO_THE_LIMIT.Chofer c, PUSH_IT_TO_THE_LIMIT.Usuario usr"
               , "c.usuario_id = usr.usuario_id AND  c.chofer_estado= 1 " + filtro);
         }
 
+        /** Turnos **/
+
+        public DataTable SelectTurnoParaFiltro()
+        {
+            return this.SelectTurnosParaFiltroConFiltro("");
+        }
+
+        public DataTable SelectTurnosParaFiltroConFiltro(String filtro)
+        {
+            return this.SelectDataTable("c.chofer_id, usr.usuario_name Username, c.chofer_nombre 'Nombre', c.chofer_dni 'DNI', c.chofer_apellido 'Apellido', c.chofer_direccion 'Direccion', c.chofer_telefono 'Telefono',c.chofer_mail 'Mail',c.chofer_fecha_Nacimiento 'Fecha Nacimiento', usr.usuario_estado 'Habilitado' "
+              , "PUSH_IT_TO_THE_LIMIT.Chofer c, PUSH_IT_TO_THE_LIMIT.Usuario usr"
+              , "c.usuario_id = usr.usuario_id AND  c.chofer_estado= 1 " + filtro);
+        }
 
         /*
         *
