@@ -183,8 +183,8 @@ namespace UberFrba.Modelo
         {
             if (activo == true)
             {
-                return "UPDATE PUSH_IT_TO_THE_LIMIT.Chofer SET chofer_dni = @DNI, chofer_nombre = @nombre, chofer_apellido = @apellido, chofer_mail = @mail, chofer_direccion = @direccion, chofer_telefono = @telefono, chofer_fecha_Nacimiento = @fechaDeNacimiento, chofer_estado = @activo, usuario_id = @usuario_id WHERE chofer_id =  @id";//+
-                       //" UPDATE PUSH_IT_TO_THE_LIMIT.Usuario SET usuario_intentos = 0  WHERE usuario_id =  (SELECT usuario_id FROM PUSH_IT_TO_THE_LIMIT.Chofer WHERE chofer_id = @id)";
+                return "UPDATE PUSH_IT_TO_THE_LIMIT.Chofer SET chofer_dni = @DNI, chofer_nombre = @nombre, chofer_apellido = @apellido, chofer_mail = @mail, chofer_direccion = @direccion, chofer_telefono = @telefono, chofer_fecha_Nacimiento = @fechaDeNacimiento, chofer_estado = @activo, usuario_id = @usuario_id WHERE chofer_id =  @id " +
+                       " UPDATE PUSH_IT_TO_THE_LIMIT.Usuario SET usuario_intentos = 0  WHERE usuario_id =  (SELECT usuario_id FROM PUSH_IT_TO_THE_LIMIT.Chofer WHERE chofer_id = @id)";
             }
             else
             {

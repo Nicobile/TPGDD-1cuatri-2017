@@ -146,7 +146,7 @@ namespace UberFrba.ABM_Chofer
             this.dataGridView_Chofer.Location = new System.Drawing.Point(12, 155);
             this.dataGridView_Chofer.Name = "dataGridView_Chofer";
             this.dataGridView_Chofer.ReadOnly = true;
-            this.dataGridView_Chofer.Size = new System.Drawing.Size(1068, 199);
+            this.dataGridView_Chofer.Size = new System.Drawing.Size(1162, 226);
             this.dataGridView_Chofer.TabIndex = 4;
             this.dataGridView_Chofer.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Chofer_CellClick);
             // 
@@ -154,7 +154,7 @@ namespace UberFrba.ABM_Chofer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1092, 366);
+            this.ClientSize = new System.Drawing.Size(1213, 417);
             this.Controls.Add(this.dataGridView_Chofer);
             this.Controls.Add(this.button_Cancelar);
             this.Controls.Add(this.button_Limpiar);
