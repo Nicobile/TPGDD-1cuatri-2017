@@ -46,7 +46,7 @@ namespace UberFrba.ABM_Chofer
             textBox_Apellido.Text = chofer.GetApellido();
             textBox_FechaDeNacimiento.Text = Convert.ToString(chofer.GetFechaDeNacimiento());
             textBox_Telefono.Text = chofer.GetTelefono();
-            checkBox_Habilitado.Checked = Convert.ToBoolean(mapper.SelectFromWhere("usuario_activo", "Usuario", "usuario_id", chofer.GetIdUsuario()));
+            checkBox_Habilitado.Checked = Convert.ToBoolean(mapper.SelectFromWhere("usuario_habilitado", "Usuario", "usuario_id", chofer.GetIdUsuario()));
 
         }
 

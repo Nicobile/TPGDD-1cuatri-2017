@@ -22,10 +22,8 @@ namespace UberFrba
             InitializeComponent();
 
             funcionalidades.Add("ABM de Rol", new ABM_Rol.RolForm());
-            funcionalidades.Add("Crear Chofer", new ABM_Chofer.AgregarChofer("ChoferCreadoPorAdmin", "OK"));
-            funcionalidades.Add("Editar Chofer", new ABM_Chofer.FiltroChofer());
-            funcionalidades.Add("Crear Cliente", new ABM_Cliente.AgregarCliente("clienteCreadoPorAdmin", "OK"));
-            funcionalidades.Add("Editar Cliente", new ABM_Cliente.FiltroCliente());
+        //    funcionalidades.Add("ABM de Choferes", new ABM_Chofer.AgregarChofer("chofer","OK"));
+            funcionalidades.Add("ABM de Choferes", new ABM_Chofer.MenuChofer());
          /*   funcionalidades.Add("Agregar Visibilidad", new ABM_Visibilidad.AgregarVisibilidad());
             funcionalidades.Add("Editar Visibilidad", new ABM_Visibilidad.FiltroVisibilidad());
             funcionalidades.Add("Consulta de facturas", new Consulta_Facturas_Vendedor.ListadoFacturas()); 

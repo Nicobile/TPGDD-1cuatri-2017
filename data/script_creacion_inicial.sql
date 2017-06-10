@@ -179,7 +179,7 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[Chofer] (
 	[chofer_telefono] NUMERIC(18,0) UNIQUE,
 	[chofer_mail] VARCHAR(50) ,
 	[chofer_fecha_Nacimiento] DATETIME NOT NULL,
-	[chofer_activo] [bit] NOT NULL DEFAULT 1,
+	[chofer_estado] [bit] NOT NULL DEFAULT 1,
 	[usuario_id] INT,
 	
 )
@@ -313,15 +313,15 @@ insert into [PUSH_IT_TO_THE_LIMIT].Rol (rol_nombre) values
 
 insert into [PUSH_IT_TO_THE_LIMIT].Funcionalidad (funcionalidad_descripcion) values
 ('ABM de Rol'),                            --1
-('Registro de usuarios'),                  --2
+('Registro de Usuarios'),                  --2
 ('ABM de Clientes'),                       --3
 ('ABM de Automoviles'),                    --4
-('ABM de turnos'),                         --5
-('ABM de choferes'),                       --6
-('Registro de viajes'),                    --7
-('Rendicion de viajes'),                   --8
-('Facturacion de clientes'),               --9
-('Listado estadistico');                   --10
+('ABM de Turnos'),                         --5
+('ABM de Choferes'),                       --6
+('Registro de Viajes'),                    --7
+('Rendicion de Viajes'),                   --8
+('Facturacion de Clientes'),               --9
+('Listado Estadistico');                   --10
 
 
 /*RolXFuncionalidad*/
@@ -652,7 +652,7 @@ create proc [PUSH_IT_TO_THE_LIMIT].crear_chofer
 AS
 BEGIN
     INSERT INTO [PUSH_IT_TO_THE_LIMIT].Chofer
-        (chofer_nombre, chofer_apellido,chofer_dni,  chofer_direccion, chofer_telefono, chofer_mail, chofer_fecha_Nacimiento,chofer_activo,usuario_id) 
+        (chofer_nombre, chofer_apellido,chofer_dni,  chofer_direccion, chofer_telefono, chofer_mail, chofer_fecha_Nacimiento,chofer_estado,usuario_id) 
     VALUES 
         (@Nombre, @Apellido, @DNI, @Direccion, @Telefono, @Mail, @Fecha_Nacimiento,@Activo,@User_id)
     SET @id = SCOPE_IDENTITY(); 

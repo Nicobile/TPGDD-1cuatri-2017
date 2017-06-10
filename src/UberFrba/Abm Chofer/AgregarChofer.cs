@@ -29,11 +29,11 @@ namespace UberFrba.ABM_Chofer
             this.idUsuario = 0;
         }
 
-   /*     private void AgregarChofer_Load(object sender, EventArgs e)
+          private void AgregarChofer_Load(object sender, EventArgs e)
         {
-            CargarRubros();
+
         }
-        */
+
         private void button_Guardar_Click(object sender, EventArgs e)
         {
             // Guarda en variables todos los campos de entrada

@@ -183,19 +183,19 @@ namespace UberFrba.Modelo
         {
             if (activo == true)
             {
-                return "UPDATE PUSH_IT_TO_THE_LIMIT.Choferes SET chofer_dni = @DNI, chofer_nombre = @nombre, chofer_apellido = @apellido, chofer_mail = @mail, chofer_direccion = @direccion, chofer_telefono = @telefono, chofer_fechaDeNacimiento = @fechaDeNacimiento, chofer_activo = @activo, usuario_id = @usuario_id @ WHERE chofer_id =  @id" +
-                       " UPDATE PUSH_IT_TO_THE_LIMIT.Usuarios SET usr_intentos = 0  WHERE usr_id =  (SELECT chofer_id_usuario FROM PUSH_IT_TO_THE_LIMIT.Choferes WHERE chofer_id = @id)";
+                return "UPDATE PUSH_IT_TO_THE_LIMIT.Chofer SET chofer_dni = @DNI, chofer_nombre = @nombre, chofer_apellido = @apellido, chofer_mail = @mail, chofer_direccion = @direccion, chofer_telefono = @telefono, chofer_fecha_Nacimiento = @fechaDeNacimiento, chofer_activo = @activo, usuario_id = @usuario_id WHERE chofer_id =  @id" +
+                       " UPDATE PUSH_IT_TO_THE_LIMIT.Usuario SET usuario_intentos = 0  WHERE usuario_id =  (SELECT usuario_id FROM PUSH_IT_TO_THE_LIMIT.Chofer WHERE chofer_id = @id)";
             }
             else
             {
-                return "UPDATE PUSH_IT_TO_THE_LIMIT.Choferes SET chofer_dni = @DNI, chofer_nombre = @nombre, chofer_apellido = @apellido, chofer_mail = @mail, chofer_direccion = @direccion, chofer_telefono = @telefono, chofer_fechaDeNacimiento = @fechaDeNacimiento, chofer_activo = @activo, usuario_id = @usuario_id WHERE chofer_id = @id";
+                return "UPDATE PUSH_IT_TO_THE_LIMIT.Chofer SET chofer_dni = @DNI, chofer_nombre = @nombre, chofer_apellido = @apellido, chofer_mail = @mail, chofer_direccion = @direccion, chofer_telefono = @telefono, chofer_fecha_Nacimiento = @fechaDeNacimiento, chofer_activo = @activo, usuario_id = @usuario_id WHERE chofer_id = @id";
             }
 
         }
 
         public string GetQueryObtener()
         {
-            return "SELECT * FROM PUSH_IT_TO_THE_LIMIT.Choferes WHERE chofer_id = @id";
+            return "SELECT * FROM PUSH_IT_TO_THE_LIMIT.Chofer WHERE chofer_id = @id";
         }
 
         IList<System.Data.SqlClient.SqlParameter> Mapeable.GetParametros()
@@ -216,7 +216,7 @@ namespace UberFrba.Modelo
             return parametros;
         }
 
-        public void CargarInformacion(SqlDataReader reader)
+        void Mapeable.CargarInformacion(SqlDataReader reader)
         {
             this.DNI = Convert.ToInt32(reader["chofer_dni"]);
             this.nombre = Convert.ToString(reader["chofer_nombre"]);
@@ -224,9 +224,9 @@ namespace UberFrba.Modelo
             this.mail = Convert.ToString(reader["chofer_mail"]);
             this.direccion = Convert.ToString(reader["chofer_direccion"]);
             this.telefono = Convert.ToInt32(reader["chofer_telefono"]);
-            this.fechaDeNacimiento = Convert.ToDateTime(reader["chofer_fechaDeNacimiento"]);
-            this.activo = Convert.ToBoolean(reader["chofer_activo"]);
-            this.idUsuario = Convert.ToInt32(reader["chofer_id_usuario"]);
+            this.fechaDeNacimiento = Convert.ToDateTime(reader["chofer_fecha_Nacimiento"]);
+          //  this.activo = Convert.ToBoolean(reader["chofer_activo"]);
+            this.idUsuario = Convert.ToInt32(reader["usuario_id"]);
         }
 
         #endregion
