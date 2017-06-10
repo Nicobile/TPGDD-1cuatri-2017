@@ -20,10 +20,11 @@ namespace UberFrba.ABM_Chofer
         private int idUsuario = 0;
         private DBMapper mapper = new DBMapper();
 
-        public EditarChofer(String idChofer)
+        public EditarChofer(String idChofer,String idUsuarioChofer)
         {
             InitializeComponent();
             this.idChofer = Convert.ToInt32(idChofer);
+            this.idUsuario = Convert.ToInt32(idUsuarioChofer);
         }
 
         private void EditarChofer_Load(object sender, EventArgs e)
@@ -37,7 +38,7 @@ namespace UberFrba.ABM_Chofer
             Choferes chofer = mapper.ObtenerChofer(idChofer);
            
 
-            idUsuario = chofer.GetIdUsuario();
+           // idUsuario = chofer.GetIdUsuario();
 
 
             textBox_Nombre.Text = chofer.GetNombre();
@@ -46,6 +47,7 @@ namespace UberFrba.ABM_Chofer
             textBox_Apellido.Text = chofer.GetApellido();
             textBox_FechaDeNacimiento.Text = Convert.ToString(chofer.GetFechaDeNacimiento());
             textBox_Telefono.Text = chofer.GetTelefono();
+            textBox_Direccion.Text = Convert.ToString(chofer.GetDireccion());
             checkBox_Habilitado.Checked = Convert.ToBoolean(mapper.SelectFromWhere("usuario_habilitado", "Usuario", "usuario_id", chofer.GetIdUsuario()));
 
         }
@@ -63,7 +65,7 @@ namespace UberFrba.ABM_Chofer
             String telefono = textBox_Telefono.Text;
             Boolean activo = checkBox_Habilitado.Checked; //La variable activo que esta en el checkbox es para saber si esta habilitado a nivel usuario --> ESTO QUE HICO EL PIBE NO ME CABE NI UN POCO
             Boolean pudoModificar;
-
+            String Direccion = textBox_Direccion.Text;
     /*        // Update contacto
             Contacto contacto = new Contacto();
             try
@@ -100,7 +102,10 @@ namespace UberFrba.ABM_Chofer
                 chofer.SetApellido(Apellido);
                 chofer.SetFechaDeNacimiento(fechaDeNacimiento);
                 chofer.SetActivo(true);
-
+                chofer.SetMail(Mail);
+                chofer.SetDireccion(Direccion);
+                chofer.SetIdUsuario(idUsuario);
+                chofer.SetTelefono(telefono);
                 mapper.ActualizarEstadoUsuario(idUsuario, activo);
 
                 pudoModificar = mapper.Modificar(idChofer, chofer);

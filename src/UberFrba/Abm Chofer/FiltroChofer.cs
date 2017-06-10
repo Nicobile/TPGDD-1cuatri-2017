@@ -28,6 +28,7 @@ namespace UberFrba.ABM_Chofer
         private void OcultarColumnasQueNoDebenVerse()
         {
             dataGridView_Chofer.Columns["chofer_id"].Visible = false;
+            dataGridView_Chofer.Columns["usuario_id"].Visible = false;
         }
 
         private void CargarChoferes()
@@ -96,7 +97,8 @@ namespace UberFrba.ABM_Chofer
             if (e.ColumnIndex == dataGridView_Chofer.Columns["Modificar"].Index && e.RowIndex >= 0)
             {
                 String idChoferAModificar = dataGridView_Chofer.Rows[e.RowIndex].Cells["chofer_id"].Value.ToString();
-                new EditarChofer(idChoferAModificar).ShowDialog();
+                String idUsuarioChoferAModificar = dataGridView_Chofer.Rows[e.RowIndex].Cells["usuario_id"].Value.ToString();
+                new EditarChofer(idChoferAModificar,idUsuarioChoferAModificar).ShowDialog();
                 CargarChoferes();
                 return;
             }
