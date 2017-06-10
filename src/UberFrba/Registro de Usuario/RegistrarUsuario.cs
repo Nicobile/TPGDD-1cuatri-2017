@@ -107,7 +107,7 @@ namespace UberFrba.Registro_de_Usuario
 
                 String idUsuario = "SELECT TOP 1 usuario_id"
                                 + " FROM PUSH_IT_TO_THE_LIMIT.Usuario"
-                                + " ORDER BY usruario_id DESC";
+                                + " ORDER BY usuario_id DESC";
 
                 // Limpio parametros
                 parametros.Clear();

@@ -48,7 +48,6 @@ namespace UberFrba.Login
             String usuario = this.textBoxUsuario.Text;
             // valida contraseña encriptada
             String contraseña = HashSha256.getHash(this.textBoxContaseña.Text);
-
             IList<SqlParameter> parametros = new List<SqlParameter>();
             parametros.Add(new SqlParameter("@username", usuario));
             parametros.Add(new SqlParameter("@password", contraseña));
