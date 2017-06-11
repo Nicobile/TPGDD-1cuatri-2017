@@ -46,8 +46,8 @@ namespace UberFrba.ABM_Cliente
 
             //Me guardo el id contacto y usuario
             idUsuario = cliente.GetIdUsuario();
-            
 
+            cliente.SetNombre("BRIAN");
             textBox_Nombre.Text = cliente.GetNombre();
             textBox_Apellido.Text = cliente.GetApellido();
             textBox_DNI.Text = Convert.ToString(cliente.GetDNI());

@@ -175,12 +175,12 @@ namespace UberFrba.Modelo
             if (activo == true)
             {
 
-                return "UPDATE PUSH_IT_TO_THE_LIMIT.Cliente SET cliente_nombre = @Nombre, cliente_apellido = @Apellido, cliente_mail = @Mail, cliente_telefono = @Telefono, cliente_direccion = @Direccion, cliente_codigo_postal = @Codigo_Postal, ,cliente_dni = @DNI, cliente_fecha_nacimiento = @Fecha_Nacimiento, cliente_estado = @Activo WHERE cliente_id = @id " +
-                " PUSH_IT_TO_THE_LIMIT.Usuario SET usuario_intentos = 0 WHERE usuario_id = (SELECT c.usuario_id FROM PUSH_IT_TO_THE_LIMIT.Cliente c WHERE c.cliente_id = @id) ";
+                return "UPDATE PUSH_IT_TO_THE_LIMIT.Cliente SET cliente_nombre = @Nombre, cliente_apellido = @Apellido, cliente_mail = @Mail, cliente_telefono = @Telefono, cliente_direccion = @Direccion, cliente_codigo_postal = @Codigo_Postal,cliente_dni = @DNI, cliente_fecha_nacimiento = @Fecha_Nacimiento, cliente_estado = @Activo WHERE cliente_id = @id " +
+                " UPDATE PUSH_IT_TO_THE_LIMIT.Usuario SET usuario_intentos = 0 WHERE usuario_id = (SELECT c.usuario_id FROM PUSH_IT_TO_THE_LIMIT.Cliente c WHERE c.cliente_id = @id) ";
             }
             else
             {
-                return "UPDATE PUSH_IT_TO_THE_LIMIT.Cliente SET cliente_nombre = @Nombre, cliente_apellido = @Apellido, cliente_mail = @Mail, cliente_telefono = @Telefono, cliente_direccion = @Direccion, cliente_codigo_postal = @Codigo_Postal, ,cliente_dni = @DNI, cliente_fecha_nacimiento = @Fecha_Nacimiento, cliente_estado = @Activo WHERE cliente_id = @id";
+                return "UPDATE PUSH_IT_TO_THE_LIMIT.Cliente SET cliente_nombre = @Nombre, cliente_apellido = @Apellido, cliente_mail = @Mail, cliente_telefono = @Telefono, cliente_direccion = @Direccion, cliente_codigo_postal = @Codigo_Postal,cliente_dni = @DNI, cliente_fecha_nacimiento = @Fecha_Nacimiento, cliente_estado = @Activo WHERE cliente_id = @id";
             }
 
 
