@@ -36,8 +36,8 @@ namespace UberFrba.ABM_Chofer
         private void CargarDatos()
         {
             Choferes chofer = mapper.ObtenerChofer(idChofer);
-           
 
+           
            // idUsuario = chofer.GetIdUsuario();
 
 

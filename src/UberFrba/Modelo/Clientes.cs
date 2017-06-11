@@ -214,7 +214,18 @@ namespace UberFrba.Modelo
             this.mail = Convert.ToString(reader["cliente_mail"]);
             this.telefono = Convert.ToInt32(reader["cliente_telefono"]);
             this.direccion = Convert.ToString(reader["cliente_direccion"]);
-            this.codigoPostal = Convert.ToInt32(reader["cliente_codigo_postal"]);
+
+
+            try
+            {
+                this.codigoPostal = Convert.ToInt32(reader["cliente_codigo_postal"]);
+            }
+            catch (InvalidCastException) { 
+            
+            //Aca no hace nada , esta asi para que muestre el resto de los datos cuando el cp es nulo ,por que sino no muestra el resto en la 
+            //pantalla de editarCliente
+            
+            }
             this.fechaDeNacimiento = Convert.ToDateTime(reader["cliente_fecha_nacimiento"]);
             this.DNI = Convert.ToInt32(reader["cliente_dni"]);
             this.activo = Convert.ToBoolean(reader["cliente_estado"]);
