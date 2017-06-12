@@ -64,7 +64,6 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter_1);
             // 
             // textBox_ValorKilometro
             // 
@@ -164,6 +163,7 @@
             this.button_Cancelar.TabIndex = 7;
             this.button_Cancelar.Text = "Volver";
             this.button_Cancelar.UseVisualStyleBackColor = true;
+            this.button_Cancelar.Click += new System.EventHandler(this.button_Cancelar_Click_1);
             // 
             // button_Limpiar
             // 
@@ -173,6 +173,7 @@
             this.button_Limpiar.TabIndex = 8;
             this.button_Limpiar.Text = "Limpiar";
             this.button_Limpiar.UseVisualStyleBackColor = true;
+            this.button_Limpiar.Click += new System.EventHandler(this.button_Limpiar_Click_1);
             // 
             // button_Guardar
             // 
@@ -182,6 +183,7 @@
             this.button_Guardar.TabIndex = 9;
             this.button_Guardar.Text = "Guardar";
             this.button_Guardar.UseVisualStyleBackColor = true;
+            this.button_Guardar.Click += new System.EventHandler(this.button_Guardar_Click_1);
             // 
             // AgregarTurno
             // 

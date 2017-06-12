@@ -93,6 +93,9 @@ GO
 IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.pr_agregar_rol_a_usuario') IS NOT NULL
     DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_agregar_rol_a_usuario
 GO
+IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.pr_crear_usuario_con_valores') IS NOT NULL
+    DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_crear_usuario_con_valores
+GO
 
 
 
@@ -539,7 +542,7 @@ AFTER INSERT  AS
 								
 				BEGIN
 					rollback transaction;
-					throw 51000,'El turno ingresado se superpone con otro',1;
+					throw 51001,'El turno ingresado se superpone con otro',1;
 				END
 
 		IF(SELECT COUNT(*) FROM PUSH_IT_TO_THE_LIMIT.Turno T,inserted I 
@@ -550,7 +553,7 @@ AFTER INSERT  AS
 				BEGIN
 					rollback transaction;
 				
-					throw 51000,'El turno ingresado ya existe y esta Activo',1;
+					throw 51002,'El turno ingresado ya existe y esta Activo',1;
 				END
 
 		IF(SELECT COUNT(*) FROM PUSH_IT_TO_THE_LIMIT.Turno T,inserted I 
@@ -561,7 +564,7 @@ AFTER INSERT  AS
 				BEGIN
 					rollback transaction;
 				
-					throw 51000,'El turno ingresado ya existe y esta Deshabilitado ',1;
+					throw 51003,'El turno ingresado ya existe y esta Deshabilitado ',1;
 				END
 
 		IF EXISTS (SELECT turno_hora_inicio,turno_hora_fin  FROM inserted 
@@ -570,7 +573,7 @@ AFTER INSERT  AS
 							OR turno_hora_fin > 24)
 			BEGIN
 				rollback transaction;
-				throw 51000,'El horario ingresado es mayor a un dia o es invalido',1;
+				throw 51004,'El horario ingresado es mayor a un dia o es invalido',1;
 			END
 
 	END
@@ -623,8 +626,6 @@ GO
 
 /*
 pr_crear_usuario
-
-pr_crear_usuario_con_valores
 
 chofer_estado
 

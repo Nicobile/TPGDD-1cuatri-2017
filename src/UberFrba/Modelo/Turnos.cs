@@ -29,8 +29,9 @@ namespace UberFrba.Modelo
         
         public void SetHoraInicio(String hora){
             if (hora == "")
+            {
                 throw new CampoVacioException("Hora inicio");
-
+            }
            this.horaInicio = Convert.ToInt32(hora);
         }
 
@@ -133,7 +134,7 @@ namespace UberFrba.Modelo
         {
             IList<SqlParameter> parametros = new List<SqlParameter>();
             parametros.Clear();
-            parametros.Add(new SqlParameter("@hora_inico", this.horaInicio));
+            parametros.Add(new SqlParameter("@hora_inicio", this.horaInicio));
             parametros.Add(new SqlParameter("@hora_fin", this.horaFin));
             parametros.Add(new SqlParameter("@descripcion", this.descripcion));
             parametros.Add(new SqlParameter("@valor_km", this.valorKilometro));

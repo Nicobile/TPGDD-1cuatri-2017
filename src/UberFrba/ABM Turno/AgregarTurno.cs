@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using UberFrba.Modelo;
 using UberFrba.Exceptions;
 using UberFrba.DataProvider;
+using System.Data.SqlClient;
 
 namespace UberFrba.ABM_Turno
 {
@@ -22,16 +23,17 @@ namespace UberFrba.ABM_Turno
         private int idTurno;
         private int idUsuario;
 
-        public AgregarTurno(String username, String contrasena)
+        public AgregarTurno()
         {
             InitializeComponent();
-            this.username = username;
-            this.contrasena = contrasena;
-            this.idUsuario = 0;
+            //this.username = username;
+            //this.contrasena = contrasena;
+            //this.idUsuario = 0;
         }
 
-        private void button_Guardar_Click(object sender, EventArgs e)
+        private void button_Guardar_Click_1(object sender, EventArgs e)
         {
+                 
             // Guarda en variables todos los campos de entrada
             String HoraInicio = textBox_HoraInicio.Text;
             String HoraFin = textBox_HoraFin.Text;
@@ -65,6 +67,23 @@ namespace UberFrba.ABM_Turno
             {
                 MessageBox.Show("Los datos fueron mal ingresados en: " + exceptionFormato.Message);
                 return;
+            }
+            catch (SqlException error)
+            {
+
+                switch (error.Number)
+                {
+                    case 51000: MessageBox.Show("El turno ingresado se superpone con otro", "Turno Superpuesto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 51001: MessageBox.Show("El turno ingresado se superpone con otro", "Turno Superpuesto", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                        break;
+                    case 51002: MessageBox.Show("El turno ingresado ya existe y esta Activo", "Turno Existente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 51003: MessageBox.Show("El turno ingresado ya existe y esta Deshabilitado", "Turno Existente Deshabilitado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case 51004: MessageBox.Show("El horario ingresado es mayor a un dia o es invalido", "Turno Horario Invalido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                }
             }
     
 
@@ -123,7 +142,21 @@ namespace UberFrba.ABM_Turno
             comboBox_Direccion.SelectedIndex = -1;
         }
         */
-        private void button_Limpiar_Click(object sender, EventArgs e)
+               
+
+        private void VolverAlMenuPrincipal()
+        {
+            this.Hide();
+            new MenuPrincipal().ShowDialog();
+            this.Close();
+        }
+
+        private void button_Cancelar_Click_1(object sender, EventArgs e)
+        {
+            VolverAlMenuPrincipal();
+        }
+
+        private void button_Limpiar_Click_1(object sender, EventArgs e)
         {
             textBox_HoraInicio.Text = "";
             textBox_HoraFin.Text = "";
@@ -134,29 +167,7 @@ namespace UberFrba.ABM_Turno
 
         }
 
-        private void button_Cancelar_Click(object sender, EventArgs e)
-        {
-
-                VolverAlMenuPrincipal();
-
-        }
-
-        private void VolverAlMenuPrincipal()
-        {
-            this.Hide();
-            new MenuPrincipal().ShowDialog();
-            this.Close();
-        }
 
     
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter_1(object sender, EventArgs e)
-        {
-
-        }
     }
 }
