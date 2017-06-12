@@ -135,6 +135,12 @@
     <Compile Include="ABM Turno\AgregarTurno.Designer.cs">
       <DependentUpon>AgregarTurno.cs</DependentUpon>
     </Compile>
+    <Compile Include="ABM Turno\MenuTurno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM Turno\MenuTurno.Designer.cs">
+      <DependentUpon>MenuTurno.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataProvider\ConnectionManager.cs" />
     <Compile Include="DataProvider\DBMapper.cs" />
     <Compile Include="DataProvider\QueryBuilder.cs" />
@@ -250,6 +256,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Turno\AgregarTurno.resx">
       <DependentUpon>AgregarTurno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM Turno\MenuTurno.resx">
+      <DependentUpon>MenuTurno.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\ElegirRol.resx">
       <DependentUpon>ElegirRol.cs</DependentUpon>

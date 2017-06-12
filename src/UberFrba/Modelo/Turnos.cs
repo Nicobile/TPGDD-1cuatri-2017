@@ -68,7 +68,9 @@ namespace UberFrba.Modelo
         public void SetValorKilometro(String value)
         {
             if (value == "")
+            {
                 throw new CampoVacioException("Valor del Kilometro");
+            }
             if (!esDouble(value))
             {
                 throw new FormatoInvalidoException("Valor del Kilometro. Ingrese todos los numeros seguidos.");
