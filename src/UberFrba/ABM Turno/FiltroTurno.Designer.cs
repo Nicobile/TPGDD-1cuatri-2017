@@ -107,7 +107,7 @@
             this.dataGridView_Turno.ReadOnly = true;
             this.dataGridView_Turno.Size = new System.Drawing.Size(943, 177);
             this.dataGridView_Turno.TabIndex = 7;
-            this.dataGridView_Turno.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Turno_CellContentClick);
+            this.dataGridView_Turno.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Turno_CellClick);
             // 
             // FiltroTurno
             // 

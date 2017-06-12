@@ -165,7 +165,7 @@ namespace UberFrba.ABM_Chofer
 
         private void monthCalendar_FechaDeCreacion_DateSelected(object sender, System.Windows.Forms.DateRangeEventArgs e)
         {
-            textBox_FechaDeNacimiento.Text = e.Start.ToShortDateString();
+              textBox_FechaDeNacimiento.Text = e.Start.ToShortDateString();
             monthCalendar_FechaDeCreacion.Visible = false;
         }
     }

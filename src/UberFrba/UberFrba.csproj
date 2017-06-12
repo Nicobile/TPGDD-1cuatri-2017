@@ -135,6 +135,12 @@
     <Compile Include="ABM Turno\AgregarTurno.Designer.cs">
       <DependentUpon>AgregarTurno.cs</DependentUpon>
     </Compile>
+    <Compile Include="ABM Turno\EditarTurno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM Turno\EditarTurno.Designer.cs">
+      <DependentUpon>EditarTurno.cs</DependentUpon>
+    </Compile>
     <Compile Include="ABM Turno\FiltroTurno.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -262,6 +268,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Turno\AgregarTurno.resx">
       <DependentUpon>AgregarTurno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM Turno\EditarTurno.resx">
+      <DependentUpon>EditarTurno.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Turno\FiltroTurno.resx">
       <DependentUpon>FiltroTurno.cs</DependentUpon>

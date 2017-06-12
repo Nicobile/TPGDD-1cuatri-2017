@@ -81,33 +81,30 @@ namespace UberFrba.ABM_Turno
             this.Close();
         }
 
-        private void dataGridView_Turno_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView_Turno_CellClick(object sender, DataGridViewCellEventArgs e)
         {
 
-        }
-
-        private void dataGridView_Chofer_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
             // Controla que la celda que se clickeo fue la de modificar
             if (e.ColumnIndex == dataGridView_Turno.Columns["Modificar"].Index && e.RowIndex >= 0)
             {
-                //String idChoferAModificar = dataGridView_Chofer.Rows[e.RowIndex].Cells["chofer_id"].Value.ToString();
-                //String idUsuarioChoferAModificar = dataGridView_Chofer.Rows[e.RowIndex].Cells["usuario_id"].Value.ToString();
-                //new EditarChofer(idChoferAModificar, idUsuarioChoferAModificar).ShowDialog();
-                //CargarChoferes();
-                //return;
+                String idTurnoAModificar = dataGridView_Turno.Rows[e.RowIndex].Cells["Turno N°"].Value.ToString();
+                new EditarTurno(idTurnoAModificar).ShowDialog();
+                CargarTurnos();
+                return;
             }
             if (e.ColumnIndex == dataGridView_Turno.Columns["Eliminar"].Index && e.RowIndex >= 0)
             {
-                //String idChoferAEliminar = dataGridView_Chofer.Rows[e.RowIndex].Cells["chofer_id"].Value.ToString();
-                //Boolean resultado = mapper.EliminarChofer(Convert.ToInt32(idChoferAEliminar), "Chofer");
-                //dataGridView_Chofer.Rows[e.RowIndex].Cells["Habilitado"].Value = false;
-                //if (resultado) MessageBox.Show("Se elimino correctamente");
-                //CargarChoferes();
-                //return;
+                String idTurnoAEliminar = dataGridView_Turno.Rows[e.RowIndex].Cells["Turno N°"].Value.ToString();
+                Boolean resultado = mapper.EliminarTurno(Convert.ToInt32(idTurnoAEliminar), "Turno");
+                dataGridView_Turno.Rows[e.RowIndex].Cells["Habilitado"].Value = false;
+                if (resultado) MessageBox.Show("Se elimino correctamente");
+                CargarTurnos();
+                return;
             }
+
         }
 
+        
 
 
     }

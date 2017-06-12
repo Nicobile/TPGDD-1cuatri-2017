@@ -133,7 +133,7 @@ namespace UberFrba.Modelo
 
         string Mapeable.GetQueryObtener()
         {
-            return "SELECT * FROM PUSH_IT_TO_THE_LIMIT.Cliente WHERE turno_id = @id";
+            return "SELECT * FROM PUSH_IT_TO_THE_LIMIT.Turno WHERE turno_id = @id";
         }
 
         IList<System.Data.SqlClient.SqlParameter> Mapeable.GetParametros()
