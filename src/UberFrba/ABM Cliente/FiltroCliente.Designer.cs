@@ -146,7 +146,7 @@ namespace UberFrba.ABM_Cliente
             this.dataGridView_Cliente.Location = new System.Drawing.Point(12, 155);
             this.dataGridView_Cliente.Name = "dataGridView_Cliente";
             this.dataGridView_Cliente.RowTemplate.ReadOnly = true;
-            this.dataGridView_Cliente.Size = new System.Drawing.Size(1068, 199);
+            this.dataGridView_Cliente.Size = new System.Drawing.Size(1258, 212);
             this.dataGridView_Cliente.TabIndex = 4;
             this.dataGridView_Cliente.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Cliente_CellClick);
             // 
@@ -154,7 +154,7 @@ namespace UberFrba.ABM_Cliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1092, 366);
+            this.ClientSize = new System.Drawing.Size(1282, 400);
             this.Controls.Add(this.dataGridView_Cliente);
             this.Controls.Add(this.button_Cancelar);
             this.Controls.Add(this.button_Limpiar);

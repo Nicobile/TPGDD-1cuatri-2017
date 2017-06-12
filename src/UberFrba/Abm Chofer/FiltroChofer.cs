@@ -57,6 +57,7 @@ namespace UberFrba.ABM_Chofer
             DataGridViewButtonColumn botonColumnaEliminar = new DataGridViewButtonColumn();
             botonColumnaEliminar.Text = "Eliminar";
             botonColumnaEliminar.Name = "Eliminar";
+            //dataGridView_Chofer.Columns["Habilitado"].;
             botonColumnaEliminar.UseColumnTextForButtonValue = true;
             dataGridView_Chofer.Columns.Add(botonColumnaEliminar);
         }
@@ -106,6 +107,7 @@ namespace UberFrba.ABM_Chofer
             {
                 String idChoferAEliminar = dataGridView_Chofer.Rows[e.RowIndex].Cells["chofer_id"].Value.ToString();
                 Boolean resultado = mapper.EliminarChofer(Convert.ToInt32(idChoferAEliminar), "Chofer");
+                dataGridView_Chofer.Rows[e.RowIndex].Cells["Habilitado"].Value=false;
                 if (resultado) MessageBox.Show("Se elimino correctamente");
                 CargarChoferes();
                 return;

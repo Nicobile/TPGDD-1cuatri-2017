@@ -112,7 +112,9 @@ namespace UberFrba.ABM_Cliente
             {
                 String idClienteAEliminar = dataGridView_Cliente.Rows[e.RowIndex].Cells["cliente_id"].Value.ToString();
                 Boolean resultado = mapper.EliminarCliente(Convert.ToInt32(idClienteAEliminar), "Cliente");
+                dataGridView_Cliente.Rows[e.RowIndex].Cells["Habilitado"].Value = false;
                 if (resultado) MessageBox.Show("Se elimino correctamente");
+
                 CargarClientes();
                 return;
             }

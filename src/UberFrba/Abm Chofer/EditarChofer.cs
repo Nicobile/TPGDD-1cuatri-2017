@@ -101,12 +101,14 @@ namespace UberFrba.ABM_Chofer
                 chofer.SetDNI(DNI);
                 chofer.SetApellido(Apellido);
                 chofer.SetFechaDeNacimiento(fechaDeNacimiento);
-                chofer.SetActivo(true);
+                chofer.SetActivo(activo);
                 chofer.SetMail(Mail);
                 chofer.SetDireccion(Direccion);
                 chofer.SetIdUsuario(idUsuario);
                 chofer.SetTelefono(telefono);
-                mapper.ActualizarEstadoUsuario(idUsuario, activo);
+                mapper.ActualizarEstadoUsuario(idChofer, activo);
+                MessageBox.Show(Convert.ToString(idChofer));
+                MessageBox.Show(Convert.ToString(activo));
 
                 pudoModificar = mapper.Modificar(idChofer, chofer);
                 if (pudoModificar) MessageBox.Show("Chofer modificado correctamente");

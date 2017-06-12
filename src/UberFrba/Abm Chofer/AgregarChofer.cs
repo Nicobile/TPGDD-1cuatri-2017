@@ -80,6 +80,7 @@ namespace UberFrba.ABM_Chofer
             */
 
             // Crea Chofer
+
             try
             {
                 Choferes chofer = new Choferes();
@@ -90,9 +91,12 @@ namespace UberFrba.ABM_Chofer
                 chofer.SetDireccion(Direccion);
                 chofer.SetTelefono(Telefono);
                 chofer.SetMail(Mail);
+                chofer.SetActivo(true);
                 chofer.SetFechaDeNacimiento(fechaDeNacimiento);
-
+                idUsuario = mapper.CrearUsuarioConValores(DNI, DNI);
+                chofer.SetIdUsuario(idUsuario);
                 idChofer = mapper.CrearChofer(chofer);
+
                 if (idChofer > 0) MessageBox.Show("Chofer agregado correctamente");
             }
             catch (CampoVacioException exceptionCampoVacio)
@@ -110,8 +114,18 @@ namespace UberFrba.ABM_Chofer
                 MessageBox.Show("Telefono ya existe");
                 return;
             }
+            catch (SqlException error)
+            {
+                //MessageBox.Show("Usuario ya existente");
+                switch (error.Number)
+                {
+                    case 2627: MessageBox.Show("El DNI ya se encuentra registrado", "DNI Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Error); //Violacion de restriccion UNIQUE 
+                        break;
+                    case 8114: MessageBox.Show("Error de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); break; //ERROR de conversion de datos
+                }
+            }
 
-          /*Excepciones no creadas, hay que verlo tambien, realmente quiero estar muerto*/
+         /*Excepciones no creadas, hay que verlo tambien, realmente quiero estar muerto*/
 
           /*  catch (CuitYaExisteException exceptionCuit)
             {
@@ -130,14 +144,18 @@ namespace UberFrba.ABM_Chofer
             }
 
             // Si al chofer lo crea el admin, crea un nuevo usuario predeterminado.
-            if (idUsuario == 0)
-            {
-                idUsuario = CrearUsuario();
-                Boolean resultado = mapper.AsignarUsuarioAChofer(idChofer, idUsuario);
-                if (resultado) MessageBox.Show("El usuario fue creado correctamente");
-            }
+            //if (idUsuario == 0)
+            //{
+            //    idUsuario = CrearUsuario();
+            //    Boolean resultado = mapper.AsignarUsuarioAChofer(idChofer, idUsuario);
+            //    if (resultado) MessageBox.Show("El usuario fue creado correctamente");
+            //}
 
-            mapper.AsignarRolAUsuario(this.idUsuario, "Chofer");
+            if (idUsuario != 0)
+            {
+                mapper.AsignarRolAUsuario(this.idUsuario, "Chofer");
+
+            }
 
             VolverAlMenuPrincipal();
         }

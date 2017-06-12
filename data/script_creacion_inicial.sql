@@ -714,3 +714,18 @@ BEGIN
         (@rol_id, @usuario_id)
 END
 GO
+
+--Procedure para agregar un usuario con valores
+CREATE PROCEDURE  PUSH_IT_TO_THE_LIMIT.pr_crear_usuario_con_valores
+    @username nvarchar(50),
+    @password nvarchar(150),
+    @usuario_id INT OUTPUT
+AS
+BEGIN
+    INSERT INTO  PUSH_IT_TO_THE_LIMIT.Usuario
+        (usuario_name, usuario_password) 
+    VALUES 
+        (@username, @password)
+    SET @usuario_id = SCOPE_IDENTITY(); 
+END
+GO

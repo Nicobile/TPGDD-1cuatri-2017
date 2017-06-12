@@ -30,7 +30,7 @@ namespace UberFrba.ABM_Rol
         {
             this.dataGridViewResultadosBusqueda = new System.Windows.Forms.DataGridView();
             this.comboBoxEstadoRoles = new System.Windows.Forms.ComboBox();
-            this.labelEstadoRoles = new System.Windows.Forms.Label();
+            this.labelNombreDelRol = new System.Windows.Forms.Label();
             this.botonCancelar = new System.Windows.Forms.Button();
             this.botonBuscar = new System.Windows.Forms.Button();
             this.botonVolver = new System.Windows.Forms.Button();
@@ -57,14 +57,14 @@ namespace UberFrba.ABM_Rol
             this.comboBoxEstadoRoles.TabIndex = 1;
             this.comboBoxEstadoRoles.SelectedIndexChanged += new System.EventHandler(this.comboBoxEstadoRoles_SelectedIndexChanged);
             // 
-            // labelEstadoRoles
+            // labelNombreDelRol
             // 
-            this.labelEstadoRoles.AutoSize = true;
-            this.labelEstadoRoles.Location = new System.Drawing.Point(22, 21);
-            this.labelEstadoRoles.Name = "labelEstadoRoles";
-            this.labelEstadoRoles.Size = new System.Drawing.Size(101, 13);
-            this.labelEstadoRoles.TabIndex = 2;
-            this.labelEstadoRoles.Text = "Estado de los Roles";
+            this.labelNombreDelRol.AutoSize = true;
+            this.labelNombreDelRol.Location = new System.Drawing.Point(22, 21);
+            this.labelNombreDelRol.Name = "labelNombreDelRol";
+            this.labelNombreDelRol.Size = new System.Drawing.Size(80, 13);
+            this.labelNombreDelRol.TabIndex = 2;
+            this.labelNombreDelRol.Text = "Nombre del Rol";
             // 
             // botonCancelar
             // 
@@ -105,7 +105,7 @@ namespace UberFrba.ABM_Rol
             this.Controls.Add(this.botonVolver);
             this.Controls.Add(this.botonBuscar);
             this.Controls.Add(this.botonCancelar);
-            this.Controls.Add(this.labelEstadoRoles);
+            this.Controls.Add(this.labelNombreDelRol);
             this.Controls.Add(this.comboBoxEstadoRoles);
             this.Controls.Add(this.dataGridViewResultadosBusqueda);
             this.Name = "ListadoEditarRol";
@@ -121,7 +121,7 @@ namespace UberFrba.ABM_Rol
 
         private System.Windows.Forms.DataGridView dataGridViewResultadosBusqueda;
         private System.Windows.Forms.ComboBox comboBoxEstadoRoles;
-        private System.Windows.Forms.Label labelEstadoRoles;
+        private System.Windows.Forms.Label labelNombreDelRol;
         private System.Windows.Forms.Button botonCancelar;
         private System.Windows.Forms.Button botonBuscar;
         private System.Windows.Forms.Button botonVolver;

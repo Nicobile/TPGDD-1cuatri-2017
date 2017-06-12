@@ -46,6 +46,7 @@ namespace UberFrba
             parametros.Clear();
             parametros = objeto.GetParametros();
             parametros.Add(new SqlParameter("@id", id));
+            
             int filasAfectadas = QueryBuilder.Instance.build(query, parametros).ExecuteNonQuery();
             if (filasAfectadas == 1) return true;
             if (filasAfectadas == 2) return true;
@@ -89,15 +90,17 @@ namespace UberFrba
 
         public int CrearUsuario()
         {
-            query = "PUSH_IT_TO_THE_LIMIT.pr_crear_usuario";
-            parametros.Clear();
-            parametroOutput = new SqlParameter("@usuario_id", SqlDbType.Int);
-            parametroOutput.Direction = ParameterDirection.Output;
-            parametros.Add(parametroOutput);
-            command = QueryBuilder.Instance.build(query, parametros);
-            command.CommandType = CommandType.StoredProcedure;
-            command.ExecuteNonQuery();
-            return (int)parametroOutput.Value;
+            
+                query = "PUSH_IT_TO_THE_LIMIT.pr_crear_usuario";
+                parametros.Clear();
+                parametroOutput = new SqlParameter("@usuario_id", SqlDbType.Int);
+                parametroOutput.Direction = ParameterDirection.Output;
+                parametros.Add(parametroOutput);
+                command = QueryBuilder.Instance.build(query, parametros);
+                command.CommandType = CommandType.StoredProcedure;
+                command.ExecuteNonQuery();
+                return (int)parametroOutput.Value;
+           
         }
 
         public int CrearUsuarioConValores(String username, String password)
@@ -108,7 +111,6 @@ namespace UberFrba
             parametroOutput.Direction = ParameterDirection.Output;
             parametros.Add(new SqlParameter("@username", username));
             parametros.Add(new SqlParameter("@password", HashSha256.getHash(password)));
-            parametros.Add(new SqlParameter("@is_admin", "0"));
             parametros.Add(parametroOutput);
             command = QueryBuilder.Instance.build(query, parametros);
             command.CommandType = CommandType.StoredProcedure;
@@ -248,13 +250,18 @@ namespace UberFrba
 
         public Boolean ActualizarEstadoUsuario(Decimal id, bool activo)
         {
-            if (activo)
-                query = "UPDATE PUSH_IT_TO_THE_LIMIT.Usuario SET usuario_habilitado = 1 WHERE usuario_id = @id";
-            else
-                query = "UPDATE PUSH_IT_TO_THE_LIMIT.Usuario SET usuario_habilitado = 0 WHERE usuario_id = @id";
             parametros.Clear();
             parametros.Add(new SqlParameter("@id", id));
+            if (activo)
+            {
+                query = "UPDATE PUSH_IT_TO_THE_LIMIT.Chofer SET chofer_estado = 1 WHERE chofer_id = @id";
+            }
+            else
+            {
+                query = "UPDATE PUSH_IT_TO_THE_LIMIT.Chofer SET chofer_estado = 0 WHERE chofer_id = 8";
+            }
             int filasAfectadas = QueryBuilder.Instance.build(query, parametros).ExecuteNonQuery();
+                
             if (filasAfectadas == 1) return true;
             return false;
         }
@@ -381,9 +388,9 @@ namespace UberFrba
         public DataTable SelectClientesParaFiltroConFiltro(String filtro)
         {
 
-            return this.SelectDataTable("cli.cliente_id, usr.usuario_name Username, cli.cliente_nombre Nombre, cli.cliente_apellido Apellido, cli.cliente_dni Documento, cli.cliente_fecha_nacimiento 'Fecha de Nacimiento', usr.usuario_habilitado 'Habilitado', cli.cliente_mail Mail, cli.cliente_telefono Telefono, cli.cliente_direccion Direccion,  cli.cliente_codigo_postal 'Codigo Postal' "
+            return this.SelectDataTable("cli.cliente_id, usr.usuario_name Username, cli.cliente_nombre Nombre, cli.cliente_apellido Apellido, cli.cliente_dni Documento, cli.cliente_fecha_nacimiento 'Fecha de Nacimiento', cli.cliente_mail Mail, cli.cliente_telefono Telefono, cli.cliente_direccion Direccion,  cli.cliente_codigo_postal 'Codigo Postal', cli.cliente_estado 'Habilitado' "
                 , "PUSH_IT_TO_THE_LIMIT.Cliente cli, PUSH_IT_TO_THE_LIMIT.Usuario usr"
-                , "cli.usuario_id = usr.usuario_id  AND cli.cliente_estado= 1 " + filtro);
+                , "cli.usuario_id = usr.usuario_id  " + filtro);
         }
 
         /** Choferes **/
@@ -395,9 +402,9 @@ namespace UberFrba
 
         public DataTable SelectChoferesParaFiltroConFiltro(String filtro)
         {
-            return this.SelectDataTable("c.chofer_id,c.usuario_id , usr.usuario_name Username, c.chofer_nombre 'Nombre', c.chofer_dni 'DNI', c.chofer_apellido 'Apellido', c.chofer_direccion 'Direccion', c.chofer_telefono 'Telefono',c.chofer_mail 'Mail',c.chofer_fecha_Nacimiento 'Fecha Nacimiento', usr.usuario_habilitado 'Habilitado' "
+            return this.SelectDataTable("c.chofer_id,c.usuario_id , usr.usuario_name Username, c.chofer_nombre 'Nombre', c.chofer_dni 'DNI', c.chofer_apellido 'Apellido', c.chofer_direccion 'Direccion', c.chofer_telefono 'Telefono',c.chofer_mail 'Mail',c.chofer_fecha_Nacimiento 'Fecha Nacimiento', c.chofer_estado 'Habilitado' "
               , "PUSH_IT_TO_THE_LIMIT.Chofer c, PUSH_IT_TO_THE_LIMIT.Usuario usr"
-              , "c.usuario_id = usr.usuario_id AND  c.chofer_estado= 1 " + filtro);
+              , "c.usuario_id = usr.usuario_id " + filtro);
         }
 
         /** Turnos **/

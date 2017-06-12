@@ -204,6 +204,7 @@ namespace UberFrba.Modelo
             parametros.Add(new SqlParameter("@Fecha_Nacimiento", this.fechaDeNacimiento));
             parametros.Add(new SqlParameter("@DNI", this.DNI));
             parametros.Add(new SqlParameter("@Activo", this.activo));
+            parametros.Add(new SqlParameter("@User_id", this.idUsuario));
             return parametros;
         }
 
@@ -214,8 +215,6 @@ namespace UberFrba.Modelo
             this.mail = Convert.ToString(reader["cliente_mail"]);
             this.telefono = Convert.ToInt32(reader["cliente_telefono"]);
             this.direccion = Convert.ToString(reader["cliente_direccion"]);
-
-
             try
             {
                 this.codigoPostal = Convert.ToInt32(reader["cliente_codigo_postal"]);

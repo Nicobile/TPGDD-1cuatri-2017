@@ -83,8 +83,9 @@ namespace UberFrba.ABM_Cliente
                 cliente.SetDireccion(direccion);
                 cliente.SetCodigoPostal(codigoPostal);
                 cliente.SetIdUsuario(idUsuario);
-                cliente.SetActivo(true); 
-
+                cliente.SetActivo(true);
+                idUsuario = mapper.CrearUsuarioConValores(numeroDeDocumento, numeroDeDocumento);
+                cliente.SetIdUsuario(idUsuario);
                 idCliente = mapper.CrearCliente(cliente);
                 if (idCliente > 0) MessageBox.Show("Se agrego el cliente correctamente");
             }
@@ -113,6 +114,17 @@ namespace UberFrba.ABM_Cliente
                 MessageBox.Show("Fecha no valida");
                 return;
             }
+            catch (SqlException error)
+            {
+                //MessageBox.Show("Usuario ya existente");
+                switch (error.Number)
+                {
+                    case 2627: MessageBox.Show("El DNI ya se encuentra registrado", "DNI Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Error); //Violacion de restriccion UNIQUE 
+                        break;
+                    case 8114: MessageBox.Show("Error de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); break; //ERROR de conversion de datos
+                }
+            }
+
 
             // Si el cliente lo crea el admin, crea un nuevo usuario predeterminado. Si lo crea un nuevo registro de usuario, usa el que viene por parametro
             if (idUsuario == 0)
@@ -122,7 +134,14 @@ namespace UberFrba.ABM_Cliente
                 if (seCreoBien) MessageBox.Show("Se creo el usuario correctamente");
             }
 
-            mapper.AsignarRolAUsuario(this.idUsuario, "Cliente");
+     
+
+
+            if (idUsuario != 0)
+            {
+                mapper.AsignarRolAUsuario(this.idUsuario, "Cliente");
+
+            }
 
             VolverAlMenuPrincipal();
         }

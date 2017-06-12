@@ -76,7 +76,13 @@ namespace UberFrba.Modelo
             return this.admin;
         }
 
+
+        //string Mapeable.GetQueryCrear()
+        //{
+        //    return "PUSH_IT_TO_THE_LIMIT.pr_crear_usuario_con_valores";
+        //}
+
     }
 }
 
- // Habra que hacerles las querys como a Chofer y Cliente?
+ // Habra que hacerles las querys como a Chofer y Cliente? NOOOOO

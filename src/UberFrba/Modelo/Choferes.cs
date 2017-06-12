@@ -207,9 +207,9 @@ namespace UberFrba.Modelo
             parametros.Add(new SqlParameter("@mail", this.mail));
             parametros.Add(new SqlParameter("@telefono", this.telefono));
             parametros.Add(new SqlParameter("@direccion", this.direccion));
-            parametros.Add(new SqlParameter("@fechaDeNacimiento", this.fechaDeNacimiento));
-            parametros.Add(new SqlParameter("@usuario_id",this.idUsuario));
-            parametros.Add(new SqlParameter("@activo", true));
+            parametros.Add(new SqlParameter("@Fecha_Nacimiento", this.fechaDeNacimiento));
+            parametros.Add(new SqlParameter("@User_id",this.idUsuario));
+            parametros.Add(new SqlParameter("@activo", this.activo));
             // faltara el usuario_id como parametro? LISTO
 
 
