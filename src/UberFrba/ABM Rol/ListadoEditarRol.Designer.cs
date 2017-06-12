@@ -29,11 +29,11 @@ namespace UberFrba.ABM_Rol
         private void InitializeComponent()
         {
             this.dataGridViewResultadosBusqueda = new System.Windows.Forms.DataGridView();
-            this.comboBoxEstadoRoles = new System.Windows.Forms.ComboBox();
             this.labelNombreDelRol = new System.Windows.Forms.Label();
             this.botonCancelar = new System.Windows.Forms.Button();
             this.botonBuscar = new System.Windows.Forms.Button();
             this.botonVolver = new System.Windows.Forms.Button();
+            this.textBox_NombreRol = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResultadosBusqueda)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,15 +47,6 @@ namespace UberFrba.ABM_Rol
             this.dataGridViewResultadosBusqueda.ReadOnly = true;
             this.dataGridViewResultadosBusqueda.Size = new System.Drawing.Size(394, 235);
             this.dataGridViewResultadosBusqueda.TabIndex = 0;
-            // 
-            // comboBoxEstadoRoles
-            // 
-            this.comboBoxEstadoRoles.FormattingEnabled = true;
-            this.comboBoxEstadoRoles.Location = new System.Drawing.Point(143, 21);
-            this.comboBoxEstadoRoles.Name = "comboBoxEstadoRoles";
-            this.comboBoxEstadoRoles.Size = new System.Drawing.Size(142, 21);
-            this.comboBoxEstadoRoles.TabIndex = 1;
-            this.comboBoxEstadoRoles.SelectedIndexChanged += new System.EventHandler(this.comboBoxEstadoRoles_SelectedIndexChanged);
             // 
             // labelNombreDelRol
             // 
@@ -97,16 +88,23 @@ namespace UberFrba.ABM_Rol
             this.botonVolver.UseVisualStyleBackColor = true;
             this.botonVolver.Click += new System.EventHandler(this.botonVolver_Click);
             // 
+            // textBox_NombreRol
+            // 
+            this.textBox_NombreRol.Location = new System.Drawing.Point(108, 18);
+            this.textBox_NombreRol.Name = "textBox_NombreRol";
+            this.textBox_NombreRol.Size = new System.Drawing.Size(285, 20);
+            this.textBox_NombreRol.TabIndex = 6;
+            // 
             // ListadoEditarRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(406, 348);
+            this.Controls.Add(this.textBox_NombreRol);
             this.Controls.Add(this.botonVolver);
             this.Controls.Add(this.botonBuscar);
             this.Controls.Add(this.botonCancelar);
             this.Controls.Add(this.labelNombreDelRol);
-            this.Controls.Add(this.comboBoxEstadoRoles);
             this.Controls.Add(this.dataGridViewResultadosBusqueda);
             this.Name = "ListadoEditarRol";
             this.Text = "ListadoEditarRol";
@@ -120,10 +118,10 @@ namespace UberFrba.ABM_Rol
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridViewResultadosBusqueda;
-        private System.Windows.Forms.ComboBox comboBoxEstadoRoles;
         private System.Windows.Forms.Label labelNombreDelRol;
         private System.Windows.Forms.Button botonCancelar;
         private System.Windows.Forms.Button botonBuscar;
         private System.Windows.Forms.Button botonVolver;
+        private System.Windows.Forms.TextBox textBox_NombreRol;
     }
 }

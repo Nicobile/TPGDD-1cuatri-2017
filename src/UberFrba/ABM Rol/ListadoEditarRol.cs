@@ -21,12 +21,12 @@ namespace UberFrba.ABM_Rol
         public ListadoEditarRol()
         {
             InitializeComponent();
+            CargarRoles();
         }
 
         private void ListadoEditarRol_Load(object sender, EventArgs e)
         {
-            comboBoxEstadoRoles.Items.Add("Habilitado");
-            comboBoxEstadoRoles.Items.Add("Deshabilitado");         
+             
         }
 
         private void comboBoxEstadoRoles_SelectedIndexChanged(object sender, EventArgs e)
@@ -34,16 +34,16 @@ namespace UberFrba.ABM_Rol
             
         }
 
-        private void CargarRoles(int estadoRol)
+        private void CargarRoles()
         {
             DataSet roles = new DataSet();
             SqlDataAdapter adapter = new SqlDataAdapter();
             parametros = new List<SqlParameter>();            
             
             parametros.Clear();
-            parametros.Add(new SqlParameter("@activo", estadoRol));
+           
 
-            command = QueryBuilder.Instance.build("SELECT * FROM PUSH_IT_TO_THE_LIMIT.Rol WHERE rol_estado = @activo", parametros);
+            command = QueryBuilder.Instance.build("SELECT rol_id 'ID' , rol_nombre 'Nombre Rol', rol_estado 'Habilitado' FROM PUSH_IT_TO_THE_LIMIT.Rol", parametros);
             adapter.SelectCommand = command;
             adapter.Fill(roles);
             dataGridViewResultadosBusqueda.DataSource = roles.Tables[0].DefaultView;
@@ -52,24 +52,38 @@ namespace UberFrba.ABM_Rol
 
         private void botonBuscar_Click(object sender, EventArgs e)
         {
-            if (this.comboBoxEstadoRoles.Text == "")
+            if (textBox_NombreRol.Text != "")
             {
-                MessageBox.Show("Seleccione un estado de rol");
+                DataSet roles = new DataSet();
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                parametros = new List<SqlParameter>();
+                parametros.Clear();
+                parametros.Add(new SqlParameter("@nombre_Rol", textBox_NombreRol.Text));
+                command = QueryBuilder.Instance.build("SELECT rol_id 'ID' , rol_nombre 'Nombre Rol', rol_estado 'Habilitado' FROM PUSH_IT_TO_THE_LIMIT.Rol WHERE rol_nombre=@nombre_rol ", parametros);
+                adapter.SelectCommand = command;
+                adapter.Fill(roles);
+                dataGridViewResultadosBusqueda.DataSource = roles.Tables[0].DefaultView;
+                AgregarBotonEditar();
             }
-            else
-            {
-                if (this.comboBoxEstadoRoles.Text == "Habilitado")
-                {
-                    CargarRoles(1);
-                }
-                else
-                { 
-                    CargarRoles(0);
-                }
-            }
+            else {
+
+                CargarRoles();
             
+            }
+
+
+
+
+
+
+
+
+
+
+
         }
 
+        
         private void AgregarBotonEditar()
         {
             if (dataGridViewResultadosBusqueda.Columns.Contains("Editar"))
@@ -96,7 +110,7 @@ namespace UberFrba.ABM_Rol
 
             if (e.ColumnIndex == dataGridViewResultadosBusqueda.Columns["Editar"].Index)
             {
-                String nombreRolAEditar = dataGridViewResultadosBusqueda.Rows[e.RowIndex].Cells["rol_nombre"].Value.ToString();
+                String nombreRolAEditar = dataGridViewResultadosBusqueda.Rows[e.RowIndex].Cells["Nombre Rol"].Value.ToString();
                 this.Hide();
                 new EditarRol(nombreRolAEditar).ShowDialog();
             }
