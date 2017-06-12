@@ -38,7 +38,9 @@ namespace UberFrba.ABM_Turno
 
         private void botonEditarTurno_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            new FiltroTurno().ShowDialog();
+            this.Close();
         }
     }
 }

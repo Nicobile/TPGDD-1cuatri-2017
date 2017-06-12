@@ -416,9 +416,9 @@ namespace UberFrba
 
         public DataTable SelectTurnosParaFiltroConFiltro(String filtro)
         {
-            return this.SelectDataTable("c.chofer_id, usr.usuario_name Username, c.chofer_nombre 'Nombre', c.chofer_dni 'DNI', c.chofer_apellido 'Apellido', c.chofer_direccion 'Direccion', c.chofer_telefono 'Telefono',c.chofer_mail 'Mail',c.chofer_fecha_Nacimiento 'Fecha Nacimiento', usr.usuario_habilitado 'Habilitado' "
-              , "PUSH_IT_TO_THE_LIMIT.Chofer c, PUSH_IT_TO_THE_LIMIT.Usuario usr"
-              , "c.usuario_id = usr.usuario_id AND  c.chofer_estado= 1 " + filtro);
+            return this.SelectDataTable("t.turno_id 'Turno N°',t.turno_hora_inicio 'Hora Inicio',t.turno_hora_fin 'Hora Fin',t.turno_descripcion 'Descripcion',t.turno_valor_Kilometro 'Valor Kilometro',t.turno_precio_base 'Precio Base',t.turno_habilitado 'Habilitado' "
+              , "PUSH_IT_TO_THE_LIMIT.Turno t "
+              + filtro);
         }
 
         /*
