@@ -13,8 +13,8 @@ namespace UberFrba.Modelo
         private int horaInicio;
         private int horaFin;
         private String descripcion;
-        private int valorKilometro;
-        private int precioBaseTurno;
+        private Double valorKilometro;
+        private Double precioBaseTurno;
         private Boolean activo;
 
         public void SetId(int id)
@@ -69,12 +69,14 @@ namespace UberFrba.Modelo
         {
             if (value == "")
                 throw new CampoVacioException("Valor del Kilometro");
-            if (!esNumero(value))
-                throw new FormatoInvalidoException("Valor del Kilometro. Ingrese todos los numeros seguidos.");  
-            this.valorKilometro = Convert.ToInt32(value);
+            if (!esDouble(value))
+            {
+                throw new FormatoInvalidoException("Valor del Kilometro. Ingrese todos los numeros seguidos.");
+            }
+            this.valorKilometro = Convert.ToDouble(value);
         }
 
-        public int GetValorKilometro()
+        public Double GetValorKilometro()
         {
             return this.valorKilometro;
         }
@@ -83,12 +85,14 @@ namespace UberFrba.Modelo
         {
             if (precio == "")
                 throw new CampoVacioException("Precio base del turno");
-            if (!esNumero(precio))
+            if (!esDouble(precio))
+            {
                 throw new FormatoInvalidoException("Precio base del turno. Ingrese todos los numeros seguidos.");
-            this.precioBaseTurno = Convert.ToInt32(precio);
+            }
+            this.precioBaseTurno = Convert.ToDouble(precio);
         }
 
-        public int GetPrecioBaseTurno()
+        public Double GetPrecioBaseTurno()
         {
             return this.precioBaseTurno;
         }
