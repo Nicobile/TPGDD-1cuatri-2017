@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -88,18 +89,28 @@ namespace UberFrba.ABM_Turno
             if (e.ColumnIndex == dataGridView_Turno.Columns["Modificar"].Index && e.RowIndex >= 0)
             {
                 String idTurnoAModificar = dataGridView_Turno.Rows[e.RowIndex].Cells["Turno N°"].Value.ToString();
+               // MessageBox.Show(Convert.ToString(idTurnoAModificar));
                 new EditarTurno(idTurnoAModificar).ShowDialog();
+                //MessageBox.Show("Hola Brian");
                 CargarTurnos();
                 return;
             }
             if (e.ColumnIndex == dataGridView_Turno.Columns["Eliminar"].Index && e.RowIndex >= 0)
             {
-                String idTurnoAEliminar = dataGridView_Turno.Rows[e.RowIndex].Cells["Turno N°"].Value.ToString();
-                Boolean resultado = mapper.EliminarTurno(Convert.ToInt32(idTurnoAEliminar), "Turno");
-                dataGridView_Turno.Rows[e.RowIndex].Cells["Habilitado"].Value = false;
-                if (resultado) MessageBox.Show("Se elimino correctamente");
-                CargarTurnos();
-                return;
+                try
+                {
+                    String idTurnoAEliminar = dataGridView_Turno.Rows[e.RowIndex].Cells["Turno N°"].Value.ToString();
+                    Boolean resultado = mapper.EliminarTurno(Convert.ToInt32(idTurnoAEliminar), "Turno");
+                    //MessageBox.Show(Convert.ToString(resultado));
+                    dataGridView_Turno.Rows[e.RowIndex].Cells["Habilitado"].Value = false;
+                    if (resultado) MessageBox.Show("El turno se elimino correctamente");
+                    CargarTurnos();
+                    return;
+                }
+                catch (SqlException )
+                {
+
+                }
             }
 
         }

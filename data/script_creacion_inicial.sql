@@ -483,7 +483,7 @@ order by viajeFecha
 
 
 /*Triggers*/
---Agrego Trigger que lo que hace es cuando actualizan un turno lo deshabilita e inserta un nuevo simuando que actualizo el viejo
+--Agrego Trigger que lo que hace es cuando actualizan un turno lo deshabilita e inserta un nuevo simuando que actualizo el viejo 
 GO
 CREATE TRIGGER actualizacion_turno
 ON [PUSH_IT_TO_THE_LIMIT].[Turno]
@@ -506,7 +506,7 @@ INSTEAD OF UPDATE AS
 		END
 
 		BEGIN
-			if((SELECT I.turno_habilitado from inserted I,deleted D WHERE I.turno_hora_inicio<>D.turno_hora_inicio  AND I.turno_hora_fin<>D.turno_hora_fin)=1)
+			if((SELECT I.turno_habilitado from inserted I,deleted D WHERE I.turno_hora_inicio<>D.turno_hora_inicio  OR I.turno_hora_fin<>D.turno_hora_fin)=1)
 				BEGIN
 					INSERT INTO [PUSH_IT_TO_THE_LIMIT].[Turno](turno_hora_inicio,turno_hora_fin,turno_descripcion,turno_valor_kilometro,turno_precio_base)
 						SELECT i.turno_hora_inicio,i.turno_hora_fin,i.turno_descripcion,i.turno_valor_kilometro,i.turno_precio_base FROM inserted i
@@ -519,7 +519,7 @@ INSTEAD OF UPDATE AS
 Go
 CREATE TRIGGER insertar_Turno
 ON [PUSH_IT_TO_THE_LIMIT].[Turno]
-AFTER INSERT  AS 
+AFTER INSERT,UPDATE  AS 
 	BEGIN
 		IF(SELECT COUNT(*) FROM PUSH_IT_TO_THE_LIMIT.Turno T,inserted I 
 			WHERE ((I.turno_hora_inicio > T.turno_hora_inicio AND I.turno_hora_inicio < T.turno_hora_fin)

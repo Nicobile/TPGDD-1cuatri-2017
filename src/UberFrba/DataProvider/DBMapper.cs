@@ -50,7 +50,9 @@ namespace UberFrba
             int filasAfectadas = QueryBuilder.Instance.build(query, parametros).ExecuteNonQuery();
             if (filasAfectadas == 1) return true;
             if (filasAfectadas == 2) return true;
+            if (filasAfectadas == 3) return true;
             return false;
+            
         }
 
         public Mapeable Obtener(Decimal id, Type clase)
@@ -236,7 +238,10 @@ namespace UberFrba
             parametros.Clear();
             parametros.Add(new SqlParameter("@id", id));
             int filasAfectadas = QueryBuilder.Instance.build(query, parametros).ExecuteNonQuery();
-            if (filasAfectadas == 1) return true;
+            if (filasAfectadas == 2)//dejar en dos es la cantidad que retorna la base (lo volvi a poner en 1 por que el triger actualizacion turno no esta funcionando)
+            {
+                return true;
+            }
             return false;
         }
 
