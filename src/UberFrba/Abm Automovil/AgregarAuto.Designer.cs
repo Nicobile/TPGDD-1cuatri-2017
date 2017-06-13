@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.comboBox_Marca = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox_Modelo = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox_Patente = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox_Turno = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.textBox_Chofer = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBox_Turno = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox_Patente = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox_Modelo = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBox_Marca = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.button_Cancelar = new System.Windows.Forms.Button();
             this.button_Limpiar = new System.Windows.Forms.Button();
@@ -65,70 +65,12 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos";
             // 
-            // label11
+            // textBox_Chofer
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 16);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(37, 13);
-            this.label11.TabIndex = 13;
-            this.label11.Text = "Marca";
-            // 
-            // comboBox_Marca
-            // 
-            this.comboBox_Marca.FormattingEnabled = true;
-            this.comboBox_Marca.Location = new System.Drawing.Point(91, 16);
-            this.comboBox_Marca.Name = "comboBox_Marca";
-            this.comboBox_Marca.Size = new System.Drawing.Size(271, 21);
-            this.comboBox_Marca.TabIndex = 14;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 45);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 13);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "Modelo";
-            // 
-            // textBox_Modelo
-            // 
-            this.textBox_Modelo.Location = new System.Drawing.Point(91, 45);
-            this.textBox_Modelo.Name = "textBox_Modelo";
-            this.textBox_Modelo.Size = new System.Drawing.Size(271, 20);
-            this.textBox_Modelo.TabIndex = 16;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 71);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 13);
-            this.label3.TabIndex = 17;
-            this.label3.Text = "Patente";
-            // 
-            // textBox_Patente
-            // 
-            this.textBox_Patente.Location = new System.Drawing.Point(91, 71);
-            this.textBox_Patente.Name = "textBox_Patente";
-            this.textBox_Patente.Size = new System.Drawing.Size(271, 20);
-            this.textBox_Patente.TabIndex = 18;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 102);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 19;
-            this.label2.Text = "Turno";
-            // 
-            // textBox_Turno
-            // 
-            this.textBox_Turno.Location = new System.Drawing.Point(91, 102);
-            this.textBox_Turno.Name = "textBox_Turno";
-            this.textBox_Turno.Size = new System.Drawing.Size(271, 20);
-            this.textBox_Turno.TabIndex = 20;
+            this.textBox_Chofer.Location = new System.Drawing.Point(91, 134);
+            this.textBox_Chofer.Name = "textBox_Chofer";
+            this.textBox_Chofer.Size = new System.Drawing.Size(271, 20);
+            this.textBox_Chofer.TabIndex = 22;
             // 
             // label4
             // 
@@ -139,12 +81,70 @@
             this.label4.TabIndex = 21;
             this.label4.Text = "Chofer";
             // 
-            // textBox_Chofer
+            // textBox_Turno
             // 
-            this.textBox_Chofer.Location = new System.Drawing.Point(91, 134);
-            this.textBox_Chofer.Name = "textBox_Chofer";
-            this.textBox_Chofer.Size = new System.Drawing.Size(271, 20);
-            this.textBox_Chofer.TabIndex = 22;
+            this.textBox_Turno.Location = new System.Drawing.Point(91, 102);
+            this.textBox_Turno.Name = "textBox_Turno";
+            this.textBox_Turno.Size = new System.Drawing.Size(271, 20);
+            this.textBox_Turno.TabIndex = 20;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 102);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 19;
+            this.label2.Text = "Turno";
+            // 
+            // textBox_Patente
+            // 
+            this.textBox_Patente.Location = new System.Drawing.Point(91, 71);
+            this.textBox_Patente.Name = "textBox_Patente";
+            this.textBox_Patente.Size = new System.Drawing.Size(271, 20);
+            this.textBox_Patente.TabIndex = 18;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 71);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(44, 13);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "Patente";
+            // 
+            // textBox_Modelo
+            // 
+            this.textBox_Modelo.Location = new System.Drawing.Point(91, 45);
+            this.textBox_Modelo.Name = "textBox_Modelo";
+            this.textBox_Modelo.Size = new System.Drawing.Size(271, 20);
+            this.textBox_Modelo.TabIndex = 16;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 45);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 13);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Modelo";
+            // 
+            // comboBox_Marca
+            // 
+            this.comboBox_Marca.FormattingEnabled = true;
+            this.comboBox_Marca.Location = new System.Drawing.Point(91, 16);
+            this.comboBox_Marca.Name = "comboBox_Marca";
+            this.comboBox_Marca.Size = new System.Drawing.Size(271, 21);
+            this.comboBox_Marca.TabIndex = 14;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 16);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(37, 13);
+            this.label11.TabIndex = 13;
+            this.label11.Text = "Marca";
             // 
             // label14
             // 
@@ -163,6 +163,7 @@
             this.button_Cancelar.TabIndex = 17;
             this.button_Cancelar.Text = "Volver";
             this.button_Cancelar.UseVisualStyleBackColor = true;
+            this.button_Cancelar.Click += new System.EventHandler(this.button_Cancelar_Click);
             // 
             // button_Limpiar
             // 
@@ -172,6 +173,7 @@
             this.button_Limpiar.TabIndex = 18;
             this.button_Limpiar.Text = "Limpiar";
             this.button_Limpiar.UseVisualStyleBackColor = true;
+            this.button_Limpiar.Click += new System.EventHandler(this.button_Limpiar_Click);
             // 
             // button_Guardar
             // 
@@ -181,6 +183,7 @@
             this.button_Guardar.TabIndex = 19;
             this.button_Guardar.Text = "Guardar";
             this.button_Guardar.UseVisualStyleBackColor = true;
+            this.button_Guardar.Click += new System.EventHandler(this.button_Guardar_Click);
             // 
             // AgregarAuto
             // 
