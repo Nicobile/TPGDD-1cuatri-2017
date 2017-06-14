@@ -105,6 +105,12 @@ IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.pr_agregar_turno_a_automovil') IS NOT NULL
 GO
 
 
+IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.pr_agregar_chofer_a_automovil') IS NOT NULL
+    DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_agregar_chofer_a_automovil
+GO
+
+
+
 /* Creacion de tablas*/
 
 /* Funcionalidad*/
@@ -762,5 +768,17 @@ BEGIN
         (turno_id, auto_id)
     VALUES
         (@turno_id, @auto_id)
+END
+GO
+--Procedure para agregarle un Chofer a un Auto
+CREATE PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_agregar_chofer_a_automovil
+    @chofer_id int,
+    @auto_id int
+AS
+BEGIN
+    INSERT INTO PUSH_IT_TO_THE_LIMIT.ChoferporAuto
+        (chofer_id, auto_id)
+    VALUES
+        (@chofer_id, @auto_id)
 END
 GO

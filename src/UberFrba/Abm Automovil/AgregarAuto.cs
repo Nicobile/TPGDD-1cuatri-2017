@@ -66,7 +66,7 @@ namespace UberFrba.Abm_Automovil
                 if (idAuto != 0)
                 {
                     mapper.AsignarTurnoaAutomovil(this.idAuto, this.idTurno);
-
+                    mapper.AsignarChoferaAutomovil(this.idAuto, this.idChofer);
                 }
 
                  
