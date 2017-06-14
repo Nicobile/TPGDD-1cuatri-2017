@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,20 @@ namespace UberFrba.Abm_Automovil
         private int idAuto;
         private int idTurno;
         private int idChofer;
+        Boolean choferAutoAgregado;
+        Boolean turnoAutoAgregado;
+
+        public Boolean TurnoAutoAgregado
+        {
+            get { return turnoAutoAgregado; }
+            set { turnoAutoAgregado = value; }
+        }
+
+        public Boolean ChoferAutoAgregado
+        {
+            get { return choferAutoAgregado; }
+            set { choferAutoAgregado = value; }
+        }
 
         public AgregarAuto()
         {
@@ -46,7 +61,11 @@ namespace UberFrba.Abm_Automovil
             String Chofer = textBox_Chofer.Text;
             String IDTurno = textBox_Turno.Text;
             String DniChofer = textBox_Chofer.Text;
-            try {
+
+           
+
+            try
+            {
 
                 Automoviles auto = new Automoviles();
 
@@ -56,20 +75,25 @@ namespace UberFrba.Abm_Automovil
                 auto.SetActivo(true);
                 this.SetIdTurno(IDTurno);
                 this.SetIdChofer(DniChofer);
-                MessageBox.Show(Convert.ToString(idChofer));
+                //MessageBox.Show(Convert.ToString(idChofer));
                 idAuto = mapper.CrearAutomoviles(auto);
-                if (idAuto > 0) {
-                    MessageBox.Show("Automovil agregado correctamente");
-                    
-                }
+                
 
                 if (idAuto != 0)
                 {
-                    mapper.AsignarTurnoaAutomovil(this.idAuto, this.idTurno);
-                    mapper.AsignarChoferaAutomovil(this.idAuto, this.idChofer);
+                     choferAutoAgregado = mapper.AsignarChoferaAutomovil(this.idAuto, this.idChofer);
+                    turnoAutoAgregado = mapper.AsignarTurnoaAutomovil(this.idAuto, this.idTurno);
+
+                   
+             
+                }
+                if (idAuto > 0 && this.choferAutoAgregado==true && this.turnoAutoAgregado==true)
+                {
+                    MessageBox.Show("Automovil agregado correctamente");
+
                 }
 
-                 
+
             }
             catch (CampoVacioException exceptionCampoVacio)
             {
@@ -83,7 +107,7 @@ namespace UberFrba.Abm_Automovil
             }
             catch (ChoferInexistenteException exceptionChofer)
             {
-                MessageBox.Show( exceptionChofer.Message + DniChofer);
+                MessageBox.Show(exceptionChofer.Message + DniChofer);
                 return;
             }
             catch (TurnoInexistenteException exceptionTurno)
@@ -91,12 +115,20 @@ namespace UberFrba.Abm_Automovil
                 MessageBox.Show(exceptionTurno.Message + IDTurno);
                 return;
             }
+            catch (SqlException error)
+            {
 
+                switch (error.Number)
+                {
+                    case 51005: MessageBox.Show(error.Message, "Coche activo ya asignado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        mapper.EliminarAutoFisicamenteDelaBase(idAuto, "Auto");
+                        return;
+                        break;
 
-
+                }
+            }
 
             VolverAlMenuPrincipal();
-
            
         }
 

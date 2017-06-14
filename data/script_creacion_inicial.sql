@@ -776,9 +776,19 @@ CREATE PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_agregar_chofer_a_automovil
     @auto_id int
 AS
 BEGIN
-    INSERT INTO PUSH_IT_TO_THE_LIMIT.ChoferporAuto
-        (chofer_id, auto_id)
-    VALUES
-        (@chofer_id, @auto_id)
+	if((SELECT COUNT(*) FROM PUSH_IT_TO_THE_LIMIT.ChoferporAuto C JOIN PUSH_IT_TO_THE_LIMIT.AUTO A ON (A.auto_id=C.auto_id) WHERE A.auto_estado=1 AND  chofer_id=@chofer_id)=0)    
+		BEGIN 
+			INSERT INTO PUSH_IT_TO_THE_LIMIT.ChoferporAuto
+			(chofer_id, auto_id)
+			VALUES
+			(@chofer_id, @auto_id)
+		END
+	ELSE 
+		BEGIN
+			--rollback transaction;
+
+			throw 51005,'El Chofer ya tiene un Coche activo asignado ',1;
+	
+		END 
 END
 GO

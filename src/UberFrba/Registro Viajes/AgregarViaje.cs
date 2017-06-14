@@ -31,8 +31,8 @@ namespace UberFrba.Registro_Viajes
             textBox_Chofer.Text = "";
             textBox_Cliente.Text = "";
             textBox_FHfin.Text = "";
-            textBox_FHinicio = "";
-            textBox_Turno = "";
+            textBox_FHinicio.Text = "";
+            textBox_Turno.Text = "";
         }
     }
 }
