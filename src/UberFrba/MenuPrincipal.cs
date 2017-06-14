@@ -25,7 +25,7 @@ namespace UberFrba
             funcionalidades.Add("ABM de Choferes", new ABM_Chofer.MenuChofer());
             funcionalidades.Add("ABM de Clientes", new Abm_Cliente.MenuCliente());
             funcionalidades.Add("ABM de Turnos", new ABM_Turno.MenuTurno());
-            funcionalidades.Add("ABM de Automoviles", new Abm_Automovil.AgregarAuto());
+            funcionalidades.Add("ABM de Automoviles", new Abm_Automovil.MenuAutomovil());
             /*funcionalidades.Add("Editar Visibilidad", new ABM_Visibilidad.FiltroVisibilidad());
             funcionalidades.Add("Consulta de facturas", new Consulta_Facturas_Vendedor.ListadoFacturas()); 
             funcionalidades.Add("Listado Estadistico", new Listado_Estadistico.Estadisticas());

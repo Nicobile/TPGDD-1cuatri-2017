@@ -336,6 +336,24 @@ namespace UberFrba
             return false;
         }
 
+
+        public Boolean AsignarChoferaAutomovil(int idAuto, int idChofer)
+        {
+            query = "PUSH_IT_TO_THE_LIMIT.pr_agregar_chofer_a_automovil";
+            parametros.Clear();
+            parametros.Add(new SqlParameter("@chofer_id", idChofer));
+            parametros.Add(new SqlParameter("@auto_id", idAuto));
+            command = QueryBuilder.Instance.build(query, parametros);
+            command.CommandType = CommandType.StoredProcedure;
+            int filasAfectadas = command.ExecuteNonQuery();
+            if (filasAfectadas == 1) return true;
+            return false;
+        }
+
+
+
+
+
         /* 
         * 
         *   SELECT QUERYS
