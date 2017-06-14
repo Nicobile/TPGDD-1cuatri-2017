@@ -157,23 +157,23 @@
             this.button_Buscar.UseVisualStyleBackColor = true;
             this.button_Buscar.Click += new System.EventHandler(this.button_Buscar_Click);
             // 
-            // dataGridView_Chofer
+            // dataGridView_Automovil
             // 
             this.dataGridView_Automovil.AllowUserToAddRows = false;
             this.dataGridView_Automovil.AllowUserToDeleteRows = false;
             this.dataGridView_Automovil.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView_Automovil.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Automovil.Location = new System.Drawing.Point(22, 179);
-            this.dataGridView_Automovil.Name = "dataGridView_Chofer";
+            this.dataGridView_Automovil.Name = "dataGridView_Automovil";
             this.dataGridView_Automovil.ReadOnly = true;
-            this.dataGridView_Automovil.Size = new System.Drawing.Size(1260, 253);
+            this.dataGridView_Automovil.Size = new System.Drawing.Size(1059, 268);
             this.dataGridView_Automovil.TabIndex = 10;
             // 
             // FiltroAutomovil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1294, 444);
+            this.ClientSize = new System.Drawing.Size(1093, 459);
             this.Controls.Add(this.dataGridView_Automovil);
             this.Controls.Add(this.button_Buscar);
             this.Controls.Add(this.button_Limpiar);

@@ -48,6 +48,7 @@ namespace UberFrba.Abm_Automovil
             textBox_Modelo.Text = "";
             textBox_Patente.Text = "";
             textBox_Chofer_Dni.Text = "";
+            CargarAutomoviles();
         }
 
         private void CargarAutomoviles()

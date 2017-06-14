@@ -121,14 +121,14 @@ namespace UberFrba.Abm_Automovil
                 switch (error.Number)
                 {
                     case 51005: MessageBox.Show(error.Message, "Coche activo ya asignado", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        mapper.EliminarAutoFisicamenteDelaBase(idAuto, "Auto");
+                        mapper.EliminarAutoFisicamenteDelaBase(idAuto, "Auto");//esto es para eliminar el auto que se agrego arriba por que a pesar de que falle al agregar AutoChofer al al auto lo agrega
                         return;
                         break;
 
                 }
             }
 
-            VolverAlMenuPrincipal();
+            VolverAlMenu();
            
         }
 
@@ -145,7 +145,7 @@ namespace UberFrba.Abm_Automovil
 
         private void button_Cancelar_Click(object sender, EventArgs e)
         {
-            VolverAlMenuPrincipal();
+            VolverAlMenu();
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -170,10 +170,10 @@ namespace UberFrba.Abm_Automovil
         }
 
 
-        private void VolverAlMenuPrincipal()
+        private void VolverAlMenu()
         {
             this.Hide();
-            new MenuPrincipal().ShowDialog();
+            new MenuAutomovil().ShowDialog();
             this.Close();
         }
 
