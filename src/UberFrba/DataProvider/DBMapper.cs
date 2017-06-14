@@ -323,6 +323,18 @@ namespace UberFrba
             return false;
         }
 
+        public Boolean AsignarTurnoaAutomovil(int idAuto, int idTurno)
+        {
+            query = "PUSH_IT_TO_THE_LIMIT.pr_agregar_turno_a_automovil";
+            parametros.Clear();
+            parametros.Add(new SqlParameter("@turno_id", idTurno));
+            parametros.Add(new SqlParameter("@auto_id", idAuto));
+            command = QueryBuilder.Instance.build(query, parametros);
+            command.CommandType = CommandType.StoredProcedure;
+            int filasAfectadas = command.ExecuteNonQuery();
+            if (filasAfectadas == 1) return true;
+            return false;
+        }
 
         /* 
         * 

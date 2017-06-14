@@ -100,6 +100,10 @@ IF OBJECT_ID('[PUSH_IT_TO_THE_LIMIT].crear_automovil') IS NOT NULL
     DROP PROCEDURE [PUSH_IT_TO_THE_LIMIT].crear_automovil
 GO
 
+IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.pr_agregar_turno_a_automovil') IS NOT NULL
+    DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_agregar_turno_a_automovil
+GO
+
 
 /* Creacion de tablas*/
 
@@ -746,5 +750,17 @@ BEGIN
     VALUES 
         (@Patente, @Marca, @Modelo,@Activo)
     SET @id = SCOPE_IDENTITY(); 
+END
+GO
+--Procedure para agregarle un Turno a un Auto
+CREATE PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_agregar_turno_a_automovil
+    @turno_id int,
+    @auto_id int
+AS
+BEGIN
+    INSERT INTO PUSH_IT_TO_THE_LIMIT.AutoporTurno
+        (turno_id, auto_id)
+    VALUES
+        (@turno_id, @auto_id)
 END
 GO

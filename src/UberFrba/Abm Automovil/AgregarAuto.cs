@@ -60,8 +60,15 @@ namespace UberFrba.Abm_Automovil
                 idAuto = mapper.CrearAutomoviles(auto);
                 if (idAuto > 0) {
                     MessageBox.Show("Automovil agregado correctamente");
-                    this.Close();
+                    
                 }
+
+                if (idAuto != 0)
+                {
+                    mapper.AsignarTurnoaAutomovil(this.idAuto, this.idTurno);
+
+                }
+
                  
             }
             catch (CampoVacioException exceptionCampoVacio)
@@ -79,13 +86,16 @@ namespace UberFrba.Abm_Automovil
                 MessageBox.Show( exceptionChofer.Message + DniChofer);
                 return;
             }
+            catch (TurnoInexistenteException exceptionTurno)
+            {
+                MessageBox.Show(exceptionTurno.Message + IDTurno);
+                return;
+            }
 
 
 
 
-
-
-
+            VolverAlMenuPrincipal();
 
            
         }
@@ -93,7 +103,7 @@ namespace UberFrba.Abm_Automovil
         private void button_Limpiar_Click(object sender, EventArgs e)
         {
 
-            
+            comboBox_Marca.Text = "";
             textBox_Modelo.Text = "";
             textBox_Patente.Text = "";
             textBox_Turno.Text = "";
@@ -103,9 +113,7 @@ namespace UberFrba.Abm_Automovil
 
         private void button_Cancelar_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            new MenuPrincipal().ShowDialog();
-            this.Close();
+            VolverAlMenuPrincipal();
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -116,6 +124,8 @@ namespace UberFrba.Abm_Automovil
         public void SetIdTurno(String idTurno)
         {
             if (idTurno == "") throw new CampoVacioException("Turno");
+            int existe = Convert.ToInt32(mapper.SelectFromWhere("COUNT(*)", "Turno", "turno_id", Convert.ToInt32(idTurno)));
+            if (existe == 0) throw new TurnoInexistenteException("No existe un Turno con N° ");
             this.idTurno = Convert.ToInt32(idTurno);
         }
 
@@ -123,12 +133,17 @@ namespace UberFrba.Abm_Automovil
         {
             if (dniChofer == "") throw new CampoVacioException("DNI Chofer");
             int idChoferObtenidoApartirDelDNI=Convert.ToInt32(mapper.SelectFromWhere("chofer_id","Chofer","chofer_dni",Convert.ToInt32(dniChofer)));
-            if(idChoferObtenidoApartirDelDNI==0) throw new ChoferInexistenteException("No existe un chofer con DNI igual a :");
+            if(idChoferObtenidoApartirDelDNI==0) throw new ChoferInexistenteException("No existe un chofer con DNI igual a : ");
             this.idChofer = idChoferObtenidoApartirDelDNI;
         }
 
 
-
+        private void VolverAlMenuPrincipal()
+        {
+            this.Hide();
+            new MenuPrincipal().ShowDialog();
+            this.Close();
+        }
 
 
     }

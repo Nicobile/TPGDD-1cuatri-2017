@@ -165,6 +165,7 @@
     <Compile Include="Exceptions\FechaPasadaException.cs" />
     <Compile Include="Exceptions\FormatoInvalidoException.cs" />
     <Compile Include="Exceptions\TelefonoYaExisteException.cs" />
+    <Compile Include="Exceptions\TurnoInexistenteException.cs" />
     <Compile Include="Facturacion\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
