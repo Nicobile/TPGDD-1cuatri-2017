@@ -37,6 +37,7 @@ namespace UberFrba.Abm_Automovil
         public AgregarAuto()
         {
             InitializeComponent();
+            //CargarComboBoxTurno();
         }
 
         private void AgregarAuto_Load(object sender, EventArgs e)
@@ -50,6 +51,8 @@ namespace UberFrba.Abm_Automovil
             comboBox_Marca.Items.Add("Volkswagen");
             comboBox_Marca.Items.Add("Toyota");
             comboBox_Marca.Items.Add("Citroën");
+            CargarComboBoxTurno();
+
         }
 
         private void button_Guardar_Click(object sender, EventArgs e)
@@ -57,9 +60,10 @@ namespace UberFrba.Abm_Automovil
             String Marca =comboBox_Marca.Text;
             String Modelo = textBox_Modelo.Text;
             String Patente = textBox_Patente.Text;
-            String Turno = textBox_Turno.Text;
+            //String Turno = textBox_Turno.Text;
             String Chofer = textBox_Chofer.Text;
-            String IDTurno = textBox_Turno.Text;
+            String IDTurno = comboBox_Turno.Text.Substring(12,1);
+            MessageBox.Show(IDTurno);
             String DniChofer = textBox_Chofer.Text;
 
            
@@ -138,7 +142,7 @@ namespace UberFrba.Abm_Automovil
             comboBox_Marca.Text = "";
             textBox_Modelo.Text = "";
             textBox_Patente.Text = "";
-            textBox_Turno.Text = "";
+            comboBox_Turno.Text = "";
             textBox_Chofer.Text = "";
 
         }
@@ -177,6 +181,23 @@ namespace UberFrba.Abm_Automovil
             this.Close();
         }
 
+        private void CargarComboBoxTurno(){//ComboBox comboTurno) {
+
+            DataTable turnos = mapper.SelectDataTable("*", "PUSH_IT_TO_THE_LIMIT.Turno");//aca traigo todos los turnos habilitados o deshabilitados , si se quiere traer solo los habilitados descomentar la linea de abajo
+            //DataTable turnos = mapper.SelectDataTable("*", "PUSH_IT_TO_THE_LIMIT.Turno","turno_habilitado = 1");aca traigo los turnos habilitados nada mas , si se quiere esta opcion comentar la linea de arriba y  descomentar esta
+            
+
+            foreach (DataRow fila in turnos.Rows)
+            {
+                string horaInicio = fila["turno_hora_inicio"].ToString();
+                string horaFin = fila["turno_hora_fin"].ToString();
+                string idTurnoCombo = fila["turno_id"].ToString();
+                comboBox_Turno.Items.Add("El turno N° "+ idTurnoCombo + " comienza a las "+horaInicio+" y finaliza a las " + horaFin);
+
+            }
+        
+        
+        }
 
     }
 }
