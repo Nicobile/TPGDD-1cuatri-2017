@@ -159,6 +159,7 @@
     <Compile Include="DataProvider\QueryHelper.cs" />
     <Compile Include="DateConfig.cs" />
     <Compile Include="Exceptions\CampoVacioException.cs" />
+    <Compile Include="Exceptions\ChoferInexistenteException.cs" />
     <Compile Include="Exceptions\ChoferYaExisteException.cs" />
     <Compile Include="Exceptions\ClienteYaExisteException.cs" />
     <Compile Include="Exceptions\FechaPasadaException.cs" />

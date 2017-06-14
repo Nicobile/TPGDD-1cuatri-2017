@@ -132,7 +132,7 @@ namespace UberFrba
 
         }
 
-        /** Empresas **/
+        /** Chofer **/
 
         public int CrearChofer(Choferes chofer)
         {
@@ -148,7 +148,14 @@ namespace UberFrba
 
             return this.Crear(turno);
         }
+        
+        /** Automoviles **/
+        public int CrearAutomoviles(Automoviles automovil)
+        {
+          return this.Crear(automovil);
+        }
 
+      
         /*
         *
         *   GET TABLE QUERYS

@@ -64,6 +64,7 @@
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // textBox_Chofer
             // 
@@ -197,6 +198,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "AgregarAuto";
             this.Text = "Agregar Auto";
+            this.Load += new System.EventHandler(this.AgregarAuto_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

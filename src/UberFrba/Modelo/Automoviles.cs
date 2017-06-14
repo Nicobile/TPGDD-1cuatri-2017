@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ using UberFrba.Exceptions;
 
 namespace UberFrba.Modelo
 {
-    class Automoviles
+    class Automoviles : Objeto, Mapeable
     {
         private int id;
         private String patente;
@@ -98,13 +99,37 @@ namespace UberFrba.Modelo
             return this.rodado;
         }
 
+        public string GetQueryCrear()
+        {
+            return "[PUSH_IT_TO_THE_LIMIT].crear_automovil";
+        }
+
+        public string GetQueryModificar()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetQueryObtener()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CargarInformacion(System.Data.SqlClient.SqlDataReader reader)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList<System.Data.SqlClient.SqlParameter> GetParametros()
+        {
+
+            IList<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@Patente", this.patente));
+            parametros.Add(new SqlParameter("@Marca", this.marca));
+            parametros.Add(new SqlParameter("@Modelo", this.modelo));
+            parametros.Add(new SqlParameter("@activo", this.activo));
 
 
-
-
-
-
-
-
+            return parametros;
+        }
     }
 }

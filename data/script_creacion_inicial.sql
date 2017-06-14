@@ -96,7 +96,9 @@ GO
 IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.pr_crear_usuario_con_valores') IS NOT NULL
     DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_crear_usuario_con_valores
 GO
-
+IF OBJECT_ID('[PUSH_IT_TO_THE_LIMIT].crear_automovil') IS NOT NULL
+    DROP PROCEDURE [PUSH_IT_TO_THE_LIMIT].crear_automovil
+GO
 
 
 /* Creacion de tablas*/
@@ -220,7 +222,7 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[Auto](
 	[auto_modelo] VARCHAR(255) NOT NULL,
 	--[chofer_id] int NOT NULL,-- REFERENCES [PUSH_IT_TO_THE_LIMIT].[Chofer],									
 	[auto_estado] BIT not null DEFAULT 1,
-	[auto_licencia] VARCHAR(26) NOT NULL,
+	[auto_licencia] VARCHAR(26),-- NOT NULL,  se lo saco por que no es obligatorio al crearlo
 	[auto_rodado] VARCHAR(10),
 )
 
@@ -728,5 +730,21 @@ BEGIN
     VALUES 
         (@username, @password)
     SET @usuario_id = SCOPE_IDENTITY(); 
+END
+GO
+--Procedure para crear un Auto
+create proc [PUSH_IT_TO_THE_LIMIT].crear_automovil
+    @Patente nvarchar(255),
+    @Marca nvarchar(255),
+    @Modelo nvarchar(255),
+    @Activo bit,
+	@id int OUTPUT
+AS
+BEGIN
+    INSERT INTO [PUSH_IT_TO_THE_LIMIT].Auto
+        (auto_patente, auto_marca,auto_modelo, auto_estado) 
+    VALUES 
+        (@Patente, @Marca, @Modelo,@Activo)
+    SET @id = SCOPE_IDENTITY(); 
 END
 GO
