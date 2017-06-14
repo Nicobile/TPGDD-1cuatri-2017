@@ -463,6 +463,25 @@ namespace UberFrba
               + filtro);
         }
 
+        /* Automovil */
+
+        public DataTable SelectAutomovilParaFiltro()
+        {
+            return this.SelectAutomovilParaFiltroConFiltro("");
+        }
+
+        public DataTable SelectAutomovilParaFiltroConFiltro(String filtro)
+        {
+            return this.SelectDataTable("a.auto_id 'Auto N°',a.auto_patente 'Patente',a.auto_marca 'Marca',a.auto_modelo 'Modelo',a.auto_estado 'Habilitado',a.auto_licencia 'Licencia',a.auto_rodado 'Rodado',c.chofer_dni 'DNI chofer'  "
+              , "PUSH_IT_TO_THE_LIMIT.Auto a, PUSH_IT_TO_THE_LIMIT.Chofer c ,PUSH_IT_TO_THE_LIMIT.ChoferporAuto p "
+              ,"a.auto_id = p.auto_id AND c.chofer_id = p.chofer_id "  + filtro);
+        }
+
+
+
+
+
+
         /*
         *
         *   TABLE UNIQUE CONTROL 

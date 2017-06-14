@@ -32,6 +32,11 @@ namespace UberFrba.Abm_Automovil
         private void botonEditarAutomovil_Click(object sender, EventArgs e)
         {
 
+            this.Hide();
+            new FiltroAutomovil().ShowDialog();
+            this.Close();
+
+
         }
 
         private void botonVolver_Click(object sender, EventArgs e)

@@ -38,17 +38,17 @@
             this.textBox_Direccion = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.monthCalendar_FechaDeCreacion = new System.Windows.Forms.MonthCalendar();
             this.textBox_Mail = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.textBox_Apellido = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.button_FechaDeCreacion = new System.Windows.Forms.Button();
+            this.button_FechaDeNacimiento = new System.Windows.Forms.Button();
             this.textBox_FechaDeNacimiento = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox_DNI = new System.Windows.Forms.TextBox();
             this.textBox_Nombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.monthCalendar_FechaDeCreacion = new System.Windows.Forms.MonthCalendar();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -104,7 +104,7 @@
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.textBox_Apellido);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.button_FechaDeCreacion);
+            this.groupBox1.Controls.Add(this.button_FechaDeNacimiento);
             this.groupBox1.Controls.Add(this.textBox_FechaDeNacimiento);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.textBox_DNI);
@@ -158,14 +158,6 @@
             this.label13.TabIndex = 16;
             this.label13.Text = "Mail";
             // 
-            // monthCalendar_FechaDeCreacion
-            // 
-            this.monthCalendar_FechaDeCreacion.Location = new System.Drawing.Point(170, 7);
-            this.monthCalendar_FechaDeCreacion.Name = "monthCalendar_FechaDeCreacion";
-            this.monthCalendar_FechaDeCreacion.TabIndex = 5;
-            this.monthCalendar_FechaDeCreacion.Visible = false;
-            this.monthCalendar_FechaDeCreacion.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar_FechaDeCreacion_DateSelected);
-            // 
             // textBox_Mail
             // 
             this.textBox_Mail.Location = new System.Drawing.Point(112, 149);
@@ -198,18 +190,19 @@
             this.label4.TabIndex = 8;
             this.label4.Text = "Fecha de Nacimiento";
             // 
-            // button_FechaDeCreacion
+            // button_FechaDeNacimiento
             // 
-            this.button_FechaDeCreacion.Location = new System.Drawing.Point(282, 97);
-            this.button_FechaDeCreacion.Name = "button_FechaDeCreacion";
-            this.button_FechaDeCreacion.Size = new System.Drawing.Size(80, 20);
-            this.button_FechaDeCreacion.TabIndex = 7;
-            this.button_FechaDeCreacion.Text = "Seleccionar";
-            this.button_FechaDeCreacion.UseVisualStyleBackColor = true;
-            this.button_FechaDeCreacion.Click += new System.EventHandler(this.button_FechaDeCreacion_Click);
+            this.button_FechaDeNacimiento.Location = new System.Drawing.Point(282, 97);
+            this.button_FechaDeNacimiento.Name = "button_FechaDeNacimiento";
+            this.button_FechaDeNacimiento.Size = new System.Drawing.Size(80, 20);
+            this.button_FechaDeNacimiento.TabIndex = 7;
+            this.button_FechaDeNacimiento.Text = "Seleccionar";
+            this.button_FechaDeNacimiento.UseVisualStyleBackColor = true;
+            this.button_FechaDeNacimiento.Click += new System.EventHandler(this.button_FechaDeNacimiento_Click);
             // 
             // textBox_FechaDeNacimiento
             // 
+            this.textBox_FechaDeNacimiento.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.textBox_FechaDeNacimiento.Location = new System.Drawing.Point(112, 97);
             this.textBox_FechaDeNacimiento.Name = "textBox_FechaDeNacimiento";
             this.textBox_FechaDeNacimiento.Size = new System.Drawing.Size(164, 20);
@@ -247,6 +240,14 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre";
             // 
+            // monthCalendar_FechaDeCreacion
+            // 
+            this.monthCalendar_FechaDeCreacion.Location = new System.Drawing.Point(126, 19);
+            this.monthCalendar_FechaDeCreacion.Name = "monthCalendar_FechaDeCreacion";
+            this.monthCalendar_FechaDeCreacion.TabIndex = 5;
+            this.monthCalendar_FechaDeCreacion.Visible = false;
+            this.monthCalendar_FechaDeCreacion.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar_FechaDeCreacion_DateSelected);
+            // 
             // EditarChofer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -280,7 +281,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox textBox_Apellido;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button_FechaDeCreacion;
+        private System.Windows.Forms.Button button_FechaDeNacimiento;
         private System.Windows.Forms.TextBox textBox_FechaDeNacimiento;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox_DNI;

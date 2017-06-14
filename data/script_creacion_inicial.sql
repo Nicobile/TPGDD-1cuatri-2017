@@ -232,7 +232,7 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[Auto](
 	[auto_modelo] VARCHAR(255) NOT NULL,
 	--[chofer_id] int NOT NULL,-- REFERENCES [PUSH_IT_TO_THE_LIMIT].[Chofer],									
 	[auto_estado] BIT not null DEFAULT 1,
-	[auto_licencia] VARCHAR(26),-- NOT NULL,  se lo saco por que no es obligatorio al crearlo
+	[auto_licencia] VARCHAR(255),-- NOT NULL,  se lo saco por que no es obligatorio al crearlo
 	[auto_rodado] VARCHAR(10),
 )
 
@@ -328,7 +328,7 @@ insert into [PUSH_IT_TO_THE_LIMIT].Rol (rol_nombre) values
 
 insert into [PUSH_IT_TO_THE_LIMIT].Funcionalidad (funcionalidad_descripcion) values
 ('ABM de Rol'),                            --1
-('Registro de Usuarios'),                  --2
+--('Registro de Usuarios'),                  --2
 ('ABM de Clientes'),                       --3
 ('ABM de Automoviles'),                    --4
 ('ABM de Turnos'),                         --5

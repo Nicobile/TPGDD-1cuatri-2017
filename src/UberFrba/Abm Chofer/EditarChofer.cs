@@ -158,7 +158,7 @@ namespace UberFrba.ABM_Chofer
             this.Close();
         }
 
-        private void button_FechaDeCreacion_Click(object sender, EventArgs e)
+        private void button_FechaDeNacimiento_Click(object sender, EventArgs e)
         {
             monthCalendar_FechaDeCreacion.Visible = true;
         }
