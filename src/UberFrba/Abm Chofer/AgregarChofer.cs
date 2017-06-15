@@ -157,7 +157,7 @@ namespace UberFrba.ABM_Chofer
 
             }
 
-            VolverAlMenuPrincipal();
+            VolverAlMenu();
         }
 
         private int CrearUsuario()
@@ -211,14 +211,14 @@ namespace UberFrba.ABM_Chofer
             }
             else
             {
-                VolverAlMenuPrincipal();
+                VolverAlMenu();
             }
         }
 
-        private void VolverAlMenuPrincipal()
+        private void VolverAlMenu()
         {
             this.Hide();
-            new MenuPrincipal().ShowDialog();
+            new MenuChofer().ShowDialog();
             this.Close();
         }
 

@@ -111,7 +111,7 @@ namespace UberFrba.ABM_Turno
 
             mapper.AsignarRolAUsuario(this.idUsuario, "Chofer");
             */
-            VolverAlMenuPrincipal();
+            VolverAlMenu();
         }
    /*     private int CrearUsuario()
         {
@@ -144,16 +144,16 @@ namespace UberFrba.ABM_Turno
         */
                
 
-        private void VolverAlMenuPrincipal()
+        private void VolverAlMenu()
         {
             this.Hide();
-            new MenuPrincipal().ShowDialog();
+            new MenuTurno().ShowDialog();
             this.Close();
         }
 
         private void button_Cancelar_Click_1(object sender, EventArgs e)
         {
-            VolverAlMenuPrincipal();
+            VolverAlMenu();
         }
 
         private void button_Limpiar_Click_1(object sender, EventArgs e)

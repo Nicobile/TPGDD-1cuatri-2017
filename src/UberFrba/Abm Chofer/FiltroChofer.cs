@@ -88,7 +88,7 @@ namespace UberFrba.ABM_Chofer
         private void button_Cancelar_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new MenuPrincipal().ShowDialog();
+            new MenuChofer().ShowDialog();
             this.Close();
         }
 

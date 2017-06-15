@@ -78,7 +78,7 @@ namespace UberFrba.ABM_Turno
         private void button_Cancelar_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new MenuPrincipal().ShowDialog();
+            new MenuTurno().ShowDialog();
             this.Close();
         }
 

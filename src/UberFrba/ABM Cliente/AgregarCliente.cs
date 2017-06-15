@@ -11,6 +11,7 @@ using UberFrba.Modelo;
 using UberFrba.Exceptions;
 using UberFrba.Utils;
 using UberFrba.DataProvider;
+using UberFrba.Abm_Cliente;
 namespace UberFrba.ABM_Cliente
 {
 
@@ -143,7 +144,7 @@ namespace UberFrba.ABM_Cliente
 
             }
 
-            VolverAlMenuPrincipal();
+            VolverAlMenu();
         }
 
         private int CrearUsuario()
@@ -181,15 +182,15 @@ namespace UberFrba.ABM_Cliente
             }
             else
             {
-                VolverAlMenuPrincipal();
+                VolverAlMenu();
             }
             
         }
 
-        private void VolverAlMenuPrincipal()
+        private void VolverAlMenu()
         {
             this.Hide();
-            new MenuPrincipal().ShowDialog();
+            new MenuCliente().ShowDialog();
             this.Close();
         }
 

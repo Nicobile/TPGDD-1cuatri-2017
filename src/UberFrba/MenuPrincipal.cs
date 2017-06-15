@@ -53,11 +53,18 @@ namespace UberFrba
 
         private void botonAceptar_Click(object sender, EventArgs e)
         {
-            String accionElegida = comboBoxAccion.SelectedValue.ToString();
+            try
+            {
+                String accionElegida = comboBoxAccion.SelectedValue.ToString();
+                this.Hide();
+                funcionalidades[accionElegida].ShowDialog();
+                this.Close();
+            }
+            catch (NullReferenceException exceptionAccionElegida) { 
             
-            this.Hide();
-            funcionalidades[accionElegida].ShowDialog();
-            this.Close();
+                MessageBox.Show("La opcion ingresada es incorrecta","Accion elegida Incorrecta",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+
           
         }
 

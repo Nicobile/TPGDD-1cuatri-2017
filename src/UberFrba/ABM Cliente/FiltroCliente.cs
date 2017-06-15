@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using UberFrba.Modelo;
 using UberFrba.DataProvider;
+using UberFrba.Abm_Cliente;
 
 namespace UberFrba.ABM_Cliente
 {
@@ -94,7 +95,7 @@ namespace UberFrba.ABM_Cliente
         private void button_Cancelar_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new MenuPrincipal().ShowDialog();
+            new MenuCliente().ShowDialog();
             this.Close();
         }
 
