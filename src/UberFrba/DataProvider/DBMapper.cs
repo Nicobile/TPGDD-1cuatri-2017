@@ -252,6 +252,29 @@ namespace UberFrba
             return false;
         }
 
+        public Boolean EliminarAutomovil(Decimal id, String enDonde)
+        {
+            query = "UPDATE PUSH_IT_TO_THE_LIMIT." + enDonde + " SET auto_estado = 0 WHERE auto_id = @id";
+            parametros.Clear();
+            parametros.Add(new SqlParameter("@id", id));
+            int filasAfectadas = QueryBuilder.Instance.build(query, parametros).ExecuteNonQuery();
+            if (filasAfectadas == 1)
+            {
+                return true;
+            }
+            return false;
+        }
+
+
+
+
+
+
+
+
+
+
+
         public Boolean EliminarAutoFisicamenteDelaBase(int id, String enDonde)
         {
             query = "DELETE PUSH_IT_TO_THE_LIMIT." + enDonde + " WHERE auto_id = @id";

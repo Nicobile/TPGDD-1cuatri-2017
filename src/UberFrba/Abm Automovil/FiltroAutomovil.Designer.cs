@@ -168,6 +168,7 @@
             this.dataGridView_Automovil.ReadOnly = true;
             this.dataGridView_Automovil.Size = new System.Drawing.Size(1059, 268);
             this.dataGridView_Automovil.TabIndex = 10;
+            this.dataGridView_Automovil.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Automovil_CellClick);
             // 
             // FiltroAutomovil
             // 

@@ -97,6 +97,40 @@ namespace UberFrba.Abm_Automovil
             return filtro;
         }
 
+        private void dataGridView_Automovil_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+                        // Controla que la celda que se clickeo fue la de modificar
+            if (e.ColumnIndex == dataGridView_Automovil.Columns["Modificar"].Index && e.RowIndex >= 0)
+            {
+            //    String idChoferAModificar = dataGridView_Automovil.Rows[e.RowIndex].Cells["chofer_id"].Value.ToString();
+            //    String idUsuarioChoferAModificar = dataGridView_Automovil.Rows[e.RowIndex].Cells["usuario_id"].Value.ToString();
+            //    new EditarChofer(idChoferAModificar, idUsuarioChoferAModificar).ShowDialog();
+            //    CargarChoferes();
+            //    return;
+            }
+            if (e.ColumnIndex == dataGridView_Automovil.Columns["Eliminar"].Index && e.RowIndex >= 0)
+            {
+                String idAutomovilAEliminar = dataGridView_Automovil.Rows[e.RowIndex].Cells["Auto N°"].Value.ToString();
+                Boolean resultado = mapper.EliminarAutomovil(Convert.ToInt32(idAutomovilAEliminar), "Auto");
+                dataGridView_Automovil.Rows[e.RowIndex].Cells["Habilitado"].Value = false;
+                if (resultado) MessageBox.Show("Se elimino correctamente");
+                CargarAutomoviles();
+                return;
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+
 
 
 
