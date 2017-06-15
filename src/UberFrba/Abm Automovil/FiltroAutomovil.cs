@@ -103,7 +103,10 @@ namespace UberFrba.Abm_Automovil
             if (e.ColumnIndex == dataGridView_Automovil.Columns["Modificar"].Index && e.RowIndex >= 0)
             {
                 String idAutomovilAModificar = dataGridView_Automovil.Rows[e.RowIndex].Cells["Auto N°"].Value.ToString();
-                new EditarAutomovil(idAutomovilAModificar).ShowDialog();
+                String dniChoferAutomovilAModificar = dataGridView_Automovil.Rows[e.RowIndex].Cells["DNI chofer"].Value.ToString();
+               // int idChoferObtenidoApartirDelDNI = Convert.ToInt32(mapper.SelectFromWhere("chofer_id", "Chofer", "chofer_dni", Convert.ToInt32(dniChoferAutomovilAModificar)));
+
+                new EditarAutomovil(idAutomovilAModificar,dniChoferAutomovilAModificar).ShowDialog();
                 CargarAutomoviles();
                     return;
             }

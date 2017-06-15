@@ -175,6 +175,7 @@
             this.button_Limpiar.TabIndex = 26;
             this.button_Limpiar.Text = "Limpiar";
             this.button_Limpiar.UseVisualStyleBackColor = true;
+            this.button_Limpiar.Click += new System.EventHandler(this.button_Limpiar_Click);
             // 
             // button_Guardar
             // 
@@ -208,6 +209,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "EditarAutomovil";
             this.Text = "EditarAutomovil";
+            this.Load += new System.EventHandler(this.EditarAutomovil_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

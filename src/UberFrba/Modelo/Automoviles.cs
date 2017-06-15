@@ -38,7 +38,7 @@ namespace UberFrba.Modelo
             this.patente = patente;
         }
 
-        public String GetPatnte()
+        public String GetPatente()
         {
             return this.patente;
         }
@@ -111,13 +111,39 @@ namespace UberFrba.Modelo
 
         public string GetQueryObtener()
         {
-            throw new NotImplementedException();
+            return "SELECT * FROM PUSH_IT_TO_THE_LIMIT.Auto WHERE auto_id = @id";
         }
+
+
 
         public void CargarInformacion(System.Data.SqlClient.SqlDataReader reader)
         {
             throw new NotImplementedException();
         }
+
+
+
+        void Mapeable.CargarInformacion(SqlDataReader reader)
+        {
+            this.patente = Convert.ToString(reader["auto_patente"]);
+            this.marca = Convert.ToString(reader["auto_marca"]);
+            this.modelo = Convert.ToString(reader["auto_modelo"]);
+            this.activo = Convert.ToBoolean(reader["auto_estado"]);
+            this.id = Convert.ToInt32(reader["auto_id"]);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public IList<System.Data.SqlClient.SqlParameter> GetParametros()
         {

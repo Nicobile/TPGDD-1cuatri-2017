@@ -198,6 +198,16 @@ namespace UberFrba
             return (Turnos)this.Obtener(idTurno, clase);
         }
 
+        /* Automoviles */
+        public Automoviles ObtenerAutomovil(int idAutomovil)
+        {
+            Automoviles objeto = new Automoviles();
+            Type clase = objeto.GetType();
+            return (Automoviles)this.Obtener(idAutomovil, clase);
+        }
+
+
+
         /** Contacto **/
 /*
         public Contacto ObtenerContacto(int idContacto)

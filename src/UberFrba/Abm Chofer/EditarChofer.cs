@@ -48,7 +48,7 @@ namespace UberFrba.ABM_Chofer
             textBox_FechaDeNacimiento.Text = Convert.ToString(chofer.GetFechaDeNacimiento());
             textBox_Telefono.Text = chofer.GetTelefono();
             textBox_Direccion.Text = Convert.ToString(chofer.GetDireccion());
-            checkBox_Habilitado.Checked = Convert.ToBoolean(mapper.SelectFromWhere("usuario_habilitado", "Usuario", "usuario_id", chofer.GetIdUsuario()));
+            checkBox_Habilitado.Checked = Convert.ToBoolean(mapper.SelectFromWhere("usuario_habilitado", "Usuario", "usuario_id", chofer.GetIdUsuario()));//creo que aca deberia traer chofer_estado cambiar
 
         }
 
