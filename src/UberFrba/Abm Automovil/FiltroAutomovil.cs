@@ -102,11 +102,10 @@ namespace UberFrba.Abm_Automovil
                         // Controla que la celda que se clickeo fue la de modificar
             if (e.ColumnIndex == dataGridView_Automovil.Columns["Modificar"].Index && e.RowIndex >= 0)
             {
-            //    String idChoferAModificar = dataGridView_Automovil.Rows[e.RowIndex].Cells["chofer_id"].Value.ToString();
-            //    String idUsuarioChoferAModificar = dataGridView_Automovil.Rows[e.RowIndex].Cells["usuario_id"].Value.ToString();
-            //    new EditarChofer(idChoferAModificar, idUsuarioChoferAModificar).ShowDialog();
-            //    CargarChoferes();
-            //    return;
+                String idAutomovilAModificar = dataGridView_Automovil.Rows[e.RowIndex].Cells["Auto N°"].Value.ToString();
+                new EditarAutomovil(idAutomovilAModificar).ShowDialog();
+                CargarAutomoviles();
+                    return;
             }
             if (e.ColumnIndex == dataGridView_Automovil.Columns["Eliminar"].Index && e.RowIndex >= 0)
             {

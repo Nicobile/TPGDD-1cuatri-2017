@@ -51,6 +51,12 @@
     <Compile Include="Abm Automovil\AgregarAuto.Designer.cs">
       <DependentUpon>AgregarAuto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Automovil\EditarAutomovil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Automovil\EditarAutomovil.Designer.cs">
+      <DependentUpon>EditarAutomovil.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Automovil\FiltroAutomovil.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -240,6 +246,9 @@
     <Compile Include="Utils\Utils.cs" />
     <EmbeddedResource Include="Abm Automovil\AgregarAuto.resx">
       <DependentUpon>AgregarAuto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Automovil\EditarAutomovil.resx">
+      <DependentUpon>EditarAutomovil.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Automovil\FiltroAutomovil.resx">
       <DependentUpon>FiltroAutomovil.cs</DependentUpon>
