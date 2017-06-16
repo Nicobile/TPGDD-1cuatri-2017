@@ -166,7 +166,7 @@
             this.dataGridView_Automovil.Location = new System.Drawing.Point(22, 179);
             this.dataGridView_Automovil.Name = "dataGridView_Automovil";
             this.dataGridView_Automovil.ReadOnly = true;
-            this.dataGridView_Automovil.Size = new System.Drawing.Size(1059, 268);
+            this.dataGridView_Automovil.Size = new System.Drawing.Size(1160, 268);
             this.dataGridView_Automovil.TabIndex = 10;
             this.dataGridView_Automovil.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Automovil_CellClick);
             // 
@@ -174,7 +174,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1093, 459);
+            this.ClientSize = new System.Drawing.Size(1195, 459);
             this.Controls.Add(this.dataGridView_Automovil);
             this.Controls.Add(this.button_Buscar);
             this.Controls.Add(this.button_Limpiar);
@@ -205,5 +205,6 @@
         private System.Windows.Forms.DataGridView dataGridView_Automovil;
         private System.Windows.Forms.Label labelChoferDni;
         private System.Windows.Forms.ComboBox comboBox_Marca;
+        //private System.Windows.Forms.DataGridViewComboBoxColumn comboBoxTurnos;
     }
 }

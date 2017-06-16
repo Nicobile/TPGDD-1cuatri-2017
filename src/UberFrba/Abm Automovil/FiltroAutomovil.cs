@@ -54,8 +54,10 @@ namespace UberFrba.Abm_Automovil
         private void CargarAutomoviles()
         {
             dataGridView_Automovil.DataSource = mapper.SelectAutomovilParaFiltro();
+            CargarColumnaTurnos();
             CargarColumnaModificacion();
             CargarColumnaEliminar();
+            
         }
 
         private void CargarColumnaEliminar()
@@ -81,6 +83,24 @@ namespace UberFrba.Abm_Automovil
 
         }
 
+        private void CargarColumnaTurnos()
+        {
+
+            if (dataGridView_Automovil.Columns.Contains("Turnos"))
+                dataGridView_Automovil.Columns.Remove("Turnos");
+            DataGridViewButtonColumn botonMostrarTurnos = new DataGridViewButtonColumn();
+            botonMostrarTurnos.Text = "Ver Turnos";
+            botonMostrarTurnos.Name = "Turnos";
+            botonMostrarTurnos.UseColumnTextForButtonValue = true;
+            dataGridView_Automovil.Columns.Add(botonMostrarTurnos);
+
+
+        }        
+        
+        
+        
+        
+        
         private void button_Buscar_Click(object sender, EventArgs e)
         {
             String filtro = CalcularFiltro();
@@ -115,23 +135,30 @@ namespace UberFrba.Abm_Automovil
                 String idAutomovilAEliminar = dataGridView_Automovil.Rows[e.RowIndex].Cells["Auto N°"].Value.ToString();
                 Boolean resultado = mapper.EliminarAutomovil(Convert.ToInt32(idAutomovilAEliminar), "Auto");
                 dataGridView_Automovil.Rows[e.RowIndex].Cells["Habilitado"].Value = false;
+                CargarColumnaTurnos();
+
                 if (resultado) MessageBox.Show("Se elimino correctamente");
                 CargarAutomoviles();
                 return;
             }
 
+            if (e.ColumnIndex == dataGridView_Automovil.Columns["Turnos"].Index && e.RowIndex >= 0)
+            {
+                String idAutomovilTurno = dataGridView_Automovil.Rows[e.RowIndex].Cells["Auto N°"].Value.ToString();
+                //MessageBox.Show(idAutomovilTurno);
+                new TurnosDeUnAutomovil(idAutomovilTurno).ShowDialog();
+                
+            //    //Boolean resultado = mapper.EliminarAutomovil(Convert.ToInt32(idAutomovilAEliminar), "Auto");
+            //    //dataGridView_Automovil.Rows[e.RowIndex].Cells["Habilitado"].Value = false;
+            //    //if (resultado) MessageBox.Show("Se elimino correctamente");
+            //    //CargarAutomoviles();
+            //    return;
+            }
 
-
-
-
-
-
-
-
-
-
+                      
 
         }
+
 
 
 

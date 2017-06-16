@@ -21,7 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -69,6 +69,12 @@
     </Compile>
     <Compile Include="Abm Automovil\MenuAutomovil.Designer.cs">
       <DependentUpon>MenuAutomovil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Automovil\TurnosDeUnAutomovil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Automovil\TurnosDeUnAutomovil.Designer.cs">
+      <DependentUpon>TurnosDeUnAutomovil.cs</DependentUpon>
     </Compile>
     <Compile Include="ABM Chofer\AgregarChofer.cs">
       <SubType>Form</SubType>
@@ -256,6 +262,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Automovil\MenuAutomovil.resx">
       <DependentUpon>MenuAutomovil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Automovil\TurnosDeUnAutomovil.resx">
+      <DependentUpon>TurnosDeUnAutomovil.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Chofer\AgregarChofer.resx">
       <DependentUpon>AgregarChofer.cs</DependentUpon>
