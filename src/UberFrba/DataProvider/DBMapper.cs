@@ -323,6 +323,27 @@ namespace UberFrba
             return false;
         }
 
+        public Boolean ActualizarEstadoTutnoAutomovil(int idAutomovil, int idTurno , int estado)
+        {
+            parametros.Clear();
+            parametros.Add(new SqlParameter("@idAutomovil", idAutomovil));
+            parametros.Add(new SqlParameter("@idTurno", idTurno));
+            parametros.Add(new SqlParameter("@estado",estado));
+            query = "UPDATE PUSH_IT_TO_THE_LIMIT.AutoporTurno SET auto_turno_estado =@estado WHERE auto_id=@idAutomovil AND turno_id=@idTurno";
+            int filasAfectadas = QueryBuilder.Instance.build(query, parametros).ExecuteNonQuery();
+
+            if (filasAfectadas == 1) return true;
+            return false;
+        }
+
+
+
+
+
+
+
+
+
 
         /* 
         * 

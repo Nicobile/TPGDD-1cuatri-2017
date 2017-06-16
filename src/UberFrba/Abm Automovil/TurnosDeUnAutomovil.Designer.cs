@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.labelRoles = new System.Windows.Forms.Label();
-            this.dataGridView_Automovil = new System.Windows.Forms.DataGridView();
+            this.dataGridView_Automovil_Turnos_Actuales = new System.Windows.Forms.DataGridView();
             this.button_Cancelar = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Automovil)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Automovil_Turnos_Actuales)).BeginInit();
             this.SuspendLayout();
             // 
             // labelRoles
@@ -44,21 +44,22 @@
             this.labelRoles.TabIndex = 10;
             this.labelRoles.Text = "Sus Turnos son :";
             // 
-            // dataGridView_Automovil
+            // dataGridView_Automovil_Turnos_Actuales
             // 
-            this.dataGridView_Automovil.AllowUserToAddRows = false;
-            this.dataGridView_Automovil.AllowUserToDeleteRows = false;
-            this.dataGridView_Automovil.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView_Automovil.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_Automovil.Location = new System.Drawing.Point(15, 73);
-            this.dataGridView_Automovil.Name = "dataGridView_Automovil";
-            this.dataGridView_Automovil.ReadOnly = true;
-            this.dataGridView_Automovil.Size = new System.Drawing.Size(742, 123);
-            this.dataGridView_Automovil.TabIndex = 11;
+            this.dataGridView_Automovil_Turnos_Actuales.AllowUserToAddRows = false;
+            this.dataGridView_Automovil_Turnos_Actuales.AllowUserToDeleteRows = false;
+            this.dataGridView_Automovil_Turnos_Actuales.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridView_Automovil_Turnos_Actuales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_Automovil_Turnos_Actuales.Location = new System.Drawing.Point(15, 73);
+            this.dataGridView_Automovil_Turnos_Actuales.Name = "dataGridView_Automovil_Turnos_Actuales";
+            this.dataGridView_Automovil_Turnos_Actuales.ReadOnly = true;
+            this.dataGridView_Automovil_Turnos_Actuales.Size = new System.Drawing.Size(882, 123);
+            this.dataGridView_Automovil_Turnos_Actuales.TabIndex = 11;
+            this.dataGridView_Automovil_Turnos_Actuales.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Automovil_Turnos_Actuales_CellClick);
             // 
             // button_Cancelar
             // 
-            this.button_Cancelar.Location = new System.Drawing.Point(657, 214);
+            this.button_Cancelar.Location = new System.Drawing.Point(835, 214);
             this.button_Cancelar.Name = "button_Cancelar";
             this.button_Cancelar.Size = new System.Drawing.Size(100, 30);
             this.button_Cancelar.TabIndex = 18;
@@ -70,14 +71,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(769, 256);
+            this.ClientSize = new System.Drawing.Size(947, 256);
             this.Controls.Add(this.button_Cancelar);
-            this.Controls.Add(this.dataGridView_Automovil);
+            this.Controls.Add(this.dataGridView_Automovil_Turnos_Actuales);
             this.Controls.Add(this.labelRoles);
             this.Name = "TurnosDeUnAutomovil";
             this.Text = "TurnosDeUnAutomovil";
             this.Load += new System.EventHandler(this.TurnosDeUnAutomovil_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Automovil)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Automovil_Turnos_Actuales)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -86,7 +87,7 @@
         #endregion
 
         private System.Windows.Forms.Label labelRoles;
-        private System.Windows.Forms.DataGridView dataGridView_Automovil;
+        private System.Windows.Forms.DataGridView dataGridView_Automovil_Turnos_Actuales;
         private System.Windows.Forms.Button button_Cancelar;
     }
 }

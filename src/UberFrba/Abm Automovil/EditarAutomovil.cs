@@ -63,6 +63,7 @@ namespace UberFrba.Abm_Automovil
             comboBox_Marca.Items.Add("Toyota");
             comboBox_Marca.Items.Add("Citroën");
             CargarComboBoxTurno();
+            comboBox_Turno.Items.Add("Ninguno");
             
         }
 
@@ -79,7 +80,7 @@ namespace UberFrba.Abm_Automovil
             textBox_Patente.Text = automovil.GetPatente();
             textBox_Chofer.Text = Convert.ToString(this.dniChoferAutomovil);
             checkBox_Habilitado.Checked = Convert.ToBoolean(mapper.SelectFromWhere("auto_estado", "Auto", "auto_id", automovil.GetId()));
-
+            comboBox_Turno.Text = "Agregar un Turno";
 
         }
 
@@ -110,7 +111,7 @@ namespace UberFrba.Abm_Automovil
         private void turnoActulaes_Click(object sender, EventArgs e)
         {
    
-            new TurnosDeUnAutomovil(this.idAutomovilString).ShowDialog();
+            new TurnosDeUnAutomovil(this.idAutomovilString,false,this.idAutomovil).ShowDialog();
         }
 
         private void button_Guardar_Click(object sender, EventArgs e)
@@ -119,30 +120,36 @@ namespace UberFrba.Abm_Automovil
             String Marca = comboBox_Marca.Text;
             String Modelo = textBox_Modelo.Text;
             String Patente = textBox_Modelo.Text;
-//            String IDTurno = comboBox_Turno.Text.Substring(12, 1); 
+            String TurnoSeleccionado = comboBox_Turno.Text;
             String DniChofer = textBox_Chofer.Text;
             Boolean activo = checkBox_Habilitado.Checked; //La variable activo que esta en el checkbox es para saber si esta habilitado a nivel usuario --> ESTO QUE HICO EL PIBE NO ME CABE NI UN POCO
             Boolean pudoModificar;
+            Boolean pudoActualizarTurnoAutomovil;
 
 
             try
             {
-                String IDTurno = comboBox_Turno.Text.Substring(12, 1); //lo hago aca para capturar la excepcion que lanza el substring al ser vacio el comboBox_turno
-
+                if (TurnoSeleccionado != "Ninguno")
+                {
+                    String IDTurno = comboBox_Turno.Text.Substring(12, 1); //lo hago aca para capturar la excepcion que lanza el substring al ser vacio el comboBox_turno
+                    this.SetIdTurno(IDTurno);
+                }
+                
                 Automoviles auto = new Automoviles();
 
                 auto.SetMarca(Marca);
                 auto.SetModelo(Modelo);
                 auto.SetPatente(Patente);
                 auto.SetActivo(activo);
-                this.SetIdTurno(IDTurno);
+                
                 this.SetIdChofer(DniChofer);
                 //MessageBox.Show(Convert.ToString(idChofer));
                 //idAuto = mapper.CrearAutomoviles(auto);
 
 
                 pudoModificar = mapper.Modificar(idAutomovil, auto);
-                if (pudoModificar) MessageBox.Show("Automovil modificado correctamente");
+               pudoActualizarTurnoAutomovil= mapper.ActualizarEstadoTutnoAutomovil(this.idAutomovil, idTurno,1);
+                if (pudoModificar && pudoActualizarTurnoAutomovil) MessageBox.Show("Automovil modificado correctamente");
 
                 //if (idAuto != 0)
                 //{
@@ -175,7 +182,14 @@ namespace UberFrba.Abm_Automovil
 
                 MessageBox.Show("Falta completar campo : Turno");
                 return;
-            
+
+            }
+            catch (FormatException exceptionNoSeIngresoUnTurno)
+            {
+
+                MessageBox.Show("Si no desea agregar ningun Turno seleccione Ninguno");
+                return;
+
             }
             catch (ChoferInexistenteException exceptionChoferNoexite)
             {

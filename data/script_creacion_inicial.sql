@@ -240,6 +240,7 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[Auto](
 CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[AutoporTurno](
 	[auto_id] int,
 	[turno_id] INTEGER,
+	[auto_estado] BIT not null DEFAULT 1,
 	PRIMARY KEY (auto_id, turno_id)
 )
 /*Registro de viaje*/
