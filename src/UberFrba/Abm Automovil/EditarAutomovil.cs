@@ -177,7 +177,13 @@ namespace UberFrba.Abm_Automovil
                 return;
             
             }
+            catch (ChoferInexistenteException exceptionChoferNoexite)
+            {
 
+                MessageBox.Show(exceptionChoferNoexite.Message + DniChofer);
+                return;
+
+            }
             
         }
 
