@@ -106,7 +106,7 @@ namespace UberFrba.Modelo
 
         public string GetQueryModificar()
         {
-            throw new NotImplementedException();
+            return "UPDATE PUSH_IT_TO_THE_LIMIT.Auto SET auto_patente = @Patente, auto_marca = @Marca, auto_modelo = @Modelo, auto_estado=@activo WHERE auto_id =  @id ";
         }
 
         public string GetQueryObtener()
@@ -115,11 +115,6 @@ namespace UberFrba.Modelo
         }
 
 
-
-        public void CargarInformacion(System.Data.SqlClient.SqlDataReader reader)
-        {
-            throw new NotImplementedException();
-        }
 
 
 
@@ -131,19 +126,6 @@ namespace UberFrba.Modelo
             this.activo = Convert.ToBoolean(reader["auto_estado"]);
             this.id = Convert.ToInt32(reader["auto_id"]);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         public IList<System.Data.SqlClient.SqlParameter> GetParametros()
         {

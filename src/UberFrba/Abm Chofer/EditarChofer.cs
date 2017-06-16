@@ -107,8 +107,8 @@ namespace UberFrba.ABM_Chofer
                 chofer.SetIdUsuario(idUsuario);
                 chofer.SetTelefono(telefono);
                 mapper.ActualizarEstadoUsuario(idChofer, activo);
-                MessageBox.Show(Convert.ToString(idChofer));
-                MessageBox.Show(Convert.ToString(activo));
+            //    MessageBox.Show(Convert.ToString(idChofer));
+              //  MessageBox.Show(Convert.ToString(activo));
 
                 pudoModificar = mapper.Modificar(idChofer, chofer);
                 if (pudoModificar) MessageBox.Show("Chofer modificado correctamente");

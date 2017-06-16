@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UberFrba.Exceptions;
 using UberFrba.Modelo;
 
 namespace UberFrba.Abm_Automovil
@@ -17,6 +18,23 @@ namespace UberFrba.Abm_Automovil
         private String dniChoferAutomovil;
         private String idAutomovilString;
         private DBMapper mapper = new DBMapper();
+        private int idTurno;
+        private int idChofer;
+        Boolean choferAutoAgregado;
+        Boolean turnoAutoAgregado;
+
+        public Boolean TurnoAutoAgregado
+        {
+            get { return turnoAutoAgregado; }
+            set { turnoAutoAgregado = value; }
+        }
+
+        public Boolean ChoferAutoAgregado
+        {
+            get { return choferAutoAgregado; }
+            set { choferAutoAgregado = value; }
+        }
+
 
         public EditarAutomovil(String idAutomovil, String idChofer)
         {
@@ -95,6 +113,117 @@ namespace UberFrba.Abm_Automovil
             new TurnosDeUnAutomovil(this.idAutomovilString).ShowDialog();
         }
 
+        private void button_Guardar_Click(object sender, EventArgs e)
+        {
+            // Guarda en variables todos los campos de entrada
+            String Marca = comboBox_Marca.Text;
+            String Modelo = textBox_Modelo.Text;
+            String Patente = textBox_Modelo.Text;
+//            String IDTurno = comboBox_Turno.Text.Substring(12, 1); 
+            String DniChofer = textBox_Chofer.Text;
+            Boolean activo = checkBox_Habilitado.Checked; //La variable activo que esta en el checkbox es para saber si esta habilitado a nivel usuario --> ESTO QUE HICO EL PIBE NO ME CABE NI UN POCO
+            Boolean pudoModificar;
+
+
+            try
+            {
+                String IDTurno = comboBox_Turno.Text.Substring(12, 1); //lo hago aca para capturar la excepcion que lanza el substring al ser vacio el comboBox_turno
+
+                Automoviles auto = new Automoviles();
+
+                auto.SetMarca(Marca);
+                auto.SetModelo(Modelo);
+                auto.SetPatente(Patente);
+                auto.SetActivo(activo);
+                this.SetIdTurno(IDTurno);
+                this.SetIdChofer(DniChofer);
+                //MessageBox.Show(Convert.ToString(idChofer));
+                //idAuto = mapper.CrearAutomoviles(auto);
+
+
+                pudoModificar = mapper.Modificar(idAutomovil, auto);
+                if (pudoModificar) MessageBox.Show("Automovil modificado correctamente");
+
+                //if (idAuto != 0)
+                //{
+                //     choferAutoAgregado = mapper.AsignarChoferaAutomovil(this.idAuto, this.idChofer);
+                //    turnoAutoAgregado = mapper.AsignarTurnoaAutomovil(this.idAuto, this.idTurno);
+
+
+
+                //}
+                //if (idAuto > 0 && this.choferAutoAgregado==true && this.turnoAutoAgregado==true)
+                //{
+                //    MessageBox.Show("Automovil agregado correctamente");
+
+                //}
+                this.Close();
+
+
+            }
+            catch (CampoVacioException exception)
+            {
+                MessageBox.Show("Falta completar campo : " + exception.Message);
+                return;
+            }
+            catch (FormatoInvalidoException exception)
+            {
+                MessageBox.Show("Datos mal ingresados en: " + exception.Message);
+                return;
+            }
+            catch (ArgumentOutOfRangeException exceptionNoSeIngresoUnTurno) {
+
+                MessageBox.Show("Falta completar campo : Turno");
+                return;
+            
+            }
+
+            
+        }
+
+
+
+
+                
+        public void SetIdTurno(String idTurno)
+        {
+            if (idTurno == "") throw new CampoVacioException("Turno");
+            int existe = Convert.ToInt32(mapper.SelectFromWhere("COUNT(*)", "Turno", "turno_id", Convert.ToInt32(idTurno)));
+            if (existe == 0) throw new TurnoInexistenteException("No existe un Turno con N° ");
+            this.idTurno = Convert.ToInt32(idTurno);
+        }
+
+        public void SetIdChofer(String dniChofer)
+        {
+            if (dniChofer == "") throw new CampoVacioException("DNI Chofer");
+            int idChoferObtenidoApartirDelDNI=Convert.ToInt32(mapper.SelectFromWhere("chofer_id","Chofer","chofer_dni",Convert.ToInt32(dniChofer)));
+            if(idChoferObtenidoApartirDelDNI==0) throw new ChoferInexistenteException("No existe un chofer con DNI igual a : ");
+            this.idChofer = idChoferObtenidoApartirDelDNI;
+        }
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -102,4 +231,4 @@ namespace UberFrba.Abm_Automovil
 
 
     }
-}
+

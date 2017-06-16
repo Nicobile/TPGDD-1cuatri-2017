@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.comboBox_Turno = new System.Windows.Forms.ComboBox();
             this.textBox_Chofer = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -44,7 +45,6 @@
             this.button_Limpiar = new System.Windows.Forms.Button();
             this.button_Guardar = new System.Windows.Forms.Button();
             this.checkBox_Habilitado = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,6 +68,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(262, 99);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 24);
+            this.button1.TabIndex = 24;
+            this.button1.Text = "Turnos Actuales";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.turnoActulaes_Click);
+            // 
             // comboBox_Turno
             // 
             this.comboBox_Turno.FormattingEnabled = true;
@@ -88,9 +98,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(6, 134);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 13);
+            this.label4.Size = new System.Drawing.Size(66, 13);
             this.label4.TabIndex = 21;
-            this.label4.Text = "Chofer";
+            this.label4.Text = "Chofer (DNI)";
             // 
             // label2
             // 
@@ -187,6 +197,7 @@
             this.button_Guardar.TabIndex = 27;
             this.button_Guardar.Text = "Guardar";
             this.button_Guardar.UseVisualStyleBackColor = true;
+            this.button_Guardar.Click += new System.EventHandler(this.button_Guardar_Click);
             // 
             // checkBox_Habilitado
             // 
@@ -198,17 +209,7 @@
             this.checkBox_Habilitado.Text = "Habilitado";
             this.checkBox_Habilitado.UseVisualStyleBackColor = true;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(262, 99);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 24);
-            this.button1.TabIndex = 24;
-            this.button1.Text = "Turnos Actuales";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.turnoActulaes_Click);
-            // 
-            // TurnosActualesAutomovil
+            // EditarAutomovil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -219,7 +220,7 @@
             this.Controls.Add(this.button_Cancelar);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.groupBox1);
-            this.Name = "TurnosActualesAutomovil";
+            this.Name = "EditarAutomovil";
             this.Text = "EditarAutomovil";
             this.Load += new System.EventHandler(this.EditarAutomovil_Load);
             this.groupBox1.ResumeLayout(false);
