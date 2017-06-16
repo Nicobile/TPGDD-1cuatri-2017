@@ -15,11 +15,13 @@ namespace UberFrba.Abm_Automovil
     {
         private int idAutomovil;
         private String dniChoferAutomovil;
+        private String idAutomovilString;
         private DBMapper mapper = new DBMapper();
 
         public EditarAutomovil(String idAutomovil, String idChofer)
         {
             InitializeComponent();
+            this.idAutomovilString=idAutomovil;
             this.idAutomovil = Convert.ToInt32(idAutomovil);
             this.dniChoferAutomovil = idChofer;
             
@@ -85,6 +87,12 @@ namespace UberFrba.Abm_Automovil
             }
 
 
+        }
+
+        private void turnoActulaes_Click(object sender, EventArgs e)
+        {
+   
+            new TurnosDeUnAutomovil(this.idAutomovilString).ShowDialog();
         }
 
 

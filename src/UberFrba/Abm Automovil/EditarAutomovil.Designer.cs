@@ -44,11 +44,13 @@
             this.button_Limpiar = new System.Windows.Forms.Button();
             this.button_Guardar = new System.Windows.Forms.Button();
             this.checkBox_Habilitado = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.comboBox_Turno);
             this.groupBox1.Controls.Add(this.textBox_Chofer);
             this.groupBox1.Controls.Add(this.label4);
@@ -71,7 +73,7 @@
             this.comboBox_Turno.FormattingEnabled = true;
             this.comboBox_Turno.Location = new System.Drawing.Point(91, 99);
             this.comboBox_Turno.Name = "comboBox_Turno";
-            this.comboBox_Turno.Size = new System.Drawing.Size(271, 21);
+            this.comboBox_Turno.Size = new System.Drawing.Size(165, 21);
             this.comboBox_Turno.TabIndex = 23;
             // 
             // textBox_Chofer
@@ -196,7 +198,17 @@
             this.checkBox_Habilitado.Text = "Habilitado";
             this.checkBox_Habilitado.UseVisualStyleBackColor = true;
             // 
-            // EditarAutomovil
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(262, 99);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 24);
+            this.button1.TabIndex = 24;
+            this.button1.Text = "Turnos Actuales";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.turnoActulaes_Click);
+            // 
+            // TurnosActualesAutomovil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -207,7 +219,7 @@
             this.Controls.Add(this.button_Cancelar);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.groupBox1);
-            this.Name = "EditarAutomovil";
+            this.Name = "TurnosActualesAutomovil";
             this.Text = "EditarAutomovil";
             this.Load += new System.EventHandler(this.EditarAutomovil_Load);
             this.groupBox1.ResumeLayout(false);
@@ -235,5 +247,6 @@
         private System.Windows.Forms.Button button_Limpiar;
         private System.Windows.Forms.Button button_Guardar;
         private System.Windows.Forms.CheckBox checkBox_Habilitado;
+        private System.Windows.Forms.Button button1;
     }
 }
