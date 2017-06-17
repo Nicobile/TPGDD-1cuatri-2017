@@ -22,6 +22,13 @@ namespace UberFrba.Abm_Automovil
         private int idChofer;
         Boolean choferAutoAgregado;
         Boolean turnoAutoAgregado;
+        Boolean pudoActualizarTurnoAutomovil;
+
+        public Boolean PudoActualizarTurnoAutomovil
+        {
+            get { return pudoActualizarTurnoAutomovil; }
+            set { pudoActualizarTurnoAutomovil = value; }
+        }
 
         public Boolean TurnoAutoAgregado
         {
@@ -124,8 +131,8 @@ namespace UberFrba.Abm_Automovil
             String DniChofer = textBox_Chofer.Text;
             Boolean activo = checkBox_Habilitado.Checked; //La variable activo que esta en el checkbox es para saber si esta habilitado a nivel usuario --> ESTO QUE HICO EL PIBE NO ME CABE NI UN POCO
             Boolean pudoModificar;
-            Boolean pudoActualizarTurnoAutomovil;
-
+            
+            Boolean existeTurnoAutomovil;
 
             try
             {
@@ -148,7 +155,23 @@ namespace UberFrba.Abm_Automovil
 
 
                 pudoModificar = mapper.Modificar(idAutomovil, auto);
-               pudoActualizarTurnoAutomovil= mapper.ActualizarEstadoTutnoAutomovil(this.idAutomovil, idTurno,1);
+
+                existeTurnoAutomovil = mapper.ExisteEstadoTunoAutomovil(this.idAutomovil, idTurno);
+                //MessageBox.Show(Convert.ToString(retorno));
+
+                if (existeTurnoAutomovil)
+                {
+                    this.pudoActualizarTurnoAutomovil = mapper.ActualizarEstadoTurnoAutomovil(this.idAutomovil, idTurno, 1);
+                }
+                else
+                {
+
+
+                    this.pudoActualizarTurnoAutomovil = mapper.AgregarTurnoAutomovil(this.idAutomovil, idTurno);
+
+                }
+                
+                
                 if (pudoModificar && pudoActualizarTurnoAutomovil) MessageBox.Show("Automovil modificado correctamente");
 
                 //if (idAuto != 0)

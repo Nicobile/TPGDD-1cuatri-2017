@@ -98,7 +98,7 @@ namespace UberFrba.Abm_Automovil
             {
                 
                 String idTurnoAModificar = dataGridView_Automovil_Turnos_Actuales.Rows[e.RowIndex].Cells["Turno N°"].Value.ToString();
-                Boolean pudoModificar=mapper.ActualizarEstadoTutnoAutomovil(this.idAutomovilSeleccionado, Convert.ToInt32(idTurnoAModificar),0);
+                Boolean pudoModificar=mapper.ActualizarEstadoTurnoAutomovil(this.idAutomovilSeleccionado, Convert.ToInt32(idTurnoAModificar),0);
                 if (pudoModificar) MessageBox.Show("Turno deshabilitado del automovil correctamente");
                 dataGridView_Automovil_Turnos_Actuales.Rows[e.RowIndex].Cells["Habilitado"].Value = false;
                 CargarTurnoAutomovil();

@@ -323,7 +323,7 @@ namespace UberFrba
             return false;
         }
 
-        public Boolean ActualizarEstadoTutnoAutomovil(int idAutomovil, int idTurno , int estado)
+        public Boolean ActualizarEstadoTurnoAutomovil(int idAutomovil, int idTurno , int estado)
         {
             parametros.Clear();
             parametros.Add(new SqlParameter("@idAutomovil", idAutomovil));
@@ -337,6 +337,18 @@ namespace UberFrba
         }
 
 
+        public Boolean ExisteEstadoTunoAutomovil(int idAutomovil, int idTurno)
+        {
+            parametros.Clear();
+            parametros.Add(new SqlParameter("@idAutomovil", idAutomovil));
+            parametros.Add(new SqlParameter("@idTurno", idTurno));
+            query = "SELECT COUNT(*) FROM PUSH_IT_TO_THE_LIMIT.AutoporTurno WHERE auto_id=@idAutomovil AND turno_id=@idTurno";
+            object existe=  QueryBuilder.Instance.build(query, parametros).ExecuteScalar();
+             existe.ToString();
+
+            if (existe.ToString() == "1") return true;
+            return false;
+        }
 
 
 
@@ -417,6 +429,20 @@ namespace UberFrba
         }
 
 
+        public Boolean AgregarTurnoAutomovil(int idAutomovil, int idTurno)
+        {
+            parametros.Clear();
+            parametros.Add(new SqlParameter("@idAutomovil", idAutomovil));
+            parametros.Add(new SqlParameter("@idTurno", idTurno));
+            
+            query = "INSERT INTO PUSH_IT_TO_THE_LIMIT.AutoporTurno (auto_id,turno_id) values(@idAutomovil,@idTurno)";
+
+            int filasAfectadas = QueryBuilder.Instance.build(query, parametros).ExecuteNonQuery();
+            if (filasAfectadas == 1) return true;
+            return false;
+        }
+
+
 
 
 
@@ -465,6 +491,7 @@ namespace UberFrba
         public DataTable SelectDataTable(String que, String deDonde, String condiciones)
         {
             return this.SelectDataTableConUsuario(que, deDonde, condiciones);
+            
         }
 
         public DataTable SelectDataTableConUsuario(String que, String deDonde, String condiciones)
