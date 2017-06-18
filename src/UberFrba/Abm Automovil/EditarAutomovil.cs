@@ -161,7 +161,7 @@ namespace UberFrba.Abm_Automovil
                 this.SetIdChofer(DniChofer);
 
 
-                pudoModificar = mapper.Modificar(idAutomovil, auto);
+                //pudoModificar = mapper.Modificar(idAutomovil, auto);
 
                 existeTurnoAutomovil = mapper.ExisteEstadoTunoAutomovil(this.idAutomovil, idTurno);
 
@@ -249,7 +249,7 @@ namespace UberFrba.Abm_Automovil
                     }
                 
                 }
-
+                pudoModificar = mapper.Modificar(idAutomovil, auto);
                 
                 if (pudoModificar && pudoActualizarTurnoAutomovil && pudoActualizarChoferAutomovil ) MessageBox.Show("Automovil modificado correctamente");
 
