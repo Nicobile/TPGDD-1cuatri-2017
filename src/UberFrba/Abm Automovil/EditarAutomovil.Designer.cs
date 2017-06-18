@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBoxDeshabilitar_chofer = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox_Turno = new System.Windows.Forms.ComboBox();
             this.textBox_Chofer = new System.Windows.Forms.TextBox();
@@ -45,7 +46,6 @@
             this.button_Limpiar = new System.Windows.Forms.Button();
             this.button_Guardar = new System.Windows.Forms.Button();
             this.checkBox_Habilitado = new System.Windows.Forms.CheckBox();
-            this.checkBoxDeshabilitar_chofer = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,18 +65,28 @@
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(368, 172);
+            this.groupBox1.Size = new System.Drawing.Size(480, 172);
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos";
             // 
+            // checkBoxDeshabilitar_chofer
+            // 
+            this.checkBoxDeshabilitar_chofer.AutoSize = true;
+            this.checkBoxDeshabilitar_chofer.Location = new System.Drawing.Point(350, 136);
+            this.checkBoxDeshabilitar_chofer.Name = "checkBoxDeshabilitar_chofer";
+            this.checkBoxDeshabilitar_chofer.Size = new System.Drawing.Size(115, 17);
+            this.checkBoxDeshabilitar_chofer.TabIndex = 29;
+            this.checkBoxDeshabilitar_chofer.Text = "Deshabilitar Chofer";
+            this.checkBoxDeshabilitar_chofer.UseVisualStyleBackColor = true;
+            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(262, 99);
+            this.button1.Location = new System.Drawing.Point(338, 96);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 24);
+            this.button1.Size = new System.Drawing.Size(136, 24);
             this.button1.TabIndex = 24;
-            this.button1.Text = "Turnos Actuales";
+            this.button1.Text = "ModificarTurnos Actuales";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.turnoActulaes_Click);
             // 
@@ -85,14 +95,14 @@
             this.comboBox_Turno.FormattingEnabled = true;
             this.comboBox_Turno.Location = new System.Drawing.Point(91, 99);
             this.comboBox_Turno.Name = "comboBox_Turno";
-            this.comboBox_Turno.Size = new System.Drawing.Size(165, 21);
+            this.comboBox_Turno.Size = new System.Drawing.Size(241, 21);
             this.comboBox_Turno.TabIndex = 23;
             // 
             // textBox_Chofer
             // 
             this.textBox_Chofer.Location = new System.Drawing.Point(91, 134);
             this.textBox_Chofer.Name = "textBox_Chofer";
-            this.textBox_Chofer.Size = new System.Drawing.Size(150, 20);
+            this.textBox_Chofer.Size = new System.Drawing.Size(241, 20);
             this.textBox_Chofer.TabIndex = 22;
             // 
             // label4
@@ -117,7 +127,7 @@
             // 
             this.textBox_Patente.Location = new System.Drawing.Point(91, 71);
             this.textBox_Patente.Name = "textBox_Patente";
-            this.textBox_Patente.Size = new System.Drawing.Size(271, 20);
+            this.textBox_Patente.Size = new System.Drawing.Size(383, 20);
             this.textBox_Patente.TabIndex = 18;
             // 
             // label3
@@ -133,7 +143,7 @@
             // 
             this.textBox_Modelo.Location = new System.Drawing.Point(91, 45);
             this.textBox_Modelo.Name = "textBox_Modelo";
-            this.textBox_Modelo.Size = new System.Drawing.Size(271, 20);
+            this.textBox_Modelo.Size = new System.Drawing.Size(383, 20);
             this.textBox_Modelo.TabIndex = 16;
             // 
             // label1
@@ -150,7 +160,7 @@
             this.comboBox_Marca.FormattingEnabled = true;
             this.comboBox_Marca.Location = new System.Drawing.Point(91, 16);
             this.comboBox_Marca.Name = "comboBox_Marca";
-            this.comboBox_Marca.Size = new System.Drawing.Size(271, 21);
+            this.comboBox_Marca.Size = new System.Drawing.Size(383, 21);
             this.comboBox_Marca.TabIndex = 14;
             // 
             // label11
@@ -211,21 +221,11 @@
             this.checkBox_Habilitado.Text = "Habilitado";
             this.checkBox_Habilitado.UseVisualStyleBackColor = true;
             // 
-            // checkBoxDeshabilitar_chofer
-            // 
-            this.checkBoxDeshabilitar_chofer.AutoSize = true;
-            this.checkBoxDeshabilitar_chofer.Location = new System.Drawing.Point(247, 136);
-            this.checkBoxDeshabilitar_chofer.Name = "checkBoxDeshabilitar_chofer";
-            this.checkBoxDeshabilitar_chofer.Size = new System.Drawing.Size(115, 17);
-            this.checkBoxDeshabilitar_chofer.TabIndex = 29;
-            this.checkBoxDeshabilitar_chofer.Text = "Deshabilitar Chofer";
-            this.checkBoxDeshabilitar_chofer.UseVisualStyleBackColor = true;
-            // 
             // EditarAutomovil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(392, 308);
+            this.ClientSize = new System.Drawing.Size(504, 308);
             this.Controls.Add(this.checkBox_Habilitado);
             this.Controls.Add(this.button_Guardar);
             this.Controls.Add(this.button_Limpiar);

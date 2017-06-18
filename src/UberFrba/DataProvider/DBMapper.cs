@@ -363,12 +363,13 @@ namespace UberFrba
             if (existe.ToString() == "1") return true;
             return false;
         }
-        public Boolean ExisteChoferAutomovilActivo(int idChofer,int estado)
+        public Boolean ExisteChoferAutomovilActivo(int idChofer,int idAutomovil,int estado)
         {
             parametros.Clear();
             parametros.Add(new SqlParameter("@idChofer", idChofer));
             parametros.Add(new SqlParameter("@estado", estado));
-            query = "SELECT COUNT(*) FROM PUSH_IT_TO_THE_LIMIT.ChoferporAuto WHERE  chofer_id=@idChofer AND auto_chofer_estado=@estado";
+            parametros.Add(new SqlParameter("@idAutomovil", idAutomovil));
+            query = "SELECT COUNT(*) FROM PUSH_IT_TO_THE_LIMIT.ChoferporAuto WHERE  chofer_id=@idChofer AND auto_chofer_estado=@estado AND auto_id <> @idAutomovil";
             object existe = QueryBuilder.Instance.build(query, parametros).ExecuteScalar();
             existe.ToString();
 

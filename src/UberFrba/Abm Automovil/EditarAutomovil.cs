@@ -170,6 +170,27 @@ namespace UberFrba.Abm_Automovil
                 int idChoferViejo = this.obtenerIdChoferApartirDelDNI(dniChoferAutomovil);
                 int idChoferNuevo = this.obtenerIdChoferApartirDelDNI(DniChofer);
 
+                if (existeTurnoAutomovil)
+                {
+                    this.pudoActualizarTurnoAutomovil = mapper.ActualizarEstadoTurnoAutomovil(this.idAutomovil, idTurno, 1);
+
+                }
+                else
+                {
+
+                    if (TurnoSeleccionado != "Ninguno")
+                    {
+                        this.pudoActualizarTurnoAutomovil = mapper.AgregarTurnoAutomovil(this.idAutomovil, idTurno);
+                    }
+                    else
+                    {
+
+
+                        pudoActualizarTurnoAutomovil = true;
+                    }
+                }
+                
+
                 if (idChoferNuevo != idChoferViejo)
                 {
                     if (existeChoferAutomovil)
@@ -192,7 +213,7 @@ namespace UberFrba.Abm_Automovil
                 }
                 else {
                     Boolean existeChoferAutomovilActivo;
-                    existeChoferAutomovilActivo = mapper.ExisteChoferAutomovilActivo(this.idChofer, 1);//Esto quiere decir que ya existe el chofer en la tabla choferporAuto con la columna auto_chofer_estado en 1
+                    existeChoferAutomovilActivo = mapper.ExisteChoferAutomovilActivo(this.idChofer,this.idAutomovil,1);//Esto quiere decir que ya existe el chofer en la tabla choferporAuto con la columna auto_chofer_estado en 1
 
 
                     if (checkBoxActivoDeshabilitar_Chofer)
@@ -209,7 +230,7 @@ namespace UberFrba.Abm_Automovil
                         {
 
 
-                            if (existeChoferAutomovilActivo)
+                            if (existeChoferAutomovilActivo )
                             {
 
                                 throw new ExisteChoferAutomovilHabilitadoException("Ya existe un Automovil activo para este Chofer");//Esto quiere decir que ya existe el chofer en la tabla choferporAuto con la columna auto_chofer_estado en 1
@@ -222,38 +243,13 @@ namespace UberFrba.Abm_Automovil
 
                             }
 
-
-
                         }
 
 
                     }
-
-                    
-                
-                
                 
                 }
 
-                if (existeTurnoAutomovil)
-                {
-                    MessageBox.Show("Existe turno autovomil "+Convert.ToString(existeTurnoAutomovil));
-                    this.pudoActualizarTurnoAutomovil = mapper.ActualizarEstadoTurnoAutomovil(this.idAutomovil, idTurno, 1);
-                   
-                }
-                else
-                {
-
-                    if (TurnoSeleccionado != "Ninguno")
-                    {
-                        this.pudoActualizarTurnoAutomovil = mapper.AgregarTurnoAutomovil(this.idAutomovil, idTurno);
-                    }
-                    else {
-
-
-                        pudoActualizarTurnoAutomovil = true;
-                    }
-                }
                 
                 if (pudoModificar && pudoActualizarTurnoAutomovil && pudoActualizarChoferAutomovil ) MessageBox.Show("Automovil modificado correctamente");
 
