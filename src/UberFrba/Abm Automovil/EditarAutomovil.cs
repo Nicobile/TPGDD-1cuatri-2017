@@ -159,8 +159,6 @@ namespace UberFrba.Abm_Automovil
                 auto.SetActivo(activo);
                 
                 this.SetIdChofer(DniChofer);
-                //MessageBox.Show(Convert.ToString(idChofer));
-                //idAuto = mapper.CrearAutomoviles(auto);
 
 
                 pudoModificar = mapper.Modificar(idAutomovil, auto);
@@ -168,21 +166,14 @@ namespace UberFrba.Abm_Automovil
                 existeTurnoAutomovil = mapper.ExisteEstadoTunoAutomovil(this.idAutomovil, idTurno);
 
                 existeChoferAutomovil = mapper.ExisteChoferAutomovil(this.idAutomovil, this.idChofer);
-                MessageBox.Show("idAutomovil"+Convert.ToString(this.idAutomovil));
-                MessageBox.Show("idChofer" + Convert.ToString(this.idChofer));
 
                 int idChoferViejo = this.obtenerIdChoferApartirDelDNI(dniChoferAutomovil);
                 int idChoferNuevo = this.obtenerIdChoferApartirDelDNI(DniChofer);
-                MessageBox.Show("idChoferViejo"+Convert.ToString(idChoferViejo));
-                MessageBox.Show("idChoferNuevo" + Convert.ToString(idChoferNuevo));
-                //MessageBox.Show("Existe chofer Autmovil " + Convert.ToString(existeChoferAutomovil));
 
                 if (idChoferNuevo != idChoferViejo)
                 {
-                    MessageBox.Show("Existe chofer Autmovil "+Convert.ToString( existeChoferAutomovil));
                     if (existeChoferAutomovil)
                     {
-                        MessageBox.Show("Pase por if(existeChoferAutomovil)");
                         //deshabilitar el chofer dni viejo
                         mapper.ActualizarEstadoChoferAutomovil(this.idAutomovil, idChoferViejo, 0);
                         //habilitar el chofer dni nuevo
@@ -190,11 +181,8 @@ namespace UberFrba.Abm_Automovil
                     }
                     else
                     {
-                        MessageBox.Show("Pase por el else del if(existeChoferAutomovil)");
                        
-                       // this.pudoActualizarChoferAutomovil = mapper.AgregarChoferAutomovil(this.idAutomovil, idChoferNuevo);
                         this.pudoActualizarChoferAutomovil = mapper.AsignarChoferaAutomovil(this.idAutomovil, idChoferNuevo);//aca llamo al procedure pr_agregar_chofer_a_automovil
-
                         if (pudoActualizarChoferAutomovil) {
 
                             mapper.ActualizarEstadoChoferAutomovil(this.idAutomovil, idChoferViejo, 0);
@@ -203,16 +191,45 @@ namespace UberFrba.Abm_Automovil
                     }
                 }
                 else {
+                    Boolean existeChoferAutomovilActivo;
+                    existeChoferAutomovilActivo = mapper.ExisteChoferAutomovilActivo(this.idChofer, 1);//Esto quiere decir que ya existe el chofer en la tabla choferporAuto con la columna auto_chofer_estado en 1
 
-                    if (checkBoxActivoDeshabilitar_Chofer) {
-                        MessageBox.Show("Pase por el else del if(idchoferNuevo != idChoferViejo) y if (checkBoxActivoDeshabilitar_Chofer)");
-                    
-                    //deshabilitar  chofer
+
+                    if (checkBoxActivoDeshabilitar_Chofer)
+                    {
+
+                        //deshabilitar  chofer
                         this.pudoActualizarChoferAutomovil = mapper.ActualizarEstadoChoferAutomovil(this.idAutomovil, idChoferViejo, 0);
-                    
+
                     }
-                
-                
+                    else
+                    {
+
+                        if (existeChoferAutomovil)
+                        {
+
+
+                            if (existeChoferAutomovilActivo)
+                            {
+
+                                throw new ExisteChoferAutomovilHabilitadoException("Ya existe un Automovil activo para este Chofer");//Esto quiere decir que ya existe el chofer en la tabla choferporAuto con la columna auto_chofer_estado en 1
+
+                            }
+                            else
+                            {
+
+                                this.pudoActualizarChoferAutomovil = mapper.ActualizarEstadoChoferAutomovil(this.idAutomovil, idChoferViejo, 1);
+
+                            }
+
+
+
+                        }
+
+
+                    }
+
+                    
                 
                 
                 
@@ -238,30 +255,8 @@ namespace UberFrba.Abm_Automovil
                     }
                 }
                 
-                
+                if (pudoModificar && pudoActualizarTurnoAutomovil && pudoActualizarChoferAutomovil ) MessageBox.Show("Automovil modificado correctamente");
 
-
-
-
-
-
-
-
-                if (pudoModificar && pudoActualizarTurnoAutomovil ) MessageBox.Show("Automovil modificado correctamente");
-
-                //if (idAuto != 0)
-                //{
-                //     choferAutoAgregado = mapper.AsignarChoferaAutomovil(this.idAuto, this.idChofer);
-                //    turnoAutoAgregado = mapper.AsignarTurnoaAutomovil(this.idAuto, this.idTurno);
-
-
-
-                //}
-                //if (idAuto > 0 && this.choferAutoAgregado==true && this.turnoAutoAgregado==true)
-                //{
-                //    MessageBox.Show("Automovil agregado correctamente");
-
-                //}
                 this.Close();
 
 
@@ -296,13 +291,20 @@ namespace UberFrba.Abm_Automovil
                 return;
 
             }
+            catch (ExisteChoferAutomovilHabilitadoException exceptionChoferAutoActivoexiste)
+            {
+
+                MessageBox.Show(exceptionChoferAutoActivoexiste.Message , "Coche activo ya asignado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+
+            }
+                 
             catch (SqlException error)
             {
 
                 switch (error.Number)
                 {
-                    case 51005: MessageBox.Show(error.Message + " para agregarlo ingresarlo desmarcar el casillero de Habilitado", "Coche activo ya asignado", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                       // mapper.EliminarAutoFisicamenteDelaBase(idAuto, "Auto");//esto es para eliminar el auto que se agrego arriba por que a pesar de que falle al agregar AutoChofer al al auto lo agrega
+                    case 51005: MessageBox.Show(error.Message , "Coche activo ya asignado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                         break;
 
@@ -328,8 +330,6 @@ namespace UberFrba.Abm_Automovil
         {
             if (dniChofer == "") throw new CampoVacioException("DNI Chofer");
             int idChoferObtenidoApartirDelDNI = this.obtenerIdChoferApartirDelDNI(dniChofer);
-            //Convert.ToInt32(mapper.SelectFromWhere("chofer_id","Chofer","chofer_dni",Convert.ToInt32(dniChofer)));
-            //if(idChoferObtenidoApartirDelDNI==0) throw new ChoferInexistenteException("No existe un chofer con DNI igual a : ");
             this.idChofer = idChoferObtenidoApartirDelDNI;
         }
 

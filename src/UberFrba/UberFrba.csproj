@@ -187,6 +187,7 @@
     <Compile Include="Exceptions\ChoferInexistenteException.cs" />
     <Compile Include="Exceptions\ChoferYaExisteException.cs" />
     <Compile Include="Exceptions\ClienteYaExisteException.cs" />
+    <Compile Include="Exceptions\ExisteChoferAutomovilHabilitadoException.cs" />
     <Compile Include="Exceptions\FechaPasadaException.cs" />
     <Compile Include="Exceptions\FormatoInvalidoException.cs" />
     <Compile Include="Exceptions\TelefonoYaExisteException.cs" />
