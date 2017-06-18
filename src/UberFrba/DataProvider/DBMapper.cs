@@ -351,7 +351,46 @@ namespace UberFrba
         }
 
 
+        public Boolean ExisteChoferAutomovil(int idAutomovil, int idChofer)
+        {
+            parametros.Clear();
+            parametros.Add(new SqlParameter("@idAutomovil", idAutomovil));
+            parametros.Add(new SqlParameter("@idChofer", idChofer));
+            query = "SELECT COUNT(*) FROM PUSH_IT_TO_THE_LIMIT.ChoferporAuto WHERE auto_id=@idAutomovil AND chofer_id=@idChofer";
+            object existe = QueryBuilder.Instance.build(query, parametros).ExecuteScalar();
+            existe.ToString();
 
+            if (existe.ToString() == "1") return true;
+            return false;
+        }
+
+
+        public Boolean ActualizarEstadoChoferAutomovil(int idAutomovil, int idChofer, int estado)
+        {
+            parametros.Clear();
+            parametros.Add(new SqlParameter("@idAutomovil", idAutomovil));
+            parametros.Add(new SqlParameter("@idChofer", idChofer));
+            parametros.Add(new SqlParameter("@estado", estado));
+            query = "UPDATE PUSH_IT_TO_THE_LIMIT.ChoferporAuto SET auto_chofer_estado =@estado WHERE auto_id=@idAutomovil AND chofer_id=@idChofer";
+            int filasAfectadas = QueryBuilder.Instance.build(query, parametros).ExecuteNonQuery();
+
+            if (filasAfectadas == 1) return true;
+            return false;
+        }
+
+
+        public Boolean AgregarChoferAutomovil(int idAutomovil, int idChofer)
+        {
+            parametros.Clear();
+            parametros.Add(new SqlParameter("@idAutomovil", idAutomovil));
+            parametros.Add(new SqlParameter("@idChofer", idChofer));
+
+            query = "INSERT INTO PUSH_IT_TO_THE_LIMIT.ChoferporAuto (auto_id,chofer_id) values(@idAutomovil,@idChofer)";
+
+            int filasAfectadas = QueryBuilder.Instance.build(query, parametros).ExecuteNonQuery();
+            if (filasAfectadas == 1) return true;
+            return false;
+        }
 
 
 
@@ -565,7 +604,7 @@ namespace UberFrba
 
         public DataTable SelectAutomovilParaFiltroConFiltro(String filtro)
         {
-            return this.SelectDataTable("a.auto_id 'Auto N°',a.auto_patente 'Patente',a.auto_marca 'Marca',a.auto_modelo 'Modelo',a.auto_estado 'Habilitado',a.auto_licencia 'Licencia',a.auto_rodado 'Rodado',c.chofer_dni 'DNI chofer'  "
+            return this.SelectDataTable("a.auto_id 'Auto N°',a.auto_patente 'Patente',a.auto_marca 'Marca',a.auto_modelo 'Modelo',(a.auto_estado & p.auto_chofer_estado) 'Habilitado',a.auto_licencia 'Licencia',a.auto_rodado 'Rodado',c.chofer_dni 'DNI chofer'  "
               , "PUSH_IT_TO_THE_LIMIT.Auto a, PUSH_IT_TO_THE_LIMIT.Chofer c ,PUSH_IT_TO_THE_LIMIT.ChoferporAuto p "
               , "a.auto_id = p.auto_id AND c.chofer_id = p.chofer_id " + filtro + "ORDER BY 'Auto N°'");
         }

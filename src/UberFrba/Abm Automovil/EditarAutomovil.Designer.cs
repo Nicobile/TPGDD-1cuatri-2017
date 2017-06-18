@@ -45,11 +45,13 @@
             this.button_Limpiar = new System.Windows.Forms.Button();
             this.button_Guardar = new System.Windows.Forms.Button();
             this.checkBox_Habilitado = new System.Windows.Forms.CheckBox();
+            this.checkBoxDeshabilitar_chofer = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBoxDeshabilitar_chofer);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.comboBox_Turno);
             this.groupBox1.Controls.Add(this.textBox_Chofer);
@@ -63,7 +65,7 @@
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(368, 181);
+            this.groupBox1.Size = new System.Drawing.Size(368, 172);
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos";
@@ -90,7 +92,7 @@
             // 
             this.textBox_Chofer.Location = new System.Drawing.Point(91, 134);
             this.textBox_Chofer.Name = "textBox_Chofer";
-            this.textBox_Chofer.Size = new System.Drawing.Size(271, 20);
+            this.textBox_Chofer.Size = new System.Drawing.Size(150, 20);
             this.textBox_Chofer.TabIndex = 22;
             // 
             // label4
@@ -163,7 +165,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(18, 196);
+            this.label14.Location = new System.Drawing.Point(18, 187);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(174, 13);
             this.label14.TabIndex = 24;
@@ -202,12 +204,22 @@
             // checkBox_Habilitado
             // 
             this.checkBox_Habilitado.AutoSize = true;
-            this.checkBox_Habilitado.Location = new System.Drawing.Point(21, 229);
+            this.checkBox_Habilitado.Location = new System.Drawing.Point(21, 222);
             this.checkBox_Habilitado.Name = "checkBox_Habilitado";
             this.checkBox_Habilitado.Size = new System.Drawing.Size(73, 17);
             this.checkBox_Habilitado.TabIndex = 28;
             this.checkBox_Habilitado.Text = "Habilitado";
             this.checkBox_Habilitado.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxDeshabilitar_chofer
+            // 
+            this.checkBoxDeshabilitar_chofer.AutoSize = true;
+            this.checkBoxDeshabilitar_chofer.Location = new System.Drawing.Point(247, 136);
+            this.checkBoxDeshabilitar_chofer.Name = "checkBoxDeshabilitar_chofer";
+            this.checkBoxDeshabilitar_chofer.Size = new System.Drawing.Size(115, 17);
+            this.checkBoxDeshabilitar_chofer.TabIndex = 29;
+            this.checkBoxDeshabilitar_chofer.Text = "Deshabilitar Chofer";
+            this.checkBoxDeshabilitar_chofer.UseVisualStyleBackColor = true;
             // 
             // EditarAutomovil
             // 
@@ -249,5 +261,6 @@
         private System.Windows.Forms.Button button_Guardar;
         private System.Windows.Forms.CheckBox checkBox_Habilitado;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox checkBoxDeshabilitar_chofer;
     }
 }

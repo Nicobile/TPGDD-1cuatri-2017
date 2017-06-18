@@ -240,7 +240,7 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[Auto](
 CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[AutoporTurno](
 	[auto_id] int,
 	[turno_id] INTEGER,
-	[auto_estado] BIT not null DEFAULT 1,
+	[auto_turno_estado] BIT not null DEFAULT 1,
 	PRIMARY KEY (auto_id, turno_id)
 )
 /*Registro de viaje*/
@@ -262,6 +262,7 @@ create table [PUSH_IT_TO_THE_LIMIT].RegistroViaje(
 CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[ChoferporAuto](
 	[chofer_id] INT,
 	[auto_id] INT,
+	[auto_chofer_estado] BIT not null DEFAULT 1,
 	PRIMARY KEY (chofer_id, auto_id)
 )
 
