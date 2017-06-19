@@ -237,11 +237,11 @@
     <Compile Include="Registro de Usuario\RegistrarUsuario.Designer.cs">
       <DependentUpon>RegistrarUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="Registro Viajes\AgregarViaje.cs">
+    <Compile Include="Registro Viajes\RegistrarViaje.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registro Viajes\AgregarViaje.Designer.cs">
-      <DependentUpon>AgregarViaje.cs</DependentUpon>
+    <Compile Include="Registro Viajes\RegistrarViaje.Designer.cs">
+      <DependentUpon>RegistrarViaje.cs</DependentUpon>
     </Compile>
     <Compile Include="Rendicion Viajes\Form1.cs">
       <SubType>Form</SubType>
@@ -339,8 +339,8 @@
     <EmbeddedResource Include="Registro de Usuario\RegistrarUsuario.resx">
       <DependentUpon>RegistrarUsuario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Registro Viajes\AgregarViaje.resx">
-      <DependentUpon>AgregarViaje.cs</DependentUpon>
+    <EmbeddedResource Include="Registro Viajes\RegistrarViaje.resx">
+      <DependentUpon>RegistrarViaje.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
