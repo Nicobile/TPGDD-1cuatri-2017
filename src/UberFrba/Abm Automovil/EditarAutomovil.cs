@@ -167,8 +167,8 @@ namespace UberFrba.Abm_Automovil
 
                 existeChoferAutomovil = mapper.ExisteChoferAutomovil(this.idAutomovil, this.idChofer);
 
-                int idChoferViejo = this.obtenerIdChoferApartirDelDNI(dniChoferAutomovil);
-                int idChoferNuevo = this.obtenerIdChoferApartirDelDNI(DniChofer);
+                int idChoferViejo = mapper.obtenerIdChoferApartirDelDNI(dniChoferAutomovil);
+                int idChoferNuevo = mapper.obtenerIdChoferApartirDelDNI(DniChofer);
 
                 if (existeTurnoAutomovil)
                 {
@@ -325,19 +325,11 @@ namespace UberFrba.Abm_Automovil
         public void SetIdChofer(String dniChofer)
         {
             if (dniChofer == "") throw new CampoVacioException("DNI Chofer");
-            int idChoferObtenidoApartirDelDNI = this.obtenerIdChoferApartirDelDNI(dniChofer);
+            int idChoferObtenidoApartirDelDNI = mapper.obtenerIdChoferApartirDelDNI(dniChofer);
             this.idChofer = idChoferObtenidoApartirDelDNI;
         }
 
-        public int obtenerIdChoferApartirDelDNI(String dniChofer) {
-
-
-            int idChoferObtenidoApartirDelDNI = Convert.ToInt32(mapper.SelectFromWhere("chofer_id", "Chofer", "chofer_dni", Convert.ToInt32(dniChofer)));
-            if (idChoferObtenidoApartirDelDNI == 0) throw new ChoferInexistenteException("No existe un chofer con DNI igual a : ");
-
-            return idChoferObtenidoApartirDelDNI;
-        
-        }
+      
 
 
         }

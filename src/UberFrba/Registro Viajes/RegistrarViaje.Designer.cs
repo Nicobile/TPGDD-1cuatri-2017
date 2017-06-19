@@ -39,7 +39,6 @@
             this.textBox_CantidadKm = new System.Windows.Forms.TextBox();
             this.label_CantidadKm = new System.Windows.Forms.Label();
             this.label_Turno = new System.Windows.Forms.Label();
-            this.textBox_Turno = new System.Windows.Forms.TextBox();
             this.textBox_Automovil = new System.Windows.Forms.TextBox();
             this.label_Automovil = new System.Windows.Forms.Label();
             this.label_Chofer = new System.Windows.Forms.Label();
@@ -47,11 +46,13 @@
             this.button_Cancelar = new System.Windows.Forms.Button();
             this.button_Limpiar = new System.Windows.Forms.Button();
             this.button_Guardar = new System.Windows.Forms.Button();
+            this.comboBox_TurnosAutmovilSeleccionado = new System.Windows.Forms.ComboBox();
             this.groupBox_datosViaje.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox_datosViaje
             // 
+            this.groupBox_datosViaje.Controls.Add(this.comboBox_TurnosAutmovilSeleccionado);
             this.groupBox_datosViaje.Controls.Add(this.comboBox_chofer);
             this.groupBox_datosViaje.Controls.Add(this.textBox_Cliente);
             this.groupBox_datosViaje.Controls.Add(this.label_Cliente);
@@ -62,7 +63,6 @@
             this.groupBox_datosViaje.Controls.Add(this.textBox_CantidadKm);
             this.groupBox_datosViaje.Controls.Add(this.label_CantidadKm);
             this.groupBox_datosViaje.Controls.Add(this.label_Turno);
-            this.groupBox_datosViaje.Controls.Add(this.textBox_Turno);
             this.groupBox_datosViaje.Controls.Add(this.textBox_Automovil);
             this.groupBox_datosViaje.Controls.Add(this.label_Automovil);
             this.groupBox_datosViaje.Controls.Add(this.label_Chofer);
@@ -155,13 +155,6 @@
             this.label_Turno.TabIndex = 27;
             this.label_Turno.Text = "Turno";
             // 
-            // textBox_Turno
-            // 
-            this.textBox_Turno.Location = new System.Drawing.Point(158, 86);
-            this.textBox_Turno.Name = "textBox_Turno";
-            this.textBox_Turno.Size = new System.Drawing.Size(273, 20);
-            this.textBox_Turno.TabIndex = 26;
-            // 
             // textBox_Automovil
             // 
             this.textBox_Automovil.Location = new System.Drawing.Point(158, 57);
@@ -225,6 +218,14 @@
             this.button_Guardar.Text = "Guardar";
             this.button_Guardar.UseVisualStyleBackColor = true;
             // 
+            // comboBox_TurnosAutmovilSeleccionado
+            // 
+            this.comboBox_TurnosAutmovilSeleccionado.FormattingEnabled = true;
+            this.comboBox_TurnosAutmovilSeleccionado.Location = new System.Drawing.Point(158, 86);
+            this.comboBox_TurnosAutmovilSeleccionado.Name = "comboBox_TurnosAutmovilSeleccionado";
+            this.comboBox_TurnosAutmovilSeleccionado.Size = new System.Drawing.Size(273, 21);
+            this.comboBox_TurnosAutmovilSeleccionado.TabIndex = 38;
+            // 
             // RegistrarViaje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -251,7 +252,6 @@
         private System.Windows.Forms.Label label_Chofer;
         private System.Windows.Forms.Label label_Automovil;
         private System.Windows.Forms.Label label_Turno;
-        private System.Windows.Forms.TextBox textBox_Turno;
         private System.Windows.Forms.TextBox textBox_Automovil;
         private System.Windows.Forms.Label label_CantidadKm;
         private System.Windows.Forms.TextBox textBox_CantidadKm;
@@ -266,5 +266,6 @@
         private System.Windows.Forms.Button button_Limpiar;
         private System.Windows.Forms.Button button_Guardar;
         private System.Windows.Forms.ComboBox comboBox_chofer;
+        private System.Windows.Forms.ComboBox comboBox_TurnosAutmovilSeleccionado;
     }
 }

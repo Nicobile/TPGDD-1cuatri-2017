@@ -351,6 +351,19 @@ namespace UberFrba
         }
 
 
+        public String ObtenerPatenteAutomovil(int idChofer)
+        {
+            parametros.Clear();
+            parametros.Add(new SqlParameter("@idChofer", idChofer));
+            query = "SELECT auto_patente FROM PUSH_IT_TO_THE_LIMIT.Auto WHERE auto_id = (SELECT auto_id FROM PUSH_IT_TO_THE_LIMIT.ChoferporAuto where chofer_id=@idChofer AND auto_chofer_estado=1)";
+            object patenteAutomovil = QueryBuilder.Instance.build(query, parametros).ExecuteScalar();
+            return patenteAutomovil.ToString();
+        }
+
+
+
+
+
         public Boolean ExisteChoferAutomovil(int idAutomovil, int idChofer)
         {
             parametros.Clear();
@@ -405,6 +418,25 @@ namespace UberFrba
             return false;
         }
 
+
+        public int obtenerIdChoferApartirDelDNI(String dniChofer)
+        {
+
+
+            int idChoferObtenidoApartirDelDNI = Convert.ToInt32(this.SelectFromWhere("chofer_id", "Chofer", "chofer_dni", Convert.ToInt32(dniChofer)));
+            if (idChoferObtenidoApartirDelDNI == 0) throw new ChoferInexistenteException("No existe un chofer con DNI igual a : ");
+
+            return idChoferObtenidoApartirDelDNI;
+
+        }
+
+        public int obtenerIdAutomovilApartirDeLaPatente(String patenteAuto)
+        {
+
+            int idAutomovilObtenidoApartirDelDNI = Convert.ToInt32(this.SelectFromWhere("auto_id", "Auto", "auto_patente", patenteAuto));
+            return idAutomovilObtenidoApartirDelDNI;
+
+        }
 
 
 
@@ -558,6 +590,22 @@ namespace UberFrba
             adapter.Fill(datos);
             return datos.Tables[0];
         }
+
+
+        public DataTable ObtenerTurnosHabilitadosAutmovil(int idAutomovil)
+        {
+
+            DataSet turnosAutomovil = new DataSet();
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            parametros = new List<SqlParameter>();
+            parametros.Clear();
+            parametros.Add(new SqlParameter("@idAutomovil",idAutomovil));
+            command = QueryBuilder.Instance.build("SELECT t.turno_id 'Turno N°',t.turno_hora_inicio 'Hora Inicio',t.turno_hora_fin 'Hora Fin',t.turno_descripcion 'Descripcion',t.turno_valor_Kilometro 'Valor Kilometro',t.turno_precio_base 'Precio Base',(t.turno_habilitado & A.auto_turno_estado) 'Habilitado'FROM  PUSH_IT_TO_THE_LIMIT.Turno t JOIN    PUSH_IT_TO_THE_LIMIT.AutoporTurno A ON(T.turno_id=A.turno_id) where t.turno_id IN (SELECT turno_id FROM PUSH_IT_TO_THE_LIMIT.AutoporTurno WHERE auto_id=@idAutomovil) AND auto_id=@idAutomovil AND auto_turno_estado=1 ", parametros);
+            adapter.SelectCommand = command;
+            adapter.Fill(turnosAutomovil);
+            return turnosAutomovil.Tables[0];
+
+         }
 
         /*
         *
