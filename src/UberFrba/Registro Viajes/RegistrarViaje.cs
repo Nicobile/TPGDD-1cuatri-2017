@@ -35,9 +35,10 @@ namespace UberFrba.Registro_Viajes
             textBox_CantidadKm.Text = "";
             comboBox_chofer.Text = "";
             textBox_Cliente.Text = "";
-            textBox_FHfin.Text = "";
-            textBox_FHinicio.Text = "";
-            comboBox_TurnosAutmovilSeleccionado.Text = "";    
+            textBox_Fecha.Text = "";
+            comboBox_TurnosAutmovilSeleccionado.Text = "";
+            horaInicio.Text = "00:00";
+            horaFin.Text = "00:00";
         }
 
         private void RegistrarViaje_Load(object sender, EventArgs e)
@@ -67,7 +68,7 @@ namespace UberFrba.Registro_Viajes
         
         private void CargarComboBoxChoferes()
         {
-              
+            
             DataTable dniChoferes = mapper.SelectDataTable("chofer_dni", "PUSH_IT_TO_THE_LIMIT.Chofer", " chofer_id IN (SELECT chofer_id FROM PUSH_IT_TO_THE_LIMIT.ChoferporAuto WHERE auto_chofer_estado=1)");
 
 
@@ -82,7 +83,7 @@ namespace UberFrba.Registro_Viajes
 
         private void CargarComboBoxTurnosDeAutomovil(int idAutomovilSeleccionado)
         {
-
+            comboBox_TurnosAutmovilSeleccionado.Items.Clear(); 
             DataTable turnosAutomovil = mapper.ObtenerTurnosHabilitadosAutmovil(idAutomovilSeleccionado);
 
 
@@ -97,6 +98,20 @@ namespace UberFrba.Registro_Viajes
 
         }
 
+        private void button_FechaDeNacimiento_Click(object sender, EventArgs e)
+        {
+            monthCalendar_FechaDeViaje.Visible = true;
+        }
+
+        private void monthCalendar_FechaDeViaje_DateChanged(object sender, DateRangeEventArgs e)
+        {
+
+        }
+        private void monthCalendar_FechaDeCreacion_DateSelected(object sender, System.Windows.Forms.DateRangeEventArgs e)
+        {
+            textBox_Fecha.Text = e.Start.ToShortDateString();
+            monthCalendar_FechaDeViaje.Visible = false;
+        }
                             
        }
 }
