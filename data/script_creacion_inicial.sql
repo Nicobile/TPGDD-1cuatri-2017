@@ -804,8 +804,8 @@ GO
   CREATE PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_agregar_registro
   @Cantidad_km numeric(18,0),
   @Fecha date,
-  @HoraInicio datetime,
-  @HoraFin datetime,
+  @HoraInicio time,
+  @HoraFin time,
   @idChofer int,
   @idAuto int,
   @idCliente int,
@@ -813,6 +813,16 @@ GO
   @id int OUTPUT
   AS
 BEGIN
+
+    if exists(select 1 from [PUSH_IT_TO_THE_LIMIT].RegistroViaje where(chofer_id = @idChofer AND
+	((@HoraInicio <= viaje_hora_fin AND @HoraInicio >= viaje_hora_inicio) OR (@HoraFin <= viaje_hora_fin AND @HoraFin >= viaje_hora_inicio))
+	AND viaje_fecha = @fecha)) throw 51001,'EL chofer ya tiene otro viaje registrado en ese horario',16;
+
+	if exists(select 1 from [PUSH_IT_TO_THE_LIMIT].RegistroViaje where(cliente_id = @idCliente AND
+	((@HoraInicio < viaje_hora_fin AND @HoraInicio > viaje_hora_inicio) OR (@HoraFin < viaje_hora_fin AND @HoraFin > viaje_hora_inicio))
+	AND viaje_fecha = @fecha)) throw 51001,'EL cliente ya tiene otro viaje registrado en ese horario',16;
+
+
     INSERT INTO [PUSH_IT_TO_THE_LIMIT].RegistroViaje
         (viaje_cantidad_km, viaje_fecha,viaje_hora_inicio, viaje_hora_fin,chofer_id,auto_id,cliente_id,turno_id) 
     VALUES 

@@ -144,6 +144,7 @@ namespace UberFrba.Registro_Viajes
             parametros.Add(parametroOutput);
             command = QueryBuilder.Instance.build(query, parametros);
             command.CommandType = CommandType.StoredProcedure;
+            try{
             command.ExecuteNonQuery();
 
 
@@ -151,6 +152,14 @@ namespace UberFrba.Registro_Viajes
             
             if(id > 0) {
                 MessageBox.Show("Registro de viaje agregado correctamente");
+            }
+           }
+            catch (SqlException error)
+            {
+                if (error.Number == 51001)
+                {
+                    MessageBox.Show(error.Message, "Error al registrar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
                             
