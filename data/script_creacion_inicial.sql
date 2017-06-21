@@ -251,10 +251,10 @@ create table [PUSH_IT_TO_THE_LIMIT].RegistroViaje(
 	[viaje_id] INT IDENTITY(1,1) PRIMARY KEY,
 	[chofer_id] INT NOT NULL ,--references [PUSH_IT_TO_THE_LIMIT].Chofer,                        
 	[auto_id] int NOT NULL, --references[PUSH_IT_TO_THE_LIMIT].[Auto],                                              
-	[factura_id] INT NOT NULL ,--references [PUSH_IT_TO_THE_LIMIT].Factura,
+	[factura_id] INT  ,--references [PUSH_IT_TO_THE_LIMIT].Factura,                 --Le saque el not null(NICO)
 	[turno_id] INT NOT NULL ,--references [PUSH_IT_TO_THE_LIMIT].Turno,                            
 	[viaje_cantidad_km] NUMERIC(18,0) NOT NULL, 
-	[rendicion_id] INT,
+	[rendicion_id] INT,                                                             --Tambien le saque el not null (NICO)
 	[viaje_fecha] date NOT NULL,--LO CAMBIO DE DATETIME A VARCHAR POR QUE LA FUNCION QUE USO EN LA MIGRACION PARA OBTENER SOLO LA FECHA RETORNA UN VARCHAR, LO MISMO PARA HORA INICIO Y FIN
 	[viaje_hora_inicio] time(0) not null ,
 	[viaje_hora_fin] time(0)  ,--IMPORTANTE :LE SAQUE EL NOT NULL POR QUE EN LA TABLA MAESTRA NO HAY , SI NO HAY QUE PONERLE UN DEFAULT
@@ -291,7 +291,7 @@ ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RegistroViaje] ADD CONSTRAINT RegistroViaje_
 
 ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RegistroViaje] ADD CONSTRAINT RegistroViaje_Turno FOREIGN KEY (turno_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Turno](Turno_id)
 
-ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RegistroViaje] ADD CONSTRAINT RegistroViaje_Cliente FOREIGN KEY (cliente_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Cliente](Cliente_id)
+ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RegistroViaje] ADD CONSTRAINT RegistroViaje_Cliente FOREIGN KEY (cliente_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Cliente](cliente_id)
 
 ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RegistroViaje] ADD CONSTRAINT RegistroViaje_RendicionViaje FOREIGN KEY (rendicion_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[RendicionViaje](rendicion_id)
 

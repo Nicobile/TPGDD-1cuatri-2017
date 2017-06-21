@@ -148,6 +148,10 @@ namespace UberFrba.Registro_Viajes
 
 
             int id = (int)parametroOutput.Value;
+            
+            if(id > 0) {
+                MessageBox.Show("Registro de viaje agregado correctamente");
+            }
         }
                             
        }
