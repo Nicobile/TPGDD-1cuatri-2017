@@ -6,8 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 using UberFrba.Exceptions;
+using UberFrba.DataProvider;
 
 namespace UberFrba.Registro_Viajes
 {
@@ -15,6 +17,7 @@ namespace UberFrba.Registro_Viajes
     {
 
         private DBMapper mapper = new DBMapper();
+        private String idTurno;
 
 
         public RegistrarViaje()
@@ -92,6 +95,7 @@ namespace UberFrba.Registro_Viajes
                 string horaInicio = fila["Hora Inicio"].ToString();
                 string horaFin = fila["Hora Fin"].ToString();
                 string idTurnoCombo = fila["Turno N°"].ToString();
+                idTurno = idTurnoCombo;
                 comboBox_TurnosAutmovilSeleccionado.Items.Add("El turno N° " + idTurnoCombo + " comienza a las " + horaInicio + " y finaliza a las " + horaFin);
 
             }
@@ -103,14 +107,47 @@ namespace UberFrba.Registro_Viajes
             monthCalendar_FechaDeViaje.Visible = true;
         }
 
-        private void monthCalendar_FechaDeViaje_DateChanged(object sender, DateRangeEventArgs e)
-        {
-
-        }
-        private void monthCalendar_FechaDeCreacion_DateSelected(object sender, System.Windows.Forms.DateRangeEventArgs e)
+        private void monthCalendar_FechaDeViaje_DateSelected(object sender, System.Windows.Forms.DateRangeEventArgs e)
         {
             textBox_Fecha.Text = e.Start.ToShortDateString();
             monthCalendar_FechaDeViaje.Visible = false;
+        }
+
+        private void button_Guardar_Click(object sender, EventArgs e)
+        {
+            int cantKm = Convert.ToInt32(textBox_CantidadKm.Text);
+            DateTime fecha = Convert.ToDateTime(textBox_Fecha.Text);
+            DateTime horarioIni = horaInicio.Value;
+            DateTime horarioFin = horaFin.Value;
+            int idChofer = mapper.obtenerIdChoferApartirDelDNI(comboBox_chofer.Text);
+            int idAuto = mapper.obtenerIdAutomovilApartirDeLaPatente(textBox_Automovil.Text);
+            int idCliente = mapper.obtenerIdClienteApartirDelDNI(textBox_Cliente.Text);
+
+            String query = "[PUSH_IT_TO_THE_LIMIT].pr_agregar_registro";
+            IList<SqlParameter> parametros = new List<SqlParameter>();
+            SqlParameter parametroOutput;
+            SqlCommand command;
+
+
+            parametros.Add(new SqlParameter("@Cantidad_km", cantKm));
+            parametros.Add(new SqlParameter("@Fecha", fecha));
+            parametros.Add(new SqlParameter("@HoraInicio", horarioIni));
+            parametros.Add(new SqlParameter("@HoraFin", horarioFin));
+            parametros.Add(new SqlParameter("@idChofer", idChofer));
+            parametros.Add(new SqlParameter("@idAuto", idAuto));
+            parametros.Add(new SqlParameter("@idCliente", idCliente));
+            parametros.Add(new SqlParameter("@idTurno", idTurno));
+
+
+            parametroOutput = new SqlParameter("@id", SqlDbType.Int);
+            parametroOutput.Direction = ParameterDirection.Output;
+            parametros.Add(parametroOutput);
+            command = QueryBuilder.Instance.build(query, parametros);
+            command.CommandType = CommandType.StoredProcedure;
+            command.ExecuteNonQuery();
+
+
+            int id = (int)parametroOutput.Value;
         }
                             
        }

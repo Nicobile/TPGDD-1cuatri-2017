@@ -438,7 +438,13 @@ namespace UberFrba
 
         }
 
+        public int obtenerIdClienteApartirDelDNI(String dniCliente)
+        {
 
+            int idClienteObtenidoApartirDelDNI = Convert.ToInt32(this.SelectFromWhere("cliente_id", "Cliente", "cliente_dni", Convert.ToInt32(dniCliente)));
+            return idClienteObtenidoApartirDelDNI;
+
+        }
 
 
         /* 

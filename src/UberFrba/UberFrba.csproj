@@ -243,11 +243,11 @@
     <Compile Include="Registro Viajes\RegistrarViaje.Designer.cs">
       <DependentUpon>RegistrarViaje.cs</DependentUpon>
     </Compile>
-    <Compile Include="Rendicion Viajes\Form1.cs">
+    <Compile Include="Rendicion Viajes\RendicionViaje.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Rendicion Viajes\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Rendicion Viajes\RendicionViaje.Designer.cs">
+      <DependentUpon>RendicionViaje.cs</DependentUpon>
     </Compile>
     <Compile Include="UsuarioSesion.cs" />
     <Compile Include="Utils\HashSha256.cs" />
@@ -341,6 +341,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Registro Viajes\RegistrarViaje.resx">
       <DependentUpon>RegistrarViaje.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rendicion Viajes\RendicionViaje.resx">
+      <DependentUpon>RendicionViaje.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

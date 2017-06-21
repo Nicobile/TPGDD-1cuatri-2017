@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.groupBox_datosViaje = new System.Windows.Forms.GroupBox();
+            this.horaFin = new System.Windows.Forms.DateTimePicker();
+            this.horaInicio = new System.Windows.Forms.DateTimePicker();
+            this.monthCalendar_FechaDeViaje = new System.Windows.Forms.MonthCalendar();
+            this.button_FechaDeNacimiento = new System.Windows.Forms.Button();
+            this.label_Hinicio = new System.Windows.Forms.Label();
             this.comboBox_TurnosAutmovilSeleccionado = new System.Windows.Forms.ComboBox();
             this.comboBox_chofer = new System.Windows.Forms.ComboBox();
             this.textBox_Cliente = new System.Windows.Forms.TextBox();
@@ -46,11 +51,6 @@
             this.button_Cancelar = new System.Windows.Forms.Button();
             this.button_Limpiar = new System.Windows.Forms.Button();
             this.button_Guardar = new System.Windows.Forms.Button();
-            this.label_Hinicio = new System.Windows.Forms.Label();
-            this.button_FechaDeNacimiento = new System.Windows.Forms.Button();
-            this.monthCalendar_FechaDeViaje = new System.Windows.Forms.MonthCalendar();
-            this.horaInicio = new System.Windows.Forms.DateTimePicker();
-            this.horaFin = new System.Windows.Forms.DateTimePicker();
             this.groupBox_datosViaje.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,6 +80,55 @@
             this.groupBox_datosViaje.TabIndex = 0;
             this.groupBox_datosViaje.TabStop = false;
             this.groupBox_datosViaje.Text = "Datos del Viaje";
+            // 
+            // horaFin
+            // 
+            this.horaFin.CustomFormat = "HH:mm";
+            this.horaFin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.horaFin.Location = new System.Drawing.Point(321, 207);
+            this.horaFin.Name = "horaFin";
+            this.horaFin.ShowUpDown = true;
+            this.horaFin.Size = new System.Drawing.Size(92, 20);
+            this.horaFin.TabIndex = 44;
+            this.horaFin.Value = new System.DateTime(2017, 5, 1, 0, 0, 0, 0);
+            // 
+            // horaInicio
+            // 
+            this.horaInicio.CustomFormat = "HH:mm";
+            this.horaInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.horaInicio.Location = new System.Drawing.Point(128, 207);
+            this.horaInicio.Name = "horaInicio";
+            this.horaInicio.ShowUpDown = true;
+            this.horaInicio.Size = new System.Drawing.Size(92, 20);
+            this.horaInicio.TabIndex = 43;
+            this.horaInicio.Value = new System.DateTime(2017, 5, 1, 0, 0, 0, 0);
+            // 
+            // monthCalendar_FechaDeViaje
+            // 
+            this.monthCalendar_FechaDeViaje.Location = new System.Drawing.Point(239, 4);
+            this.monthCalendar_FechaDeViaje.Name = "monthCalendar_FechaDeViaje";
+            this.monthCalendar_FechaDeViaje.TabIndex = 42;
+            this.monthCalendar_FechaDeViaje.Visible = false;
+            this.monthCalendar_FechaDeViaje.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar_FechaDeViaje_DateSelected);
+            // 
+            // button_FechaDeNacimiento
+            // 
+            this.button_FechaDeNacimiento.Location = new System.Drawing.Point(321, 146);
+            this.button_FechaDeNacimiento.Name = "button_FechaDeNacimiento";
+            this.button_FechaDeNacimiento.Size = new System.Drawing.Size(80, 20);
+            this.button_FechaDeNacimiento.TabIndex = 41;
+            this.button_FechaDeNacimiento.Text = "Seleccionar";
+            this.button_FechaDeNacimiento.UseVisualStyleBackColor = true;
+            this.button_FechaDeNacimiento.Click += new System.EventHandler(this.button_FechaDeNacimiento_Click);
+            // 
+            // label_Hinicio
+            // 
+            this.label_Hinicio.AutoSize = true;
+            this.label_Hinicio.Location = new System.Drawing.Point(6, 207);
+            this.label_Hinicio.Name = "label_Hinicio";
+            this.label_Hinicio.Size = new System.Drawing.Size(99, 13);
+            this.label_Hinicio.TabIndex = 39;
+            this.label_Hinicio.Text = "Hora inicio del viaje";
             // 
             // comboBox_TurnosAutmovilSeleccionado
             // 
@@ -226,55 +275,7 @@
             this.button_Guardar.TabIndex = 39;
             this.button_Guardar.Text = "Guardar";
             this.button_Guardar.UseVisualStyleBackColor = true;
-            // 
-            // label_Hinicio
-            // 
-            this.label_Hinicio.AutoSize = true;
-            this.label_Hinicio.Location = new System.Drawing.Point(6, 207);
-            this.label_Hinicio.Name = "label_Hinicio";
-            this.label_Hinicio.Size = new System.Drawing.Size(99, 13);
-            this.label_Hinicio.TabIndex = 39;
-            this.label_Hinicio.Text = "Hora inicio del viaje";
-            // 
-            // button_FechaDeNacimiento
-            // 
-            this.button_FechaDeNacimiento.Location = new System.Drawing.Point(321, 146);
-            this.button_FechaDeNacimiento.Name = "button_FechaDeNacimiento";
-            this.button_FechaDeNacimiento.Size = new System.Drawing.Size(80, 20);
-            this.button_FechaDeNacimiento.TabIndex = 41;
-            this.button_FechaDeNacimiento.Text = "Seleccionar";
-            this.button_FechaDeNacimiento.UseVisualStyleBackColor = true;
-            this.button_FechaDeNacimiento.Click += new System.EventHandler(this.button_FechaDeNacimiento_Click);
-            // 
-            // monthCalendar_FechaDeViaje
-            // 
-            this.monthCalendar_FechaDeViaje.Location = new System.Drawing.Point(239, 4);
-            this.monthCalendar_FechaDeViaje.Name = "monthCalendar_FechaDeViaje";
-            this.monthCalendar_FechaDeViaje.TabIndex = 42;
-            this.monthCalendar_FechaDeViaje.Visible = false;
-            this.monthCalendar_FechaDeViaje.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar_FechaDeViaje_DateChanged);
-            // 
-            // horaInicio
-            // 
-            this.horaInicio.CustomFormat = "HH:mm";
-            this.horaInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.horaInicio.Location = new System.Drawing.Point(128, 207);
-            this.horaInicio.Name = "horaInicio";
-            this.horaInicio.ShowUpDown = true;
-            this.horaInicio.Size = new System.Drawing.Size(92, 20);
-            this.horaInicio.TabIndex = 43;
-            this.horaInicio.Value = new System.DateTime(2017, 5, 1, 0, 0, 0, 0);
-            // 
-            // horaFin
-            // 
-            this.horaFin.CustomFormat = "HH:mm";
-            this.horaFin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.horaFin.Location = new System.Drawing.Point(321, 207);
-            this.horaFin.Name = "horaFin";
-            this.horaFin.ShowUpDown = true;
-            this.horaFin.Size = new System.Drawing.Size(92, 20);
-            this.horaFin.TabIndex = 44;
-            this.horaFin.Value = new System.DateTime(2017, 5, 1, 0, 0, 0, 0);
+            this.button_Guardar.Click += new System.EventHandler(this.button_Guardar_Click);
             // 
             // RegistrarViaje
             // 

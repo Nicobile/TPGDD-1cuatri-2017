@@ -109,6 +109,9 @@ IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.pr_agregar_chofer_a_automovil') IS NOT NULL
     DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_agregar_chofer_a_automovil
 GO
 
+IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.pr_agregar_registro') IS NOT NULL
+    DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_agregar_registro
+GO
 
 
 /* Creacion de tablas*/
@@ -247,14 +250,14 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[AutoporTurno](
 create table [PUSH_IT_TO_THE_LIMIT].RegistroViaje(
 	[viaje_id] INT IDENTITY(1,1) PRIMARY KEY,
 	[chofer_id] INT NOT NULL ,--references [PUSH_IT_TO_THE_LIMIT].Chofer,                        
-	[viaje_automovil] VARCHAR(8) NOT NULL, --references[PUSH_IT_TO_THE_LIMIT].[Auto],                                              
+	[auto_id] int NOT NULL, --references[PUSH_IT_TO_THE_LIMIT].[Auto],                                              
 	[factura_id] INT NOT NULL ,--references [PUSH_IT_TO_THE_LIMIT].Factura,
 	[turno_id] INT NOT NULL ,--references [PUSH_IT_TO_THE_LIMIT].Turno,                            
 	[viaje_cantidad_km] NUMERIC(18,0) NOT NULL, 
 	[rendicion_id] INT,
-	[viaje_fecha] VARCHAR(15) NOT NULL,--LO CAMBIO DE DATETIME A VARCHAR POR QUE LA FUNCION QUE USO EN LA MIGRACION PARA OBTENER SOLO LA FECHA RETORNA UN VARCHAR, LO MISMO PARA HORA INICIO Y FIN
-	[viaje_hora_inicio] VARCHAR(10) not null ,
-	[viaje_hora_fin] VARCHAR(10)  ,--IMPORTANTE :LE SAQUE EL NOT NULL POR QUE EN LA TABLA MAESTRA NO HAY , SI NO HAY QUE PONERLE UN DEFAULT
+	[viaje_fecha] date NOT NULL,--LO CAMBIO DE DATETIME A VARCHAR POR QUE LA FUNCION QUE USO EN LA MIGRACION PARA OBTENER SOLO LA FECHA RETORNA UN VARCHAR, LO MISMO PARA HORA INICIO Y FIN
+	[viaje_hora_inicio] time(0) not null ,
+	[viaje_hora_fin] time(0)  ,--IMPORTANTE :LE SAQUE EL NOT NULL POR QUE EN LA TABLA MAESTRA NO HAY , SI NO HAY QUE PONERLE UN DEFAULT
 	[cliente_id] INT NOT NULL ,--references [PUSH_IT_TO_THE_LIMIT].Cliente,
 )
 
@@ -292,6 +295,7 @@ ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RegistroViaje] ADD CONSTRAINT RegistroViaje_
 
 ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RegistroViaje] ADD CONSTRAINT RegistroViaje_RendicionViaje FOREIGN KEY (rendicion_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[RendicionViaje](rendicion_id)
 
+ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RegistroViaje] ADD CONSTRAINT RegistroViaje_Auto FOREIGN KEY (auto_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Auto](auto_id)
 --Creamos la fk de Cliente
 ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[Cliente] ADD CONSTRAINT Cliente_Usuario FOREIGN KEY (usuario_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Usuario](usuario_id)
 
@@ -351,7 +355,7 @@ insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones (rol_id, funcionalidad_id) va
 insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones (rol_id,funcionalidad_id)
 	select distinct R.rol_id, F.funcionalidad_id from [PUSH_IT_TO_THE_LIMIT].Rol R,[PUSH_IT_TO_THE_LIMIT].Funcionalidad F
 	where R.rol_nombre = 'Administrativo' and
-			F.funcionalidad_descripcion in ('ABM de Rol','Registro de usuarios','ABM de Clientes','ABM de Automoviles','ABM de turnos','ABM de choferes','Registro de viajes','Listado estadistico');
+			F.funcionalidad_descripcion in ('ABM de Rol','Registro de usuarios','ABM de Clientes','ABM de Automoviles','ABM de turnos','ABM de choferes','Registro de viajes','Listado estadistico','Rendicion de viajes');
 
 --Chofer
 insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones (rol_id,funcionalidad_id)
@@ -480,8 +484,8 @@ order by Factura_Nro
 
 
 /*RegistroViaje*/
-insert into [PUSH_IT_TO_THE_LIMIT].RegistroViaje (viaje_automovil, chofer_id, cliente_id, rendicion_id, turno_id, viaje_cantidad_km, viaje_fecha,viaje_hora_inicio, factura_id)
-select distinct  a.auto_id, ch.chofer_id, cl.cliente_id, r.rendicion_id, t.turno_id, m.Viaje_Cant_Kilometros,CONVERT(varchar(10),m.Viaje_Fecha,120) viajeFecha,STUFF(m.Viaje_Fecha,1,11,''), f.factura_id
+insert into [PUSH_IT_TO_THE_LIMIT].RegistroViaje (auto_id, chofer_id, cliente_id, rendicion_id, turno_id, viaje_cantidad_km, viaje_fecha,viaje_hora_inicio, factura_id)
+select distinct  a.auto_id, ch.chofer_id, cl.cliente_id, r.rendicion_id, t.turno_id, m.Viaje_Cant_Kilometros,CONVERT(date,m.Viaje_Fecha) viajeFecha,CONVERT(time,m.Viaje_Fecha)/*STUFF(m.Viaje_Fecha,1,11,'')*/, f.factura_id
 from [PUSH_IT_TO_THE_LIMIT].[Auto] a, [PUSH_IT_TO_THE_LIMIT].Chofer ch, [PUSH_IT_TO_THE_LIMIT].Cliente cl, [PUSH_IT_TO_THE_LIMIT].RendicionViaje r, [PUSH_IT_TO_THE_LIMIT].Turno t, gd_esquema.Maestra m, gd_esquema.Maestra m2, [PUSH_IT_TO_THE_LIMIT].Factura f
 where m.Viaje_Cant_Kilometros is not null
 and m.Auto_Patente = a.auto_patente
@@ -793,5 +797,26 @@ BEGIN
 			throw 51005,'El Chofer ya tiene un Coche activo asignado ',1;
 	
 		END 
+END
+GO
+
+--Procedure de creacion de un registro de viaje nuevo
+  CREATE PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_agregar_registro
+  @Cantidad_km numeric(18,0),
+  @Fecha date,
+  @HoraInicio datetime,
+  @HoraFin datetime,
+  @idChofer int,
+  @idAuto int,
+  @idCliente int,
+  @idTurno int,
+  @id int OUTPUT
+  AS
+BEGIN
+    INSERT INTO [PUSH_IT_TO_THE_LIMIT].RegistroViaje
+        (viaje_cantidad_km, viaje_fecha,viaje_hora_inicio, viaje_hora_fin,chofer_id,auto_id,cliente_id,turno_id) 
+    VALUES 
+        (@Cantidad_km,@Fecha,@HoraInicio,@HoraFin,@idChofer,@idAuto,@idCliente,@idTurno)
+    SET @id = SCOPE_IDENTITY(); 
 END
 GO
