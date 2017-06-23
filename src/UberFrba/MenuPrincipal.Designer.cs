@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuPrincipal));
             this.labelTitulo = new System.Windows.Forms.Label();
             this.comboBoxAccion = new System.Windows.Forms.ComboBox();
             this.botonAceptar = new System.Windows.Forms.Button();
@@ -47,6 +48,7 @@
             // 
             // comboBoxAccion
             // 
+            this.comboBoxAccion.BackColor = System.Drawing.Color.Tan;
             this.comboBoxAccion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxAccion.FormattingEnabled = true;
             this.comboBoxAccion.Location = new System.Drawing.Point(63, 121);
@@ -82,12 +84,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(443, 255);
             this.Controls.Add(this.botonCerrarSesion);
             this.Controls.Add(this.botonAceptar);
             this.Controls.Add(this.comboBoxAccion);
             this.Controls.Add(this.labelTitulo);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MenuPrincipal";
             this.Text = "MenuPrincipal";

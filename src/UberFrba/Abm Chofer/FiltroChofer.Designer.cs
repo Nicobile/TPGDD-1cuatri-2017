@@ -29,6 +29,7 @@ namespace UberFrba.ABM_Chofer
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FiltroChofer));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -154,12 +155,14 @@ namespace UberFrba.ABM_Chofer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
             this.ClientSize = new System.Drawing.Size(1213, 417);
             this.Controls.Add(this.dataGridView_Chofer);
             this.Controls.Add(this.button_Cancelar);
             this.Controls.Add(this.button_Limpiar);
             this.Controls.Add(this.button_Buscar);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FiltroChofer";
             this.Text = "Filtro de Choferes";
             this.Load += new System.EventHandler(this.FiltroChofer_Load);

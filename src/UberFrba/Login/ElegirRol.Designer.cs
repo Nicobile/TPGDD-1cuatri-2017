@@ -28,6 +28,7 @@ namespace UberFrba.Login
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ElegirRol));
             this.comboBoxRol = new System.Windows.Forms.ComboBox();
             this.botonAceptar = new System.Windows.Forms.Button();
             this.labelEnunciado = new System.Windows.Forms.Label();
@@ -67,10 +68,12 @@ namespace UberFrba.Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
             this.ClientSize = new System.Drawing.Size(365, 212);
             this.Controls.Add(this.labelEnunciado);
             this.Controls.Add(this.botonAceptar);
             this.Controls.Add(this.comboBoxRol);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ElegirRol";
             this.Text = "ElegirRol";
             this.Load += new System.EventHandler(this.ElegirRol_Load);

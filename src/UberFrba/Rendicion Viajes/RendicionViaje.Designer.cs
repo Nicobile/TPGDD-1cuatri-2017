@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RendicionViaje));
             this.groupBox_datosViaje = new System.Windows.Forms.GroupBox();
+            this.textBox_importe = new System.Windows.Forms.TextBox();
+            this.label_Importe = new System.Windows.Forms.Label();
             this.button_FechaDeNacimiento = new System.Windows.Forms.Button();
             this.comboBox_TurnosAutmovilSeleccionado = new System.Windows.Forms.ComboBox();
             this.comboBox_chofer = new System.Windows.Forms.ComboBox();
@@ -38,8 +41,6 @@
             this.label_Turno = new System.Windows.Forms.Label();
             this.label_Chofer = new System.Windows.Forms.Label();
             this.monthCalendar_FechaDeViaje = new System.Windows.Forms.MonthCalendar();
-            this.label_Importe = new System.Windows.Forms.Label();
-            this.textBox_importe = new System.Windows.Forms.TextBox();
             this.dgListado = new System.Windows.Forms.DataGridView();
             this.button_Cancelar = new System.Windows.Forms.Button();
             this.button_Limpiar = new System.Windows.Forms.Button();
@@ -66,6 +67,22 @@
             this.groupBox_datosViaje.TabIndex = 1;
             this.groupBox_datosViaje.TabStop = false;
             this.groupBox_datosViaje.Text = "Datos";
+            // 
+            // textBox_importe
+            // 
+            this.textBox_importe.Location = new System.Drawing.Point(105, 126);
+            this.textBox_importe.Name = "textBox_importe";
+            this.textBox_importe.Size = new System.Drawing.Size(273, 20);
+            this.textBox_importe.TabIndex = 44;
+            // 
+            // label_Importe
+            // 
+            this.label_Importe.AutoSize = true;
+            this.label_Importe.Location = new System.Drawing.Point(6, 126);
+            this.label_Importe.Name = "label_Importe";
+            this.label_Importe.Size = new System.Drawing.Size(42, 13);
+            this.label_Importe.TabIndex = 43;
+            this.label_Importe.Text = "Importe";
             // 
             // button_FechaDeNacimiento
             // 
@@ -133,34 +150,18 @@
             this.monthCalendar_FechaDeViaje.TabIndex = 42;
             this.monthCalendar_FechaDeViaje.Visible = false;
             // 
-            // label_Importe
-            // 
-            this.label_Importe.AutoSize = true;
-            this.label_Importe.Location = new System.Drawing.Point(6, 126);
-            this.label_Importe.Name = "label_Importe";
-            this.label_Importe.Size = new System.Drawing.Size(42, 13);
-            this.label_Importe.TabIndex = 43;
-            this.label_Importe.Text = "Importe";
-            // 
-            // textBox_importe
-            // 
-            this.textBox_importe.Location = new System.Drawing.Point(105, 126);
-            this.textBox_importe.Name = "textBox_importe";
-            this.textBox_importe.Size = new System.Drawing.Size(273, 20);
-            this.textBox_importe.TabIndex = 44;
-            // 
             // dgListado
             // 
             this.dgListado.AllowUserToAddRows = false;
             this.dgListado.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgListado.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgListado.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgListado.EnableHeadersVisualStyles = false;
             this.dgListado.Location = new System.Drawing.Point(12, 225);
@@ -202,12 +203,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
             this.ClientSize = new System.Drawing.Size(857, 406);
             this.Controls.Add(this.btnFacturar);
             this.Controls.Add(this.button_Limpiar);
             this.Controls.Add(this.button_Cancelar);
             this.Controls.Add(this.dgListado);
             this.Controls.Add(this.groupBox_datosViaje);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RendicionViaje";
             this.Text = "Rendicion de Viajes";
             this.groupBox_datosViaje.ResumeLayout(false);

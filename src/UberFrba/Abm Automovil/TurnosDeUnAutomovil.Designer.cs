@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TurnosDeUnAutomovil));
             this.labelRoles = new System.Windows.Forms.Label();
             this.dataGridView_Automovil_Turnos_Actuales = new System.Windows.Forms.DataGridView();
             this.button_Cancelar = new System.Windows.Forms.Button();
@@ -71,10 +72,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
             this.ClientSize = new System.Drawing.Size(947, 256);
             this.Controls.Add(this.button_Cancelar);
             this.Controls.Add(this.dataGridView_Automovil_Turnos_Actuales);
             this.Controls.Add(this.labelRoles);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TurnosDeUnAutomovil";
             this.Text = "TurnosDeUnAutomovil";
             this.Load += new System.EventHandler(this.TurnosDeUnAutomovil_Load);

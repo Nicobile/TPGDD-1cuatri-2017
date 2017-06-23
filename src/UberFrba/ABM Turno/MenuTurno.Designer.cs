@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuTurno));
             this.labelTurnos = new System.Windows.Forms.Label();
             this.botonAgregarTurno = new System.Windows.Forms.Button();
             this.botonEditarTurno = new System.Windows.Forms.Button();
@@ -80,11 +81,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
             this.ClientSize = new System.Drawing.Size(309, 386);
             this.Controls.Add(this.botonVolver);
             this.Controls.Add(this.botonEditarTurno);
             this.Controls.Add(this.botonAgregarTurno);
             this.Controls.Add(this.labelTurnos);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MenuTurno";
             this.Text = "MenuTurno";
             this.Load += new System.EventHandler(this.MenuTurno_Load);

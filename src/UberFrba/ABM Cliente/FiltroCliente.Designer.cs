@@ -29,6 +29,7 @@ namespace UberFrba.ABM_Cliente
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FiltroCliente));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -154,12 +155,14 @@ namespace UberFrba.ABM_Cliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
             this.ClientSize = new System.Drawing.Size(1282, 400);
             this.Controls.Add(this.dataGridView_Cliente);
             this.Controls.Add(this.button_Cancelar);
             this.Controls.Add(this.button_Limpiar);
             this.Controls.Add(this.button_Buscar);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FiltroCliente";
             this.Text = "Filtro de clientes";
             this.Load += new System.EventHandler(this.FiltroCliente_Load);

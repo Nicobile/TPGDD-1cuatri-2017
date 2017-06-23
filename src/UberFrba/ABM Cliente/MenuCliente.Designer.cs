@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuCliente));
             this.labelClientes = new System.Windows.Forms.Label();
             this.botonAgregarCliente = new System.Windows.Forms.Button();
             this.botonEditarCliente = new System.Windows.Forms.Button();
@@ -81,11 +82,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
             this.ClientSize = new System.Drawing.Size(309, 386);
             this.Controls.Add(this.botonVolver);
             this.Controls.Add(this.botonEditarCliente);
             this.Controls.Add(this.botonAgregarCliente);
             this.Controls.Add(this.labelClientes);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MenuCliente";
             this.Text = "MenuCliente";
             this.ResumeLayout(false);

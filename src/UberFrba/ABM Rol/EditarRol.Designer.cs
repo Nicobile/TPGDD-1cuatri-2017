@@ -28,6 +28,7 @@ namespace UberFrba.ABM_Rol
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditarRol));
             this.botonVolver = new System.Windows.Forms.Button();
             this.botonGuardar = new System.Windows.Forms.Button();
             this.botonLimpiar = new System.Windows.Forms.Button();
@@ -52,90 +53,90 @@ namespace UberFrba.ABM_Rol
             this.botonVolver.UseVisualStyleBackColor = true;
             this.botonVolver.Click += new System.EventHandler(this.botonVolver_Click);
             // 
-            // button3
+            // botonGuardar
             // 
             this.botonGuardar.Location = new System.Drawing.Point(200, 368);
-            this.botonGuardar.Name = "button3";
+            this.botonGuardar.Name = "botonGuardar";
             this.botonGuardar.Size = new System.Drawing.Size(88, 22);
             this.botonGuardar.TabIndex = 7;
             this.botonGuardar.Text = "Guardar";
             this.botonGuardar.UseVisualStyleBackColor = true;
             this.botonGuardar.Click += new System.EventHandler(this.botonGuardar_Click);
             // 
-            // button2
+            // botonLimpiar
             // 
             this.botonLimpiar.Location = new System.Drawing.Point(30, 368);
-            this.botonLimpiar.Name = "button2";
+            this.botonLimpiar.Name = "botonLimpiar";
             this.botonLimpiar.Size = new System.Drawing.Size(81, 22);
             this.botonLimpiar.TabIndex = 6;
             this.botonLimpiar.Text = "Limpiar";
             this.botonLimpiar.UseVisualStyleBackColor = true;
             this.botonLimpiar.Click += new System.EventHandler(this.botonLimpiar_Click);
             // 
-            // checkedListBox1
+            // checkedListBoxFuncionalidades
             // 
             this.checkedListBoxFuncionalidades.FormattingEnabled = true;
             this.checkedListBoxFuncionalidades.Location = new System.Drawing.Point(139, 106);
-            this.checkedListBoxFuncionalidades.Name = "checkedListBox1";
+            this.checkedListBoxFuncionalidades.Name = "checkedListBoxFuncionalidades";
             this.checkedListBoxFuncionalidades.Size = new System.Drawing.Size(149, 214);
             this.checkedListBoxFuncionalidades.TabIndex = 5;
             // 
-            // label5
+            // labelFuncionalidades
             // 
             this.labelFuncionalidades.AutoSize = true;
             this.labelFuncionalidades.Location = new System.Drawing.Point(27, 106);
-            this.labelFuncionalidades.Name = "label5";
+            this.labelFuncionalidades.Name = "labelFuncionalidades";
             this.labelFuncionalidades.Size = new System.Drawing.Size(84, 13);
             this.labelFuncionalidades.TabIndex = 2;
             this.labelFuncionalidades.Text = "Funcionalidades";
             // 
-            // textBox1
+            // textBoxRol
             // 
             this.textBoxRol.Location = new System.Drawing.Point(139, 62);
-            this.textBoxRol.Name = "textBox1";
+            this.textBoxRol.Name = "textBoxRol";
             this.textBoxRol.Size = new System.Drawing.Size(71, 20);
             this.textBoxRol.TabIndex = 0;
             // 
-            // label1
+            // labelRol
             // 
             this.labelRol.AutoSize = true;
             this.labelRol.Location = new System.Drawing.Point(59, 32);
-            this.labelRol.Name = "label1";
+            this.labelRol.Name = "labelRol";
             this.labelRol.Size = new System.Drawing.Size(61, 13);
             this.labelRol.TabIndex = 1;
             this.labelRol.Text = "Rol Elegido";
             // 
-            // label2
+            // labelNuevoRol
             // 
             this.labelNuevoRol.AutoSize = true;
             this.labelNuevoRol.Location = new System.Drawing.Point(32, 65);
-            this.labelNuevoRol.Name = "label2";
+            this.labelNuevoRol.Name = "labelNuevoRol";
             this.labelNuevoRol.Size = new System.Drawing.Size(79, 13);
             this.labelNuevoRol.TabIndex = 2;
             this.labelNuevoRol.Text = "Nuevo Nombre";
             // 
-            // label3
+            // labelRolElegido
             // 
             this.labelRolElegido.AutoSize = true;
             this.labelRolElegido.Location = new System.Drawing.Point(141, 32);
-            this.labelRolElegido.Name = "label3";
+            this.labelRolElegido.Name = "labelRolElegido";
             this.labelRolElegido.Size = new System.Drawing.Size(0, 13);
             this.labelRolElegido.TabIndex = 8;
             // 
-            // checkBox1
+            // checkBoxEstadoRol
             // 
             this.checkBoxEstadoRol.AutoSize = true;
             this.checkBoxEstadoRol.Location = new System.Drawing.Point(139, 337);
-            this.checkBoxEstadoRol.Name = "checkBox1";
+            this.checkBoxEstadoRol.Name = "checkBoxEstadoRol";
             this.checkBoxEstadoRol.Size = new System.Drawing.Size(73, 17);
             this.checkBoxEstadoRol.TabIndex = 9;
             this.checkBoxEstadoRol.Text = "Habilitado";
             this.checkBoxEstadoRol.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // botonVolverBusqueda
             // 
             this.botonVolverBusqueda.Location = new System.Drawing.Point(200, 400);
-            this.botonVolverBusqueda.Name = "button1";
+            this.botonVolverBusqueda.Name = "botonVolverBusqueda";
             this.botonVolverBusqueda.Size = new System.Drawing.Size(83, 26);
             this.botonVolverBusqueda.TabIndex = 10;
             this.botonVolverBusqueda.Text = "Editar otro Rol";
@@ -146,6 +147,7 @@ namespace UberFrba.ABM_Rol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
             this.ClientSize = new System.Drawing.Size(331, 459);
             this.Controls.Add(this.botonVolverBusqueda);
             this.Controls.Add(this.checkBoxEstadoRol);
@@ -158,6 +160,7 @@ namespace UberFrba.ABM_Rol
             this.Controls.Add(this.labelFuncionalidades);
             this.Controls.Add(this.botonVolver);
             this.Controls.Add(this.labelRol);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EditarRol";
             this.Text = "EditarRol";
             this.Load += new System.EventHandler(this.EditarRol_Load);

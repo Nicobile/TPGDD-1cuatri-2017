@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditarAutomovil));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkBoxDeshabilitar_chofer = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -232,6 +233,7 @@
             this.Controls.Add(this.button_Cancelar);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EditarAutomovil";
             this.Text = "EditarAutomovil";
             this.Load += new System.EventHandler(this.EditarAutomovil_Load);

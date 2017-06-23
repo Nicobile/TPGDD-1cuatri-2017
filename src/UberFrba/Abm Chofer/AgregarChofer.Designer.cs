@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AgregarChofer));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.monthCalendar_FechaDeNacimiento = new System.Windows.Forms.MonthCalendar();
             this.textBox_Direccion = new System.Windows.Forms.TextBox();
@@ -250,12 +251,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
             this.ClientSize = new System.Drawing.Size(392, 308);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.button_Limpiar);
             this.Controls.Add(this.button_Cancelar);
             this.Controls.Add(this.button_Guardar);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AgregarChofer";
             this.Text = "Agregar Chofer";
             this.groupBox1.ResumeLayout(false);

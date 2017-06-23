@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditarChofer));
             this.button_Guardar = new System.Windows.Forms.Button();
             this.button_Cancelar = new System.Windows.Forms.Button();
             this.button_Limpiar = new System.Windows.Forms.Button();
@@ -38,6 +39,7 @@
             this.textBox_Direccion = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.monthCalendar_FechaDeCreacion = new System.Windows.Forms.MonthCalendar();
             this.textBox_Mail = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.textBox_Apellido = new System.Windows.Forms.TextBox();
@@ -48,7 +50,6 @@
             this.textBox_DNI = new System.Windows.Forms.TextBox();
             this.textBox_Nombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.monthCalendar_FechaDeCreacion = new System.Windows.Forms.MonthCalendar();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -158,6 +159,14 @@
             this.label13.TabIndex = 16;
             this.label13.Text = "Mail";
             // 
+            // monthCalendar_FechaDeCreacion
+            // 
+            this.monthCalendar_FechaDeCreacion.Location = new System.Drawing.Point(126, 19);
+            this.monthCalendar_FechaDeCreacion.Name = "monthCalendar_FechaDeCreacion";
+            this.monthCalendar_FechaDeCreacion.TabIndex = 5;
+            this.monthCalendar_FechaDeCreacion.Visible = false;
+            this.monthCalendar_FechaDeCreacion.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar_FechaDeCreacion_DateSelected);
+            // 
             // textBox_Mail
             // 
             this.textBox_Mail.Location = new System.Drawing.Point(112, 149);
@@ -240,24 +249,18 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre";
             // 
-            // monthCalendar_FechaDeCreacion
-            // 
-            this.monthCalendar_FechaDeCreacion.Location = new System.Drawing.Point(126, 19);
-            this.monthCalendar_FechaDeCreacion.Name = "monthCalendar_FechaDeCreacion";
-            this.monthCalendar_FechaDeCreacion.TabIndex = 5;
-            this.monthCalendar_FechaDeCreacion.Visible = false;
-            this.monthCalendar_FechaDeCreacion.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar_FechaDeCreacion_DateSelected);
-            // 
             // EditarChofer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
             this.ClientSize = new System.Drawing.Size(386, 340);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.checkBox_Habilitado);
             this.Controls.Add(this.button_Limpiar);
             this.Controls.Add(this.button_Cancelar);
             this.Controls.Add(this.button_Guardar);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EditarChofer";
             this.Text = "Editar Chofer";
             this.Load += new System.EventHandler(this.EditarChofer_Load);

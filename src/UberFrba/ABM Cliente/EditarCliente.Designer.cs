@@ -28,12 +28,21 @@ namespace UberFrba.ABM_Cliente
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditarCliente));
             this.button_Guardar = new System.Windows.Forms.Button();
             this.button_Cancelar = new System.Windows.Forms.Button();
             this.button_Limpiar = new System.Windows.Forms.Button();
             this.checkBox_Habilitado = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox_CodigoPostal = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBox_Telefono = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox_Mail = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox_Direccion = new System.Windows.Forms.TextBox();
             this.monthCalendar_FechaDeNacimiento = new System.Windows.Forms.MonthCalendar();
+            this.label11 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.button_FechaDeNacimiento = new System.Windows.Forms.Button();
             this.textBox_FechaDeNacimiento = new System.Windows.Forms.TextBox();
@@ -43,14 +52,6 @@ namespace UberFrba.ABM_Cliente
             this.label2 = new System.Windows.Forms.Label();
             this.textBox_Nombre = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.textBox_Direccion = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox_Mail = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox_Telefono = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBox_CodigoPostal = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -121,6 +122,61 @@ namespace UberFrba.ABM_Cliente
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos";
             // 
+            // textBox_CodigoPostal
+            // 
+            this.textBox_CodigoPostal.Location = new System.Drawing.Point(112, 220);
+            this.textBox_CodigoPostal.Name = "textBox_CodigoPostal";
+            this.textBox_CodigoPostal.Size = new System.Drawing.Size(250, 20);
+            this.textBox_CodigoPostal.TabIndex = 26;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 220);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(72, 13);
+            this.label6.TabIndex = 25;
+            this.label6.Text = "Codigo Postal";
+            // 
+            // textBox_Telefono
+            // 
+            this.textBox_Telefono.Location = new System.Drawing.Point(112, 186);
+            this.textBox_Telefono.Name = "textBox_Telefono";
+            this.textBox_Telefono.Size = new System.Drawing.Size(250, 20);
+            this.textBox_Telefono.TabIndex = 24;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 186);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(49, 13);
+            this.label5.TabIndex = 23;
+            this.label5.Text = "Telefono";
+            // 
+            // textBox_Mail
+            // 
+            this.textBox_Mail.Location = new System.Drawing.Point(112, 157);
+            this.textBox_Mail.Name = "textBox_Mail";
+            this.textBox_Mail.Size = new System.Drawing.Size(250, 20);
+            this.textBox_Mail.TabIndex = 22;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 157);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(26, 13);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "Mail";
+            // 
+            // textBox_Direccion
+            // 
+            this.textBox_Direccion.Location = new System.Drawing.Point(112, 126);
+            this.textBox_Direccion.Name = "textBox_Direccion";
+            this.textBox_Direccion.Size = new System.Drawing.Size(250, 20);
+            this.textBox_Direccion.TabIndex = 14;
+            // 
             // monthCalendar_FechaDeNacimiento
             // 
             this.monthCalendar_FechaDeNacimiento.Location = new System.Drawing.Point(162, 19);
@@ -128,6 +184,15 @@ namespace UberFrba.ABM_Cliente
             this.monthCalendar_FechaDeNacimiento.TabIndex = 13;
             this.monthCalendar_FechaDeNacimiento.Visible = false;
             this.monthCalendar_FechaDeNacimiento.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar_FechaDeNacimiento_DateSelected);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(7, 126);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(52, 13);
+            this.label11.TabIndex = 12;
+            this.label11.Text = "Direccion";
             // 
             // label4
             // 
@@ -203,80 +268,18 @@ namespace UberFrba.ABM_Cliente
             this.label13.TabIndex = 0;
             this.label13.Text = "Nombre";
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(7, 126);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(52, 13);
-            this.label11.TabIndex = 12;
-            this.label11.Text = "Direccion";
-            // 
-            // textBox_Direccion
-            // 
-            this.textBox_Direccion.Location = new System.Drawing.Point(112, 126);
-            this.textBox_Direccion.Name = "textBox_Direccion";
-            this.textBox_Direccion.Size = new System.Drawing.Size(250, 20);
-            this.textBox_Direccion.TabIndex = 14;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 157);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(26, 13);
-            this.label1.TabIndex = 21;
-            this.label1.Text = "Mail";
-            // 
-            // textBox_Mail
-            // 
-            this.textBox_Mail.Location = new System.Drawing.Point(112, 157);
-            this.textBox_Mail.Name = "textBox_Mail";
-            this.textBox_Mail.Size = new System.Drawing.Size(250, 20);
-            this.textBox_Mail.TabIndex = 22;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 186);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(49, 13);
-            this.label5.TabIndex = 23;
-            this.label5.Text = "Telefono";
-            // 
-            // textBox_Telefono
-            // 
-            this.textBox_Telefono.Location = new System.Drawing.Point(112, 186);
-            this.textBox_Telefono.Name = "textBox_Telefono";
-            this.textBox_Telefono.Size = new System.Drawing.Size(250, 20);
-            this.textBox_Telefono.TabIndex = 24;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 220);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(72, 13);
-            this.label6.TabIndex = 25;
-            this.label6.Text = "Codigo Postal";
-            // 
-            // textBox_CodigoPostal
-            // 
-            this.textBox_CodigoPostal.Location = new System.Drawing.Point(112, 220);
-            this.textBox_CodigoPostal.Name = "textBox_CodigoPostal";
-            this.textBox_CodigoPostal.Size = new System.Drawing.Size(250, 20);
-            this.textBox_CodigoPostal.TabIndex = 26;
-            // 
             // EditarCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
             this.ClientSize = new System.Drawing.Size(386, 360);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.checkBox_Habilitado);
             this.Controls.Add(this.button_Limpiar);
             this.Controls.Add(this.button_Cancelar);
             this.Controls.Add(this.button_Guardar);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EditarCliente";
             this.Text = "Editar Clientes";
             this.Load += new System.EventHandler(this.EditarCliente_Load);

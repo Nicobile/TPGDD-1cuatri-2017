@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegistrarViaje));
             this.groupBox_datosViaje = new System.Windows.Forms.GroupBox();
             this.horaFin = new System.Windows.Forms.DateTimePicker();
             this.horaInicio = new System.Windows.Forms.DateTimePicker();
@@ -140,6 +141,7 @@
             // 
             // comboBox_chofer
             // 
+            this.comboBox_chofer.BackColor = System.Drawing.Color.White;
             this.comboBox_chofer.FormattingEnabled = true;
             this.comboBox_chofer.Location = new System.Drawing.Point(127, 27);
             this.comboBox_chofer.Name = "comboBox_chofer";
@@ -281,14 +283,18 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(461, 352);
             this.Controls.Add(this.button_Guardar);
             this.Controls.Add(this.button_Limpiar);
             this.Controls.Add(this.button_Cancelar);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.groupBox_datosViaje);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RegistrarViaje";
             this.Text = "RegistrarViaje";
+            this.TransparencyKey = System.Drawing.SystemColors.Window;
             this.Load += new System.EventHandler(this.RegistrarViaje_Load);
             this.groupBox_datosViaje.ResumeLayout(false);
             this.groupBox_datosViaje.PerformLayout();

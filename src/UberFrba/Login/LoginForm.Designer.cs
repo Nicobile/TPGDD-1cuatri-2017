@@ -28,6 +28,7 @@ namespace UberFrba.Login
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.botonIngresar = new System.Windows.Forms.Button();
             this.textBoxUsuario = new System.Windows.Forms.TextBox();
             this.labelUsuario = new System.Windows.Forms.Label();
@@ -36,10 +37,13 @@ namespace UberFrba.Login
             this.labelTitulo = new System.Windows.Forms.Label();
             this.botonRegistrarse = new System.Windows.Forms.Button();
             this.labelPregunta = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // botonIngresar
             // 
+            this.botonIngresar.BackColor = System.Drawing.Color.White;
             this.botonIngresar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.botonIngresar.Location = new System.Drawing.Point(163, 170);
             this.botonIngresar.Name = "botonIngresar";
@@ -47,7 +51,7 @@ namespace UberFrba.Login
             this.botonIngresar.TabIndex = 0;
             this.botonIngresar.TabStop = false;
             this.botonIngresar.Text = "Ingresar";
-            this.botonIngresar.UseVisualStyleBackColor = true;
+            this.botonIngresar.UseVisualStyleBackColor = false;
             this.botonIngresar.Click += new System.EventHandler(this.botonIngresar_Click);
             // 
             // textBoxUsuario
@@ -81,6 +85,7 @@ namespace UberFrba.Login
             // 
             // textBoxContaseña
             // 
+            this.textBoxContaseña.BackColor = System.Drawing.SystemColors.Window;
             this.textBoxContaseña.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxContaseña.Location = new System.Drawing.Point(211, 129);
             this.textBoxContaseña.Name = "textBoxContaseña";
@@ -121,11 +126,26 @@ namespace UberFrba.Login
             this.labelPregunta.TabIndex = 7;
             this.labelPregunta.Text = "¿Todavia no tenes una cuenta?";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = global::UberFrba.Properties.Resources.logouber6;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Location = new System.Drawing.Point(22, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(54, 53);
+            this.pictureBox1.TabIndex = 8;
+            this.pictureBox1.TabStop = false;
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.BackgroundImage = global::UberFrba.Properties.Resources.images__3_;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(456, 307);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.labelPregunta);
             this.Controls.Add(this.botonRegistrarse);
             this.Controls.Add(this.labelTitulo);
@@ -134,9 +154,12 @@ namespace UberFrba.Login
             this.Controls.Add(this.labelUsuario);
             this.Controls.Add(this.textBoxUsuario);
             this.Controls.Add(this.botonIngresar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "LoginForm";
-            this.Text = "LoginForm";
+            this.Text = "UberAplication";
             this.Load += new System.EventHandler(this.LoginForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -152,5 +175,6 @@ namespace UberFrba.Login
         private System.Windows.Forms.Label labelTitulo;
         private System.Windows.Forms.Button botonRegistrarse;
         private System.Windows.Forms.Label labelPregunta;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

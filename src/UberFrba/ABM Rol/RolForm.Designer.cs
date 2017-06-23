@@ -28,6 +28,7 @@ namespace UberFrba.ABM_Rol
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RolForm));
             this.labelRoles = new System.Windows.Forms.Label();
             this.botonBajaRol = new System.Windows.Forms.Button();
             this.botonEditarRol = new System.Windows.Forms.Button();
@@ -92,12 +93,14 @@ namespace UberFrba.ABM_Rol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
             this.ClientSize = new System.Drawing.Size(309, 386);
             this.Controls.Add(this.botonVolver);
             this.Controls.Add(this.labelRoles);
             this.Controls.Add(this.botonBajaRol);
             this.Controls.Add(this.botonEditarRol);
             this.Controls.Add(this.botonAgregarRol);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RolForm";
             this.Text = "RolForm";
             this.Load += new System.EventHandler(this.RolForm_Load);

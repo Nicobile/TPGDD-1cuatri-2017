@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuChofer));
             this.labelRoles = new System.Windows.Forms.Label();
             this.botonAgregarChofer = new System.Windows.Forms.Button();
             this.botonEditarChofer = new System.Windows.Forms.Button();
@@ -81,11 +82,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
+            this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
             this.ClientSize = new System.Drawing.Size(309, 386);
             this.Controls.Add(this.botonVolver);
             this.Controls.Add(this.botonEditarChofer);
             this.Controls.Add(this.botonAgregarChofer);
             this.Controls.Add(this.labelRoles);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MenuChofer";
             this.Text = "MenuChofer";
             this.Load += new System.EventHandler(this.MenuChofer_Load);

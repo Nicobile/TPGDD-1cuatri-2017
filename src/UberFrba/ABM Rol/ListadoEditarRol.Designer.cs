@@ -28,6 +28,7 @@ namespace UberFrba.ABM_Rol
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListadoEditarRol));
             this.dataGridViewResultadosBusqueda = new System.Windows.Forms.DataGridView();
             this.labelNombreDelRol = new System.Windows.Forms.Label();
             this.botonCancelar = new System.Windows.Forms.Button();
@@ -99,6 +100,7 @@ namespace UberFrba.ABM_Rol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
             this.ClientSize = new System.Drawing.Size(406, 348);
             this.Controls.Add(this.textBox_NombreRol);
             this.Controls.Add(this.botonVolver);
@@ -106,6 +108,7 @@ namespace UberFrba.ABM_Rol
             this.Controls.Add(this.botonCancelar);
             this.Controls.Add(this.labelNombreDelRol);
             this.Controls.Add(this.dataGridViewResultadosBusqueda);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ListadoEditarRol";
             this.Text = "ListadoEditarRol";
             this.Load += new System.EventHandler(this.ListadoEditarRol_Load);

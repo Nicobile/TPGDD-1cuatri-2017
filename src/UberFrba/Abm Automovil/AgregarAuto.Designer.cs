@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AgregarAuto));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBox_Turno = new System.Windows.Forms.ComboBox();
             this.textBox_Chofer = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -42,12 +44,12 @@
             this.button_Cancelar = new System.Windows.Forms.Button();
             this.button_Limpiar = new System.Windows.Forms.Button();
             this.button_Guardar = new System.Windows.Forms.Button();
-            this.comboBox_Turno = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.SystemColors.Window;
             this.groupBox1.Controls.Add(this.comboBox_Turno);
             this.groupBox1.Controls.Add(this.textBox_Chofer);
             this.groupBox1.Controls.Add(this.label4);
@@ -65,6 +67,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // comboBox_Turno
+            // 
+            this.comboBox_Turno.FormattingEnabled = true;
+            this.comboBox_Turno.Location = new System.Drawing.Point(91, 99);
+            this.comboBox_Turno.Name = "comboBox_Turno";
+            this.comboBox_Turno.Size = new System.Drawing.Size(271, 21);
+            this.comboBox_Turno.TabIndex = 23;
             // 
             // textBox_Chofer
             // 
@@ -179,24 +189,18 @@
             this.button_Guardar.UseVisualStyleBackColor = true;
             this.button_Guardar.Click += new System.EventHandler(this.button_Guardar_Click);
             // 
-            // comboBox_Turno
-            // 
-            this.comboBox_Turno.FormattingEnabled = true;
-            this.comboBox_Turno.Location = new System.Drawing.Point(91, 99);
-            this.comboBox_Turno.Name = "comboBox_Turno";
-            this.comboBox_Turno.Size = new System.Drawing.Size(271, 21);
-            this.comboBox_Turno.TabIndex = 23;
-            // 
             // AgregarAuto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
             this.ClientSize = new System.Drawing.Size(392, 308);
             this.Controls.Add(this.button_Guardar);
             this.Controls.Add(this.button_Limpiar);
             this.Controls.Add(this.button_Cancelar);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AgregarAuto";
             this.Text = "Agregar Auto";
             this.Load += new System.EventHandler(this.AgregarAuto_Load);

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuAutomovil));
             this.labelRoles = new System.Windows.Forms.Label();
             this.botonAgregarAutomovil = new System.Windows.Forms.Button();
             this.botonEditarAutomovil = new System.Windows.Forms.Button();
@@ -43,6 +44,7 @@
             this.labelRoles.Size = new System.Drawing.Size(119, 25);
             this.labelRoles.TabIndex = 9;
             this.labelRoles.Text = "Automoviles";
+            this.labelRoles.UseWaitCursor = true;
             // 
             // botonAgregarAutomovil
             // 
@@ -80,13 +82,18 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(309, 386);
             this.Controls.Add(this.botonVolver);
             this.Controls.Add(this.botonEditarAutomovil);
             this.Controls.Add(this.botonAgregarAutomovil);
             this.Controls.Add(this.labelRoles);
+            this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MenuAutomovil";
             this.Text = "MenuAutomovil";
+            this.TransparencyKey = System.Drawing.Color.White;
             this.Load += new System.EventHandler(this.MenuAutomovil_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

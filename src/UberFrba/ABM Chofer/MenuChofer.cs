@@ -20,6 +20,7 @@ namespace UberFrba.ABM_Chofer
         private void MenuChofer_Load(object sender, EventArgs e)
         {
 
+
         }
 
         private void botonAgregarChofer_Click(object sender, EventArgs e)

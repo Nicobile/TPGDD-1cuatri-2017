@@ -28,6 +28,7 @@ namespace UberFrba.Registro_de_Usuario
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegistrarUsuario));
             this.botonVolver = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.labelUsuario = new System.Windows.Forms.Label();
@@ -176,6 +177,7 @@ namespace UberFrba.Registro_de_Usuario
             this.Controls.Add(this.labelUsuario);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.botonVolver);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RegistrarUsuario";
             this.Text = "Registrar usuario";
             this.Load += new System.EventHandler(this.RegistrarUsuario_Load);
