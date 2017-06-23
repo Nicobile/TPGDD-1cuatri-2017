@@ -376,22 +376,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\uber-main-2016.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Untitled-7 copy.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\uber-yo.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\New-Logo-Vertical-Dark.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\logoultimo.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\logouber3.JPG" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\fondouber.jpg" />
@@ -400,31 +388,13 @@
     <None Include="Resources\logouber6.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\descarga %282%29.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\images %282%29.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\images %283%29.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\09b8f1b7c20223cc81fed1a0c33c12a8.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\images %282%291.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\uber-logo-700x39317.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\HUAYI-triaxial-space-wood-floor-photography-backdrops-font-b-pine-b-font-font-b-plank-b.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\images.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\images %284%29.jpg" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
