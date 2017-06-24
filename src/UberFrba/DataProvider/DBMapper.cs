@@ -424,8 +424,7 @@ namespace UberFrba
 
 
             int idChoferObtenidoApartirDelDNI = Convert.ToInt32(this.SelectFromWhere("chofer_id", "Chofer", "chofer_dni", Convert.ToInt32(dniChofer)));
-            if (idChoferObtenidoApartirDelDNI == 0) throw new ChoferInexistenteException("No existe un chofer con DNI igual a : ");
-
+            if (idChoferObtenidoApartirDelDNI == 0) throw new ChoferInexistenteException("No existe un chofer con DNI igual a : "+dniChofer);
             return idChoferObtenidoApartirDelDNI;
 
         }
@@ -434,6 +433,7 @@ namespace UberFrba
         {
 
             int idAutomovilObtenidoApartirDelDNI = Convert.ToInt32(this.SelectFromWhere("auto_id", "Auto", "auto_patente", patenteAuto));
+            if (idAutomovilObtenidoApartirDelDNI == 0) throw new PatenteAutomovilInexistente("No existe un Automovil con Patente igual a : " +patenteAuto);
             return idAutomovilObtenidoApartirDelDNI;
 
         }

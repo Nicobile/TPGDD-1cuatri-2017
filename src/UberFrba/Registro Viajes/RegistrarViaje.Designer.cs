@@ -133,6 +133,7 @@
             // 
             // comboBox_TurnosAutmovilSeleccionado
             // 
+            this.comboBox_TurnosAutmovilSeleccionado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_TurnosAutmovilSeleccionado.FormattingEnabled = true;
             this.comboBox_TurnosAutmovilSeleccionado.Location = new System.Drawing.Point(127, 86);
             this.comboBox_TurnosAutmovilSeleccionado.Name = "comboBox_TurnosAutmovilSeleccionado";
@@ -142,6 +143,7 @@
             // comboBox_chofer
             // 
             this.comboBox_chofer.BackColor = System.Drawing.Color.White;
+            this.comboBox_chofer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_chofer.FormattingEnabled = true;
             this.comboBox_chofer.Location = new System.Drawing.Point(127, 27);
             this.comboBox_chofer.Name = "comboBox_chofer";
@@ -294,7 +296,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RegistrarViaje";
             this.Text = "RegistrarViaje";
-            //this.TransparencyKey = System.Drawing.SystemColors.Window;
             this.Load += new System.EventHandler(this.RegistrarViaje_Load);
             this.groupBox_datosViaje.ResumeLayout(false);
             this.groupBox_datosViaje.PerformLayout();

@@ -93,6 +93,7 @@
             // 
             // comboBox_Turno
             // 
+            this.comboBox_Turno.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Turno.FormattingEnabled = true;
             this.comboBox_Turno.Location = new System.Drawing.Point(91, 99);
             this.comboBox_Turno.Name = "comboBox_Turno";
@@ -158,6 +159,7 @@
             // 
             // comboBox_Marca
             // 
+            this.comboBox_Marca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Marca.FormattingEnabled = true;
             this.comboBox_Marca.Location = new System.Drawing.Point(91, 16);
             this.comboBox_Marca.Name = "comboBox_Marca";
@@ -226,6 +228,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
             this.ClientSize = new System.Drawing.Size(504, 308);
             this.Controls.Add(this.checkBox_Habilitado);
             this.Controls.Add(this.button_Guardar);

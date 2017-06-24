@@ -53,8 +53,6 @@ namespace UberFrba.Registro_Viajes
 
         private void comboBox_chofer_SelectionChangeCommitted(object sender, EventArgs e)
         {
-
-                
            int idChofer  = this.mapper.obtenerIdChoferApartirDelDNI(comboBox_chofer.Text);
 
            textBox_Automovil.Text = mapper.ObtenerPatenteAutomovil(idChofer);
@@ -62,10 +60,6 @@ namespace UberFrba.Registro_Viajes
            int idAutomovilSeleccionado = mapper.obtenerIdAutomovilApartirDeLaPatente(textBox_Automovil.Text);
 
            this.CargarComboBoxTurnosDeAutomovil(idAutomovilSeleccionado);
-
-
-
-
          }
 
 
@@ -115,47 +109,41 @@ namespace UberFrba.Registro_Viajes
 
         private void button_Guardar_Click(object sender, EventArgs e)
         {
-
-            int cantKm;
-            DateTime fecha = Convert.ToDateTime(textBox_Fecha.Text);
-            DateTime horarioIni = horaInicio.Value;
-            DateTime horarioFin = horaFin.Value;
-            int idChofer = mapper.obtenerIdChoferApartirDelDNI(comboBox_chofer.Text);
-            int idAuto = mapper.obtenerIdAutomovilApartirDeLaPatente(textBox_Automovil.Text);
-           
-            int idTurno = Convert.ToInt32(comboBox_TurnosAutmovilSeleccionado.Text.Substring(12, 1));
+            String DNICliente = textBox_Cliente.Text; 
+            String CantKm =textBox_CantidadKm.Text;
+            String fecha = textBox_Fecha.Text;
+            TimeSpan horarioIni = horaInicio.Value.TimeOfDay;
+            TimeSpan horarioFin = horaFin.Value.TimeOfDay;
+            String DNIChofer = comboBox_chofer.Text;
+            String PatenteAuto = textBox_Automovil.Text;
+            String TurnoSeleccionado = comboBox_TurnosAutmovilSeleccionado.Text;
 
 
             //Crear RegistroViaje
             try
             {
-                int idCliente = mapper.obtenerIdClienteApartirDelDNI(textBox_Cliente.Text);//lo hago aca para poder capturar la excepcion sin el dni del cliente no existe
 
-                if (textBox_CantidadKm.Text == "")
-                {
-                    throw new CampoVacioException("CantidadKm");
-                }
-                else {
-
-                     cantKm = Convert.ToInt32(textBox_CantidadKm.Text);    
-                
-                } 
-
-                         
 
                 RegistroViaje registroViaje = new RegistroViaje();
-                registroViaje.SetCantidadKm(cantKm);
+                registroViaje.SetIdChofer(DNIChofer);
+                registroViaje.SetIdAuto(PatenteAuto);
+                registroViaje.SetIdTurno(TurnoSeleccionado);
+                registroViaje.SetCantidadKm(CantKm);
                 registroViaje.SetFechaViaje(fecha);
-                registroViaje.SetHoraInicio(horarioIni);
-                registroViaje.SetHoraFin(horarioFin);
-                registroViaje.SetIdChofer(idChofer);
-                registroViaje.SetIdAuto(idAuto);
-                registroViaje.SetIdCliente(idCliente);
-                registroViaje.SetIdTurno(idTurno);
+                registroViaje.SetIdCliente(DNICliente);
 
+
+
+                if (horarioFin <= horarioIni)
+                {
+                    throw new DuracionViajeInvalidaException("La HoraFin no puede ser menor o igual que la HoraInicio");
+                }
+                else {
+                    registroViaje.SetHoraInicio(horarioIni);
+                    registroViaje.SetHoraFin(horarioFin);
+                }
+                
                 int idRegistroViaje = mapper.Crear(registroViaje);
-
-
 
                 if (idRegistroViaje > 0)
                 {
@@ -166,10 +154,11 @@ namespace UberFrba.Registro_Viajes
 
             }
             catch (NullReferenceException) { }
-            
-           catch (ClienteInexistenteException error) {
 
-                MessageBox.Show(error.Message , "Cliente inexistente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            catch (ClienteInexistenteException error)
+            {
+
+                MessageBox.Show(error.Message, "Cliente inexistente", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             catch (CampoVacioException exception)
@@ -179,12 +168,35 @@ namespace UberFrba.Registro_Viajes
             }
             catch (SqlException error)
             {
-                if (error.Number == 51001)
+                if (error.Number == 51015)
                 {
                     MessageBox.Show(error.Message, "Error al registrar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (error.Number == 51016)
+                {
+                    MessageBox.Show(error.Message, "Error al registrar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
             }
-                       
+            catch (DuracionViajeInvalidaException error) {
+
+                MessageBox.Show(error.Message, "Error al registrar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            
+            }
+            catch (PatenteAutomovilInexistente error)
+            {
+
+                MessageBox.Show(error.Message, "Error al registrar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            catch (ChoferInexistenteException error)
+            {
+
+                MessageBox.Show(error.Message, "Error al registrar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            
         }
                             
        }

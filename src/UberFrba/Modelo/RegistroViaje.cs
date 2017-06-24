@@ -4,15 +4,19 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UberFrba.Exceptions;
 
 namespace UberFrba.Modelo
 {
     class RegistroViaje: Objeto, Mapeable
     {
+
+
+        private DBMapper mapper = new DBMapper();
         int cantidadKm;
         DateTime fechaViaje;
-        DateTime horarioInicio;
-        DateTime horarioFin;
+        TimeSpan horarioInicio;
+        TimeSpan horarioFin;
         int idChofer;
         int idAuto;
         int idCliente;
@@ -21,9 +25,16 @@ namespace UberFrba.Modelo
 
 
 
-        public void SetCantidadKm(int km)
+        public void SetCantidadKm(String km)
         {
-            this.cantidadKm = km;
+            if (km == "")
+            {
+                throw new CampoVacioException("Cantidad Kilometros");
+            }
+            else
+            {
+                this.cantidadKm = Convert.ToInt32(km);
+            }
         }
 
         public int GetCantidadKm()
@@ -31,9 +42,16 @@ namespace UberFrba.Modelo
             return this.cantidadKm;
         }
 
-        public void SetFechaViaje(DateTime fecha)
+        public void SetFechaViaje(String fecha)
         {
-            this.fechaViaje = fecha;
+            if (fecha == "")
+            {
+                throw new CampoVacioException("Fecha Viaje");
+            }
+            else
+            {
+                this.fechaViaje = Convert.ToDateTime(fecha);
+            }
         }
 
         public DateTime GetFechaViaje()
@@ -41,30 +59,37 @@ namespace UberFrba.Modelo
             return this.fechaViaje;
         }
 
-        public void SetHoraInicio(DateTime horaInicio)
+        public void SetHoraInicio(TimeSpan horaInicio)
         {
             this.horarioInicio =horaInicio ;
         }
 
-        public DateTime GetHoraInicio()
+        public TimeSpan GetHoraInicio()
         {
             return this.horarioInicio;
         }
 
-        public void SetHoraFin(DateTime horaFin)
+        public void SetHoraFin(TimeSpan horaFin)
         {
             this.horarioFin= horaFin;
         }
 
-        public DateTime GetHoraFin()
+        public TimeSpan GetHoraFin()
         {
             return this.horarioFin;
         }
 
 
-        public void SetIdChofer(int idChofer)
+        public void SetIdChofer(String DniChofer)
         {
-            this.idChofer = idChofer;
+            if (DniChofer == "")
+            {
+                throw new CampoVacioException("Chofer(DNI)");
+            }
+            else
+            {
+                this.idChofer = mapper.obtenerIdChoferApartirDelDNI(DniChofer);
+            }
         }
 
         public int GetIdChofer()
@@ -72,9 +97,16 @@ namespace UberFrba.Modelo
             return this.idChofer;
         }
 
-        public void SetIdAuto(int idAuto)
+        public void SetIdAuto(String PatenteAuto)
         {
-            this.idAuto = idAuto;
+            if (PatenteAuto == "")
+            {
+                throw new CampoVacioException("Patente");
+            }
+            else
+            {
+                this.idAuto = mapper.obtenerIdAutomovilApartirDeLaPatente(PatenteAuto);
+            }
         }
 
         public int GetIdAuto()
@@ -82,9 +114,17 @@ namespace UberFrba.Modelo
             return this.idAuto;
         }
         
-        public void SetIdCliente(int idCliente)
+        public void SetIdCliente(String DniCliente)
         {
-            this.idCliente = idCliente;
+            if (DniCliente == "")
+            {
+                throw new CampoVacioException("Cliente(DNI)");
+            }
+            else
+            {
+                this.idCliente = mapper.obtenerIdClienteApartirDelDNI(DniCliente);
+            }
+            
         }
 
         public int GetIdCliente()
@@ -93,9 +133,17 @@ namespace UberFrba.Modelo
         }
 
 
-        public void SetIdTurno(int idTurno)
+        public void SetIdTurno(String TurnoSeleccionado)
         {
-            this.idTurno = idTurno;
+
+            if (TurnoSeleccionado == "")
+            {
+                throw new CampoVacioException("Turno");
+            }
+            else
+            {
+                this.idTurno = Convert.ToInt32(TurnoSeleccionado.Substring(12, 1));
+            }
         }
 
         public int GetIdTurno()

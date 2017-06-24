@@ -204,9 +204,11 @@
     <Compile Include="Exceptions\ChoferYaExisteException.cs" />
     <Compile Include="Exceptions\ClienteInexistenteException.cs" />
     <Compile Include="Exceptions\ClienteYaExisteException.cs" />
+    <Compile Include="Exceptions\DuracionViajeInvalidaExceptiom.cs" />
     <Compile Include="Exceptions\ExisteChoferAutomovilHabilitadoException.cs" />
     <Compile Include="Exceptions\FechaPasadaException.cs" />
     <Compile Include="Exceptions\FormatoInvalidoException.cs" />
+    <Compile Include="Exceptions\PatenteAutomovilInexistente.cs" />
     <Compile Include="Exceptions\TelefonoYaExisteException.cs" />
     <Compile Include="Exceptions\TurnoInexistenteException.cs" />
     <Compile Include="Facturacion\Form1.cs">

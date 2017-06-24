@@ -111,7 +111,7 @@ namespace UberFrba.Abm_Automovil
             }
             catch (ChoferInexistenteException exceptionChofer)
             {
-                MessageBox.Show(exceptionChofer.Message + DniChofer);
+                MessageBox.Show(exceptionChofer.Message);
                 return;
             }
             catch (TurnoInexistenteException exceptionTurno)
