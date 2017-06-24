@@ -33,6 +33,8 @@
             this.comboBoxAccion = new System.Windows.Forms.ComboBox();
             this.botonAceptar = new System.Windows.Forms.Button();
             this.botonCerrarSesion = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // labelTitulo
@@ -80,6 +82,17 @@
             this.botonCerrarSesion.UseVisualStyleBackColor = true;
             this.botonCerrarSesion.Click += new System.EventHandler(this.botonCerrarSesion_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = global::UberFrba.Properties.Resources.logouber6;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(54, 53);
+            this.pictureBox1.TabIndex = 9;
+            this.pictureBox1.TabStop = false;
+            // 
             // MenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -87,6 +100,7 @@
             this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(443, 255);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.botonCerrarSesion);
             this.Controls.Add(this.botonAceptar);
             this.Controls.Add(this.comboBoxAccion);
@@ -97,6 +111,7 @@
             this.Name = "MenuPrincipal";
             this.Text = "MenuPrincipal";
             this.Load += new System.EventHandler(this.MenuPrincipal_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -108,6 +123,7 @@
         private System.Windows.Forms.ComboBox comboBoxAccion;
         private System.Windows.Forms.Button botonAceptar;
         private System.Windows.Forms.Button botonCerrarSesion;
+        private System.Windows.Forms.PictureBox pictureBox1;
 
 
 
