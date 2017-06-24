@@ -417,6 +417,24 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\registro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\registro3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\registroUsuarioFondo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\registroUsuarioFondo1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\registroUsuarioFondo2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\registroUsuarioFondo3.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

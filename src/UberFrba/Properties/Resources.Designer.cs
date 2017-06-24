@@ -63,16 +63,6 @@ namespace UberFrba.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap fondouber {
-            get {
-                object obj = ResourceManager.GetObject("fondouber", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
         public static System.Drawing.Bitmap HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b {
             get {
                 object obj = ResourceManager.GetObject("HUAYI-triaxial-space-wood-floor-photography-backdrops-font-b-pine-b-font-font-b-p" +
@@ -97,6 +87,16 @@ namespace UberFrba.Properties {
         public static System.Drawing.Bitmap logouber6 {
             get {
                 object obj = ResourceManager.GetObject("logouber6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap registroUsuarioFondo3 {
+            get {
+                object obj = ResourceManager.GetObject("registroUsuarioFondo3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

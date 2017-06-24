@@ -48,7 +48,7 @@ namespace UberFrba.Registro_de_Usuario
             // botonVolver
             // 
             this.botonVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonVolver.Location = new System.Drawing.Point(21, 276);
+            this.botonVolver.Location = new System.Drawing.Point(21, 298);
             this.botonVolver.Name = "botonVolver";
             this.botonVolver.Size = new System.Drawing.Size(127, 23);
             this.botonVolver.TabIndex = 5;
@@ -59,12 +59,14 @@ namespace UberFrba.Registro_de_Usuario
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(120, 40);
+            this.label1.Location = new System.Drawing.Point(105, 40);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(158, 25);
             this.label1.TabIndex = 6;
             this.label1.Text = "Registrar usuario";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // labelUsuario
             // 
@@ -106,7 +108,7 @@ namespace UberFrba.Registro_de_Usuario
             // botonSiguiente
             // 
             this.botonSiguiente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonSiguiente.Location = new System.Drawing.Point(216, 201);
+            this.botonSiguiente.Location = new System.Drawing.Point(240, 217);
             this.botonSiguiente.Name = "botonSiguiente";
             this.botonSiguiente.Size = new System.Drawing.Size(108, 50);
             this.botonSiguiente.TabIndex = 11;
@@ -177,6 +179,8 @@ namespace UberFrba.Registro_de_Usuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::UberFrba.Properties.Resources.registroUsuarioFondo3;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(387, 333);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label2);
@@ -191,6 +195,7 @@ namespace UberFrba.Registro_de_Usuario
             this.Controls.Add(this.labelUsuario);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.botonVolver);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RegistrarUsuario";
             this.Text = "Registrar usuario";

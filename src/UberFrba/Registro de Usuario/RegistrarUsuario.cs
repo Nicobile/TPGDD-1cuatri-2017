@@ -152,6 +152,11 @@ namespace UberFrba.Registro_de_Usuario
             this.Close();
         }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
        
     }
 }
