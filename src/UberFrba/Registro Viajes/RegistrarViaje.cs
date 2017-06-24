@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 using System.Windows.Forms;
 using UberFrba.Exceptions;
 using UberFrba.DataProvider;
+using UberFrba.Modelo;
 
 namespace UberFrba.Registro_Viajes
 {
@@ -17,7 +18,7 @@ namespace UberFrba.Registro_Viajes
     {
 
         private DBMapper mapper = new DBMapper();
-        private String idTurno;
+      
 
 
         public RegistrarViaje()
@@ -95,7 +96,6 @@ namespace UberFrba.Registro_Viajes
                 string horaInicio = fila["Hora Inicio"].ToString();
                 string horaFin = fila["Hora Fin"].ToString();
                 string idTurnoCombo = fila["Turno N°"].ToString();
-                idTurno = idTurnoCombo;
                 comboBox_TurnosAutmovilSeleccionado.Items.Add("El turno N° " + idTurnoCombo + " comienza a las " + horaInicio + " y finaliza a las " + horaFin);
 
             }
@@ -115,45 +115,68 @@ namespace UberFrba.Registro_Viajes
 
         private void button_Guardar_Click(object sender, EventArgs e)
         {
-            int cantKm = Convert.ToInt32(textBox_CantidadKm.Text);
+
+            int cantKm;
             DateTime fecha = Convert.ToDateTime(textBox_Fecha.Text);
             DateTime horarioIni = horaInicio.Value;
             DateTime horarioFin = horaFin.Value;
             int idChofer = mapper.obtenerIdChoferApartirDelDNI(comboBox_chofer.Text);
             int idAuto = mapper.obtenerIdAutomovilApartirDeLaPatente(textBox_Automovil.Text);
-            int idCliente = mapper.obtenerIdClienteApartirDelDNI(textBox_Cliente.Text);
-
-            String query = "[PUSH_IT_TO_THE_LIMIT].pr_agregar_registro";
-            IList<SqlParameter> parametros = new List<SqlParameter>();
-            SqlParameter parametroOutput;
-            SqlCommand command;
+           
+            int idTurno = Convert.ToInt32(comboBox_TurnosAutmovilSeleccionado.Text.Substring(12, 1));
 
 
-            parametros.Add(new SqlParameter("@Cantidad_km", cantKm));
-            parametros.Add(new SqlParameter("@Fecha", fecha));
-            parametros.Add(new SqlParameter("@HoraInicio", horarioIni));
-            parametros.Add(new SqlParameter("@HoraFin", horarioFin));
-            parametros.Add(new SqlParameter("@idChofer", idChofer));
-            parametros.Add(new SqlParameter("@idAuto", idAuto));
-            parametros.Add(new SqlParameter("@idCliente", idCliente));
-            parametros.Add(new SqlParameter("@idTurno", idTurno));
+            //Crear RegistroViaje
+            try
+            {
+                int idCliente = mapper.obtenerIdClienteApartirDelDNI(textBox_Cliente.Text);//lo hago aca para poder capturar la excepcion sin el dni del cliente no existe
+
+                if (textBox_CantidadKm.Text == "")
+                {
+                    throw new CampoVacioException("CantidadKm");
+                }
+                else {
+
+                     cantKm = Convert.ToInt32(textBox_CantidadKm.Text);    
+                
+                } 
+
+                         
+
+                RegistroViaje registroViaje = new RegistroViaje();
+                registroViaje.SetCantidadKm(cantKm);
+                registroViaje.SetFechaViaje(fecha);
+                registroViaje.SetHoraInicio(horarioIni);
+                registroViaje.SetHoraFin(horarioFin);
+                registroViaje.SetIdChofer(idChofer);
+                registroViaje.SetIdAuto(idAuto);
+                registroViaje.SetIdCliente(idCliente);
+                registroViaje.SetIdTurno(idTurno);
+
+                int idRegistroViaje = mapper.Crear(registroViaje);
 
 
-            parametroOutput = new SqlParameter("@id", SqlDbType.Int);
-            parametroOutput.Direction = ParameterDirection.Output;
-            parametros.Add(parametroOutput);
-            command = QueryBuilder.Instance.build(query, parametros);
-            command.CommandType = CommandType.StoredProcedure;
-            try{
-            command.ExecuteNonQuery();
+
+                if (idRegistroViaje > 0)
+                {
+                    MessageBox.Show("Registro de viaje agregado correctamente");
+                    this.Close();
+                }
 
 
-            int id = (int)parametroOutput.Value;
-            
-            if(id > 0) {
-                MessageBox.Show("Registro de viaje agregado correctamente");
             }
-           }
+            catch (NullReferenceException) { }
+            
+           catch (ClienteInexistenteException error) {
+
+                MessageBox.Show(error.Message , "Cliente inexistente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            catch (CampoVacioException exception)
+            {
+                MessageBox.Show("Falta completar campo: " + exception.Message);
+                return;
+            }
             catch (SqlException error)
             {
                 if (error.Number == 51001)
@@ -161,6 +184,7 @@ namespace UberFrba.Registro_Viajes
                     MessageBox.Show(error.Message, "Error al registrar", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+                       
         }
                             
        }

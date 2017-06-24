@@ -442,6 +442,7 @@ namespace UberFrba
         {
 
             int idClienteObtenidoApartirDelDNI = Convert.ToInt32(this.SelectFromWhere("cliente_id", "Cliente", "cliente_dni", Convert.ToInt32(dniCliente)));
+            if (idClienteObtenidoApartirDelDNI == 0) throw new ClienteInexistenteException("No existe un Cliente con DNI N° : " +dniCliente) ;
             return idClienteObtenidoApartirDelDNI;
 
         }

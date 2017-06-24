@@ -16,7 +16,7 @@ namespace UberFrba.Modelo
         private int telefono;
         private String direccion;
         private int codigoPostal;
-        private int DNI;
+        private long DNI;
         private DateTime fechaDeNacimiento;
         private Boolean activo;
         private int idUsuario;
@@ -118,10 +118,10 @@ namespace UberFrba.Modelo
             if (!esNumero(numeroDeDocumento))
                 throw new FormatoInvalidoException("Numero de documento. Ingrese todos los numeros seguidos.");
 
-            this.DNI = Convert.ToInt32(numeroDeDocumento);
+            this.DNI = Convert.ToInt64(numeroDeDocumento);
         }
 
-        public int GetDNI()
+        public long GetDNI()
         {
             return this.DNI;
         }
@@ -226,7 +226,7 @@ namespace UberFrba.Modelo
             
             }
             this.fechaDeNacimiento = Convert.ToDateTime(reader["cliente_fecha_nacimiento"]);
-            this.DNI = Convert.ToInt32(reader["cliente_dni"]);
+            this.DNI = Convert.ToInt64(reader["cliente_dni"]);
             this.activo = Convert.ToBoolean(reader["cliente_estado"]);
             this.idUsuario = Convert.ToInt32(reader["usuario_id"]);
 

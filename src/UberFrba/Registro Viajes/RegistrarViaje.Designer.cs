@@ -294,7 +294,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RegistrarViaje";
             this.Text = "RegistrarViaje";
-            this.TransparencyKey = System.Drawing.SystemColors.Window;
+            //this.TransparencyKey = System.Drawing.SystemColors.Window;
             this.Load += new System.EventHandler(this.RegistrarViaje_Load);
             this.groupBox_datosViaje.ResumeLayout(false);
             this.groupBox_datosViaje.PerformLayout();

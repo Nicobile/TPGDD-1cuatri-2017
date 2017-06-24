@@ -202,6 +202,7 @@
     <Compile Include="Exceptions\CampoVacioException.cs" />
     <Compile Include="Exceptions\ChoferInexistenteException.cs" />
     <Compile Include="Exceptions\ChoferYaExisteException.cs" />
+    <Compile Include="Exceptions\ClienteInexistenteException.cs" />
     <Compile Include="Exceptions\ClienteYaExisteException.cs" />
     <Compile Include="Exceptions\ExisteChoferAutomovilHabilitadoException.cs" />
     <Compile Include="Exceptions\FechaPasadaException.cs" />
@@ -243,6 +244,7 @@
     <Compile Include="Modelo\Clientes.cs" />
     <Compile Include="Modelo\Mapeable.cs" />
     <Compile Include="Modelo\Objeto.cs" />
+    <Compile Include="Modelo\RegistroViaje.cs" />
     <Compile Include="Modelo\Turnos.cs" />
     <Compile Include="Modelo\Usuarios.cs" />
     <Compile Include="Program.cs" />

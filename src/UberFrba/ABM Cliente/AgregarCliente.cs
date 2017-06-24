@@ -54,6 +54,7 @@ namespace UberFrba.ABM_Cliente
             String nombre = textBox_Nombre.Text;
             String apellido = textBox_Apellido.Text;
             String numeroDeDocumento = textBox_DNI.Text;
+            MessageBox.Show(numeroDeDocumento);
             DateTime fechaDeNacimiento;
             DateTime.TryParse(textBox_FechaDeNacimiento.Text, out fechaDeNacimiento);
             String mail = textBox_Mail.Text;
@@ -121,6 +122,7 @@ namespace UberFrba.ABM_Cliente
                 switch (error.Number)
                 {
                     case 2627: MessageBox.Show("El DNI ya se encuentra registrado", "DNI Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Error); //Violacion de restriccion UNIQUE 
+                        return;
                         break;
                     case 8114: MessageBox.Show("Error de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); break; //ERROR de conversion de datos
                 }
