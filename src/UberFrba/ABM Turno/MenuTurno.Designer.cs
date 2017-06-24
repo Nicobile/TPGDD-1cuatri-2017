@@ -33,13 +33,15 @@
             this.botonAgregarTurno = new System.Windows.Forms.Button();
             this.botonEditarTurno = new System.Windows.Forms.Button();
             this.botonVolver = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // labelTurnos
             // 
             this.labelTurnos.AutoSize = true;
             this.labelTurnos.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTurnos.Location = new System.Drawing.Point(112, 19);
+            this.labelTurnos.Location = new System.Drawing.Point(112, 25);
             this.labelTurnos.Name = "labelTurnos";
             this.labelTurnos.Size = new System.Drawing.Size(74, 25);
             this.labelTurnos.TabIndex = 9;
@@ -77,12 +79,24 @@
             this.botonVolver.UseVisualStyleBackColor = true;
             this.botonVolver.Click += new System.EventHandler(this.botonVolver_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = global::UberFrba.Properties.Resources.logouber6;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(54, 53);
+            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.TabStop = false;
+            // 
             // MenuTurno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
             this.ClientSize = new System.Drawing.Size(309, 386);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.botonVolver);
             this.Controls.Add(this.botonEditarTurno);
             this.Controls.Add(this.botonAgregarTurno);
@@ -91,6 +105,7 @@
             this.Name = "MenuTurno";
             this.Text = "MenuTurno";
             this.Load += new System.EventHandler(this.MenuTurno_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -102,5 +117,6 @@
         private System.Windows.Forms.Button botonAgregarTurno;
         private System.Windows.Forms.Button botonEditarTurno;
         private System.Windows.Forms.Button botonVolver;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

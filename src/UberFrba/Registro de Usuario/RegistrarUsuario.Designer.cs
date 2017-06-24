@@ -41,6 +41,8 @@ namespace UberFrba.Registro_de_Usuario
             this.labelAclaracion = new System.Windows.Forms.Label();
             this.textBoxPass2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // botonVolver
@@ -160,11 +162,23 @@ namespace UberFrba.Registro_de_Usuario
             this.label2.TabIndex = 16;
             this.label2.Text = "Repetir contraseña*";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = global::UberFrba.Properties.Resources.logouber6;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(54, 53);
+            this.pictureBox1.TabIndex = 17;
+            this.pictureBox1.TabStop = false;
+            // 
             // RegistrarUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(387, 333);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBoxPass2);
             this.Controls.Add(this.labelAclaracion);
@@ -181,6 +195,7 @@ namespace UberFrba.Registro_de_Usuario
             this.Name = "RegistrarUsuario";
             this.Text = "Registrar usuario";
             this.Load += new System.EventHandler(this.RegistrarUsuario_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -200,5 +215,6 @@ namespace UberFrba.Registro_de_Usuario
         private System.Windows.Forms.Label labelAclaracion;
         private System.Windows.Forms.TextBox textBoxPass2;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

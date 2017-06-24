@@ -33,13 +33,15 @@
             this.botonAgregarAutomovil = new System.Windows.Forms.Button();
             this.botonEditarAutomovil = new System.Windows.Forms.Button();
             this.botonVolver = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // labelRoles
             // 
             this.labelRoles.AutoSize = true;
             this.labelRoles.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelRoles.Location = new System.Drawing.Point(97, 9);
+            this.labelRoles.Location = new System.Drawing.Point(98, 23);
             this.labelRoles.Name = "labelRoles";
             this.labelRoles.Size = new System.Drawing.Size(119, 25);
             this.labelRoles.TabIndex = 9;
@@ -78,6 +80,17 @@
             this.botonVolver.UseVisualStyleBackColor = true;
             this.botonVolver.Click += new System.EventHandler(this.botonVolver_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = global::UberFrba.Properties.Resources.logouber6;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 9);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(54, 53);
+            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.TabStop = false;
+            // 
             // MenuAutomovil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -85,6 +98,7 @@
             this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(309, 386);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.botonVolver);
             this.Controls.Add(this.botonEditarAutomovil);
             this.Controls.Add(this.botonAgregarAutomovil);
@@ -95,6 +109,7 @@
             this.Text = "MenuAutomovil";
             this.TransparencyKey = System.Drawing.Color.White;
             this.Load += new System.EventHandler(this.MenuAutomovil_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -106,5 +121,6 @@
         private System.Windows.Forms.Button botonAgregarAutomovil;
         private System.Windows.Forms.Button botonEditarAutomovil;
         private System.Windows.Forms.Button botonVolver;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
