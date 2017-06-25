@@ -206,7 +206,13 @@ namespace UberFrba.Registro_Viajes
                 MessageBox.Show(error.Message, "Error al registrar", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
-            
+            catch (ClienteInhabilitadoException error)
+            {
+
+                MessageBox.Show(error.Message, "Error al registrar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+
         }
                             
        }
