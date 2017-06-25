@@ -830,3 +830,22 @@ BEGIN
     SET @id = SCOPE_IDENTITY(); 
 END
 GO
+
+--Procedure de creacion de un registro de viaje nuevo(NO LE PONGO NUMERO FACTURA POR QUE ES EL ID ,DUDA)
+  CREATE PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_agregar_factura
+  @FechaInicio DateTime,
+  @FechaFin DateTime,
+  @idCliente int,
+  @ImporteTotal int
+  --@CantidadViajes int NO TENEMOS ESTE DATO DESNORMALIZADO , NO SE SI ES NECESARIO 
+AS
+BEGIN
+
+	INSERT INTO PUSH_IT_TO_THE_LIMIT.Factura 
+		(factura_fecha_inicio,factura_fecha_fin,cliente_id,factura_importe_total)
+	VALUES	
+		(@FechaInicio,@FechaFin,@idCliente,@ImporteTotal)
+END
+GO
+
+

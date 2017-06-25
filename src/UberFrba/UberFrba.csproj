@@ -246,6 +246,7 @@
     <Compile Include="Modelo\Automoviles.cs" />
     <Compile Include="Modelo\Choferes.cs" />
     <Compile Include="Modelo\Clientes.cs" />
+    <Compile Include="Modelo\Factura.cs" />
     <Compile Include="Modelo\Mapeable.cs" />
     <Compile Include="Modelo\Objeto.cs" />
     <Compile Include="Modelo\RegistroViaje.cs" />
