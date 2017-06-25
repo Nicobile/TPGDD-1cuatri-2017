@@ -614,6 +614,19 @@ namespace UberFrba
 
          }
 
+        public DataTable ObtenerClientesHabilitados()
+        {
+
+            DataSet turnosAutomovil = new DataSet();
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            parametros = new List<SqlParameter>();
+            parametros.Clear();
+            command = QueryBuilder.Instance.build("SELECT cliente_dni,cliente_nombre,cliente_apellido FROM PUSH_IT_TO_THE_LIMIT.Cliente WHERE cliente_estado=1", parametros);
+            adapter.SelectCommand = command;
+            adapter.Fill(turnosAutomovil);
+            return turnosAutomovil.Tables[0];
+
+        }
         /*
         *
         *   SELECT TABLE QUERYS

@@ -321,7 +321,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button button_Cancelar;
         private System.Windows.Forms.Button button_Limpiar;
-        private System.Windows.Forms.Button button_Guardar;
         private System.Windows.Forms.ComboBox comboBox_chofer;
         private System.Windows.Forms.ComboBox comboBox_TurnosAutmovilSeleccionado;
         private System.Windows.Forms.Label label_Hinicio;
@@ -329,5 +328,6 @@
         private System.Windows.Forms.MonthCalendar monthCalendar_FechaDeViaje;
         private System.Windows.Forms.DateTimePicker horaFin;
         private System.Windows.Forms.DateTimePicker horaInicio;
+        private System.Windows.Forms.Button button_Guardar;
     }
 }
