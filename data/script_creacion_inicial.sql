@@ -355,7 +355,7 @@ insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones (rol_id, funcionalidad_id) va
 insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones (rol_id,funcionalidad_id)
 	select distinct R.rol_id, F.funcionalidad_id from [PUSH_IT_TO_THE_LIMIT].Rol R,[PUSH_IT_TO_THE_LIMIT].Funcionalidad F
 	where R.rol_nombre = 'Administrativo' and
-			F.funcionalidad_descripcion in ('ABM de Rol','Registro de usuarios','ABM de Clientes','ABM de Automoviles','ABM de turnos','ABM de choferes','Registro de viajes','Listado estadistico','Rendicion de viajes');
+			F.funcionalidad_descripcion in ('ABM de Rol','Facturacion de Clientes','ABM de Clientes','ABM de Automoviles','ABM de turnos','ABM de choferes','Registro de viajes','Listado estadistico','Rendicion de viajes');
 
 --Chofer
 insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones (rol_id,funcionalidad_id)

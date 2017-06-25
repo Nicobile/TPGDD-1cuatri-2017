@@ -18,6 +18,7 @@ namespace UberFrba.Registro_Viajes
     {
 
         private DBMapper mapper = new DBMapper();
+        int idAutomovilSeleccionado;
       
 
 
@@ -43,12 +44,15 @@ namespace UberFrba.Registro_Viajes
             comboBox_TurnosAutmovilSeleccionado.Text = "";
             horaInicio.Text = "00:00";
             horaFin.Text = "00:00";
+            comboBox_chofer.Items.Clear();
+            comboBox_TurnosAutmovilSeleccionado.Items.Clear();
+            this.CargarComboBoxChoferes();
+            this.CargarComboBoxTurnosDeAutomovil(idAutomovilSeleccionado);
         }
 
         private void RegistrarViaje_Load(object sender, EventArgs e)
         {
             this.CargarComboBoxChoferes();
-
         }
 
         private void comboBox_chofer_SelectionChangeCommitted(object sender, EventArgs e)
@@ -57,7 +61,7 @@ namespace UberFrba.Registro_Viajes
 
            textBox_Automovil.Text = mapper.ObtenerPatenteAutomovil(idChofer);
 
-           int idAutomovilSeleccionado = mapper.obtenerIdAutomovilApartirDeLaPatente(textBox_Automovil.Text);
+           idAutomovilSeleccionado = mapper.obtenerIdAutomovilApartirDeLaPatente(textBox_Automovil.Text);
 
            this.CargarComboBoxTurnosDeAutomovil(idAutomovilSeleccionado);
          }
@@ -96,7 +100,7 @@ namespace UberFrba.Registro_Viajes
 
         }
 
-        private void button_FechaDeNacimiento_Click(object sender, EventArgs e)
+        private void button_FechaDeRegistroViaje_Click(object sender, EventArgs e)
         {
             monthCalendar_FechaDeViaje.Visible = true;
         }
@@ -191,6 +195,12 @@ namespace UberFrba.Registro_Viajes
 
             }
             catch (ChoferInexistenteException error)
+            {
+
+                MessageBox.Show(error.Message, "Error al registrar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            catch (CantidaKilometrosInvalidoException error)
             {
 
                 MessageBox.Show(error.Message, "Error al registrar", MessageBoxButtons.OK, MessageBoxIcon.Error);

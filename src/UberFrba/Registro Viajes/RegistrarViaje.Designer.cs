@@ -33,7 +33,7 @@
             this.horaFin = new System.Windows.Forms.DateTimePicker();
             this.horaInicio = new System.Windows.Forms.DateTimePicker();
             this.monthCalendar_FechaDeViaje = new System.Windows.Forms.MonthCalendar();
-            this.button_FechaDeNacimiento = new System.Windows.Forms.Button();
+            this.button_FechaDeRegistroViaje = new System.Windows.Forms.Button();
             this.label_Hinicio = new System.Windows.Forms.Label();
             this.comboBox_TurnosAutmovilSeleccionado = new System.Windows.Forms.ComboBox();
             this.comboBox_chofer = new System.Windows.Forms.ComboBox();
@@ -60,7 +60,7 @@
             this.groupBox_datosViaje.Controls.Add(this.horaFin);
             this.groupBox_datosViaje.Controls.Add(this.horaInicio);
             this.groupBox_datosViaje.Controls.Add(this.monthCalendar_FechaDeViaje);
-            this.groupBox_datosViaje.Controls.Add(this.button_FechaDeNacimiento);
+            this.groupBox_datosViaje.Controls.Add(this.button_FechaDeRegistroViaje);
             this.groupBox_datosViaje.Controls.Add(this.label_Hinicio);
             this.groupBox_datosViaje.Controls.Add(this.comboBox_TurnosAutmovilSeleccionado);
             this.groupBox_datosViaje.Controls.Add(this.comboBox_chofer);
@@ -106,21 +106,21 @@
             // 
             // monthCalendar_FechaDeViaje
             // 
-            this.monthCalendar_FechaDeViaje.Location = new System.Drawing.Point(239, 4);
+            this.monthCalendar_FechaDeViaje.Location = new System.Drawing.Point(133, 6);
             this.monthCalendar_FechaDeViaje.Name = "monthCalendar_FechaDeViaje";
             this.monthCalendar_FechaDeViaje.TabIndex = 42;
             this.monthCalendar_FechaDeViaje.Visible = false;
             this.monthCalendar_FechaDeViaje.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar_FechaDeViaje_DateSelected);
             // 
-            // button_FechaDeNacimiento
+            // button_FechaDeRegistroViaje
             // 
-            this.button_FechaDeNacimiento.Location = new System.Drawing.Point(321, 146);
-            this.button_FechaDeNacimiento.Name = "button_FechaDeNacimiento";
-            this.button_FechaDeNacimiento.Size = new System.Drawing.Size(80, 20);
-            this.button_FechaDeNacimiento.TabIndex = 41;
-            this.button_FechaDeNacimiento.Text = "Seleccionar";
-            this.button_FechaDeNacimiento.UseVisualStyleBackColor = true;
-            this.button_FechaDeNacimiento.Click += new System.EventHandler(this.button_FechaDeNacimiento_Click);
+            this.button_FechaDeRegistroViaje.Location = new System.Drawing.Point(321, 146);
+            this.button_FechaDeRegistroViaje.Name = "button_FechaDeRegistroViaje";
+            this.button_FechaDeRegistroViaje.Size = new System.Drawing.Size(80, 20);
+            this.button_FechaDeRegistroViaje.TabIndex = 41;
+            this.button_FechaDeRegistroViaje.Text = "Seleccionar";
+            this.button_FechaDeRegistroViaje.UseVisualStyleBackColor = true;
+            this.button_FechaDeRegistroViaje.Click += new System.EventHandler(this.button_FechaDeRegistroViaje_Click);
             // 
             // label_Hinicio
             // 
@@ -325,7 +325,7 @@
         private System.Windows.Forms.ComboBox comboBox_chofer;
         private System.Windows.Forms.ComboBox comboBox_TurnosAutmovilSeleccionado;
         private System.Windows.Forms.Label label_Hinicio;
-        private System.Windows.Forms.Button button_FechaDeNacimiento;
+        private System.Windows.Forms.Button button_FechaDeRegistroViaje;
         private System.Windows.Forms.MonthCalendar monthCalendar_FechaDeViaje;
         private System.Windows.Forms.DateTimePicker horaFin;
         private System.Windows.Forms.DateTimePicker horaInicio;

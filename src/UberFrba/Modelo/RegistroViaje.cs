@@ -31,6 +31,10 @@ namespace UberFrba.Modelo
             {
                 throw new CampoVacioException("Cantidad Kilometros");
             }
+            if (Convert.ToInt32(km)<=0)
+            {
+                throw new CantidaKilometrosInvalidoException("No se puede ingresar Cantidad de Kilometros menores a cero");
+            }
             else
             {
                 this.cantidadKm = Convert.ToInt32(km);

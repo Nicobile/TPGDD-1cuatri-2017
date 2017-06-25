@@ -28,6 +28,7 @@ namespace UberFrba
             funcionalidades.Add("ABM de Automoviles", new Abm_Automovil.MenuAutomovil());
             funcionalidades.Add("Registro de Viajes", new Registro_Viajes.RegistrarViaje()); 
             funcionalidades.Add("Rendicion de Viajes", new Rendicion_Viajes.RendicionViaje());
+            funcionalidades.Add("Facturacion de Clientes", new Facturacion.CrearFacturaCliente());
             /*funcionalidades.Add("Editar Visibilidad", new ABM_Visibilidad.FiltroVisibilidad());
             funcionalidades.Add("Consulta de facturas", new Consulta_Facturas_Vendedor.ListadoFacturas()); 
             funcionalidades.Add("Listado Estadistico", new Listado_Estadistico.Estadisticas());
