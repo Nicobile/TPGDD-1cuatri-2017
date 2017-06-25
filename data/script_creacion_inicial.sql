@@ -140,7 +140,7 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].RolporFunciones(
 )
 
 
-/*Usuario FALTA CONTRASEÑA DEFAULT QUE ES W23A CREO QUE EN SHA256*/
+
 CREATE TABLE [PUSH_IT_TO_THE_LIMIT].Usuario(
 	[usuario_id] INT IDENTITY(1,1) PRIMARY KEY,
 	[usuario_name] VARCHAR(255) UNIQUE NOT NULL,
@@ -170,17 +170,17 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].Cliente(
 	[cliente_codigo_postal] INT ,
 	[cliente_fecha_nacimiento] DATETIME NOT NULL,
 	[cliente_dni] NUMERIC(18,0) UNIQUE NOT NULL,
-	[usuario_id] INT NOT NULL ,/*references [PUSH_IT_TO_THE_LIMIT].Usuario,*/
+	[usuario_id] INT NOT NULL ,
 	[cliente_estado] BIT NOT NULL DEFAULT 1 , 
 )
 
 
-/*Facturacion cliente*/ /*SACAMOS TODOS LOS NOT NULL POR QUE EN LA TABLA MAESTRA HAY FECHAS EN NULL*/
+/*Facturacion cliente*/ 
 CREATE TABLE [PUSH_IT_TO_THE_LIMIT].Factura(
-	[factura_id] INT IDENTITY(1,1) PRIMARY KEY,
-	[factura_fecha_inicio] DATETIME , /*En la tabla maestra las fechas estan en null, por las dudas comento el not null*/
+	 	
+	[factura_fecha_inicio] DATETIME , 
 	[factura_fecha_fin] DATETIME ,
-	[factura_numero] numeric(18,0) unique not null,
+	[factura_id] numeric(18,0) IDENTITY(1,1) PRIMARY KEY,
 	[cliente_id] INT NOT NULL REFERENCES [PUSH_IT_TO_THE_LIMIT].Cliente,
 	[factura_importe_total] NUMERIC(18,2) ,
 	)
@@ -219,11 +219,10 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[Turno](
 
 /*Rendicion Viaje*/
 CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[RendicionViaje](
-	[rendicion_id] INT IDENTITY(1,1) PRIMARY KEY,
+	[rendicion_id] numeric(18,0)  IDENTITY(1,1) PRIMARY KEY,
 	[rendicion_fecha] DATETIME NOT NULL,
-	[rendicion_numero] numeric(18,0) not null,
-	[chofer_id] int NOT NULL ,--REFERENCES [PUSH_IT_TO_THE_LIMIT].[Chofer],					
-	[turno_id] int NOT NULL ,--REFERENCES [PUSH_IT_TO_THE_LIMIT].[Turno],					
+	[chofer_id] int NOT NULL ,					
+	[turno_id] int NOT NULL ,					
 	[rendicion_importe_total] NUMERIC(18,2) NOT NULL,    
 )
 
@@ -233,9 +232,9 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[Auto](
 	[auto_patente] VARCHAR(10) UNIQUE NOT NULL,
 	[auto_marca] VARCHAR(255) NOT NULL,
 	[auto_modelo] VARCHAR(255) NOT NULL,
-	--[chofer_id] int NOT NULL,-- REFERENCES [PUSH_IT_TO_THE_LIMIT].[Chofer],									
+	--[chofer_id] int NOT NULL,								
 	[auto_estado] BIT not null DEFAULT 1,
-	[auto_licencia] VARCHAR(255),-- NOT NULL,  se lo saco por que no es obligatorio al crearlo
+	[auto_licencia] VARCHAR(255),
 	[auto_rodado] VARCHAR(10),
 )
 
@@ -249,17 +248,18 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[AutoporTurno](
 /*Registro de viaje*/
 create table [PUSH_IT_TO_THE_LIMIT].RegistroViaje(
 	[viaje_id] INT IDENTITY(1,1) PRIMARY KEY,
-	[chofer_id] INT NOT NULL ,--references [PUSH_IT_TO_THE_LIMIT].Chofer,                        
-	[auto_id] int NOT NULL, --references[PUSH_IT_TO_THE_LIMIT].[Auto],                                              
-	[factura_id] INT  ,--references [PUSH_IT_TO_THE_LIMIT].Factura,                 --Le saque el not null(NICO)
-	[turno_id] INT NOT NULL ,--references [PUSH_IT_TO_THE_LIMIT].Turno,                            
+	[chofer_id] INT NOT NULL ,                      
+	[auto_id] int NOT NULL,                                              
+	[factura_numero] numeric(18,0),
+	[turno_id] INT NOT NULL ,                           
 	[viaje_cantidad_km] NUMERIC(18,0) NOT NULL, 
-	[rendicion_id] INT,                                                             --Tambien le saque el not null (NICO)
-	[viaje_fecha] date NOT NULL,--LO CAMBIO DE DATETIME A VARCHAR POR QUE LA FUNCION QUE USO EN LA MIGRACION PARA OBTENER SOLO LA FECHA RETORNA UN VARCHAR, LO MISMO PARA HORA INICIO Y FIN
-	[viaje_hora_inicio] time(0) not null ,
-	[viaje_hora_fin] time(0)  ,--IMPORTANTE :LE SAQUE EL NOT NULL POR QUE EN LA TABLA MAESTRA NO HAY , SI NO HAY QUE PONERLE UN DEFAULT
-	[cliente_id] INT NOT NULL ,--references [PUSH_IT_TO_THE_LIMIT].Cliente,
+	[rendicion_id] NUMERIC(18,0),                                                             
+	[viaje_fecha] date NOT NULL,
+	[viaje_hora_inicio] time(0)  ,
+	[viaje_hora_fin] time(0)  ,
+	[cliente_id] INT NOT NULL ,
 )
+
 
 /*Chofer por Auto*/
 CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[ChoferporAuto](
@@ -355,7 +355,7 @@ insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones (rol_id, funcionalidad_id) va
 insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones (rol_id,funcionalidad_id)
 	select distinct R.rol_id, F.funcionalidad_id from [PUSH_IT_TO_THE_LIMIT].Rol R,[PUSH_IT_TO_THE_LIMIT].Funcionalidad F
 	where R.rol_nombre = 'Administrativo' and
-			F.funcionalidad_descripcion in ('ABM de Rol','Facturacion de Clientes','ABM de Clientes','ABM de Automoviles','ABM de turnos','ABM de choferes','Registro de viajes','Listado estadistico','Rendicion de viajes');
+			F.funcionalidad_descripcion in ('ABM de Rol','Registro de usuarios','ABM de Clientes','ABM de Automoviles','ABM de turnos','ABM de choferes','Registro de viajes','Listado estadistico','Rendicion de viajes');
 
 --Chofer
 insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones (rol_id,funcionalidad_id)
@@ -440,6 +440,7 @@ order by Turno_Hora_Inicio
 
 
 /*RendicionViaje*/  
+SET IDENTITY_INSERT [PUSH_IT_TO_THE_LIMIT].RendicionViaje ON
 insert into [PUSH_IT_TO_THE_LIMIT].RendicionViaje(chofer_id, rendicion_fecha, rendicion_importe_total, rendicion_numero, turno_id)
 select distinct c.chofer_id, m.Rendicion_Fecha, sum(m.Rendicion_Importe), m.Rendicion_Nro, t.turno_id 
 from gd_esquema.Maestra m,  [PUSH_IT_TO_THE_LIMIT].Chofer c, [PUSH_IT_TO_THE_LIMIT].Turno t
@@ -447,7 +448,8 @@ where m.Rendicion_Fecha is not null
 and m.Chofer_Dni = c.chofer_dni
 and m.Turno_Hora_Inicio = t.turno_hora_inicio
 group by Rendicion_Nro, c.chofer_id, t.turno_id, m.Rendicion_Fecha
-order by Rendicion_Nro
+SET IDENTITY_INSERT [PUSH_IT_TO_THE_LIMIT].RendicionViaje OFF
+
 
 
 
@@ -473,31 +475,58 @@ where m.Chofer_Dni = c.chofer_dni
 and m.Auto_Patente = a.auto_patente
 
 /*Factura*/
-insert into [PUSH_IT_TO_THE_LIMIT].Factura (cliente_id, factura_fecha_inicio, factura_fecha_fin, factura_numero, factura_importe_total)
-select distinct c.cliente_id, m.Factura_Fecha_Inicio, m.Factura_Fecha_Fin, m.Factura_Nro, ( select sum(m2.Turno_Precio_Base + ( m2.Viaje_Cant_Kilometros * m2.Turno_Valor_Kilometro))   
-																							 from gd_esquema.Maestra m2
-																							where m2.Factura_Nro = m.Factura_Nro)
-from  gd_esquema.Maestra m,[PUSH_IT_TO_THE_LIMIT].Cliente c
-where Factura_Nro is not null
-and c.cliente_dni = m.Cliente_Dni
-order by Factura_Nro
+
+		SET IDENTITY_INSERT [PUSH_IT_TO_THE_LIMIT].Factura ON					
+	INSERT INTO [PUSH_IT_TO_THE_LIMIT].Factura(factura_id,cliente_id,factura_fecha_inicio,factura_fecha_fin,factura_importe_total)			
+	SELECT	Factura_Nro,
+		   cliente.cliente_id,
+		   Factura_Fecha_Inicio,
+		   Factura_Fecha_Fin,
+		   SUM(Turno_Precio_Base+Turno_Valor_Kilometro*Viaje_Cant_Kilometros)
+		   From [gd_esquema].Maestra m JOIN [PUSH_IT_TO_THE_LIMIT].Cliente cliente on (cliente.cliente_dni = m.Cliente_Dni)
+			WHERE Factura_Nro IS NOT NULL
+	GROUP BY Factura_Nro, cliente.cliente_id, Factura_Fecha, Factura_Fecha_Inicio, Factura_Fecha_Fin
+	SET IDENTITY_INSERT [PUSH_IT_TO_THE_LIMIT].RendicionViaje OFF
+
 
 
 /*RegistroViaje*/
 insert into [PUSH_IT_TO_THE_LIMIT].RegistroViaje (auto_id, chofer_id, cliente_id, rendicion_id, turno_id, viaje_cantidad_km, viaje_fecha,viaje_hora_inicio, factura_id)
-select distinct  a.auto_id, ch.chofer_id, cl.cliente_id, r.rendicion_id, t.turno_id, m.Viaje_Cant_Kilometros,CONVERT(date,m.Viaje_Fecha) viajeFecha,CONVERT(time,m.Viaje_Fecha)/*STUFF(m.Viaje_Fecha,1,11,'')*/, f.factura_id
-from [PUSH_IT_TO_THE_LIMIT].[Auto] a, [PUSH_IT_TO_THE_LIMIT].Chofer ch, [PUSH_IT_TO_THE_LIMIT].Cliente cl, [PUSH_IT_TO_THE_LIMIT].RendicionViaje r, [PUSH_IT_TO_THE_LIMIT].Turno t, gd_esquema.Maestra m, gd_esquema.Maestra m2, [PUSH_IT_TO_THE_LIMIT].Factura f
-where m.Viaje_Cant_Kilometros is not null
-and m.Auto_Patente = a.auto_patente
-and m.Chofer_Dni = ch.chofer_dni
-and m.Cliente_Dni = cl.cliente_dni
-and m.Rendicion_Nro = r.rendicion_numero
-and m.Turno_Hora_Inicio = t.turno_hora_inicio
-and m.Chofer_Dni = m2.Chofer_Dni
-and m.Cliente_Dni = m2.Cliente_Dni
-and m.Viaje_Fecha = m2.Viaje_Fecha
-and m2.Factura_Nro = f.factura_numero
-order by viajeFecha
+
+select auto.auto_id,
+		choferes.chofer_id,
+		cliente.cliente_id,
+		viajeCompleto.Rendicion_Nro,
+		turno.turno_id,	
+		m.Viaje_Cant_Kilometros,
+		convert(date,m.Viaje_Fecha),
+		CONVERT(time,m.Viaje_Fecha),
+		viajeCompleto.Factura_Nro FROM [gd_esquema].Maestra m
+	LEFT JOIN (
+				SELECT DISTINCT 
+					conRendicion.Auto_Patente,
+					conRendicion.Chofer_dni,
+					conRendicion.Cliente_Dni,
+					conRendicion.Rendicion_Nro,
+					conRendicion.Turno_Hora_Inicio,
+					conRendicion.Viaje_Cant_Kilometros,
+					conRendicion.Viaje_Fecha,	
+					conFactura.Factura_Nro
+				From [gd_esquema].Maestra conrendicion JOIN [gd_esquema].[Maestra] confactura on
+				(conRendicion.Cliente_Dni = confactura.Cliente_Dni			
+					AND conrendicion.Viaje_Fecha = confactura.Viaje_Fecha 
+					AND conrendicion.Chofer_Dni = confactura.Chofer_Dni)
+				WHERE (conrendicion.Rendicion_Nro IS NOT NULL AND confactura.Factura_Nro IS NOT NULL)
+			)viajeCompleto									
+				on (viajeCompleto.Chofer_Dni = m.Chofer_Dni 
+					AND viajeCompleto.Cliente_Dni = m.Cliente_Dni 
+					AND viajeCompleto.Viaje_Fecha = m.Viaje_Fecha)		
+			JOIN [PUSH_IT_TO_THE_LIMIT].Chofer choferes on (choferes.chofer_dni=m.Chofer_Dni)		
+			JOIN [PUSH_IT_TO_THE_LIMIT].Auto auto on (auto.auto_patente=m.Auto_Patente)			
+			JOIN [PUSH_IT_TO_THE_LIMIT].Cliente cliente on (cliente.cliente_dni = m.Cliente_Dni)		
+		JOIN [PUSH_IT_TO_THE_LIMIT].Turno turno on (turno.turno_hora_inicio = m.Turno_Hora_Inicio)	
+		WHERE (m.Factura_Nro IS NULL AND m.Rendicion_Nro IS NULL)		
+
 
 
 /*Triggers*/
