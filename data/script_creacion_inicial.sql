@@ -59,7 +59,7 @@ IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_TH
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_THE_LIMIT.Turno'))
     DROP TABLE PUSH_IT_TO_THE_LIMIT.Turno
 
-
+	
 /*Validacion Triggers*/
 IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.actualizacion_turno') IS NOT NULL
 		DROP TRIGGER PUSH_IT_TO_THE_LIMIT.actualizacion_turno
@@ -112,7 +112,9 @@ GO
 IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.pr_agregar_registro') IS NOT NULL
     DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_agregar_registro
 GO
-
+IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.pr_agregar_factura') IS NOT NULL
+    DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_agregar_factura
+GO
 
 /* Creacion de tablas*/
 
