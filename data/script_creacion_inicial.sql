@@ -250,7 +250,7 @@ create table [PUSH_IT_TO_THE_LIMIT].RegistroViaje(
 	[viaje_id] INT IDENTITY(1,1) PRIMARY KEY,
 	[chofer_id] INT NOT NULL ,                      
 	[auto_id] int NOT NULL,                                              
-	[factura_numero] numeric(18,0),
+	[factura_id] numeric(18,0),
 	[turno_id] INT NOT NULL ,                           
 	[viaje_cantidad_km] NUMERIC(18,0) NOT NULL, 
 	[rendicion_id] NUMERIC(18,0),                                                             
@@ -441,7 +441,7 @@ order by Turno_Hora_Inicio
 
 /*RendicionViaje*/  
 SET IDENTITY_INSERT [PUSH_IT_TO_THE_LIMIT].RendicionViaje ON
-insert into [PUSH_IT_TO_THE_LIMIT].RendicionViaje(chofer_id, rendicion_fecha, rendicion_importe_total, rendicion_numero, turno_id)
+insert into [PUSH_IT_TO_THE_LIMIT].RendicionViaje(chofer_id, rendicion_fecha, rendicion_importe_total, rendicion_id, turno_id)
 select distinct c.chofer_id, m.Rendicion_Fecha, sum(m.Rendicion_Importe), m.Rendicion_Nro, t.turno_id 
 from gd_esquema.Maestra m,  [PUSH_IT_TO_THE_LIMIT].Chofer c, [PUSH_IT_TO_THE_LIMIT].Turno t
 where m.Rendicion_Fecha is not null
@@ -525,9 +525,7 @@ select auto.auto_id,
 			JOIN [PUSH_IT_TO_THE_LIMIT].Auto auto on (auto.auto_patente=m.Auto_Patente)			
 			JOIN [PUSH_IT_TO_THE_LIMIT].Cliente cliente on (cliente.cliente_dni = m.Cliente_Dni)		
 		JOIN [PUSH_IT_TO_THE_LIMIT].Turno turno on (turno.turno_hora_inicio = m.Turno_Hora_Inicio)	
-		WHERE (m.Factura_Nro IS NULL AND m.Rendicion_Nro IS NULL)		
-
-
+		WHERE (m.Factura_Nro IS NULL AND m.Rendicion_Nro IS NULL)
 
 /*Triggers*/
 --Agrego Trigger que lo que hace es cuando actualizan un turno lo deshabilita e inserta un nuevo simuando que actualizo el viejo 
