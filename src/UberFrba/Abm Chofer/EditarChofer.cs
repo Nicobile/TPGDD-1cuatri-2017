@@ -18,6 +18,7 @@ namespace UberFrba.ABM_Chofer
         private int idChofer;
         private int idContacto = 0;
         private int idUsuario = 0;
+        String dniViejo;
         private DBMapper mapper = new DBMapper();
 
         public EditarChofer(String idChofer,String idUsuarioChofer)
@@ -44,6 +45,7 @@ namespace UberFrba.ABM_Chofer
             textBox_Nombre.Text = chofer.GetNombre();
             textBox_Mail.Text = chofer.GetMail();
             textBox_DNI.Text = chofer.GetDNI();
+            this.dniViejo = chofer.GetDNI();
             textBox_Apellido.Text = chofer.GetApellido();
             textBox_FechaDeNacimiento.Text = Convert.ToString(chofer.GetFechaDeNacimiento());
             textBox_Telefono.Text = chofer.GetTelefono();
@@ -56,6 +58,7 @@ namespace UberFrba.ABM_Chofer
         private void button_Guardar_Click(object sender, EventArgs e)
         {
             // Guarda en variables todos los campos de entrada
+            
             String Nombre = textBox_Nombre.Text;
             String Mail = textBox_Mail.Text;
             String DNI = textBox_DNI.Text;
@@ -66,32 +69,7 @@ namespace UberFrba.ABM_Chofer
             Boolean activo = checkBox_Habilitado.Checked; //La variable activo que esta en el checkbox es para saber si esta habilitado a nivel usuario --> ESTO QUE HICO EL PIBE NO ME CABE NI UN POCO
             Boolean pudoModificar;
             String Direccion = textBox_Direccion.Text;
-    /*        // Update contacto
-            Contacto contacto = new Contacto();
-            try
-            {
-                contacto.setMail(mail);
-                contacto.setTelefono(telefono);
-                contacto.SetCalle(calle);
-                contacto.SetNumeroCalle(numero);
-                contacto.SetPiso(piso);
-                contacto.SetDepartamento(departamento);
-                contacto.SetLocalidad(localidad);
-                contacto.SetCodigoPostal(codigoPostal);
-                mapper.Modificar(idContacto, contacto);
-            }
-            catch (CampoVacioException exception)
-            {
-                MessageBox.Show("Falta completar campo: " + exception.Message);
-                return;
-            }
-            catch (FormatoInvalidoException exception)
-            {
-                MessageBox.Show("Datos mal ingresados en: " + exception.Message);
-                return;
-            }
-            */
-            // Update chofer
+   
             try
             {
                 Choferes chofer = new Choferes();
@@ -107,12 +85,24 @@ namespace UberFrba.ABM_Chofer
                 chofer.SetIdUsuario(idUsuario);
                 chofer.SetTelefono(telefono);
                 mapper.ActualizarEstadoUsuario(idChofer, activo);
-            //    MessageBox.Show(Convert.ToString(idChofer));
-              //  MessageBox.Show(Convert.ToString(activo));
 
                 pudoModificar = mapper.Modificar(idChofer, chofer);
-                if (pudoModificar) MessageBox.Show("Chofer modificado correctamente");
+                if (pudoModificar) {
+                    MessageBox.Show("Chofer modificado correctamente");
+                    if (DNI != this.dniViejo)
+                    {
+                        MessageBox.Show("Contraseña modificada");
+                        mapper.ActualizarUsuarioyPassword(this.idUsuario, DNI, DNI);
+                    
+                    }
+                }
+
             }
+
+
+
+
+
             catch (CampoVacioException exception)
             {
                 MessageBox.Show("Falta completar campo: " + exception.Message);
@@ -128,21 +118,22 @@ namespace UberFrba.ABM_Chofer
                 MessageBox.Show("Telefono ya existe" + exception.Message);
                 return;
             }
-                /*Como antes, faltan estas excepciones, despues las veo son las 2 de la matina y estoy cansadito
-     /*       catch (CuitYaExisteException exception)
-            {
-                MessageBox.Show("Cuit ya existe");
-                return;
-            }
-            catch (RazonSocialYaExisteException exception)
-            {
-                MessageBox.Show("RazonSocial ya existe");
-                return;
-            } */
-            catch (FechaPasadaException exception)
+                
+            catch (FechaInvalidaException exception)
             {
                 MessageBox.Show("Fecha no valida" + exception.Message);
                 return;
+            }
+            catch (SqlException error)
+            {
+                //MessageBox.Show("Usuario ya existente");
+                switch (error.Number)
+                {
+                    case 2627: MessageBox.Show("El DNI ya se encuentra registrado", "DNI Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Error); //Violacion de restriccion UNIQUE 
+                        return;
+                        break;
+                    case 8114: MessageBox.Show("Error de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); break; //ERROR de conversion de datos
+                }
             }
 
             this.Close();

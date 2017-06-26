@@ -132,7 +132,7 @@ namespace UberFrba.Modelo
                 throw new CampoVacioException("Fecha de nacimiento");
 
             if (!esFechaPasada(fechaDeNacimiento))
-                throw new FechaPasadaException();
+                throw new FechaInvalidaException();
 
             this.fechaDeNacimiento = fechaDeNacimiento;
         }

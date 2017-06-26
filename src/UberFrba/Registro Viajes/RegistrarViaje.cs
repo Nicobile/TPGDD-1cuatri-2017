@@ -152,7 +152,11 @@ namespace UberFrba.Registro_Viajes
                 if (idRegistroViaje > 0)
                 {
                     MessageBox.Show("Registro de viaje agregado correctamente");
+                    //this.Close();
+                    this.Hide();
+                    new MenuPrincipal().ShowDialog();
                     this.Close();
+                    
                 }
 
 

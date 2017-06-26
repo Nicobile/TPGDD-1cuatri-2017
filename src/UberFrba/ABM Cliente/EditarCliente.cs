@@ -19,6 +19,7 @@ namespace UberFrba.ABM_Cliente
         private int idCliente = 0;
         private int idContacto = 0;
         private int idUsuario = 0;
+        private String dniViejo;
         private DBMapper mapper = new DBMapper();
         private IList<SqlParameter> parametros = new List<SqlParameter>();
         
@@ -50,6 +51,7 @@ namespace UberFrba.ABM_Cliente
             textBox_Nombre.Text = cliente.GetNombre();
             textBox_Apellido.Text = cliente.GetApellido();
             textBox_DNI.Text = Convert.ToString(cliente.GetDNI());
+            dniViejo = Convert.ToString(cliente.GetDNI()); 
             textBox_FechaDeNacimiento.Text = Convert.ToString(cliente.GetFechaDeNacimiento());
             textBox_Mail.Text = cliente.GetMail();
             textBox_Telefono.Text = Convert.ToString(cliente.GetTelefono());
@@ -101,7 +103,18 @@ namespace UberFrba.ABM_Cliente
                 mapper.ActualizarEstadoUsuario(idUsuario, activo);
 
                 pudoModificar = mapper.Modificar(idCliente, cliente);
-                if (pudoModificar) MessageBox.Show("El cliente se modifico correctamente");
+                if (pudoModificar)
+                {
+                    MessageBox.Show("El cliente se modifico correctamente");
+
+                    if (dniViejo != numeroDeDocumento) {
+
+                        mapper.ActualizarUsuarioyPassword(this.idUsuario, numeroDeDocumento, numeroDeDocumento);
+                                            
+                    
+                    }
+
+                }
             }
             catch (CampoVacioException exception)
             {
@@ -123,10 +136,20 @@ namespace UberFrba.ABM_Cliente
                 MessageBox.Show("El telefono ya existe");
                 return;
             }
-            catch (FechaPasadaException exception)
+            catch (FechaInvalidaException exception)
             {
                 MessageBox.Show("Fecha no valida");
                 return;
+            }
+            catch (SqlException error)
+            {
+                switch (error.Number)
+                {
+                    case 2627: MessageBox.Show("El DNI ya se encuentra registrado", "DNI Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Error); //Violacion de restriccion UNIQUE 
+                        return;
+                        break;
+                    case 8114: MessageBox.Show("Error de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); break; //ERROR de conversion de datos
+                }
             }
 
             this.Close();

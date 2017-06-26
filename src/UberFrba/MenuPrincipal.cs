@@ -84,5 +84,10 @@ namespace UberFrba
             this.Close();
 
         }
+
+        private void comboBoxAccion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

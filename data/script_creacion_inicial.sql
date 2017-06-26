@@ -115,6 +115,10 @@ GO
 IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.pr_agregar_factura') IS NOT NULL
     DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_agregar_factura
 GO
+IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.pr_usuario_nombre_password') IS NOT NULL
+    DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_usuario_nombre_password
+GO
+
 
 /* Creacion de tablas*/
 
@@ -357,7 +361,7 @@ insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones (rol_id, funcionalidad_id) va
 insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones (rol_id,funcionalidad_id)
 	select distinct R.rol_id, F.funcionalidad_id from [PUSH_IT_TO_THE_LIMIT].Rol R,[PUSH_IT_TO_THE_LIMIT].Funcionalidad F
 	where R.rol_nombre = 'Administrativo' and
-			F.funcionalidad_descripcion in ('ABM de Rol','Registro de usuarios','ABM de Clientes','ABM de Automoviles','ABM de turnos','ABM de choferes','Registro de viajes','Listado estadistico','Rendicion de viajes');
+			F.funcionalidad_descripcion in ('ABM de Rol','Facturacion de Clientes','ABM de Clientes','ABM de Automoviles','ABM de turnos','ABM de choferes','Registro de viajes','Listado estadistico','Rendicion de viajes');
 
 --Chofer
 insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones (rol_id,funcionalidad_id)
@@ -820,12 +824,12 @@ BEGIN
 			(@chofer_id, @auto_id)
 		END
 	ELSE 
-		BEGIN
+		--BEGIN
 			--rollback transaction;
 
 			throw 51005,'El Chofer ya tiene un Coche activo asignado ',1;
 	
-		END 
+		--END 
 END
 GO
 
@@ -847,9 +851,14 @@ BEGIN
 	((@HoraInicio <= viaje_hora_fin AND @HoraInicio >= viaje_hora_inicio) OR (@HoraFin <= viaje_hora_fin AND @HoraFin >= viaje_hora_inicio))
 	AND viaje_fecha = @fecha)) throw 51015,'EL chofer ya tiene otro viaje registrado en ese horario',16;
 
-	if exists(select 1 from [PUSH_IT_TO_THE_LIMIT].RegistroViaje where(cliente_id = @idCliente AND
-	((@HoraInicio <= viaje_hora_fin AND @HoraInicio >= viaje_hora_inicio) OR (@HoraFin <= viaje_hora_fin AND @HoraFin >= viaje_hora_inicio))
-	AND viaje_fecha = @fecha)) throw 51016,'EL cliente ya tiene otro viaje registrado en ese horario',16;
+	if exists(select 1 from [PUSH_IT_TO_THE_LIMIT].RegistroViaje 
+	where(cliente_id = @idCliente AND
+	((@HoraInicio <= viaje_hora_fin AND @HoraInicio >= viaje_hora_inicio)
+	OR 
+	(@HoraFin <= viaje_hora_fin AND @HoraFin >= viaje_hora_inicio)) OR((viaje_hora_fin>=@HoraInicio AND viaje_hora_fin<=@HoraFin)OR (viaje_hora_inicio>=@HoraInicio AND viaje_hora_inicio<=@HoraFin))
+	AND viaje_fecha = @fecha)
+	
+	) throw 51016,'EL cliente ya tiene otro viaje registrado en ese horario',16;
 
 
     INSERT INTO [PUSH_IT_TO_THE_LIMIT].RegistroViaje
@@ -860,13 +869,13 @@ BEGIN
 END
 GO
 
---Procedure de creacion de un registro de viaje nuevo(NO LE PONGO NUMERO FACTURA POR QUE ES EL ID ,DUDA)
-  CREATE PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_agregar_factura
+--Procedure de creacion de una factura
+ CREATE PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_agregar_factura
   @FechaInicio DateTime,
   @FechaFin DateTime,
   @idCliente int,
-  @ImporteTotal int
-  --@CantidadViajes int NO TENEMOS ESTE DATO DESNORMALIZADO , NO SE SI ES NECESARIO 
+  @ImporteTotal int,
+  @id int OUTPUT
 AS
 BEGIN
 
@@ -874,7 +883,54 @@ BEGIN
 		(factura_fecha_inicio,factura_fecha_fin,cliente_id,factura_importe_total)
 	VALUES	
 		(@FechaInicio,@FechaFin,@idCliente,@ImporteTotal)
+	SET @id = SCOPE_IDENTITY(); 
 END
 GO
+
+CREATE PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_actualizar_factura_registroviaje
+  @idFactura int,
+  @FechaInicio DateTime,
+  @FechaFin DateTime,
+  @idCliente int
+  
+AS
+BEGIN
+	if(@idFactura>0)
+		BEGIN
+		UPDATE PUSH_IT_TO_THE_LIMIT.RegistroViaje SET factura_id= @idFactura 
+		WHERE viaje_id IN (
+			SELECT viaje_id FROM PUSH_IT_TO_THE_LIMIT.RegistroViaje R JOIN PUSH_IT_TO_THE_LIMIT.Turno T ON(R.turno_id = T.turno_id) WHERE viaje_fecha>=@fechaInicio AND viaje_fecha<=@fechaFin AND factura_id IS NULL AND cliente_id =@idCliente
+			)
+		END
+
+END
+GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+--Procedure de atualizacion usuario y contraseña
+CREATE PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_usuario_nombre_password
+  @idUsuario INT,
+  @nombreUsuario NVARCHAR(255),
+  @passwordUsuario NVARCHAR(255)
+AS
+BEGIN
+	UPDATE PUSH_IT_TO_THE_LIMIT.Usuario 
+		SET usuario_name=@nombreUsuario ,usuario_password=@passwordUsuario
+			WHERE usuario_id=@idUsuario
+END
+GO
+
+
 
 

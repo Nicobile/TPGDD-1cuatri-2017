@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UberFrba.Exceptions;
+using UberFrba.Modelo;
 
 namespace UberFrba.Facturacion
 {
@@ -53,11 +55,52 @@ namespace UberFrba.Facturacion
 
         private void button_CrearFactura_Click_1(object sender, EventArgs e)
         {
+            String ClienteDNI = this.obtenerDNIaPartirDetextBox(comboBox_Cliente.Text);
+            String FechaInicio = textBox_FechaInicio.Text;
+            String FechaFin = textBox_FechaFin.Text;
+            String Total = textBox_TotalFactutado.Text;
+            String CantViajes = textBox_CantidadViajes.Text;
 
-            string[] separadas;
-            separadas = comboBox_Cliente.Text.Split(':');
-            String DniCliente = separadas[1];//En la posicion 1 del vector separadas esta en dni del cliente asi es la forma de obtenerlo
-            MessageBox.Show(DniCliente);
+
+            try {
+
+                Factura factura = new Factura();
+                factura.SetIdCliente(ClienteDNI);
+                factura.SetFechaInicioFactura(FechaInicio);
+                factura.SetFechaFinFactura(FechaFin);
+                factura.SetImporteTotalFactura(Total);
+                factura.SetCantidadViajesFacturados(CantViajes);
+
+                int idFactura = mapper.Crear(factura);
+
+
+
+                if(idFactura > 0)
+                {
+                    MessageBox.Show("Se creo correctamente la  Factura");
+
+                    mapper.ActualizarFacturaIdenRegistrViaje(idFactura, factura.GetFechaInicioFactura(), factura.GetFechaFinFactura(), factura.GetIdCliente());
+                }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            }
+            catch (CampoVacioException exception)
+            {
+                MessageBox.Show("Falta completar campo: " + exception.Message);
+                return;
+            }
+
+
+
         }
 
 
@@ -77,15 +120,80 @@ namespace UberFrba.Facturacion
             CargarComboBoxClientes();
             textBox_FechaFin.Text = "";
             textBox_FechaInicio.Text = "";
+            textBox_TotalFactutado.Text = "";
+            textBox_CantidadViajes.Text = "";
+            dataGridView_Viajes_Facturados.DataSource = null;
+        }
+
+        private void OcultarColumnasQueNoDebenVerse()
+        {
+            dataGridView_Viajes_Facturados.Columns["auto_id"].Visible = false;
+            dataGridView_Viajes_Facturados.Columns["chofer_id"].Visible = false;
+            dataGridView_Viajes_Facturados.Columns["cliente_id"].Visible = false;
+            dataGridView_Viajes_Facturados.Columns["turno_id"].Visible = false;
+            dataGridView_Viajes_Facturados.Columns["factura_id"].Visible = false;
+            dataGridView_Viajes_Facturados.Columns["rendicion_id"].Visible = false;
+        }
+        public String obtenerDNIaPartirDetextBox(String cliente) {
+
+
+            string[] separadas;
+            separadas = comboBox_Cliente.Text.Split(':');
+            String DniCliente = separadas[1];
+            return DniCliente;
+        
+        
+        }
+
+
+
+        public void validarYCargar() {
+            if (comboBox_Cliente.Text == "") {
+                throw new CampoVacioException("Cliente");
+            }
+            if (textBox_FechaInicio.Text == "") {
+                throw new CampoVacioException("Fecha Inicio");
+            }
+
+            lasFechasCorrespondenAunMes(textBox_FechaInicio.Text ,textBox_FechaFin.Text);
+
+            String DNICliente = this.obtenerDNIaPartirDetextBox(comboBox_Cliente.Text);
+            int idCliente = mapper.obtenerIdClienteApartirDelDNI(DNICliente);
+
+
+
+
+            dataGridView_Viajes_Facturados.DataSource = mapper.SelectDataTableRegistroViaje(textBox_FechaInicio.Text,textBox_FechaFin.Text,idCliente);
+            OcultarColumnasQueNoDebenVerse();
+            textBox_CantidadViajes.Text = mapper.CantidadDeViajesFactura(textBox_FechaInicio.Text, textBox_FechaFin.Text,idCliente);
+            textBox_TotalFactutado.Text = mapper.TotalFactura(textBox_FechaInicio.Text, textBox_FechaFin.Text,idCliente);
+
+
+
+
+
         }
 
 
 
 
+        public void lasFechasCorrespondenAunMes(String fechaInicio, String fechaFin) {
 
+            DateTime fechaIniciofac = Convert.ToDateTime(fechaInicio);
+            DateTime fechaFinfac = Convert.ToDateTime(fechaFin);
 
+            int resultado = fechaIniciofac.CompareTo(fechaFinfac);
+            if (resultado >=0) {
+                throw new FechaInvalidaException("La fecha inicio no puede ser mayor a la fecha fin");
+            
+            }
+            if (fechaIniciofac.Month != fechaFinfac.Month) {
 
-
+                throw new FechaInvalidaException("La fecha inicio  y la fecha fin tienen meses distintos ");
+            
+            }
+        
+        }
 
 
 
@@ -122,19 +230,39 @@ namespace UberFrba.Facturacion
         private void monthCalendar_FechaDeFacturaFin_DateSelected(object sender, System.Windows.Forms.DateRangeEventArgs e)
         {
             textBox_FechaFin.Text = e.Start.ToShortDateString();
+            
+            try
+            {
+                this.validarYCargar();
+            }
+            catch (FechaInvalidaException error) {
+
+                MessageBox.Show(error.Message, "Error en fecha", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBox_FechaInicio.Text = "";
+                textBox_FechaFin.Text = "";
+            
+            }
+
             monthCalendar_FechaDeFacturaFin.Visible = false;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
         #endregion
 
-        
-
-        
-
-        
-
-       
-
-        
+             
        
 
     }

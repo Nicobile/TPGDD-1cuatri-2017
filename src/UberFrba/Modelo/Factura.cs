@@ -4,23 +4,33 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UberFrba.Exceptions;
 
 namespace UberFrba.Modelo
 {
     class Factura : Objeto, Mapeable
     {
-
+        private DBMapper mapper = new DBMapper();
         DateTime fechaInicioFactura;
         DateTime fechaFinFactura;
         int idCliente;
-        int importeTotalFactura;
+        float importeTotalFactura;
         int cantidadViajesFacturados;
 
         public void SetFechaInicioFactura(String fechaInicio)
         {
-                this.fechaInicioFactura= Convert.ToDateTime(fechaInicio);
-        }
 
+            if (fechaInicio == "")
+            {
+                throw new CampoVacioException("Fecha Inicio");
+            }
+            else
+            {
+                this.fechaInicioFactura = Convert.ToDateTime(fechaInicio);
+
+            }
+
+        }
         public DateTime GetFechaInicioFactura()
         {
             return this.fechaInicioFactura;
@@ -28,35 +38,53 @@ namespace UberFrba.Modelo
 
         public void SetFechaFinFactura(String fechaFin)
         {
-            this.fechaFinFactura = Convert.ToDateTime(fechaFin);
-        }
+            if (fechaFin == "")
+            {
+                throw new CampoVacioException("Fecha Inicio");
+            }
+            else
+            {
+                this.fechaFinFactura = Convert.ToDateTime(fechaFin);
+            }
 
+        }
         public DateTime GetFechaFinFactura()
         {
             return this.fechaFinFactura;
         }
         public void SetIdCliente(String DniCliente)
         {
-            this.idCliente = Convert.ToInt32(DniCliente);
+
+            if (DniCliente == "")
+            {
+
+                throw new CampoVacioException("Cliente");
+
+            }
+            else
+            {
+                this.idCliente = mapper.obtenerIdClienteApartirDelDNI(DniCliente);
+            
+            }
         }
 
         public int GetIdCliente()
         {
             return this.idCliente;
         }
-        public void SetImporteTotalFactura(int TotalFactura)
+        public void SetImporteTotalFactura(String TotalFactura)
         {
-            this.importeTotalFactura=TotalFactura;
+            this.importeTotalFactura=Convert.ToSingle(TotalFactura);
         }
 
-        public int GetImporteTotalFactura()
+        public Double GetImporteTotalFactura()
         {
             return this.importeTotalFactura;
         }
 
-        public void SetCantidadViajesFacturados(int CantidadViajes)
+        public void SetCantidadViajesFacturados(String CantidadViajes)
         {
-            this.cantidadViajesFacturados = CantidadViajes;
+            this.cantidadViajesFacturados =Convert.ToInt32(CantidadViajes);
         }
 
         public int GetCantidadViajesFacturados()
@@ -91,29 +119,14 @@ namespace UberFrba.Modelo
         public IList<System.Data.SqlClient.SqlParameter> GetParametros()
         {
 
-            //IList<SqlParameter> parametros = new List<SqlParameter>();
-            //parametros.Clear();
-            //parametros.Add(new SqlParameter("@Cantidad_km", this.cantidadKm));
-            //parametros.Add(new SqlParameter("@Fecha", this.fechaViaje));
-            //parametros.Add(new SqlParameter("@HoraInicio", this.horarioInicio));
-            //parametros.Add(new SqlParameter("@HoraFin", this.horarioFin));
-            //parametros.Add(new SqlParameter("@idChofer", this.idChofer));
-            //parametros.Add(new SqlParameter("@idAuto", this.idAuto));
-            //parametros.Add(new SqlParameter("@idCliente", this.idCliente));
-            //parametros.Add(new SqlParameter("@idTurno", this.idTurno));
-            //return parametros;
-            throw new NotImplementedException();
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+            IList<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Clear();
+            parametros.Add(new SqlParameter("@FechaInicio", this.fechaInicioFactura));
+            parametros.Add(new SqlParameter("@FechaFin", this.fechaFinFactura));
+            parametros.Add(new SqlParameter("@idCliente", this.idCliente));
+            parametros.Add(new SqlParameter("@ImporteTotal", this.importeTotalFactura));
+            return parametros;
         }
         #endregion
     }

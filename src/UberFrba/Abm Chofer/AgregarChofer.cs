@@ -137,7 +137,7 @@ namespace UberFrba.ABM_Chofer
                 MessageBox.Show("RazonSocial ya existe");
                 return;
             } */
-            catch (FechaPasadaException exceptionFecha)
+            catch (FechaInvalidaException exceptionFecha)
             {
                 MessageBox.Show("Fecha no valida");
                 return;

@@ -208,7 +208,7 @@
     <Compile Include="Exceptions\ClienteYaExisteException.cs" />
     <Compile Include="Exceptions\DuracionViajeInvalidaExceptiom.cs" />
     <Compile Include="Exceptions\ExisteChoferAutomovilHabilitadoException.cs" />
-    <Compile Include="Exceptions\FechaPasadaException.cs" />
+    <Compile Include="Exceptions\FechaInvalidaException.cs" />
     <Compile Include="Exceptions\FormatoInvalidoException.cs" />
     <Compile Include="Exceptions\PatenteAutomovilInexistente.cs" />
     <Compile Include="Exceptions\TelefonoYaExisteException.cs" />
@@ -244,6 +244,7 @@
       <DependentUpon>MenuPrincipal.cs</DependentUpon>
     </Compile>
     <Compile Include="Modelo\Automoviles.cs" />
+    <Compile Include="Modelo\campoVacioException.cs" />
     <Compile Include="Modelo\Choferes.cs" />
     <Compile Include="Modelo\Clientes.cs" />
     <Compile Include="Modelo\Factura.cs" />

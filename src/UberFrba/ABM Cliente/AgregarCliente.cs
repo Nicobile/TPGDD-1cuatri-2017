@@ -111,7 +111,7 @@ namespace UberFrba.ABM_Cliente
                 MessageBox.Show("El telefono ya existe");
                 return;
             }
-            catch (FechaPasadaException exception)
+            catch (FechaInvalidaException exception)
             {
                 MessageBox.Show("Fecha no valida");
                 return;

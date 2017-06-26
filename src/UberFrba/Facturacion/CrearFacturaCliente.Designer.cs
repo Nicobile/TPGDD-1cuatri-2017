@@ -30,6 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CrearFacturaCliente));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox_CantidadViajes = new System.Windows.Forms.TextBox();
+            this.textBox_TotalFactutado = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.button_FechaDeFinFactura = new System.Windows.Forms.Button();
             this.button_FechaDeInicioFactura = new System.Windows.Forms.Button();
             this.textBox_FechaFin = new System.Windows.Forms.TextBox();
@@ -51,6 +55,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.textBox_CantidadViajes);
+            this.groupBox1.Controls.Add(this.textBox_TotalFactutado);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.button_FechaDeFinFactura);
             this.groupBox1.Controls.Add(this.button_FechaDeInicioFactura);
             this.groupBox1.Controls.Add(this.textBox_FechaFin);
@@ -61,14 +69,46 @@
             this.groupBox1.Controls.Add(this.comboBox_Cliente);
             this.groupBox1.Location = new System.Drawing.Point(27, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(428, 198);
+            this.groupBox1.Size = new System.Drawing.Size(449, 198);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Factura";
             // 
+            // textBox_CantidadViajes
+            // 
+            this.textBox_CantidadViajes.Location = new System.Drawing.Point(107, 146);
+            this.textBox_CantidadViajes.Name = "textBox_CantidadViajes";
+            this.textBox_CantidadViajes.Size = new System.Drawing.Size(315, 20);
+            this.textBox_CantidadViajes.TabIndex = 47;
+            // 
+            // textBox_TotalFactutado
+            // 
+            this.textBox_TotalFactutado.Location = new System.Drawing.Point(107, 116);
+            this.textBox_TotalFactutado.Name = "textBox_TotalFactutado";
+            this.textBox_TotalFactutado.Size = new System.Drawing.Size(315, 20);
+            this.textBox_TotalFactutado.TabIndex = 46;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(24, 149);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(83, 13);
+            this.label6.TabIndex = 45;
+            this.label6.Text = "Cantidad Viajes ";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(24, 123);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(82, 13);
+            this.label5.TabIndex = 44;
+            this.label5.Text = "Total Facturado";
+            // 
             // button_FechaDeFinFactura
             // 
-            this.button_FechaDeFinFactura.Location = new System.Drawing.Point(332, 89);
+            this.button_FechaDeFinFactura.Location = new System.Drawing.Point(348, 89);
             this.button_FechaDeFinFactura.Name = "button_FechaDeFinFactura";
             this.button_FechaDeFinFactura.Size = new System.Drawing.Size(80, 20);
             this.button_FechaDeFinFactura.TabIndex = 43;
@@ -78,7 +118,7 @@
             // 
             // button_FechaDeInicioFactura
             // 
-            this.button_FechaDeInicioFactura.Location = new System.Drawing.Point(332, 60);
+            this.button_FechaDeInicioFactura.Location = new System.Drawing.Point(348, 60);
             this.button_FechaDeInicioFactura.Name = "button_FechaDeInicioFactura";
             this.button_FechaDeInicioFactura.Size = new System.Drawing.Size(80, 20);
             this.button_FechaDeInicioFactura.TabIndex = 42;
@@ -88,7 +128,7 @@
             // 
             // textBox_FechaFin
             // 
-            this.textBox_FechaFin.Location = new System.Drawing.Point(91, 89);
+            this.textBox_FechaFin.Location = new System.Drawing.Point(107, 85);
             this.textBox_FechaFin.Name = "textBox_FechaFin";
             this.textBox_FechaFin.Size = new System.Drawing.Size(235, 20);
             this.textBox_FechaFin.TabIndex = 5;
@@ -104,7 +144,7 @@
             // 
             // textBox_FechaInicio
             // 
-            this.textBox_FechaInicio.Location = new System.Drawing.Point(91, 60);
+            this.textBox_FechaInicio.Location = new System.Drawing.Point(107, 60);
             this.textBox_FechaInicio.Name = "textBox_FechaInicio";
             this.textBox_FechaInicio.Size = new System.Drawing.Size(235, 20);
             this.textBox_FechaInicio.TabIndex = 3;
@@ -121,7 +161,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 32);
+            this.label1.Location = new System.Drawing.Point(24, 35);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(39, 13);
             this.label1.TabIndex = 1;
@@ -131,7 +171,7 @@
             // 
             this.comboBox_Cliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Cliente.FormattingEnabled = true;
-            this.comboBox_Cliente.Location = new System.Drawing.Point(91, 29);
+            this.comboBox_Cliente.Location = new System.Drawing.Point(107, 32);
             this.comboBox_Cliente.Name = "comboBox_Cliente";
             this.comboBox_Cliente.Size = new System.Drawing.Size(321, 21);
             this.comboBox_Cliente.TabIndex = 0;
@@ -161,12 +201,12 @@
             this.dataGridView_Viajes_Facturados.Location = new System.Drawing.Point(54, 242);
             this.dataGridView_Viajes_Facturados.Name = "dataGridView_Viajes_Facturados";
             this.dataGridView_Viajes_Facturados.ReadOnly = true;
-            this.dataGridView_Viajes_Facturados.Size = new System.Drawing.Size(757, 123);
+            this.dataGridView_Viajes_Facturados.Size = new System.Drawing.Size(838, 207);
             this.dataGridView_Viajes_Facturados.TabIndex = 46;
             // 
             // button_CrearFactura
             // 
-            this.button_CrearFactura.Location = new System.Drawing.Point(703, 387);
+            this.button_CrearFactura.Location = new System.Drawing.Point(749, 455);
             this.button_CrearFactura.Name = "button_CrearFactura";
             this.button_CrearFactura.Size = new System.Drawing.Size(100, 30);
             this.button_CrearFactura.TabIndex = 51;
@@ -176,7 +216,7 @@
             // 
             // button_limpiar
             // 
-            this.button_limpiar.Location = new System.Drawing.Point(355, 387);
+            this.button_limpiar.Location = new System.Drawing.Point(355, 455);
             this.button_limpiar.Name = "button_limpiar";
             this.button_limpiar.Size = new System.Drawing.Size(100, 30);
             this.button_limpiar.TabIndex = 52;
@@ -186,7 +226,7 @@
             // 
             // button_volver
             // 
-            this.button_volver.Location = new System.Drawing.Point(27, 387);
+            this.button_volver.Location = new System.Drawing.Point(27, 455);
             this.button_volver.Name = "button_volver";
             this.button_volver.Size = new System.Drawing.Size(100, 30);
             this.button_volver.TabIndex = 53;
@@ -209,7 +249,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
-            this.ClientSize = new System.Drawing.Size(815, 429);
+            this.ClientSize = new System.Drawing.Size(904, 508);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.button_volver);
             this.Controls.Add(this.button_limpiar);
@@ -248,5 +288,9 @@
         private System.Windows.Forms.Button button_limpiar;
         private System.Windows.Forms.Button button_volver;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBox_CantidadViajes;
+        private System.Windows.Forms.TextBox textBox_TotalFactutado;
+        private System.Windows.Forms.Label label6;
     }
 }
