@@ -34,6 +34,7 @@ namespace UberFrba
             funcionalidades.Add("Listado Estadistico", new Listado_Estadistico.Estadisticas());
             funcionalidades.Add("Ver Historial", new Historial_Cliente.Historial());
             funcionalidades.Add("Cambiar Contraseña", new Login.CambiarContrasena()); */
+            funcionalidades.Add("Listado Estadistico", new Listado_Estadistico.ListadoEstadistico());
         
         }
 
