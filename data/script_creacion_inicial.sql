@@ -119,6 +119,15 @@ IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.pr_usuario_nombre_password') IS NOT NULL
     DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_usuario_nombre_password
 GO
 
+IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.pr_actualizar_factura_registroviaje') IS NOT NULL
+    DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_actualizar_factura_registroviaje
+GO
+
+
+
+
+
+
 
 /* Creacion de tablas*/
 
