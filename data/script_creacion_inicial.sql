@@ -123,8 +123,18 @@ IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.pr_actualizar_factura_registroviaje') IS NOT 
     DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_actualizar_factura_registroviaje
 GO
 
-
-
+IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.fx_Top5choferesViajesMasLargosEnUnTrimestre') IS NOT NULL
+    DROP FUNCTION PUSH_IT_TO_THE_LIMIT.fx_Top5choferesViajesMasLargosEnUnTrimestre
+GO
+IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.fx_Top5DechoferesMayorRecaudacionEnUnTrimeste') IS NOT NULL
+    DROP FUNCTION PUSH_IT_TO_THE_LIMIT.fx_Top5DechoferesMayorRecaudacionEnUnTrimeste
+GO
+IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.fx_Top5clientesMayorConsumoEnUnTrimestre') IS NOT NULL
+    DROP FUNCTION PUSH_IT_TO_THE_LIMIT.fx_Top5clientesMayorConsumoEnUnTrimestre
+GO
+IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.fx_Top5clientesQueviajronEnUnMismoAutoEnUnTrimestre') IS NOT NULL
+    DROP FUNCTION PUSH_IT_TO_THE_LIMIT.fx_Top5clientesQueviajronEnUnMismoAutoEnUnTrimestre
+GO
 
 
 
@@ -940,6 +950,64 @@ BEGIN
 END
 GO
 
+
+
+--Funciones para listado estadistico
+
+
+CREATE FUNCTION PUSH_IT_TO_THE_LIMIT.fx_Top5choferesViajesMasLargosEnUnTrimestre(@anio int,@trimestre int)
+RETURNS TABLE
+AS
+RETURN(
+		SELECT TOP 5 (chofer.chofer_apellido+' '+chofer.chofer_nombre)as Chofer, max(viaje_cantidad_km) as Distancia
+		FROM PUSH_IT_TO_THE_LIMIT.RegistroViaje viaje JOIN PUSH_IT_TO_THE_LIMIT.Chofer chofer on  viaje.chofer_id = chofer.chofer_id
+		GROUP BY chofer.chofer_nombre, chofer.chofer_apellido
+		ORDER BY Distancia DESC
+)
+GO
+
+CREATE FUNCTION PUSH_IT_TO_THE_LIMIT.fx_Top5DechoferesMayorRecaudacionEnUnTrimeste(@anio int, @trimestre int)
+RETURNS TABLE
+AS
+RETURN(
+		SELECT TOP 5 (chofer.chofer_apellido+' '+chofer.chofer_nombre) as Chofer,
+			sum(rendicion_importe_total) as 'Total($)'	
+			from [PUSH_IT_TO_THE_LIMIT].RendicionViaje rendicion join [PUSH_IT_TO_THE_LIMIT].Chofer chofer on (rendicion.chofer_id = chofer.chofer_id)
+			where year(rendicion.rendicion_fecha)=@anio AND DATEPART(qq,rendicion.rendicion_fecha)=@trimestre 
+			Group by rendicion.chofer_id, chofer.chofer_apellido, chofer.chofer_nombre, chofer.chofer_direccion, chofer.chofer_mail,chofer.chofer_telefono
+			order by sum(rendicion_importe_total) desc
+)
+GO
+
+CREATE FUNCTION PUSH_IT_TO_THE_LIMIT.fx_Top5clientesQueviajronEnUnMismoAutoEnUnTrimestre(@anio int,@trimestre int)
+RETURNS TABLE
+AS
+RETURN(
+		SELECT TOP 5 (cliente.cliente_apellido+' '+cliente.cliente_nombre)as Cliente,auto.auto_marca, auto.auto_patente,Viajes
+		FROM ( SELECT viaje.cliente_id, viaje.auto_id,
+				ROW_NUMBER() OVER (PARTITION BY viaje.cliente_id ORDER BY count(*) DESC) AS Fila,
+				count(*) as Viajes
+			FROM PUSH_IT_TO_THE_LIMIT.RegistroViaje viaje
+			WHERE YEAR(viaje_fecha)=@anio AND DATEPART(qq,viaje_fecha) = @trimestre
+			GROUP BY viaje.cliente_id,viaje.auto_id)Resultados JOIN PUSH_IT_TO_THE_LIMIT.Cliente cliente ON (Resultados.cliente_id = cliente.cliente_id)
+												JOIN PUSH_IT_TO_THE_LIMIT.Auto auto on (Resultados.auto_id = auto.auto_id)
+			 WHERE Resultados.Fila = 1
+			ORDER BY Viajes DESC
+)
+GO
+
+
+CREATE FUNCTION PUSH_IT_TO_THE_LIMIT.fx_Top5clientesMayorConsumoEnUnTrimestre(@anio int,@trimestre int)
+RETURNS TABLE
+AS
+RETURN(
+		SELECT TOP 5 (cliente.cliente_apellido+' '+cliente.cliente_nombre) as Cliente,sum(factura_importe_total) as ConsumoCliente 
+		from PUSH_IT_TO_THE_LIMIT.Factura fact join PUSH_IT_TO_THE_LIMIT.Cliente cliente on (fact.cliente_id = cliente.cliente_id)
+		WHERE year(fact.factura_fecha_fin) = @anio AND DATEPART(qq,fact.factura_fecha_fin) = @trimestre
+		GROUP BY fact.cliente_id,cliente.cliente_apellido, cliente.cliente_nombre
+		ORDER BY ConsumoCliente Desc
+)
+GO
 
 
 
