@@ -106,7 +106,7 @@
             // 
             // monthCalendar_FechaDeViaje
             // 
-            this.monthCalendar_FechaDeViaje.Location = new System.Drawing.Point(133, 6);
+            this.monthCalendar_FechaDeViaje.Location = new System.Drawing.Point(239, 6);
             this.monthCalendar_FechaDeViaje.Name = "monthCalendar_FechaDeViaje";
             this.monthCalendar_FechaDeViaje.TabIndex = 42;
             this.monthCalendar_FechaDeViaje.Visible = false;
@@ -171,6 +171,7 @@
             // 
             this.textBox_Fecha.Location = new System.Drawing.Point(128, 145);
             this.textBox_Fecha.Name = "textBox_Fecha";
+            this.textBox_Fecha.ReadOnly = true;
             this.textBox_Fecha.Size = new System.Drawing.Size(177, 20);
             this.textBox_Fecha.TabIndex = 32;
             // 
@@ -221,6 +222,7 @@
             // 
             this.textBox_Automovil.Location = new System.Drawing.Point(128, 57);
             this.textBox_Automovil.Name = "textBox_Automovil";
+            this.textBox_Automovil.ReadOnly = true;
             this.textBox_Automovil.Size = new System.Drawing.Size(273, 20);
             this.textBox_Automovil.TabIndex = 25;
             // 

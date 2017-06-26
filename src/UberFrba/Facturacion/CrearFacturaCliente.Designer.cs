@@ -78,6 +78,7 @@
             // 
             this.textBox_CantidadViajes.Location = new System.Drawing.Point(107, 146);
             this.textBox_CantidadViajes.Name = "textBox_CantidadViajes";
+            this.textBox_CantidadViajes.ReadOnly = true;
             this.textBox_CantidadViajes.Size = new System.Drawing.Size(315, 20);
             this.textBox_CantidadViajes.TabIndex = 47;
             // 
@@ -85,6 +86,7 @@
             // 
             this.textBox_TotalFactutado.Location = new System.Drawing.Point(107, 116);
             this.textBox_TotalFactutado.Name = "textBox_TotalFactutado";
+            this.textBox_TotalFactutado.ReadOnly = true;
             this.textBox_TotalFactutado.Size = new System.Drawing.Size(315, 20);
             this.textBox_TotalFactutado.TabIndex = 46;
             // 
@@ -130,6 +132,7 @@
             // 
             this.textBox_FechaFin.Location = new System.Drawing.Point(107, 85);
             this.textBox_FechaFin.Name = "textBox_FechaFin";
+            this.textBox_FechaFin.ReadOnly = true;
             this.textBox_FechaFin.Size = new System.Drawing.Size(235, 20);
             this.textBox_FechaFin.TabIndex = 5;
             // 
@@ -146,6 +149,7 @@
             // 
             this.textBox_FechaInicio.Location = new System.Drawing.Point(107, 60);
             this.textBox_FechaInicio.Name = "textBox_FechaInicio";
+            this.textBox_FechaInicio.ReadOnly = true;
             this.textBox_FechaInicio.Size = new System.Drawing.Size(235, 20);
             this.textBox_FechaInicio.TabIndex = 3;
             // 
