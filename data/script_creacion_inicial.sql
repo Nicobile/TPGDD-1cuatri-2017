@@ -132,7 +132,7 @@ GO
 IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.fx_Top5clientesMayorConsumoEnUnTrimestre') IS NOT NULL
     DROP FUNCTION PUSH_IT_TO_THE_LIMIT.fx_Top5clientesMayorConsumoEnUnTrimestre
 GO
-IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.fx_Top5clientesQueviajronEnUnMismoAutoEnUnTrimestre') IS NOT NULL
+IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.fx_Top5clientesQueviajaronEnUnMismoAutoEnUnTrimestre') IS NOT NULL
     DROP FUNCTION PUSH_IT_TO_THE_LIMIT.fx_Top5clientesQueviajronEnUnMismoAutoEnUnTrimestre
 GO
 
@@ -961,7 +961,7 @@ AS
 RETURN(
 		SELECT TOP 5 (chofer.chofer_apellido+' '+chofer.chofer_nombre)as Chofer, max(viaje_cantidad_km) as Distancia
 		FROM PUSH_IT_TO_THE_LIMIT.RegistroViaje viaje JOIN PUSH_IT_TO_THE_LIMIT.Chofer chofer on  viaje.chofer_id = chofer.chofer_id
-		GROUP BY chofer.chofer_nombre, chofer.chofer_apellido
+		GROUP BY  chofer.chofer_apellido,chofer.chofer_nombre
 		ORDER BY Distancia DESC
 )
 GO
@@ -979,7 +979,7 @@ RETURN(
 )
 GO
 
-CREATE FUNCTION PUSH_IT_TO_THE_LIMIT.fx_Top5clientesQueviajronEnUnMismoAutoEnUnTrimestre(@anio int,@trimestre int)
+CREATE FUNCTION PUSH_IT_TO_THE_LIMIT.fx_Top5clientesQueviajaronEnUnMismoAutoEnUnTrimestre(@anio int,@trimestre int)
 RETURNS TABLE
 AS
 RETURN(

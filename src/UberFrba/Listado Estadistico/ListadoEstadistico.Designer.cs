@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.seleccionAño = new System.Windows.Forms.DateTimePicker();
             this.año = new System.Windows.Forms.Label();
@@ -44,7 +44,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 38);
+            this.label1.Location = new System.Drawing.Point(14, 38);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(134, 13);
             this.label1.TabIndex = 5;
@@ -63,7 +63,7 @@
             // año
             // 
             this.año.AutoSize = true;
-            this.año.Location = new System.Drawing.Point(12, 70);
+            this.año.Location = new System.Drawing.Point(14, 77);
             this.año.Name = "año";
             this.año.Size = new System.Drawing.Size(96, 13);
             this.año.TabIndex = 7;
@@ -73,14 +73,14 @@
             // 
             this.listado.AllowUserToAddRows = false;
             this.listado.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.listado.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.listado.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.listado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.listado.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.listado.EnableHeadersVisualStyles = false;
@@ -145,7 +145,7 @@
             this.SeleccionEstadistica.Items.AddRange(new object[] {
             "Choferes con mayor recaudación",
             "Choferes que realizaron viajes más largos",
-            "Clientes que mayor consumieron",
+            "Clientes de mayor consumo",
             "Clientes que viajaron mayor cantidad de veces en un mismo auto"});
             this.SeleccionEstadistica.Location = new System.Drawing.Point(246, 35);
             this.SeleccionEstadistica.Name = "SeleccionEstadistica";
@@ -164,6 +164,7 @@
             // 
             // ListadoEstadistico
             // 
+            this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
             this.ClientSize = new System.Drawing.Size(648, 423);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
@@ -176,6 +177,7 @@
             this.Controls.Add(this.SeleccionEstadistica);
             this.Name = "ListadoEstadistico";
             this.Text = "Listado Estadistico";
+          
             ((System.ComponentModel.ISupportInitialize)(this.listado)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
