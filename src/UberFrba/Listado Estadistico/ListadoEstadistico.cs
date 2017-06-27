@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
+using UberFrba.Exceptions;
 
 
 namespace UberFrba.Listado_Estadistico
@@ -29,9 +30,9 @@ namespace UberFrba.Listado_Estadistico
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string funcion = this.getTipoEstadistica();         
+            
          
-            int trimestre = this.getTrimestre();
-            string funcion = this.getTipoEstadistica();
          /* me conectto con la base para obtener el resultado de aplocar la funcion*/
            String config = ConfigurationManager.AppSettings["archConexionConSQL"];
            SqlConnection conexion = new SqlConnection(config);
@@ -43,8 +44,10 @@ namespace UberFrba.Listado_Estadistico
             
             string query = "SELECT * From " + "[PUSH_IT_TO_THE_LIMIT]" + "." + funcion+"(@anio, @trimestre)";
             SqlCommand command = new SqlCommand(query, conexion);
-
+           
             command.Parameters.AddWithValue("@anio", seleccionAño.Value.Year);
+            int trimestre = this.getTrimestre();
+            
             command.Parameters.AddWithValue("@trimestre", trimestre);
             /*para mostrar el resultado*/
             DataTable tabla = new DataTable();
@@ -60,9 +63,9 @@ namespace UberFrba.Listado_Estadistico
                 case 0: return 1;
                 case 1: return 2;
                 case 2: return 3;
-               
+                case 3: return 4;
             }
-            return 4;
+            throw new CampoVacioException("Falto seleccionar un trimestre");
         }
     
         private string getTipoEstadistica()
@@ -74,7 +77,7 @@ namespace UberFrba.Listado_Estadistico
                 case 2: return "fx_Top5clientesMayorConsumoEnUnTrimestre";
                 case 3: return "fx_Top5clientesQueviajaronEnUnMismoAutoEnUnTrimestre";
             }
-            return null;
+            throw new CampoVacioException("Falto seleccionar una estadistica");
         }
       
         private void btnVolver_Click(object sender, EventArgs e)
@@ -83,10 +86,10 @@ namespace UberFrba.Listado_Estadistico
             new MenuPrincipal().ShowDialog();
             this.Close();
         }
-
+   
         
        
-
+     
  
 
 

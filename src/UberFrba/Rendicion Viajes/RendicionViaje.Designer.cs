@@ -31,6 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RendicionViaje));
             this.groupBox_datosViaje = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.textBox_importe = new System.Windows.Forms.TextBox();
             this.label_Importe = new System.Windows.Forms.Label();
             this.button_FechaDeRendicion = new System.Windows.Forms.Button();
@@ -46,7 +47,6 @@
             this.button_Limpiar = new System.Windows.Forms.Button();
             this.btnFacturar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox_datosViaje.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Viajes_Rendidos)).BeginInit();
             this.SuspendLayout();
@@ -70,6 +70,17 @@
             this.groupBox_datosViaje.TabIndex = 1;
             this.groupBox_datosViaje.TabStop = false;
             this.groupBox_datosViaje.Text = "Datos";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.Red;
+            this.label1.Location = new System.Drawing.Point(6, 160);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(625, 13);
+            this.label1.TabIndex = 45;
+            this.label1.Text = "AVISO: Se deben cargar todos los campos, antes de ingresar un turno deberan estar" +
+    " cargados previamente Chofer(DNI) y la Fecha";
             // 
             // textBox_importe
             // 
@@ -174,7 +185,7 @@
             this.dataGridView_Viajes_Rendidos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView_Viajes_Rendidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Viajes_Rendidos.EnableHeadersVisualStyles = false;
-            this.dataGridView_Viajes_Rendidos.Location = new System.Drawing.Point(12, 225);
+            this.dataGridView_Viajes_Rendidos.Location = new System.Drawing.Point(12, 287);
             this.dataGridView_Viajes_Rendidos.MultiSelect = false;
             this.dataGridView_Viajes_Rendidos.Name = "dataGridView_Viajes_Rendidos";
             this.dataGridView_Viajes_Rendidos.ReadOnly = true;
@@ -184,7 +195,7 @@
             // 
             // button_Cancelar
             // 
-            this.button_Cancelar.Location = new System.Drawing.Point(12, 411);
+            this.button_Cancelar.Location = new System.Drawing.Point(12, 473);
             this.button_Cancelar.Name = "button_Cancelar";
             this.button_Cancelar.Size = new System.Drawing.Size(100, 30);
             this.button_Cancelar.TabIndex = 6;
@@ -194,7 +205,7 @@
             // 
             // button_Limpiar
             // 
-            this.button_Limpiar.Location = new System.Drawing.Point(429, 411);
+            this.button_Limpiar.Location = new System.Drawing.Point(428, 473);
             this.button_Limpiar.Name = "button_Limpiar";
             this.button_Limpiar.Size = new System.Drawing.Size(100, 30);
             this.button_Limpiar.TabIndex = 7;
@@ -204,7 +215,7 @@
             // 
             // btnFacturar
             // 
-            this.btnFacturar.Location = new System.Drawing.Point(861, 411);
+            this.btnFacturar.Location = new System.Drawing.Point(861, 473);
             this.btnFacturar.Name = "btnFacturar";
             this.btnFacturar.Size = new System.Drawing.Size(100, 30);
             this.btnFacturar.TabIndex = 8;
@@ -216,29 +227,18 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(17, 202);
+            this.label4.Location = new System.Drawing.Point(17, 264);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(124, 20);
             this.label4.TabIndex = 45;
             this.label4.Text = "Viajes a Rendir :";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(6, 160);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(625, 13);
-            this.label1.TabIndex = 45;
-            this.label1.Text = "AVISO: Se deben cargar todos los campos, antes de ingresar un turno deberan estar" +
-    " cargados previamente Chofer(DNI) y la Fecha";
             // 
             // RendicionViaje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
-            this.ClientSize = new System.Drawing.Size(973, 453);
+            this.ClientSize = new System.Drawing.Size(973, 551);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnFacturar);
             this.Controls.Add(this.button_Limpiar);

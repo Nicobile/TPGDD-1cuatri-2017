@@ -133,7 +133,7 @@ IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.fx_Top5clientesMayorConsumoEnUnTrimestre') IS
     DROP FUNCTION PUSH_IT_TO_THE_LIMIT.fx_Top5clientesMayorConsumoEnUnTrimestre
 GO
 IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.fx_Top5clientesQueviajaronEnUnMismoAutoEnUnTrimestre') IS NOT NULL
-    DROP FUNCTION PUSH_IT_TO_THE_LIMIT.fx_Top5clientesQueviajronEnUnMismoAutoEnUnTrimestre
+    DROP FUNCTION PUSH_IT_TO_THE_LIMIT.fx_Top5clientesQueviajaronEnUnMismoAutoEnUnTrimestre
 GO
 IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.pr_actualizar_rendicion_registroviaje') IS NOT NULL
     DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_actualizar_rendicion_registroviaje
