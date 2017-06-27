@@ -162,8 +162,11 @@ namespace UberFrba.Rendicion_Viajes
             String DNIChofer = this.obtenerDNIaPartirDetextBox(comboBox_chofer.Text);
             int idChofer = mapper.obtenerIdChoferApartirDelDNI(DNIChofer);
 
+
+            //ACA LA FUNCION SELECTDATA.... ES LA QUE TRAE LA GRILLA CON LOS VIAJES QUE NO ESTOY PUDIENDO HACER QUE DEPENDA DE TURNO
             dataGridView_Viajes_Rendidos.DataSource = mapper.SelectDataTableRegistroViajeparaRendi(textBox_Fecha.Text, idChofer, Convert.ToInt32(idturno));
             OcultarColumnasQueNoDebenVerse();
+            //ACA SE LLENA EL CAMPO DEL IMPORTE DE LA RENDICION CON LA MISMA QUERI PERO CON UN SUM, SI MODIFICAS LA DE ARRIBA, TENES QUE MODIFICAR ESTA
             textBox_importe.Text = mapper.TotalRendicion(textBox_Fecha.Text, idChofer, Convert.ToInt32(idturno));
 
 

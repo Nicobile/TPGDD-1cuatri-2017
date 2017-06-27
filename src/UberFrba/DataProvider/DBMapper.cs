@@ -406,7 +406,7 @@ namespace UberFrba
             parametros.Add(new SqlParameter("@fecha", fecha));
             parametros.Add(new SqlParameter("@idChofer", idChofer));
             parametros.Add(new SqlParameter("@idTurno", idTurno));
-            command = QueryBuilder.Instance.build("select viaje_id 'Viaje N°',chofer_id,auto_id,factura_id,T.turno_id,viaje_cantidad_km 'Cantidad Km',rendicion_id,viaje_fecha'Fecha',viaje_hora_inicio'Hora Inicio',viaje_hora_fin'Hora Fin',cliente_id ,'Total Viaje'=CASE WHEN (viaje_cantidad_km * T.turno_valor_kilometro) < T.turno_precio_base THEN T.turno_precio_base ELSE viaje_cantidad_km * T.turno_valor_kilometro	END,T.turno_descripcion 'Turno'	from PUSH_IT_TO_THE_LIMIT.RegistroViaje R JOIN PUSH_IT_TO_THE_LIMIT.Turno T ON(R.turno_id = T.turno_id) WHERE  viaje_fecha = @fecha AND factura_id IS NULL AND chofer_id = @idChofer", parametros);
+            command = QueryBuilder.Instance.build("select viaje_id 'Viaje N°',chofer_id,auto_id,factura_id,T.turno_id,viaje_cantidad_km 'Cantidad Km',rendicion_id,viaje_fecha'Fecha',viaje_hora_inicio'Hora Inicio',viaje_hora_fin'Hora Fin',cliente_id ,'Total Viaje'=CASE WHEN (viaje_cantidad_km * T.turno_valor_kilometro) < T.turno_precio_base THEN T.turno_precio_base ELSE viaje_cantidad_km * T.turno_valor_kilometro	END,T.turno_descripcion 'Turno'	from PUSH_IT_TO_THE_LIMIT.RegistroViaje R JOIN PUSH_IT_TO_THE_LIMIT.Turno T ON(R.turno_id = T.turno_id) = @idTurno WHERE viaje_fecha = @fecha AND factura_id IS NULL AND chofer_id = @idChofer", parametros);
             DataSet datos = new DataSet();
             SqlDataAdapter adapter = new SqlDataAdapter();
             adapter.SelectCommand = command;
