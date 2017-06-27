@@ -95,9 +95,9 @@
             this.label_Importe.AutoSize = true;
             this.label_Importe.Location = new System.Drawing.Point(6, 126);
             this.label_Importe.Name = "label_Importe";
-            this.label_Importe.Size = new System.Drawing.Size(42, 13);
+            this.label_Importe.Size = new System.Drawing.Size(68, 13);
             this.label_Importe.TabIndex = 43;
-            this.label_Importe.Text = "Importe";
+            this.label_Importe.Text = "Importe(30%)";
             // 
             // button_FechaDeRendicion
             // 

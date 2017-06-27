@@ -18,7 +18,7 @@ namespace UberFrba.Rendicion_Viajes
     public partial class RendicionViaje : Form
     {
         private DBMapper mapper = new DBMapper();
-        String idturno;
+        int ideTurno = 0;
 
         public RendicionViaje()
         {
@@ -58,7 +58,6 @@ namespace UberFrba.Rendicion_Viajes
                 string horaInicio = fila["Hora Inicio"].ToString();
                 string horaFin = fila["Hora Fin"].ToString();
                 string idTurnoCombo = fila["Turno Nº"].ToString();
-                idturno = idTurnoCombo;
                 comboBox_Turnos.Items.Add("El turno N° " + idTurnoCombo + " comienza a las " + horaInicio + " y finaliza a las " + horaFin);
 
             }
@@ -105,7 +104,7 @@ namespace UberFrba.Rendicion_Viajes
         private void btnFacturar_Click(object sender, EventArgs e)
         {
             String ChoferDNI = this.obtenerDNIaPartirDetextBox(comboBox_chofer.Text);
-            String Turno = idturno;
+            String Turno = comboBox_Turnos.Text;
             String Fecha = textBox_Fecha.Text;
             String Total = textBox_importe.Text;
 
@@ -117,7 +116,7 @@ namespace UberFrba.Rendicion_Viajes
                 rendicion.SetIdChofer(ChoferDNI);
                 rendicion.SetFechaRendicion(Fecha);
                 rendicion.SetImporteTotalRendicion(Total);
-                rendicion.SetIdTurno(Turno);
+                rendicion.SetIdTurno(Convert.ToString(ideTurno));
 
                 int idRendicion = mapper.Crear(rendicion);
 
@@ -127,7 +126,7 @@ namespace UberFrba.Rendicion_Viajes
                 {
                     MessageBox.Show("Se creo correctamente la Rendición");
 
-                    mapper.ActualizarRendicionIdenRegistrViaje(idRendicion, rendicion.GetFechaRendicion(), rendicion.GetIdChofer(),Convert.ToInt32(this.idturno));
+                    mapper.ActualizarRendicionIdenRegistrViaje(idRendicion, rendicion.GetFechaRendicion(), rendicion.GetIdChofer(),ideTurno);
                 }
 
             }
@@ -162,12 +161,18 @@ namespace UberFrba.Rendicion_Viajes
             String DNIChofer = this.obtenerDNIaPartirDetextBox(comboBox_chofer.Text);
             int idChofer = mapper.obtenerIdChoferApartirDelDNI(DNIChofer);
 
+            switch (comboBox_Turnos.SelectedIndex)
+            {
+                case 0: ideTurno = 1; break;
+                case 1: ideTurno = 2; break;
+                case 2: ideTurno = 3; break;
+            }
 
             //ACA LA FUNCION SELECTDATA.... ES LA QUE TRAE LA GRILLA CON LOS VIAJES QUE NO ESTOY PUDIENDO HACER QUE DEPENDA DE TURNO
-            dataGridView_Viajes_Rendidos.DataSource = mapper.SelectDataTableRegistroViajeparaRendi(textBox_Fecha.Text, idChofer, Convert.ToInt32(idturno));
+            dataGridView_Viajes_Rendidos.DataSource = mapper.SelectDataTableRegistroViajeparaRendi(textBox_Fecha.Text, idChofer, ideTurno);
             OcultarColumnasQueNoDebenVerse();
             //ACA SE LLENA EL CAMPO DEL IMPORTE DE LA RENDICION CON LA MISMA QUERI PERO CON UN SUM, SI MODIFICAS LA DE ARRIBA, TENES QUE MODIFICAR ESTA
-            textBox_importe.Text = mapper.TotalRendicion(textBox_Fecha.Text, idChofer, Convert.ToInt32(idturno));
+            textBox_importe.Text = mapper.TotalRendicion(textBox_Fecha.Text, idChofer, ideTurno);
 
 
         }

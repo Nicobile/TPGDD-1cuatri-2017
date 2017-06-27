@@ -66,7 +66,7 @@ namespace UberFrba.Modelo
             }
             else
             {
-                this.idTurno = Convert.ToInt32(TurnoSeleccionado.Substring(12, 1));
+                this.idTurno = Convert.ToInt32(TurnoSeleccionado);
             }
         }
 

@@ -936,15 +936,15 @@ CREATE PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_actualizar_factura_registroviaje
   @idFactura int,
   @FechaInicio DateTime,
   @FechaFin DateTime,
-  @idCliente int
-  
+  @idCliente int,
+  @idTurno int
 AS
 BEGIN
 	if(@idFactura>0)
 		BEGIN
 		UPDATE PUSH_IT_TO_THE_LIMIT.RegistroViaje SET factura_id= @idFactura 
 		WHERE viaje_id IN (
-			SELECT viaje_id FROM PUSH_IT_TO_THE_LIMIT.RegistroViaje R JOIN PUSH_IT_TO_THE_LIMIT.Turno T ON(R.turno_id = T.turno_id) WHERE viaje_fecha>=@fechaInicio AND viaje_fecha<=@fechaFin AND factura_id IS NULL AND cliente_id =@idCliente
+			SELECT viaje_id FROM PUSH_IT_TO_THE_LIMIT.RegistroViaje R JOIN PUSH_IT_TO_THE_LIMIT.Turno T ON(R.turno_id = T.turno_id AND R.turno_id = @idTurno AND T.turno_id = @idTurno) WHERE viaje_fecha>=@fechaInicio AND viaje_fecha<=@fechaFin AND factura_id IS NULL AND cliente_id =@idCliente
 			)
 		END
 
