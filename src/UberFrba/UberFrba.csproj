@@ -251,6 +251,7 @@
     <Compile Include="Modelo\Mapeable.cs" />
     <Compile Include="Modelo\Objeto.cs" />
     <Compile Include="Modelo\RegistroViaje.cs" />
+    <Compile Include="Modelo\Rendicion.cs" />
     <Compile Include="Modelo\Turnos.cs" />
     <Compile Include="Modelo\Usuarios.cs" />
     <Compile Include="Program.cs" />

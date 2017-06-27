@@ -41,17 +41,19 @@
             this.label_Turno = new System.Windows.Forms.Label();
             this.label_Chofer = new System.Windows.Forms.Label();
             this.monthCalendar_Fecha = new System.Windows.Forms.MonthCalendar();
-            this.dgListado = new System.Windows.Forms.DataGridView();
+            this.dataGridView_Viajes_Rendidos = new System.Windows.Forms.DataGridView();
             this.button_Cancelar = new System.Windows.Forms.Button();
             this.button_Limpiar = new System.Windows.Forms.Button();
             this.btnFacturar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox_datosViaje.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgListado)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Viajes_Rendidos)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox_datosViaje
             // 
+            this.groupBox_datosViaje.Controls.Add(this.label1);
             this.groupBox_datosViaje.Controls.Add(this.textBox_importe);
             this.groupBox_datosViaje.Controls.Add(this.label_Importe);
             this.groupBox_datosViaje.Controls.Add(this.button_FechaDeRendicion);
@@ -64,7 +66,7 @@
             this.groupBox_datosViaje.Controls.Add(this.monthCalendar_Fecha);
             this.groupBox_datosViaje.Location = new System.Drawing.Point(12, 12);
             this.groupBox_datosViaje.Name = "groupBox_datosViaje";
-            this.groupBox_datosViaje.Size = new System.Drawing.Size(833, 169);
+            this.groupBox_datosViaje.Size = new System.Drawing.Size(833, 176);
             this.groupBox_datosViaje.TabIndex = 1;
             this.groupBox_datosViaje.TabStop = false;
             this.groupBox_datosViaje.Text = "Datos";
@@ -104,6 +106,7 @@
             this.comboBox_Turnos.Name = "comboBox_Turnos";
             this.comboBox_Turnos.Size = new System.Drawing.Size(273, 21);
             this.comboBox_Turnos.TabIndex = 38;
+            this.comboBox_Turnos.SelectedIndexChanged += new System.EventHandler(this.comboBox_Turnos_SelectedIndexChanged);
             // 
             // comboBox_chofer
             // 
@@ -157,10 +160,10 @@
             this.monthCalendar_Fecha.Visible = false;
             this.monthCalendar_Fecha.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar_FechaDeRendicion_DateSelected);
             // 
-            // dgListado
+            // dataGridView_Viajes_Rendidos
             // 
-            this.dgListado.AllowUserToAddRows = false;
-            this.dgListado.AllowUserToDeleteRows = false;
+            this.dataGridView_Viajes_Rendidos.AllowUserToAddRows = false;
+            this.dataGridView_Viajes_Rendidos.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -168,16 +171,16 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgListado.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgListado.EnableHeadersVisualStyles = false;
-            this.dgListado.Location = new System.Drawing.Point(12, 225);
-            this.dgListado.MultiSelect = false;
-            this.dgListado.Name = "dgListado";
-            this.dgListado.ReadOnly = true;
-            this.dgListado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgListado.Size = new System.Drawing.Size(949, 180);
-            this.dgListado.TabIndex = 5;
+            this.dataGridView_Viajes_Rendidos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView_Viajes_Rendidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_Viajes_Rendidos.EnableHeadersVisualStyles = false;
+            this.dataGridView_Viajes_Rendidos.Location = new System.Drawing.Point(12, 225);
+            this.dataGridView_Viajes_Rendidos.MultiSelect = false;
+            this.dataGridView_Viajes_Rendidos.Name = "dataGridView_Viajes_Rendidos";
+            this.dataGridView_Viajes_Rendidos.ReadOnly = true;
+            this.dataGridView_Viajes_Rendidos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView_Viajes_Rendidos.Size = new System.Drawing.Size(949, 180);
+            this.dataGridView_Viajes_Rendidos.TabIndex = 5;
             // 
             // button_Cancelar
             // 
@@ -207,6 +210,7 @@
             this.btnFacturar.TabIndex = 8;
             this.btnFacturar.Text = "Generar";
             this.btnFacturar.UseVisualStyleBackColor = true;
+            this.btnFacturar.Click += new System.EventHandler(this.btnFacturar_Click);
             // 
             // label4
             // 
@@ -218,6 +222,17 @@
             this.label4.TabIndex = 45;
             this.label4.Text = "Viajes a Rendir :";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.Red;
+            this.label1.Location = new System.Drawing.Point(6, 160);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(625, 13);
+            this.label1.TabIndex = 45;
+            this.label1.Text = "AVISO: Se deben cargar todos los campos, antes de ingresar un turno deberan estar" +
+    " cargados previamente Chofer(DNI) y la Fecha";
+            // 
             // RendicionViaje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -228,7 +243,7 @@
             this.Controls.Add(this.btnFacturar);
             this.Controls.Add(this.button_Limpiar);
             this.Controls.Add(this.button_Cancelar);
-            this.Controls.Add(this.dgListado);
+            this.Controls.Add(this.dataGridView_Viajes_Rendidos);
             this.Controls.Add(this.groupBox_datosViaje);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RendicionViaje";
@@ -236,7 +251,7 @@
             this.Load += new System.EventHandler(this.RendicionViaje_Load);
             this.groupBox_datosViaje.ResumeLayout(false);
             this.groupBox_datosViaje.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgListado)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Viajes_Rendidos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -255,10 +270,11 @@
         private System.Windows.Forms.Label label_Turno;
         private System.Windows.Forms.Label label_Chofer;
         private System.Windows.Forms.MonthCalendar monthCalendar_Fecha;
-        private System.Windows.Forms.DataGridView dgListado;
+        private System.Windows.Forms.DataGridView dataGridView_Viajes_Rendidos;
         private System.Windows.Forms.Button button_Cancelar;
         private System.Windows.Forms.Button button_Limpiar;
         private System.Windows.Forms.Button btnFacturar;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label1;
     }
 }

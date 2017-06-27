@@ -135,7 +135,12 @@ GO
 IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.fx_Top5clientesQueviajaronEnUnMismoAutoEnUnTrimestre') IS NOT NULL
     DROP FUNCTION PUSH_IT_TO_THE_LIMIT.fx_Top5clientesQueviajronEnUnMismoAutoEnUnTrimestre
 GO
-
+IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.pr_actualizar_rendicion_registroviaje') IS NOT NULL
+    DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_actualizar_rendicion_registroviaje
+GO
+IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.pr_agregar_rendicion') IS NOT NULL
+    DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_agregar_rendicion
+GO
 
 
 
@@ -906,6 +911,27 @@ BEGIN
 END
 GO
 
+
+--procedure para la creacion de una rendicion de viaje
+ CREATE PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_agregar_rendicion
+  @fecha DateTime,
+  @idChofer int,
+  @idTurno int,
+  @importeTotal int,
+  @id int OUTPUT
+AS
+BEGIN
+
+	INSERT INTO PUSH_IT_TO_THE_LIMIT.RendicionViaje
+		(rendicion_fecha,chofer_id,turno_id,rendicion_importe_total)
+	VALUES	
+		(@fecha,@idChofer,@idTurno,@importeTotal)
+	SET @id = SCOPE_IDENTITY(); 
+END
+GO
+
+
+--procedure para actualizar el registro con el id de factura
 CREATE PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_actualizar_factura_registroviaje
   @idFactura int,
   @FechaInicio DateTime,
@@ -926,7 +952,24 @@ END
 GO
 
 
+--procedure para actualizar el registro con el id de rendicion
+CREATE PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_actualizar_rendicion_registroviaje
+  @idRendicion int,
+  @Fecha DateTime,
+  @idChofer int,
+  @idTurno int
+AS
+BEGIN
+	if(@idRendicion>0)
+		BEGIN
+		UPDATE PUSH_IT_TO_THE_LIMIT.RegistroViaje SET rendicion_id= @idRendicion
+		WHERE viaje_id IN (
+			SELECT viaje_id FROM PUSH_IT_TO_THE_LIMIT.RegistroViaje R JOIN PUSH_IT_TO_THE_LIMIT.Turno T ON(R.turno_id = T.turno_id) WHERE viaje_fecha = @Fecha AND rendicion_id IS NULL AND chofer_id =@idChofer
+			)
+		END
 
+END
+GO
 
 
 
