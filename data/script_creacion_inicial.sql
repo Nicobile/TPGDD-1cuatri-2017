@@ -142,6 +142,10 @@ IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.pr_agregar_rendicion') IS NOT NULL
     DROP PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_agregar_rendicion
 GO
 
+IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.fx_verificarRendicion') IS NOT NULL
+    DROP FUNCTION PUSH_IT_TO_THE_LIMIT.fx_verificarRendicion
+GO
+
 
 
 /* Creacion de tablas*/
@@ -1052,5 +1056,8 @@ RETURN(
 )
 GO
 
-
-
+CREATE FUNCTION PUSH_IT_TO_THE_LIMIT.fx_verificarRendicion(@fecha nvarchar(15),@idchofer int)
+RETURNS TABLE
+as
+return (select count(*) as CantidadRegistros from PUSH_IT_TO_THE_LIMIT.RendicionViaje r where convert(date,r.rendicion_fecha) =convert(date, @fecha) and r.chofer_id= @idchofer)
+go

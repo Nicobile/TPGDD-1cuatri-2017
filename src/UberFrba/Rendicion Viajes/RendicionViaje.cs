@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using UberFrba.Exceptions;
 using UberFrba.DataProvider;
 using UberFrba.Modelo;
-
+using System.Configuration;
 
 namespace UberFrba.Rendicion_Viajes
 {
@@ -140,23 +140,46 @@ namespace UberFrba.Rendicion_Viajes
                 rendicion.SetFechaRendicion(Fecha);
                 rendicion.SetImporteTotalRendicion(Total);
                 rendicion.SetIdTurno(Convert.ToString(ideTurno));
-
-                int idRendicion = mapper.Crear(rendicion);
-
-
-
-                if (idRendicion > 0)
+                if (!ExisteRendicion(rendicion.GetIdChofer(), Fecha))
                 {
-                    MessageBox.Show("Se creo correctamente la Rendición");
+                    int idRendicion = mapper.Crear(rendicion);
+                    if (idRendicion > 0)
+                    {
+                        MessageBox.Show("Se creo correctamente la Rendición");
 
-                    mapper.ActualizarRendicionIdenRegistrViaje(idRendicion, rendicion.GetFechaRendicion(), rendicion.GetIdChofer(), ideTurno);
-                }
+                        mapper.ActualizarRendicionIdenRegistrViaje(idRendicion, rendicion.GetFechaRendicion(), rendicion.GetIdChofer(), ideTurno);
+                    }
+                     }
+                    else { MessageBox.Show("Ya se ralizo la rendicion diaria para ese chofer", "Rendicion existente", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+
+
+               
             }
             else { MessageBox.Show(error, "Faltan completar campos", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             
            
         
 
+        }
+        private bool ExisteRendicion(int idchofer, String fecha)
+        {
+            String config = ConfigurationManager.AppSettings["archConexionConSQL"];
+            SqlConnection conexion = new SqlConnection(config);
+            try
+            {
+                conexion.Open();
+            }
+            catch (Exception) { MessageBox.Show("Error en conexion"); }
+            string query = "SELECT * From [PUSH_IT_TO_THE_LIMIT].fx_verificarRendicion(@fecha,@idchofer)";
+            SqlCommand cmd = new SqlCommand(query, conexion);
+            cmd.Parameters.AddWithValue("@fecha", fecha);
+            cmd.Parameters.AddWithValue("@idchofer", idchofer);
+            int count = Convert.ToInt32(cmd.ExecuteScalar());
+            if (count == 0)
+                return false;
+            else
+               
+                return true;
         }
 
         private void OcultarColumnasQueNoDebenVerse()
