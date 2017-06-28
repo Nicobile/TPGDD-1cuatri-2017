@@ -16,13 +16,13 @@ namespace UberFrba.Listado_Estadistico
 {
     public partial class ListadoEstadistico : Form
     {
-
+        private DBMapper mapper = new DBMapper();
        
         public ListadoEstadistico()
         {
             InitializeComponent();
-            DateTime FECHA_ACTUAL = DateTime.Parse(ConfigurationManager.AppSettings["FechaInicio"]);
-            seleccionAño.MaxDate = FECHA_ACTUAL;
+            DateTime FECHA_ACTUAL = DateTime.Today;
+            seleccionAño.MaxDate = FECHA_ACTUAL;// para que no se puedan hacer rendiciones mas alla del dia de hoy
             seleccionAño.Value = FECHA_ACTUAL;
             seleccionTrimestre.Text = "";
             SeleccionEstadistica.Text = "";
@@ -40,28 +40,8 @@ namespace UberFrba.Listado_Estadistico
                 
             if (error==""){
 
-                /* me conectto con la base para obtener el resultado de aplocar la funcion*/
-                String config = ConfigurationManager.AppSettings["archConexionConSQL"];
-                SqlConnection conexion = new SqlConnection(config);
-                try
-                {
-                    conexion.Open();
-                }
-                catch (Exception) { MessageBox.Show("Error en conexion"); }
-
-                string query = "SELECT * From [PUSH_IT_TO_THE_LIMIT]." + funcion + "(@anio, @trimestre)";
-                SqlCommand command = new SqlCommand(query, conexion);
-
-                command.Parameters.AddWithValue("@anio", seleccionAño.Value.Year);
-                
-
-                command.Parameters.AddWithValue("@trimestre", trimestre);
-                /*para mostrar el resultado*/
-                DataTable tabla = new DataTable();
-                SqlDataAdapter adapter = new SqlDataAdapter(command);
-                adapter.Fill(tabla);
-                listado.DataSource = tabla;
-                
+               
+                    listado.DataSource = mapper.AplicarEstadistica(seleccionAño.Value.Year, trimestre, funcion);     
                
             }
             else {

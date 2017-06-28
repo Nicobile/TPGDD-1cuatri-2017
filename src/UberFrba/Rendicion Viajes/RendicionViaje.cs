@@ -163,17 +163,7 @@ namespace UberFrba.Rendicion_Viajes
         }
         private bool ExisteRendicion(int idchofer, String fecha)
         {
-            String config = ConfigurationManager.AppSettings["archConexionConSQL"];
-            SqlConnection conexion = new SqlConnection(config);
-            try
-            {
-                conexion.Open();
-            }
-            catch (Exception) { MessageBox.Show("Error en conexion"); }
-            string query = "SELECT * From [PUSH_IT_TO_THE_LIMIT].fx_verificarRendicion(@fecha,@idchofer)";
-            SqlCommand cmd = new SqlCommand(query, conexion);
-            cmd.Parameters.AddWithValue("@fecha", fecha);
-            cmd.Parameters.AddWithValue("@idchofer", idchofer);
+            SqlCommand cmd=mapper.BuscarRendicion(fecha, idchofer);
             int count = Convert.ToInt32(cmd.ExecuteScalar());
             if (count == 0)
                 return false;

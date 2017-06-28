@@ -37,7 +37,6 @@
             this.label_Hinicio = new System.Windows.Forms.Label();
             this.comboBox_TurnosAutmovilSeleccionado = new System.Windows.Forms.ComboBox();
             this.comboBox_chofer = new System.Windows.Forms.ComboBox();
-            this.textBox_Cliente = new System.Windows.Forms.TextBox();
             this.label_Cliente = new System.Windows.Forms.Label();
             this.textBox_Fecha = new System.Windows.Forms.TextBox();
             this.label_FHinicio = new System.Windows.Forms.Label();
@@ -52,11 +51,13 @@
             this.button_Cancelar = new System.Windows.Forms.Button();
             this.button_Limpiar = new System.Windows.Forms.Button();
             this.button_Guardar = new System.Windows.Forms.Button();
+            this.comboBox_Cliente = new System.Windows.Forms.ComboBox();
             this.groupBox_datosViaje.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox_datosViaje
             // 
+            this.groupBox_datosViaje.Controls.Add(this.comboBox_Cliente);
             this.groupBox_datosViaje.Controls.Add(this.horaFin);
             this.groupBox_datosViaje.Controls.Add(this.horaInicio);
             this.groupBox_datosViaje.Controls.Add(this.monthCalendar_FechaDeViaje);
@@ -64,7 +65,6 @@
             this.groupBox_datosViaje.Controls.Add(this.label_Hinicio);
             this.groupBox_datosViaje.Controls.Add(this.comboBox_TurnosAutmovilSeleccionado);
             this.groupBox_datosViaje.Controls.Add(this.comboBox_chofer);
-            this.groupBox_datosViaje.Controls.Add(this.textBox_Cliente);
             this.groupBox_datosViaje.Controls.Add(this.label_Cliente);
             this.groupBox_datosViaje.Controls.Add(this.textBox_Fecha);
             this.groupBox_datosViaje.Controls.Add(this.label_FHinicio);
@@ -150,13 +150,6 @@
             this.comboBox_chofer.Size = new System.Drawing.Size(273, 21);
             this.comboBox_chofer.TabIndex = 37;
             this.comboBox_chofer.SelectedIndexChanged += new System.EventHandler(this.comboBox_chofer_SelectionChangeCommitted);
-            // 
-            // textBox_Cliente
-            // 
-            this.textBox_Cliente.Location = new System.Drawing.Point(128, 172);
-            this.textBox_Cliente.Name = "textBox_Cliente";
-            this.textBox_Cliente.Size = new System.Drawing.Size(273, 20);
-            this.textBox_Cliente.TabIndex = 35;
             // 
             // label_Cliente
             // 
@@ -283,6 +276,17 @@
             this.button_Guardar.UseVisualStyleBackColor = true;
             this.button_Guardar.Click += new System.EventHandler(this.button_Guardar_Click);
             // 
+            // comboBox_Cliente
+            // 
+            this.comboBox_Cliente.BackColor = System.Drawing.Color.White;
+            this.comboBox_Cliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_Cliente.FormattingEnabled = true;
+            this.comboBox_Cliente.Location = new System.Drawing.Point(128, 172);
+            this.comboBox_Cliente.Name = "comboBox_Cliente";
+            this.comboBox_Cliente.Size = new System.Drawing.Size(273, 21);
+            this.comboBox_Cliente.TabIndex = 45;
+      
+            // 
             // RegistrarViaje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -315,7 +319,6 @@
         private System.Windows.Forms.TextBox textBox_Automovil;
         private System.Windows.Forms.Label label_CantidadKm;
         private System.Windows.Forms.TextBox textBox_CantidadKm;
-        private System.Windows.Forms.TextBox textBox_Cliente;
         private System.Windows.Forms.Label label_Cliente;
         private System.Windows.Forms.TextBox textBox_Fecha;
         private System.Windows.Forms.Label label_FHinicio;
@@ -331,5 +334,6 @@
         private System.Windows.Forms.DateTimePicker horaFin;
         private System.Windows.Forms.DateTimePicker horaInicio;
         private System.Windows.Forms.Button button_Guardar;
+        private System.Windows.Forms.ComboBox comboBox_Cliente;
     }
 }

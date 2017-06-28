@@ -8,7 +8,8 @@ using UberFrba.Exceptions;
 using UberFrba.DataProvider;
 using UberFrba.Utils;
 using System.Data;
-
+using System.Configuration;
+using System.Windows.Forms;
 namespace UberFrba
 {
     class DBMapper
@@ -70,22 +71,7 @@ namespace UberFrba
             return objeto;
         }
 
-        /* public Boolean Eliminar(String idParameter, Decimal id, String enDonde)
-         {
-             query = "UPDATE NET_A_CERO." + enDonde + " SET dado_de_baja = 1 WHERE id = @id";
-             parametros.Clear();
-             parametros.Add(new SqlParameter("@"+idParameter, id));
-             int filasAfectadas = QueryBuilder.Instance.build(query, parametros).ExecuteNonQuery();
-             if (filasAfectadas == 1) return true;
-             return false;
-         }
-         * */
-
-        /*
-        *
-        *   CREATE TABLE QUERYS
-        *
-        */
+      
 
 
         /** Usuarios **/
@@ -179,10 +165,47 @@ namespace UberFrba
             adapter.Fill(datos);
             return datos.Tables[0];
         }
+        public DataTable AplicarEstadistica(int anio, int trimestre, String funcion)
+        {
+            /* me conectto con la base para obtener el resultado de aplocar la funcion*/
+            String config = ConfigurationManager.AppSettings["archConexionConSQL"];
+            SqlConnection conexion = new SqlConnection(config);
+                 try
+            {
+                conexion.Open();
+            }
+            catch (Exception) { MessageBox.Show("Error en conexion"); }
+
+            string query = "SELECT * From [PUSH_IT_TO_THE_LIMIT]." + funcion + "(@anio, @trimestre)";
+            SqlCommand command = new SqlCommand(query, conexion);
+
+            command.Parameters.AddWithValue("@anio", anio);
 
 
+            command.Parameters.AddWithValue("@trimestre", trimestre);
+            /*para mostrar el resultado*/
+            DataTable tabla = new DataTable();
+            SqlDataAdapter adapter = new SqlDataAdapter(command);
+            adapter.Fill(tabla);
+            return tabla;
+        }
 
+        public SqlCommand BuscarRendicion(String fecha, int idchofer)
+        {
+            String config = ConfigurationManager.AppSettings["archConexionConSQL"];
+            SqlConnection conexion = new SqlConnection(config);
+            try
+            {
+                conexion.Open();
+            }
+            catch (Exception) { MessageBox.Show("Error en conexion"); }
+            string query = "SELECT * From [PUSH_IT_TO_THE_LIMIT].fx_verificarRendicion(@fecha,@idchofer)";
+            SqlCommand cmd = new SqlCommand(query, conexion);
+            cmd.Parameters.AddWithValue("@fecha", fecha);
+            cmd.Parameters.AddWithValue("@idchofer", idchofer);
+            return cmd;
 
+        }
 
 
 
@@ -867,24 +890,7 @@ namespace UberFrba
             return true;
         }
 
-        //  TODO: QUITAR SI NO SE UTILIZA
-
-        /*private bool esUnico(String que, String aQue, String enDonde)
-        {
-            query = "SELECT COUNT(*) FROM NET_A_CERO." + enDonde + " WHERE " + aQue + " = @" + aQue;
-            parametros.Clear();
-            parametros.Add(new SqlParameter("@" + aQue, que));
-            return ControlDeUnicidad(query, parametros);
-        }
-
-        private bool esUnico(String que, String aQue, String enDonde, Decimal id)
-        {
-            query = "SELECT COUNT(*) FROM NET_A_CERO." + enDonde + " WHERE " + aQue + " = @" + aQue + " AND id != " + id;
-            parametros.Clear();
-            parametros.Add(new SqlParameter("@" + aQue, que));
-            return ControlDeUnicidad(query, parametros);
-        }
-        */
+      
 
         /** Clientes **/
         private bool esClienteUnico(String numeroDeDocumento, int idCliente)

@@ -19,7 +19,12 @@ namespace UberFrba.Registro_Viajes
 
         private DBMapper mapper = new DBMapper();
         int idAutomovilSeleccionado;
-      
+        private readonly TimeSpan horaInicioTurno1 = new TimeSpan(00, 00, 00);
+        private readonly TimeSpan horaFinTurno1 = new TimeSpan(07, 59, 00);
+        private readonly TimeSpan horaInicioTurno2 = new TimeSpan(08, 00, 00);
+        private readonly TimeSpan horaFinTurno2 = new TimeSpan(15, 59, 00);
+        private readonly TimeSpan horaInicioTurno3 = new TimeSpan(16, 00, 00);
+        private readonly TimeSpan horaFinTurno3 = new TimeSpan(23, 59, 00);
 
 
         public RegistrarViaje()
@@ -39,21 +44,25 @@ namespace UberFrba.Registro_Viajes
             textBox_Automovil.Text = "";
             textBox_CantidadKm.Text = "";
             comboBox_chofer.Text = "";
-            textBox_Cliente.Text = "";
+            comboBox_Cliente.Text = "";
             textBox_Fecha.Text = "";
             comboBox_TurnosAutmovilSeleccionado.Text = "";
             horaInicio.Text = "00:00";
             horaFin.Text = "00:00";
             comboBox_chofer.Items.Clear();
+            comboBox_Cliente.Items.Clear();
             comboBox_TurnosAutmovilSeleccionado.Items.Clear();
             this.CargarComboBoxChoferes();
             this.CargarComboBoxTurnosDeAutomovil(idAutomovilSeleccionado);
+            this.CargarComboBoxClientes();
         }
 
         private void RegistrarViaje_Load(object sender, EventArgs e)
         {
             this.CargarComboBoxChoferes();
+            this.CargarComboBoxClientes();
         }
+       
 
         private void comboBox_chofer_SelectionChangeCommitted(object sender, EventArgs e)
         {
@@ -82,7 +91,31 @@ namespace UberFrba.Registro_Viajes
             }
             
           }
+     /*   private void comboBox_Cliente_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            int idcliente = this.mapper.obtenerIdChoferApartirDelDNI(comboBox_chofer.Text);
 
+            textBox_Automovil.Text = mapper.ObtenerPatenteAutomovil(idcliente);
+
+            idAutomovilSeleccionado = mapper.obtenerIdAutomovilApartirDeLaPatente(textBox_Automovil.Text);
+
+            this.CargarComboBoxTurnosDeAutomovil(idAutomovilSeleccionado);
+        }*/
+        private void CargarComboBoxClientes()
+        {
+
+            DataTable dniClientes = mapper.SelectDataTable("cliente_dni", "PUSH_IT_TO_THE_LIMIT.Cliente c", "  c.cliente_id IN (SELECT c.cliente_id FROM PUSH_IT_TO_THE_LIMIT.Usuario u WHERE u.usuario_habilitado=1 and c.cliente_id=u.usuario_id)");
+
+
+            foreach (DataRow fila in dniClientes.Rows)
+            {
+                string cliente_dni = fila["cliente_dni"].ToString();
+                
+                comboBox_Cliente.Items.Add(cliente_dni);
+
+            }
+
+        }
         private void CargarComboBoxTurnosDeAutomovil(int idAutomovilSeleccionado)
         {
             comboBox_TurnosAutmovilSeleccionado.Items.Clear(); 
@@ -113,7 +146,7 @@ namespace UberFrba.Registro_Viajes
 
         private void button_Guardar_Click(object sender, EventArgs e)
         {
-            String DNICliente = textBox_Cliente.Text; 
+            String DNICliente = comboBox_Cliente.Text; 
             String CantKm =textBox_CantidadKm.Text;
             String fecha = textBox_Fecha.Text;
             TimeSpan horarioIni = horaInicio.Value.TimeOfDay;
@@ -121,6 +154,19 @@ namespace UberFrba.Registro_Viajes
             String DNIChofer = comboBox_chofer.Text;
             String PatenteAuto = textBox_Automovil.Text;
             String TurnoSeleccionado = comboBox_TurnosAutmovilSeleccionado.Text;
+
+            int ideTurno=0;
+            switch (comboBox_TurnosAutmovilSeleccionado.SelectedIndex)
+            {
+                case 0: ideTurno = 1; break;//selcciono el primer turno es decir de 0 a 8
+                case 1: ideTurno = 2; break;//selcciono el segundo es decir de 8 a 16
+                case 2: ideTurno = 3; break;//selcciono el tercer turno es decir de 16 a 24
+            }
+
+
+
+            
+
 
 
             //Crear RegistroViaje
@@ -136,6 +182,33 @@ namespace UberFrba.Registro_Viajes
                 registroViaje.SetFechaViaje(fecha);
                 registroViaje.SetIdCliente(DNICliente);
 
+                if (ideTurno == 1)
+                {
+                    if (!(horaInicio.Value.TimeOfDay >= horaInicioTurno1 && horaFin.Value.TimeOfDay <= horaFinTurno1))
+                    {
+
+                        throw new HorarioNoCoincideConTurno("El horario no corresponde al turno");
+                    }
+
+                }
+                if (ideTurno == 2)
+                {
+                    if (!(horaInicio.Value.TimeOfDay >= horaInicioTurno2 && horaFin.Value.TimeOfDay <= horaFinTurno2))
+                    {
+
+                        throw new HorarioNoCoincideConTurno("El horario no corresponde al turno");
+                    }
+
+                }
+                if (ideTurno == 3)
+                {
+                    if (!(horaInicio.Value.TimeOfDay >= horaInicioTurno3 && horaFin.Value.TimeOfDay <= horaFinTurno3))
+                    {
+                        throw new HorarioNoCoincideConTurno("El horario no corresponde al turno");
+                       
+                    }
+
+                }
 
 
                 if (horarioFin <= horarioIni)
@@ -216,8 +289,16 @@ namespace UberFrba.Registro_Viajes
                 MessageBox.Show(error.Message, "Error al registrar", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
+            catch (HorarioNoCoincideConTurno error)
+            {
+
+                MessageBox.Show(error.Message, "Error horario no coincide con el turno", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
 
         }
+
+       
                             
        }
 }

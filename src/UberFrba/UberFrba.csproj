@@ -203,6 +203,7 @@
     <Compile Include="Exceptions\CantidaKilometrosInvalidoException.cs" />
     <Compile Include="Exceptions\ChoferInexistenteException.cs" />
     <Compile Include="Exceptions\ChoferYaExisteException.cs" />
+    <Compile Include="Exceptions\Class1.cs" />
     <Compile Include="Exceptions\ClienteInexistenteException.cs" />
     <Compile Include="Exceptions\ClienteInhabilitadoException.cs" />
     <Compile Include="Exceptions\ClienteYaExisteException.cs" />
