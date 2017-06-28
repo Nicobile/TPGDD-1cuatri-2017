@@ -24,36 +24,55 @@ namespace UberFrba.Listado_Estadistico
             DateTime FECHA_ACTUAL = DateTime.Parse(ConfigurationManager.AppSettings["FechaInicio"]);
             seleccionAño.MaxDate = FECHA_ACTUAL;
             seleccionAño.Value = FECHA_ACTUAL;
+            seleccionTrimestre.Text = "";
+            SeleccionEstadistica.Text = "";
 
         }
 
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string funcion = this.getTipoEstadistica();         
             
-         
-         /* me conectto con la base para obtener el resultado de aplocar la funcion*/
-           String config = ConfigurationManager.AppSettings["archConexionConSQL"];
-           SqlConnection conexion = new SqlConnection(config);
-           try
-           {
-               conexion.Open();
-           }
-           catch (Exception) { MessageBox.Show("Error en conexion"); }
-            
-            string query = "SELECT * From " + "[PUSH_IT_TO_THE_LIMIT]" + "." + funcion+"(@anio, @trimestre)";
-            SqlCommand command = new SqlCommand(query, conexion);
-           
-            command.Parameters.AddWithValue("@anio", seleccionAño.Value.Year);
+            String funcion = this.getTipoEstadistica();
             int trimestre = this.getTrimestre();
+            String error = errorEnCampo(trimestre,funcion);
             
-            command.Parameters.AddWithValue("@trimestre", trimestre);
-            /*para mostrar el resultado*/
-            DataTable tabla = new DataTable();
-            SqlDataAdapter adapter = new SqlDataAdapter(command);
-            adapter.Fill(tabla);
-            listado.DataSource = tabla;
+                
+            if (error==""){
+
+                /* me conectto con la base para obtener el resultado de aplocar la funcion*/
+                String config = ConfigurationManager.AppSettings["archConexionConSQL"];
+                SqlConnection conexion = new SqlConnection(config);
+                try
+                {
+                    conexion.Open();
+                }
+                catch (Exception) { MessageBox.Show("Error en conexion"); }
+
+                string query = "SELECT * From " + "[PUSH_IT_TO_THE_LIMIT]" + "." + funcion + "(@anio, @trimestre)";
+                SqlCommand command = new SqlCommand(query, conexion);
+
+                command.Parameters.AddWithValue("@anio", seleccionAño.Value.Year);
+                
+
+                command.Parameters.AddWithValue("@trimestre", trimestre);
+                /*para mostrar el resultado*/
+                DataTable tabla = new DataTable();
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                adapter.Fill(tabla);
+                listado.DataSource = tabla;
+                
+               
+            }
+            else {
+                MessageBox.Show(error, "Faltan completar campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } 
+        }
+        private String errorEnCampo(int trimestre, String estadistica){
+            String error = "";
+            if (trimestre==-1) { error+="-Debe ingresar un trimestre\n";}
+            if (estadistica ==null) { error += "-Debe ingresar una estadistica\n"; }
+            return error;
         }
 
         private int getTrimestre()
@@ -65,7 +84,8 @@ namespace UberFrba.Listado_Estadistico
                 case 2: return 3;
                 case 3: return 4;
             }
-            throw new CampoVacioException("Falto seleccionar un trimestre");
+            
+            return -1;
         }
     
         private string getTipoEstadistica()
@@ -77,7 +97,8 @@ namespace UberFrba.Listado_Estadistico
                 case 2: return "fx_Top5clientesMayorConsumoEnUnTrimestre";
                 case 3: return "fx_Top5clientesQueviajaronEnUnMismoAutoEnUnTrimestre";
             }
-            throw new CampoVacioException("Falto seleccionar una estadistica");
+            
+            return null;
         }
       
         private void btnVolver_Click(object sender, EventArgs e)

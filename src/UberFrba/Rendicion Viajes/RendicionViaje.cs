@@ -93,25 +93,48 @@ namespace UberFrba.Rendicion_Viajes
 
         public String obtenerDNIaPartirDetextBox(String cliente)
         {
-            string[] separadas;
-            separadas = comboBox_chofer.Text.Split(':');
-            String DniCliente = separadas[1];
-            return DniCliente;
+            if (comboBox_chofer.Text == "") { return comboBox_chofer.Text; }
+            else
+            {
+                string[] separadas;
+                separadas = comboBox_chofer.Text.Split(':');
+                String DniCliente = separadas[1];
+                return DniCliente;
+            }
         }
 
+        private String errorEnCampos( String fecha, String turno) {
+            String error="";
+           
+            if (fecha == "")
+            {
+                error += "- Debe seleccionar una fecha\n";
+               
+            }
 
+            if (turno == "")
+            {
+                error += "- Debe seleccionar una turno\n";
+               
+            }
+            return error;
+        }
 
         private void btnFacturar_Click(object sender, EventArgs e)
         {
-            String ChoferDNI = this.obtenerDNIaPartirDetextBox(comboBox_chofer.Text);
-            String Turno = comboBox_Turnos.Text;
-            String Fecha = textBox_Fecha.Text;
-            String Total = textBox_importe.Text;
-
-
-            try
+            if (this.obtenerDNIaPartirDetextBox(comboBox_chofer.Text) == "")
             {
+                MessageBox.Show("Debe ingresar un chofer", "Faltan completar campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            String ChoferDNI = this.obtenerDNIaPartirDetextBox(comboBox_chofer.Text);
+                String Turno = comboBox_Turnos.Text;
+                String Fecha = textBox_Fecha.Text;
+                String Total = textBox_importe.Text;
+                String error = errorEnCampos( textBox_Fecha.Text, comboBox_Turnos.Text);
+          
 
+            if (error == "")
+            {
                 Rendicion rendicion = new Rendicion();
                 rendicion.SetIdChofer(ChoferDNI);
                 rendicion.SetFechaRendicion(Fecha);
@@ -126,15 +149,13 @@ namespace UberFrba.Rendicion_Viajes
                 {
                     MessageBox.Show("Se creo correctamente la Rendición");
 
-                    mapper.ActualizarRendicionIdenRegistrViaje(idRendicion, rendicion.GetFechaRendicion(), rendicion.GetIdChofer(),ideTurno);
+                    mapper.ActualizarRendicionIdenRegistrViaje(idRendicion, rendicion.GetFechaRendicion(), rendicion.GetIdChofer(), ideTurno);
                 }
-
             }
-            catch (CampoVacioException exception)
-            {
-                MessageBox.Show("Falta completar campo: " + exception.Message);
-                return;
-            }
+            else { MessageBox.Show(error, "Faltan completar campos", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            
+           
+        
 
         }
 
@@ -147,33 +168,28 @@ namespace UberFrba.Rendicion_Viajes
             dataGridView_Viajes_Rendidos.Columns["factura_id"].Visible = false;
             dataGridView_Viajes_Rendidos.Columns["rendicion_id"].Visible = false;
         }
-
+       
         private void cargar()
         {
-            if (comboBox_chofer.Text == "")
-            {
-                throw new CampoVacioException("Chofer");
-            }
-            if (textBox_Fecha.Text == "")
-            {
-                throw new CampoVacioException("Fecha");
-            }
-            String DNIChofer = this.obtenerDNIaPartirDetextBox(comboBox_chofer.Text);
-            int idChofer = mapper.obtenerIdChoferApartirDelDNI(DNIChofer);
+            
+          
+                String DNIChofer = this.obtenerDNIaPartirDetextBox(comboBox_chofer.Text);
+                int idChofer = mapper.obtenerIdChoferApartirDelDNI(DNIChofer);
 
-            switch (comboBox_Turnos.SelectedIndex)
-            {
-                case 0: ideTurno = 1; break;
-                case 1: ideTurno = 2; break;
-                case 2: ideTurno = 3; break;
-            }
+                switch (comboBox_Turnos.SelectedIndex)
+                {
+                    case 0: ideTurno = 1; break;
+                    case 1: ideTurno = 2; break;
+                    case 2: ideTurno = 3; break;
+                }
 
-            //ACA LA FUNCION SELECTDATA.... ES LA QUE TRAE LA GRILLA CON LOS VIAJES QUE NO ESTOY PUDIENDO HACER QUE DEPENDA DE TURNO
-            dataGridView_Viajes_Rendidos.DataSource = mapper.SelectDataTableRegistroViajeparaRendi(textBox_Fecha.Text, idChofer, ideTurno);
-            OcultarColumnasQueNoDebenVerse();
-            //ACA SE LLENA EL CAMPO DEL IMPORTE DE LA RENDICION CON LA MISMA QUERI PERO CON UN SUM, SI MODIFICAS LA DE ARRIBA, TENES QUE MODIFICAR ESTA
-            textBox_importe.Text = mapper.TotalRendicion(textBox_Fecha.Text, idChofer, ideTurno);
-
+                //ACA LA FUNCION SELECTDATA.... ES LA QUE TRAE LA GRILLA CON LOS VIAJES QUE NO ESTOY PUDIENDO HACER QUE DEPENDA DE TURNO
+                dataGridView_Viajes_Rendidos.DataSource = mapper.SelectDataTableRegistroViajeparaRendi(textBox_Fecha.Text, idChofer, ideTurno);
+                OcultarColumnasQueNoDebenVerse();
+                //ACA SE LLENA EL CAMPO DEL IMPORTE DE LA RENDICION CON LA MISMA QUERI PERO CON UN SUM, SI MODIFICAS LA DE ARRIBA, TENES QUE MODIFICAR ESTA
+                textBox_importe.Text = mapper.TotalRendicion(textBox_Fecha.Text, idChofer, ideTurno);
+            
+ 
 
         }
 

@@ -39,17 +39,11 @@ namespace UberFrba.Modelo
         public void SetIdChofer(String DniChofer)
         {
 
-            if (DniChofer == "")
-            {
-
-                throw new CampoVacioException("Chofer");
-
-            }
-            else
-            {
+            
+            
                 this.idChofer = mapper.obtenerIdChoferApartirDelDNI(DniChofer);
 
-            }
+            
         }
 
         public int GetIdChofer()
