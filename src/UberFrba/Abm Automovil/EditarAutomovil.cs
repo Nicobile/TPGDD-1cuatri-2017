@@ -67,7 +67,7 @@ namespace UberFrba.Abm_Automovil
 
         private void EditarAutomovil_Load(object sender, EventArgs e)
         {
-            CargarDatos();
+            
             comboBox_Marca.Items.Add("Porsche");
             comboBox_Marca.Items.Add("Chevrolet");
             comboBox_Marca.Items.Add("Renault");
@@ -77,6 +77,7 @@ namespace UberFrba.Abm_Automovil
             comboBox_Marca.Items.Add("Volkswagen");
             comboBox_Marca.Items.Add("Toyota");
             comboBox_Marca.Items.Add("Citroën");
+            CargarDatos();
             CargarComboBoxTurno();
             comboBox_Turno.Items.Add("Ninguno");
             

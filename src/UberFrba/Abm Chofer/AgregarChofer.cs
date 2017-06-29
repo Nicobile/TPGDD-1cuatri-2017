@@ -92,13 +92,22 @@ namespace UberFrba.ABM_Chofer
                 chofer.SetTelefono(Telefono);
                 chofer.SetMail(Mail);
                 chofer.SetActivo(true);
-                chofer.SetFechaDeNacimiento(fechaDeNacimiento);
                 idUsuario = mapper.CrearUsuarioConValores(DNI, DNI);
+                chofer.SetFechaDeNacimiento(fechaDeNacimiento);
                 chofer.SetIdUsuario(idUsuario);
                 idChofer = mapper.CrearChofer(chofer);
+                
 
-                if (idChofer > 0) MessageBox.Show("Chofer agregado correctamente");
+                if (idChofer > 0)
+                    MessageBox.Show("Chofer agregado correctamente");
+                    
             }
+
+
+
+
+
+
             catch (CampoVacioException exceptionCampoVacio)
             {
                 MessageBox.Show("Falta completar campo: " + exceptionCampoVacio.Message);

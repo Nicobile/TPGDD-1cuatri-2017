@@ -401,7 +401,7 @@ insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones (rol_id,funcionalidad_id)
 insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones (rol_id,funcionalidad_id)
 	select distinct R.rol_id, F.funcionalidad_id from [PUSH_IT_TO_THE_LIMIT].Rol R,[PUSH_IT_TO_THE_LIMIT].Funcionalidad F
 	where R.rol_nombre = 'Cliente' and
-			F.funcionalidad_descripcion in ('Facturacion de clientes','Listado estadistico');
+			F.funcionalidad_descripcion in ('Facturacion de clientes');
 
 /*Usuarios*/
 

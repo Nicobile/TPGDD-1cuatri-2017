@@ -183,12 +183,12 @@ namespace UberFrba.Modelo
         {
             if (activo == true)
             {
-                return "UPDATE PUSH_IT_TO_THE_LIMIT.Chofer SET chofer_dni = @DNI, chofer_nombre = @nombre, chofer_apellido = @apellido, chofer_mail = @mail, chofer_direccion = @direccion, chofer_telefono = @telefono, chofer_fecha_Nacimiento = @fechaDeNacimiento, chofer_estado = @activo, usuario_id = @usuario_id WHERE chofer_id =  @id " +
+                return "UPDATE PUSH_IT_TO_THE_LIMIT.Chofer SET chofer_dni=@DNI, chofer_nombre=@Nombre, chofer_apellido=@Apellido, chofer_mail=@Mail, chofer_direccion=@Direccion, chofer_telefono=@Telefono, chofer_fecha_Nacimiento=@Fecha_Nacimiento, chofer_estado=@Activo, usuario_id=@User_id WHERE chofer_id= @id " +
                        " UPDATE PUSH_IT_TO_THE_LIMIT.Usuario SET usuario_intentos = 0  WHERE usuario_id =  (SELECT usuario_id FROM PUSH_IT_TO_THE_LIMIT.Chofer WHERE chofer_id = @id)";
             }
             else
             {
-                return "UPDATE PUSH_IT_TO_THE_LIMIT.Chofer SET chofer_dni = @DNI, chofer_nombre = @nombre, chofer_apellido = @apellido, chofer_mail = @mail, chofer_direccion = @direccion, chofer_telefono = @telefono, chofer_fecha_Nacimiento = @fechaDeNacimiento, chofer_estado = @activo, usuario_id = @usuario_id WHERE chofer_id = @id";
+                return "UPDATE PUSH_IT_TO_THE_LIMIT.Chofer SET chofer_dni = @DNI, chofer_nombre =@Nombre, chofer_apellido =@Apellido, chofer_mail =@Mail, chofer_direccion =@Direccion, chofer_telefono =@Telefono, chofer_fecha_Nacimiento =@Fecha_Nacimiento, chofer_estado =@Activo, usuario_id =@User_id WHERE chofer_id = @id";
             }
 
         }
@@ -201,18 +201,16 @@ namespace UberFrba.Modelo
         IList<System.Data.SqlClient.SqlParameter> Mapeable.GetParametros()
         {
             IList<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@Nombre", this.nombre));
+            parametros.Add(new SqlParameter("@Apellido", this.apellido));
+            parametros.Add(new SqlParameter("@Mail", this.mail));
+            parametros.Add(new SqlParameter("@Telefono", this.telefono));
+            parametros.Add(new SqlParameter("@Direccion", this.direccion));
+            parametros.Add(new SqlParameter("@Fecha_Nacimiento", this.fechaDeNacimiento));
             parametros.Add(new SqlParameter("@DNI", this.DNI));
-            parametros.Add(new SqlParameter("@nombre", this.nombre));
-            parametros.Add(new SqlParameter("@apellido", this.apellido));
-            parametros.Add(new SqlParameter("@mail", this.mail));
-            parametros.Add(new SqlParameter("@telefono", this.telefono));
-            parametros.Add(new SqlParameter("@direccion", this.direccion));
-            parametros.Add(new SqlParameter("@fechaDeNacimiento", this.fechaDeNacimiento));
-            parametros.Add(new SqlParameter("@usuario_id",this.idUsuario));
-            parametros.Add(new SqlParameter("@activo", this.activo));
-            // faltara el usuario_id como parametro? LISTO
-
-
+            parametros.Add(new SqlParameter("@Activo", this.activo));
+            parametros.Add(new SqlParameter("@User_id", this.idUsuario));
+            
             return parametros;
         }
 
