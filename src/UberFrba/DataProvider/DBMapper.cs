@@ -176,6 +176,7 @@ namespace UberFrba
             }
             catch (Exception) { MessageBox.Show("Error en conexion"); }
 
+
             string query = "SELECT * From [PUSH_IT_TO_THE_LIMIT]." + funcion + "(@anio, @trimestre)";
             SqlCommand command = new SqlCommand(query, conexion);
 

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListadoEstadistico));
             this.label1 = new System.Windows.Forms.Label();
             this.seleccionAño = new System.Windows.Forms.DateTimePicker();
             this.año = new System.Windows.Forms.Label();
@@ -39,13 +40,15 @@
             this.SeleccionEstadistica = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.listado)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 38);
+            this.label1.Location = new System.Drawing.Point(12, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(134, 13);
             this.label1.TabIndex = 5;
@@ -55,7 +58,7 @@
             // 
             this.seleccionAño.CustomFormat = "yyyy";
             this.seleccionAño.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.seleccionAño.Location = new System.Drawing.Point(246, 70);
+            this.seleccionAño.Location = new System.Drawing.Point(152, 95);
             this.seleccionAño.Name = "seleccionAño";
             this.seleccionAño.ShowUpDown = true;
             this.seleccionAño.Size = new System.Drawing.Size(82, 20);
@@ -64,7 +67,7 @@
             // año
             // 
             this.año.AutoSize = true;
-            this.año.Location = new System.Drawing.Point(14, 77);
+            this.año.Location = new System.Drawing.Point(12, 95);
             this.año.Name = "año";
             this.año.Size = new System.Drawing.Size(96, 13);
             this.año.TabIndex = 7;
@@ -85,16 +88,16 @@
             this.listado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.listado.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.listado.EnableHeadersVisualStyles = false;
-            this.listado.Location = new System.Drawing.Point(12, 189);
+            this.listado.Location = new System.Drawing.Point(35, 198);
             this.listado.MultiSelect = false;
             this.listado.Name = "listado";
             this.listado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.listado.Size = new System.Drawing.Size(622, 172);
+            this.listado.Size = new System.Drawing.Size(494, 172);
             this.listado.TabIndex = 10;
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(15, 386);
+            this.btnVolver.Location = new System.Drawing.Point(35, 386);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(95, 25);
             this.btnVolver.TabIndex = 11;
@@ -118,15 +121,15 @@
             "Segundo trimestre",
             "Tercer trimestre",
             "Cuarto trimestre"});
-            this.seleccionTrimestre.Location = new System.Drawing.Point(246, 113);
+            this.seleccionTrimestre.Location = new System.Drawing.Point(152, 57);
             this.seleccionTrimestre.Name = "seleccionTrimestre";
-            this.seleccionTrimestre.Size = new System.Drawing.Size(300, 21);
+            this.seleccionTrimestre.Size = new System.Drawing.Size(250, 21);
             this.seleccionTrimestre.TabIndex = 12;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 113);
+            this.label3.Location = new System.Drawing.Point(12, 57);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(117, 13);
             this.label3.TabIndex = 13;
@@ -148,14 +151,14 @@
             "Choferes que realizaron viajes más largos",
             "Clientes de mayor consumo",
             "Clientes que viajaron mayor cantidad de veces en un mismo auto"});
-            this.SeleccionEstadistica.Location = new System.Drawing.Point(246, 35);
+            this.SeleccionEstadistica.Location = new System.Drawing.Point(152, 30);
             this.SeleccionEstadistica.Name = "SeleccionEstadistica";
-            this.SeleccionEstadistica.Size = new System.Drawing.Size(300, 21);
+            this.SeleccionEstadistica.Size = new System.Drawing.Size(250, 21);
             this.SeleccionEstadistica.TabIndex = 4;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(539, 158);
+            this.button1.Location = new System.Drawing.Point(447, 382);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(95, 25);
             this.button1.TabIndex = 14;
@@ -167,31 +170,43 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(9, 142);
+            this.label2.Location = new System.Drawing.Point(12, 128);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(212, 13);
             this.label2.TabIndex = 46;
             this.label2.Text = "AVISO: Se deben cargar todos los campos.";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.seleccionTrimestre);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.año);
+            this.groupBox1.Controls.Add(this.SeleccionEstadistica);
+            this.groupBox1.Controls.Add(this.seleccionAño);
+            this.groupBox1.Location = new System.Drawing.Point(35, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(426, 155);
+            this.groupBox1.TabIndex = 47;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Seleccionar Datos";
+            // 
             // ListadoEstadistico
             // 
             this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
-            this.ClientSize = new System.Drawing.Size(648, 423);
-            this.Controls.Add(this.label2);
+            this.ClientSize = new System.Drawing.Size(564, 419);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.seleccionTrimestre);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.listado);
-            this.Controls.Add(this.seleccionAño);
-            this.Controls.Add(this.año);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.SeleccionEstadistica);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ListadoEstadistico";
             this.Text = "Listado Estadistico";
             ((System.ComponentModel.ISupportInitialize)(this.listado)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -207,6 +222,7 @@
         private System.Windows.Forms.ComboBox SeleccionEstadistica;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox groupBox1;
 
   
     }
