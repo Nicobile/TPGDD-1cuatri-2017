@@ -19,12 +19,6 @@ namespace UberFrba.Registro_Viajes
 
         private DBMapper mapper = new DBMapper();
         int idAutomovilSeleccionado;
-        private readonly TimeSpan horaInicioTurno1 = new TimeSpan(00, 00, 00);
-        private readonly TimeSpan horaFinTurno1 = new TimeSpan(07, 59, 00);
-        private readonly TimeSpan horaInicioTurno2 = new TimeSpan(08, 00, 00);
-        private readonly TimeSpan horaFinTurno2 = new TimeSpan(15, 59, 00);
-        private readonly TimeSpan horaInicioTurno3 = new TimeSpan(16, 00, 00);
-        private readonly TimeSpan horaFinTurno3 = new TimeSpan(23, 59, 00);
 
 
         public RegistrarViaje()
@@ -91,16 +85,7 @@ namespace UberFrba.Registro_Viajes
             }
             
           }
-     /*   private void comboBox_Cliente_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            int idcliente = this.mapper.obtenerIdChoferApartirDelDNI(comboBox_chofer.Text);
-
-            textBox_Automovil.Text = mapper.ObtenerPatenteAutomovil(idcliente);
-
-            idAutomovilSeleccionado = mapper.obtenerIdAutomovilApartirDeLaPatente(textBox_Automovil.Text);
-
-            this.CargarComboBoxTurnosDeAutomovil(idAutomovilSeleccionado);
-        }*/
+     
         private void CargarComboBoxClientes()
         {
 
@@ -179,19 +164,6 @@ namespace UberFrba.Registro_Viajes
             String PatenteAuto = textBox_Automovil.Text;
             String idTurnoSeleccionado = this.obtenerIdTurnoaPartirDeCombobox(comboBox_TurnosAutmovilSeleccionado.Text);
 
-
-
-
-
-            //int ideTurno=0;
-            //switch (comboBox_TurnosAutmovilSeleccionado.SelectedIndex)
-            //{
-            //    case 0: ideTurno = 1; break;//selcciono el primer turno es decir de 0 a 8
-            //    case 1: ideTurno = 2; break;//selcciono el segundo es decir de 8 a 16
-            //    case 2: ideTurno = 3; break;//selcciono el tercer turno es decir de 16 a 24
-            //}
-
-
             //Crear RegistroViaje
             try
             {
@@ -207,11 +179,8 @@ namespace UberFrba.Registro_Viajes
 
 
                 Turnos turnoSeleccionado = mapper.ObtenerTurnos(Convert.ToInt32(idTurnoSeleccionado));
-
-                MessageBox.Show(Convert.ToString(turnoSeleccionado.GetHoraInicio()));
-
-                
-                    if (!(horaInicio.Value.TimeOfDay.Hours >= turnoSeleccionado.GetHoraInicio() && horaFin.Value.TimeOfDay.Hours <= turnoSeleccionado.GetHoraFin()))
+                            
+                if (!(horaInicio.Value.TimeOfDay.Hours >= turnoSeleccionado.GetHoraInicio() && horaFin.Value.TimeOfDay.Hours <= turnoSeleccionado.GetHoraFin()))
                     {
                         throw new HorarioNoCoincideConTurno("El horario no corresponde al turno");
                     }
