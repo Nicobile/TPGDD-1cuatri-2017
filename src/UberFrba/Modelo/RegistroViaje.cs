@@ -121,11 +121,13 @@ namespace UberFrba.Modelo
         public void SetIdCliente(String DniCliente)
         {
 
-            int IDCliente = mapper.obtenerIdClienteApartirDelDNI(DniCliente);
+            
             if (DniCliente == "")
             {
                 throw new CampoVacioException("Cliente(DNI)");
             }
+
+            int IDCliente = mapper.obtenerIdClienteApartirDelDNI(DniCliente);
 
             if (Convert.ToBoolean(mapper.SelectFromWhere("cliente_estado", "Cliente", "cliente_id", IDCliente) )== false)
             {

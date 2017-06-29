@@ -93,7 +93,7 @@
             // label_Importe
             // 
             this.label_Importe.AutoSize = true;
-            this.label_Importe.Location = new System.Drawing.Point(6, 126);
+            this.label_Importe.Location = new System.Drawing.Point(27, 126);
             this.label_Importe.Name = "label_Importe";
             this.label_Importe.Size = new System.Drawing.Size(68, 13);
             this.label_Importe.TabIndex = 43;
@@ -139,7 +139,7 @@
             // label_FHinicio
             // 
             this.label_FHinicio.AutoSize = true;
-            this.label_FHinicio.Location = new System.Drawing.Point(6, 26);
+            this.label_FHinicio.Location = new System.Drawing.Point(27, 26);
             this.label_FHinicio.Name = "label_FHinicio";
             this.label_FHinicio.Size = new System.Drawing.Size(37, 13);
             this.label_FHinicio.TabIndex = 31;
@@ -148,7 +148,7 @@
             // label_Turno
             // 
             this.label_Turno.AutoSize = true;
-            this.label_Turno.Location = new System.Drawing.Point(6, 90);
+            this.label_Turno.Location = new System.Drawing.Point(27, 90);
             this.label_Turno.Name = "label_Turno";
             this.label_Turno.Size = new System.Drawing.Size(35, 13);
             this.label_Turno.TabIndex = 27;
@@ -157,11 +157,11 @@
             // label_Chofer
             // 
             this.label_Chofer.AutoSize = true;
-            this.label_Chofer.Location = new System.Drawing.Point(6, 58);
+            this.label_Chofer.Location = new System.Drawing.Point(27, 58);
             this.label_Chofer.Name = "label_Chofer";
-            this.label_Chofer.Size = new System.Drawing.Size(66, 13);
+            this.label_Chofer.Size = new System.Drawing.Size(41, 13);
             this.label_Chofer.TabIndex = 22;
-            this.label_Chofer.Text = "Chofer (DNI)";
+            this.label_Chofer.Text = "Chofer ";
             // 
             // monthCalendar_Fecha
             // 

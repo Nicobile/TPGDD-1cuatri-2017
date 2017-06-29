@@ -138,15 +138,17 @@ namespace UberFrba
             command.ExecuteNonQuery();
         }
 
-        public void ActualizarRendicionIdenRegistrViaje(int idRendicion,DateTime fecha,int idChofer,int idTurno)
+        public void ActualizarRendicionIdenRegistrViaje(int idRendicion,DateTime fecha,int idChofer,String idTurno)
         {
+
+            int IDTurno = Convert.ToInt32(idTurno);
 
             query = "PUSH_IT_TO_THE_LIMIT.pr_actualizar_rendicion_registroviaje";
             parametros.Clear();
             parametros.Add(new SqlParameter("@idRendicion", idRendicion));
             parametros.Add(new SqlParameter("@Fecha", fecha));
             parametros.Add(new SqlParameter("@idChofer", idChofer));
-            parametros.Add(new SqlParameter("@idTurno", idTurno));
+            parametros.Add(new SqlParameter("@idTurno",IDTurno));
             command = QueryBuilder.Instance.build(query, parametros);
             command.CommandType = CommandType.StoredProcedure;
             command.ExecuteNonQuery();
@@ -191,21 +193,18 @@ namespace UberFrba
             return tabla;
         }
 
-        public SqlCommand BuscarRendicion(String fecha, int idchofer)
+        public bool ExisteRendicion(String fecha, int idchofer)
         {
-            String config = ConfigurationManager.AppSettings["archConexionConSQL"];
-            SqlConnection conexion = new SqlConnection(config);
-            try
-            {
-                conexion.Open();
-            }
-            catch (Exception) { MessageBox.Show("Error en conexion"); }
-            string query = "SELECT * From [PUSH_IT_TO_THE_LIMIT].fx_verificarRendicion(@fecha,@idchofer)";
-            SqlCommand cmd = new SqlCommand(query, conexion);
-            cmd.Parameters.AddWithValue("@fecha", fecha);
-            cmd.Parameters.AddWithValue("@idchofer", idchofer);
-            return cmd;
-
+                        
+            this.query = "SELECT * From [PUSH_IT_TO_THE_LIMIT].fx_verificarRendicion(@fecha,@idchofer)";
+            parametros.Clear();            
+            parametros.Add(new SqlParameter("@fecha", fecha));
+            parametros.Add(new SqlParameter("@idchofer", idchofer));
+            int filasAfectadas = Convert.ToInt32(QueryBuilder.Instance.build(this.query, parametros).ExecuteScalar());
+            if (filasAfectadas == 0)
+                return false;
+            else
+                return true;
         }
 
 
@@ -424,12 +423,13 @@ namespace UberFrba
 
 
 
-        public DataTable SelectDataTableRegistroViajeparaRendi(String fecha, int idChofer, int idTurno)
+        public DataTable SelectDataTableRegistroViajeparaRendi(String fecha, int idChofer, String idTurno)
         {
+            int IDTurno = Convert.ToInt32(idTurno);
             parametros.Clear();
             parametros.Add(new SqlParameter("@fecha", fecha));
             parametros.Add(new SqlParameter("@idChofer", idChofer));
-            parametros.Add(new SqlParameter("@idTurno", idTurno));
+            parametros.Add(new SqlParameter("@idTurno", IDTurno));
             command = QueryBuilder.Instance.build("select viaje_id 'Viaje N°',chofer_id,auto_id,factura_id,T.turno_id,viaje_cantidad_km 'Cantidad Km',rendicion_id,viaje_fecha'Fecha',viaje_hora_inicio'Hora Inicio',viaje_hora_fin'Hora Fin',cliente_id ,'Total Viaje'=CASE WHEN (viaje_cantidad_km * T.turno_valor_kilometro) < T.turno_precio_base THEN T.turno_precio_base ELSE viaje_cantidad_km * T.turno_valor_kilometro	END,T.turno_descripcion 'Turno'	from PUSH_IT_TO_THE_LIMIT.RegistroViaje R JOIN PUSH_IT_TO_THE_LIMIT.Turno T ON R.turno_id = T.turno_id AND R.turno_id = @idTurno AND T.turno_id = @idTurno WHERE viaje_fecha = @fecha AND rendicion_id IS NULL AND chofer_id = @idChofer", parametros);
             DataSet datos = new DataSet();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -515,12 +515,13 @@ namespace UberFrba
             return viajes;
         }
 
-        public String TotalRendicion(String fecha, int idChofer, int idTurno)
+        public String TotalRendicion(String fecha, int idChofer, String idTurno)
         {
+            int IDTurno = Convert.ToInt32(idTurno);
             parametros.Clear();
             parametros.Add(new SqlParameter("@fecha", fecha));
             parametros.Add(new SqlParameter("@idChofer", idChofer));
-            parametros.Add(new SqlParameter("@idTurno", idTurno));
+            parametros.Add(new SqlParameter("@idTurno", IDTurno));
             query = "SELECT (SUM(VIAJES.[Total Viaje]))*0.3 FROM (select viaje_id 'Viaje N°',chofer_id,auto_id,factura_id,T.turno_id,viaje_cantidad_km 'Cantidad Km',rendicion_id,viaje_fecha'Fecha',viaje_hora_inicio'Hora Inicio',viaje_hora_fin'Hora Fin',cliente_id ,'Total Viaje'= CASE WHEN (viaje_cantidad_km * T.turno_valor_kilometro) < T.turno_precio_base THEN T.turno_precio_base ELSE viaje_cantidad_km * T.turno_valor_kilometro END from PUSH_IT_TO_THE_LIMIT.RegistroViaje R JOIN PUSH_IT_TO_THE_LIMIT.Turno T ON(R.turno_id = T.turno_id AND R.turno_id = @idTurno AND T.turno_id = @idTurno) WHERE @fecha = viaje_fecha AND rendicion_id IS NULL AND chofer_id =@idChofer) VIAJES";
             object cantidadViajes = QueryBuilder.Instance.build(query, parametros).ExecuteScalar();
             String viajes = cantidadViajes.ToString();
