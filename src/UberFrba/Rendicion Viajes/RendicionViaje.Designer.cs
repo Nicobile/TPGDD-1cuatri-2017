@@ -63,10 +63,9 @@
             this.groupBox_datosViaje.Controls.Add(this.label_FHinicio);
             this.groupBox_datosViaje.Controls.Add(this.label_Turno);
             this.groupBox_datosViaje.Controls.Add(this.label_Chofer);
-            this.groupBox_datosViaje.Controls.Add(this.monthCalendar_Fecha);
             this.groupBox_datosViaje.Location = new System.Drawing.Point(12, 12);
             this.groupBox_datosViaje.Name = "groupBox_datosViaje";
-            this.groupBox_datosViaje.Size = new System.Drawing.Size(833, 176);
+            this.groupBox_datosViaje.Size = new System.Drawing.Size(426, 184);
             this.groupBox_datosViaje.TabIndex = 1;
             this.groupBox_datosViaje.TabStop = false;
             this.groupBox_datosViaje.Text = "Datos";
@@ -75,12 +74,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(6, 160);
+            this.label1.Location = new System.Drawing.Point(41, 160);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(625, 13);
+            this.label1.Size = new System.Drawing.Size(127, 13);
             this.label1.TabIndex = 45;
-            this.label1.Text = "AVISO: Se deben cargar todos los campos, antes de ingresar un turno deberan estar" +
-    " cargados previamente Chofer(DNI) y la Fecha";
+            this.label1.Text = "*Cargar todos los campos";
             // 
             // textBox_importe
             // 
@@ -165,7 +163,7 @@
             // 
             // monthCalendar_Fecha
             // 
-            this.monthCalendar_Fecha.Location = new System.Drawing.Point(390, 0);
+            this.monthCalendar_Fecha.Location = new System.Drawing.Point(570, 23);
             this.monthCalendar_Fecha.Name = "monthCalendar_Fecha";
             this.monthCalendar_Fecha.TabIndex = 42;
             this.monthCalendar_Fecha.Visible = false;
@@ -245,6 +243,7 @@
             this.Controls.Add(this.button_Cancelar);
             this.Controls.Add(this.dataGridView_Viajes_Rendidos);
             this.Controls.Add(this.groupBox_datosViaje);
+            this.Controls.Add(this.monthCalendar_Fecha);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RendicionViaje";
             this.Text = "Rendicion de Viajes";

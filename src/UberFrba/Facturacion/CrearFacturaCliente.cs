@@ -70,7 +70,10 @@ namespace UberFrba.Facturacion
 
                     mapper.ActualizarFacturaIdenRegistrViaje(idFactura, factura.GetFechaInicioFactura(), factura.GetFechaFinFactura(), factura.GetIdCliente());
                 }
-
+                this.Hide();
+                new MenuPrincipal().ShowDialog();
+                this.Close();
+            
             }
             catch (CampoVacioException exception)
             {
