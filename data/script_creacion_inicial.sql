@@ -241,7 +241,7 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[Chofer] (
 CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[Turno](
 	[turno_id] INT IDENTITY(1,1) PRIMARY KEY,
 	[turno_hora_inicio]	NUMERIC(18,0) NOT NULL,
-	[turno_hora_fin] NUMERIC(18,0) NOT NULL,
+	[turno_hora_fin]  NUMERIC(18,0) NOT NULL,
 	[turno_descripcion] VARCHAR(255),
 	[turno_valor_kilometro] NUMERIC(18,2) NOT NULL,
 	[turno_precio_base] NUMERIC(18,2) NOT NULL,
@@ -466,7 +466,7 @@ and r.rol_nombre = ('Chofer')
 /*Turno*/
 
 insert into [PUSH_IT_TO_THE_LIMIT].Turno(turno_descripcion, turno_hora_fin, turno_hora_inicio, turno_precio_base, turno_valor_kilometro)
-select distinct Turno_Descripcion, Turno_Hora_Fin, Turno_Hora_Inicio, Turno_Precio_Base, Turno_Valor_Kilometro
+select distinct Turno_Descripcion,Turno_Hora_Fin, Turno_Hora_Inicio, Turno_Precio_Base, Turno_Valor_Kilometro
 from gd_esquema.Maestra
 order by Turno_Hora_Inicio
 
@@ -480,7 +480,7 @@ select distinct c.chofer_id, m.Rendicion_Fecha, sum(m.Rendicion_Importe), m.Rend
 from gd_esquema.Maestra m,  [PUSH_IT_TO_THE_LIMIT].Chofer c, [PUSH_IT_TO_THE_LIMIT].Turno t
 where m.Rendicion_Fecha is not null
 and m.Chofer_Dni = c.chofer_dni
-and m.Turno_Hora_Inicio = t.turno_hora_inicio
+and  m.Turno_Hora_Inicio = t.turno_hora_inicio
 group by Rendicion_Nro, c.chofer_id, t.turno_id, m.Rendicion_Fecha
 SET IDENTITY_INSERT [PUSH_IT_TO_THE_LIMIT].RendicionViaje OFF
 
@@ -875,20 +875,32 @@ GO
   AS
 BEGIN
 
-    if exists(select 1 from [PUSH_IT_TO_THE_LIMIT].RegistroViaje where(chofer_id = @idChofer AND
-	((@HoraInicio <= viaje_hora_fin AND @HoraInicio >= viaje_hora_inicio) OR (@HoraFin <= viaje_hora_fin AND @HoraFin >= viaje_hora_inicio))
+ --   if exists(select 1 from [PUSH_IT_TO_THE_LIMIT].RegistroViaje where(chofer_id = @idChofer AND
+	--((@HoraInicio <= viaje_hora_fin AND @HoraInicio >= viaje_hora_inicio) OR (@HoraFin <= viaje_hora_fin AND @HoraFin >= viaje_hora_inicio))
+	--AND viaje_fecha = @fecha)) throw 51015,'EL chofer ya tiene otro viaje registrado en ese horario',16;
+
+	--if exists(select 1 from [PUSH_IT_TO_THE_LIMIT].RegistroViaje 
+	--where(cliente_id = @idCliente AND
+	--((@HoraInicio <= viaje_hora_fin AND @HoraInicio >= viaje_hora_inicio)
+	--OR 
+	--(@HoraFin <= viaje_hora_fin AND @HoraFin >= viaje_hora_inicio)) OR((viaje_hora_fin>=@HoraInicio AND viaje_hora_fin<=@HoraFin)OR (viaje_hora_inicio>=@HoraInicio AND viaje_hora_inicio<=@HoraFin))
+	--AND viaje_fecha = @fecha)
+	
+	--) throw 51016,'EL cliente ya tiene otro viaje registrado en ese horario',16;
+
+	
+	if exists(select 1 from [PUSH_IT_TO_THE_LIMIT].RegistroViaje where(chofer_id = @idChofer AND
+	@HoraInicio >= viaje_hora_inicio AND @HoraFin <= viaje_hora_fin 
 	AND viaje_fecha = @fecha)) throw 51015,'EL chofer ya tiene otro viaje registrado en ese horario',16;
 
+	
 	if exists(select 1 from [PUSH_IT_TO_THE_LIMIT].RegistroViaje 
 	where(cliente_id = @idCliente AND
-	((@HoraInicio <= viaje_hora_fin AND @HoraInicio >= viaje_hora_inicio)
-	OR 
-	(@HoraFin <= viaje_hora_fin AND @HoraFin >= viaje_hora_inicio)) OR((viaje_hora_fin>=@HoraInicio AND viaje_hora_fin<=@HoraFin)OR (viaje_hora_inicio>=@HoraInicio AND viaje_hora_inicio<=@HoraFin))
+	@HoraInicio >= viaje_hora_inicio AND @HoraFin <= viaje_hora_fin
 	AND viaje_fecha = @fecha)
 	
 	) throw 51016,'EL cliente ya tiene otro viaje registrado en ese horario',16;
-
-
+	
     INSERT INTO [PUSH_IT_TO_THE_LIMIT].RegistroViaje
         (viaje_cantidad_km, viaje_fecha,viaje_hora_inicio, viaje_hora_fin,chofer_id,auto_id,cliente_id,turno_id) 
     VALUES 
