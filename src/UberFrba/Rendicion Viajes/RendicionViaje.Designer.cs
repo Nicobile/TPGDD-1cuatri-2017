@@ -185,7 +185,7 @@
             this.dataGridView_Viajes_Rendidos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView_Viajes_Rendidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Viajes_Rendidos.EnableHeadersVisualStyles = false;
-            this.dataGridView_Viajes_Rendidos.Location = new System.Drawing.Point(12, 287);
+            this.dataGridView_Viajes_Rendidos.Location = new System.Drawing.Point(12, 253);
             this.dataGridView_Viajes_Rendidos.MultiSelect = false;
             this.dataGridView_Viajes_Rendidos.Name = "dataGridView_Viajes_Rendidos";
             this.dataGridView_Viajes_Rendidos.ReadOnly = true;
@@ -195,7 +195,7 @@
             // 
             // button_Cancelar
             // 
-            this.button_Cancelar.Location = new System.Drawing.Point(12, 473);
+            this.button_Cancelar.Location = new System.Drawing.Point(12, 457);
             this.button_Cancelar.Name = "button_Cancelar";
             this.button_Cancelar.Size = new System.Drawing.Size(100, 30);
             this.button_Cancelar.TabIndex = 6;
@@ -205,7 +205,7 @@
             // 
             // button_Limpiar
             // 
-            this.button_Limpiar.Location = new System.Drawing.Point(428, 473);
+            this.button_Limpiar.Location = new System.Drawing.Point(423, 457);
             this.button_Limpiar.Name = "button_Limpiar";
             this.button_Limpiar.Size = new System.Drawing.Size(100, 30);
             this.button_Limpiar.TabIndex = 7;
@@ -215,7 +215,7 @@
             // 
             // btnFacturar
             // 
-            this.btnFacturar.Location = new System.Drawing.Point(861, 473);
+            this.btnFacturar.Location = new System.Drawing.Point(861, 457);
             this.btnFacturar.Name = "btnFacturar";
             this.btnFacturar.Size = new System.Drawing.Size(100, 30);
             this.btnFacturar.TabIndex = 8;
@@ -227,7 +227,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(17, 264);
+            this.label4.Location = new System.Drawing.Point(17, 221);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(124, 20);
             this.label4.TabIndex = 45;
@@ -238,7 +238,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
-            this.ClientSize = new System.Drawing.Size(973, 551);
+            this.ClientSize = new System.Drawing.Size(973, 499);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnFacturar);
             this.Controls.Add(this.button_Limpiar);

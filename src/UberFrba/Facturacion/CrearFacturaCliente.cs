@@ -55,7 +55,7 @@ namespace UberFrba.Facturacion
 
         private void button_CrearFactura_Click_1(object sender, EventArgs e)
         {
-            String ClienteDNI = this.obtenerDNIaPartirDetextBox(comboBox_Cliente.Text);
+           
             String FechaInicio = textBox_FechaInicio.Text;
             String FechaFin = textBox_FechaFin.Text;
             String Total = textBox_TotalFactutado.Text;
@@ -63,6 +63,15 @@ namespace UberFrba.Facturacion
 
 
             try {
+
+                String ClienteDNI = this.obtenerDNIaPartirDetextBox(comboBox_Cliente.Text);//lo pongo aca para captuarar la excepcion
+
+
+
+
+
+
+
 
                 Factura factura = new Factura();
                 factura.SetIdCliente(ClienteDNI);
@@ -136,13 +145,16 @@ namespace UberFrba.Facturacion
         }
         public String obtenerDNIaPartirDetextBox(String cliente) {
 
-
-            string[] separadas;
-            separadas = comboBox_Cliente.Text.Split(':');
-            String DniCliente = separadas[1];
-            return DniCliente;
-        
-        
+            if (cliente == "")
+            {
+                throw new CampoVacioException("Cliente");
+            }
+            else {
+                string[] separadas;
+                separadas = comboBox_Cliente.Text.Split(':');
+                String DniCliente = separadas[1];
+                return DniCliente;
+            }
         }
 
 
