@@ -95,6 +95,11 @@ namespace UberFrba.Facturacion
         
         private void button_limpiar_Click(object sender, EventArgs e)
         {
+            LimpiarDatosVista();
+        }
+
+        public void LimpiarDatosVista() 
+        {
             comboBox_Cliente.Items.Clear();
             CargarComboBoxClientes();
             textBox_FechaFin.Text = "";
@@ -162,7 +167,13 @@ namespace UberFrba.Facturacion
                 throw new FechaInvalidaException("La fecha inicio  y la fecha fin tienen meses distintos ");
             
             }
-        
+
+            if (fechaIniciofac.Year != fechaFinfac.Year)
+            {
+
+                throw new FechaInvalidaException("La fecha inicio  y la fecha fin tienen Años distintos ");
+
+            }
         }
 
         #region Month Calendar para las Fecha inicio y fin
@@ -195,9 +206,16 @@ namespace UberFrba.Facturacion
             catch (FechaInvalidaException error) {
 
                 MessageBox.Show(error.Message, "Error en fecha", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                textBox_FechaInicio.Text = "";
-                textBox_FechaFin.Text = "";
+                LimpiarDatosVista();
+                monthCalendar_FechaDeFacturaFin.Visible = false;
+                return;
             
+            }
+            catch (CampoVacioException exception)
+            {
+                MessageBox.Show("Falta completar campo: " + exception.Message);
+                monthCalendar_FechaDeFacturaFin.Visible = false;
+                return;
             }
 
             monthCalendar_FechaDeFacturaFin.Visible = false;
