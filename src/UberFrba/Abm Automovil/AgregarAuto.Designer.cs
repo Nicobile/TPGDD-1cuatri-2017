@@ -49,7 +49,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.BackColor = System.Drawing.SystemColors.Window;
+            this.groupBox1.BackColor = System.Drawing.Color.Wheat;
             this.groupBox1.Controls.Add(this.comboBox_Turno);
             this.groupBox1.Controls.Add(this.textBox_Chofer);
             this.groupBox1.Controls.Add(this.label4);

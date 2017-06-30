@@ -49,6 +49,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Wheat;
             this.groupBox1.Controls.Add(this.textBox_ValorKilometro);
             this.groupBox1.Controls.Add(this.textBox_PrecioBase);
             this.groupBox1.Controls.Add(this.label15);

@@ -97,6 +97,7 @@ namespace UberFrba.ABM_Cliente
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Wheat;
             this.groupBox1.Controls.Add(this.textBox_CodigoPostal);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.textBox_Telefono);

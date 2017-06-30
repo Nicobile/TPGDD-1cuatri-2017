@@ -42,6 +42,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Wheat;
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.textBox_DescripcionTurno);
             this.groupBox1.Location = new System.Drawing.Point(12, 21);
@@ -101,6 +102,7 @@
             // 
             this.dataGridView_Turno.AllowUserToAddRows = false;
             this.dataGridView_Turno.AllowUserToDeleteRows = false;
+            this.dataGridView_Turno.BackgroundColor = System.Drawing.Color.Wheat;
             this.dataGridView_Turno.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView_Turno.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Turno.Location = new System.Drawing.Point(12, 153);

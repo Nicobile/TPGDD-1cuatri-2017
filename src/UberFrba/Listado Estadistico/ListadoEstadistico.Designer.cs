@@ -79,6 +79,7 @@
             // 
             this.listado.AllowUserToAddRows = false;
             this.listado.AllowUserToDeleteRows = false;
+            this.listado.BackgroundColor = System.Drawing.Color.Wheat;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -144,6 +145,7 @@
             "Choferes con viajes mas largos",
             "Clientes con mayor consumo",
             "Clientes con mayor cantidad de veces utilizado el mismo vehiculo"});
+            this.SeleccionEstadistica.BackColor = System.Drawing.SystemColors.Window;
             this.SeleccionEstadistica.DisplayMember = "0";
             this.SeleccionEstadistica.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.SeleccionEstadistica.FormattingEnabled = true;
@@ -160,12 +162,13 @@
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.SystemColors.Control;
             this.button1.Location = new System.Drawing.Point(457, 386);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(95, 25);
             this.button1.TabIndex = 14;
             this.button1.Text = "Calcular";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label2
@@ -180,6 +183,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Wheat;
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.seleccionTrimestre);

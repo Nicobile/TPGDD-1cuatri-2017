@@ -49,12 +49,15 @@
             this.button_limpiar = new System.Windows.Forms.Button();
             this.button_volver = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Viajes_Facturados)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Wheat;
+            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.textBox_CantidadViajes);
             this.groupBox1.Controls.Add(this.textBox_TotalFactutado);
             this.groupBox1.Controls.Add(this.label6);
@@ -69,7 +72,7 @@
             this.groupBox1.Controls.Add(this.comboBox_Cliente);
             this.groupBox1.Location = new System.Drawing.Point(27, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(449, 198);
+            this.groupBox1.Size = new System.Drawing.Size(449, 202);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Factura";
@@ -182,6 +185,7 @@
             // 
             // monthCalendar_FechaDeFacturaInicio
             // 
+            this.monthCalendar_FechaDeFacturaInicio.BackColor = System.Drawing.SystemColors.Window;
             this.monthCalendar_FechaDeFacturaInicio.Location = new System.Drawing.Point(488, 68);
             this.monthCalendar_FechaDeFacturaInicio.Name = "monthCalendar_FechaDeFacturaInicio";
             this.monthCalendar_FechaDeFacturaInicio.TabIndex = 44;
@@ -200,6 +204,7 @@
             // 
             this.dataGridView_Viajes_Facturados.AllowUserToAddRows = false;
             this.dataGridView_Viajes_Facturados.AllowUserToDeleteRows = false;
+            this.dataGridView_Viajes_Facturados.BackgroundColor = System.Drawing.Color.Wheat;
             this.dataGridView_Viajes_Facturados.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView_Viajes_Facturados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Viajes_Facturados.Location = new System.Drawing.Point(54, 242);
@@ -242,11 +247,21 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(30, 217);
+            this.label4.Location = new System.Drawing.Point(38, 219);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(137, 20);
             this.label4.TabIndex = 44;
             this.label4.Text = "Viajes a Facturar :";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.Red;
+            this.label7.Location = new System.Drawing.Point(39, 182);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(127, 13);
+            this.label7.TabIndex = 48;
+            this.label7.Text = "*Cargar todos los campos";
             // 
             // CrearFacturaCliente
             // 
@@ -296,5 +311,6 @@
         private System.Windows.Forms.TextBox textBox_CantidadViajes;
         private System.Windows.Forms.TextBox textBox_TotalFactutado;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
     }
 }

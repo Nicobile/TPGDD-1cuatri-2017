@@ -75,6 +75,7 @@ namespace UberFrba.ABM_Rol
             // 
             // checkedListBoxFuncionalidades
             // 
+            this.checkedListBoxFuncionalidades.BackColor = System.Drawing.Color.Wheat;
             this.checkedListBoxFuncionalidades.FormattingEnabled = true;
             this.checkedListBoxFuncionalidades.Location = new System.Drawing.Point(139, 106);
             this.checkedListBoxFuncionalidades.Name = "checkedListBoxFuncionalidades";

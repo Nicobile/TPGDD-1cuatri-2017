@@ -175,5 +175,7 @@ namespace UberFrba.ABM_Cliente
             textBox_FechaDeNacimiento.Text = e.Start.ToShortDateString();
             monthCalendar_FechaDeNacimiento.Visible = false;
         }
+
+        
     }
 }

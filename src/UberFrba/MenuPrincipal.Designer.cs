@@ -59,7 +59,7 @@
             this.comboBoxAccion.Name = "comboBoxAccion";
             this.comboBoxAccion.Size = new System.Drawing.Size(319, 28);
             this.comboBoxAccion.TabIndex = 1;
-            this.comboBoxAccion.SelectedIndexChanged += new System.EventHandler(this.comboBoxAccion_SelectedIndexChanged);
+//            this.comboBoxAccion.SelectedIndexChanged += new System.EventHandler(this.comboBoxAccion_SelectedIndexChanged);
             // 
             // botonAceptar
             // 

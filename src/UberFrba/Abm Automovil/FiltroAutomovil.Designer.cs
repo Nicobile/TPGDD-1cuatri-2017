@@ -48,6 +48,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Wheat;
             this.groupBox1.Controls.Add(this.comboBox_Marca);
             this.groupBox1.Controls.Add(this.labelChoferDni);
             this.groupBox1.Controls.Add(this.labePatente);
@@ -162,6 +163,7 @@
             // 
             this.dataGridView_Automovil.AllowUserToAddRows = false;
             this.dataGridView_Automovil.AllowUserToDeleteRows = false;
+            this.dataGridView_Automovil.BackgroundColor = System.Drawing.Color.Wheat;
             this.dataGridView_Automovil.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView_Automovil.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Automovil.Location = new System.Drawing.Point(22, 179);

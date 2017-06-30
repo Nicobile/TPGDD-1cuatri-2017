@@ -53,6 +53,7 @@
             // 
             // groupBox_datosViaje
             // 
+            this.groupBox_datosViaje.BackColor = System.Drawing.Color.Wheat;
             this.groupBox_datosViaje.Controls.Add(this.label1);
             this.groupBox_datosViaje.Controls.Add(this.textBox_importe);
             this.groupBox_datosViaje.Controls.Add(this.label_Importe);
@@ -173,6 +174,7 @@
             // 
             this.dataGridView_Viajes_Rendidos.AllowUserToAddRows = false;
             this.dataGridView_Viajes_Rendidos.AllowUserToDeleteRows = false;
+            this.dataGridView_Viajes_Rendidos.BackgroundColor = System.Drawing.Color.Wheat;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

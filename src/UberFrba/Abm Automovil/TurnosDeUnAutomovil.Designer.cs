@@ -49,6 +49,7 @@
             // 
             this.dataGridView_Automovil_Turnos_Actuales.AllowUserToAddRows = false;
             this.dataGridView_Automovil_Turnos_Actuales.AllowUserToDeleteRows = false;
+            this.dataGridView_Automovil_Turnos_Actuales.BackgroundColor = System.Drawing.Color.Wheat;
             this.dataGridView_Automovil_Turnos_Actuales.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView_Automovil_Turnos_Actuales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Automovil_Turnos_Actuales.Location = new System.Drawing.Point(15, 73);

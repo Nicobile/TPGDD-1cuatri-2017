@@ -55,6 +55,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Wheat;
             this.groupBox1.Controls.Add(this.monthCalendar_FechaDeNacimiento);
             this.groupBox1.Controls.Add(this.textBox_Direccion);
             this.groupBox1.Controls.Add(this.textBox_Telefono);

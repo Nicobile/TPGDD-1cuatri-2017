@@ -47,6 +47,7 @@ namespace UberFrba.ABM_Chofer
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Wheat;
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.textBox_DNI);
@@ -142,6 +143,7 @@ namespace UberFrba.ABM_Chofer
             // 
             this.dataGridView_Chofer.AllowUserToAddRows = false;
             this.dataGridView_Chofer.AllowUserToDeleteRows = false;
+            this.dataGridView_Chofer.BackgroundColor = System.Drawing.Color.Wheat;
             this.dataGridView_Chofer.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView_Chofer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Chofer.Location = new System.Drawing.Point(12, 155);

@@ -89,9 +89,6 @@ namespace UberFrba
 
         }
 
-        private void comboBoxAccion_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

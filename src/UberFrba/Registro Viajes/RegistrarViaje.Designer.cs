@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegistrarViaje));
             this.groupBox_datosViaje = new System.Windows.Forms.GroupBox();
+            this.comboBox_Cliente = new System.Windows.Forms.ComboBox();
             this.horaFin = new System.Windows.Forms.DateTimePicker();
             this.horaInicio = new System.Windows.Forms.DateTimePicker();
             this.monthCalendar_FechaDeViaje = new System.Windows.Forms.MonthCalendar();
@@ -51,12 +52,12 @@
             this.button_Cancelar = new System.Windows.Forms.Button();
             this.button_Limpiar = new System.Windows.Forms.Button();
             this.button_Guardar = new System.Windows.Forms.Button();
-            this.comboBox_Cliente = new System.Windows.Forms.ComboBox();
             this.groupBox_datosViaje.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox_datosViaje
             // 
+            this.groupBox_datosViaje.BackColor = System.Drawing.Color.Wheat;
             this.groupBox_datosViaje.Controls.Add(this.comboBox_Cliente);
             this.groupBox_datosViaje.Controls.Add(this.horaFin);
             this.groupBox_datosViaje.Controls.Add(this.horaInicio);
@@ -81,6 +82,16 @@
             this.groupBox_datosViaje.TabIndex = 0;
             this.groupBox_datosViaje.TabStop = false;
             this.groupBox_datosViaje.Text = "Datos del Viaje";
+            // 
+            // comboBox_Cliente
+            // 
+            this.comboBox_Cliente.BackColor = System.Drawing.Color.White;
+            this.comboBox_Cliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_Cliente.FormattingEnabled = true;
+            this.comboBox_Cliente.Location = new System.Drawing.Point(128, 172);
+            this.comboBox_Cliente.Name = "comboBox_Cliente";
+            this.comboBox_Cliente.Size = new System.Drawing.Size(273, 21);
+            this.comboBox_Cliente.TabIndex = 45;
             // 
             // horaFin
             // 
@@ -275,17 +286,6 @@
             this.button_Guardar.Text = "Guardar";
             this.button_Guardar.UseVisualStyleBackColor = true;
             this.button_Guardar.Click += new System.EventHandler(this.button_Guardar_Click);
-            // 
-            // comboBox_Cliente
-            // 
-            this.comboBox_Cliente.BackColor = System.Drawing.Color.White;
-            this.comboBox_Cliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_Cliente.FormattingEnabled = true;
-            this.comboBox_Cliente.Location = new System.Drawing.Point(128, 172);
-            this.comboBox_Cliente.Name = "comboBox_Cliente";
-            this.comboBox_Cliente.Size = new System.Drawing.Size(273, 21);
-            this.comboBox_Cliente.TabIndex = 45;
-      
             // 
             // RegistrarViaje
             // 

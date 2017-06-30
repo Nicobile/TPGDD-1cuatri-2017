@@ -47,6 +47,7 @@ namespace UberFrba.ABM_Cliente
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Wheat;
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.textBox_DNI);
@@ -142,6 +143,7 @@ namespace UberFrba.ABM_Cliente
             // 
             this.dataGridView_Cliente.AllowUserToAddRows = false;
             this.dataGridView_Cliente.AllowUserToDeleteRows = false;
+            this.dataGridView_Cliente.BackgroundColor = System.Drawing.Color.Wheat;
             this.dataGridView_Cliente.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView_Cliente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Cliente.Location = new System.Drawing.Point(12, 155);
