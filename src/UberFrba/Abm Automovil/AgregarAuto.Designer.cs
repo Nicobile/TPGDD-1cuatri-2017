@@ -70,6 +70,7 @@
             // 
             // comboBox_Turno
             // 
+            this.comboBox_Turno.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Turno.FormattingEnabled = true;
             this.comboBox_Turno.Location = new System.Drawing.Point(91, 99);
             this.comboBox_Turno.Name = "comboBox_Turno";
@@ -88,9 +89,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(6, 134);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 13);
+            this.label4.Size = new System.Drawing.Size(63, 13);
             this.label4.TabIndex = 21;
-            this.label4.Text = "Chofer";
+            this.label4.Text = "Chofer(DNI)";
             // 
             // label2
             // 
@@ -135,6 +136,7 @@
             // 
             // comboBox_Marca
             // 
+            this.comboBox_Marca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Marca.FormattingEnabled = true;
             this.comboBox_Marca.Location = new System.Drawing.Point(91, 16);
             this.comboBox_Marca.Name = "comboBox_Marca";

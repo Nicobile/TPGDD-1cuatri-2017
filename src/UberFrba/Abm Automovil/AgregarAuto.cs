@@ -42,6 +42,14 @@ namespace UberFrba.Abm_Automovil
 
         private void AgregarAuto_Load(object sender, EventArgs e)
         {
+            cargarComboboxMarca();
+            CargarComboBoxTurno();
+
+
+        }
+
+        public void cargarComboboxMarca()
+        {
             comboBox_Marca.Items.Add("Porsche");
             comboBox_Marca.Items.Add("Chevrolet");
             comboBox_Marca.Items.Add("Renault");
@@ -51,19 +59,16 @@ namespace UberFrba.Abm_Automovil
             comboBox_Marca.Items.Add("Volkswagen");
             comboBox_Marca.Items.Add("Toyota");
             comboBox_Marca.Items.Add("Citroën");
-            CargarComboBoxTurno();
-
         }
-
         private void button_Guardar_Click(object sender, EventArgs e)
         {
             String Marca =comboBox_Marca.Text;
             String Modelo = textBox_Modelo.Text;
             String Patente = textBox_Patente.Text;
             //String Turno = textBox_Turno.Text;
-            String Chofer = textBox_Chofer.Text;
-            String IDTurno = comboBox_Turno.Text.Substring(12,1);
-            MessageBox.Show(IDTurno);
+            //String Chofer = textBox_Chofer.Text;
+            //String IDTurno = comboBox_Turno.Text.Substring(12,1);
+            //MessageBox.Show(IDTurno);
             String DniChofer = textBox_Chofer.Text;
 
            
@@ -77,6 +82,7 @@ namespace UberFrba.Abm_Automovil
                 auto.SetModelo(Modelo);
                 auto.SetPatente(Patente);
                 auto.SetActivo(true);
+                String IDTurno = obtenerIdTurnoaPartirDeCombobox(comboBox_Turno.Text);
                 this.SetIdTurno(IDTurno);
                 this.SetIdChofer(DniChofer);
                 //MessageBox.Show(Convert.ToString(idChofer));
@@ -114,11 +120,11 @@ namespace UberFrba.Abm_Automovil
                 MessageBox.Show(exceptionChofer.Message);
                 return;
             }
-            catch (TurnoInexistenteException exceptionTurno)
-            {
-                MessageBox.Show(exceptionTurno.Message + IDTurno);
-                return;
-            }
+            //catch (TurnoInexistenteException exceptionTurno)
+            //{
+            //    MessageBox.Show(exceptionTurno.Message + IDTurno);
+            //    return;
+            //}
             catch (SqlException error)
             {
 
@@ -139,10 +145,12 @@ namespace UberFrba.Abm_Automovil
         private void button_Limpiar_Click(object sender, EventArgs e)
         {
 
-            comboBox_Marca.Text = "";
+            comboBox_Marca.Items.Clear();
+            cargarComboboxMarca();
             textBox_Modelo.Text = "";
             textBox_Patente.Text = "";
-            comboBox_Turno.Text = "";
+            comboBox_Turno.Items.Clear();
+            CargarComboBoxTurno();
             textBox_Chofer.Text = "";
 
         }
@@ -192,12 +200,31 @@ namespace UberFrba.Abm_Automovil
                 string horaInicio = fila["turno_hora_inicio"].ToString();
                 string horaFin = fila["turno_hora_fin"].ToString();
                 string idTurnoCombo = fila["turno_id"].ToString();
-                comboBox_Turno.Items.Add("El turno N° "+ idTurnoCombo + " comienza a las "+horaInicio+" y finaliza a las " + horaFin);
+                comboBox_Turno.Items.Add("El turno N° "+"("+ idTurnoCombo + ")"+" comienza a las "+horaInicio+" y finaliza a las " + horaFin);
 
             }
         
         
         }
+
+        public String obtenerIdTurnoaPartirDeCombobox(String turno)
+        {
+            if (turno == "")
+            {
+                throw new CampoVacioException("Turno");
+            }
+            string[] turnoSeparado1;
+            string[] turnoSeparado2;
+            turnoSeparado1 = turno.Split('(');
+            turnoSeparado2 = turnoSeparado1[1].Split(')');
+            return turnoSeparado2[0];
+        }
+
+
+
+
+
+
 
     }
 }
