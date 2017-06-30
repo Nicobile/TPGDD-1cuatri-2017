@@ -21,18 +21,18 @@ namespace UberFrba.Abm_Automovil
         private SqlCommand command { get; set; }
         private IList<SqlParameter> parametros = new List<SqlParameter>();
         private Boolean ocultarBotonDeshabilitarTurno;
-        private int idAutomovilSeleccionado;
+        //private int idAutomovilSeleccionado;
 
-        public TurnosDeUnAutomovil(String idAutomovil,Boolean botonDeshabilitarTurno,int idAutomovilSeleccionado)
+        public TurnosDeUnAutomovil(String idAutomovil,Boolean botonDeshabilitarTurno)//,int idAutomovilSeleccionado) me parece que no es necesario DEJAR ASI 
         {
             InitializeComponent();
             this.idAutomovilt = idAutomovil;
             this.idAutomovilTurno = Convert.ToInt32(idAutomovil);
             this.ocultarBotonDeshabilitarTurno = botonDeshabilitarTurno;
-            if (idAutomovilSeleccionado != 0)
-            {
-                this.idAutomovilSeleccionado = idAutomovilSeleccionado;
-            }
+            //if (idAutomovilSeleccionado != 0)
+            //{
+            //    this.idAutomovilSeleccionado = idAutomovilSeleccionado;
+            //}
             //this.OcultarColumnasQueNoDebenVerse("Deshabilitar  Turno al Automovil");
         }
 
@@ -98,7 +98,8 @@ namespace UberFrba.Abm_Automovil
             {
                 
                 String idTurnoAModificar = dataGridView_Automovil_Turnos_Actuales.Rows[e.RowIndex].Cells["Turno N°"].Value.ToString();
-                Boolean pudoModificar=mapper.ActualizarEstadoTurnoAutomovil(this.idAutomovilSeleccionado, Convert.ToInt32(idTurnoAModificar),0);
+                //Boolean pudoModificar=mapper.ActualizarEstadoTurnoAutomovil(this.idAutomovilSeleccionado, Convert.ToInt32(idTurnoAModificar),0);
+                Boolean pudoModificar = mapper.ActualizarEstadoTurnoAutomovil(this.idAutomovilTurno, Convert.ToInt32(idTurnoAModificar), 0);
                 if (pudoModificar) MessageBox.Show("Turno deshabilitado del automovil correctamente");
                 dataGridView_Automovil_Turnos_Actuales.Rows[e.RowIndex].Cells["Habilitado"].Value = false;
                 CargarTurnoAutomovil();

@@ -146,7 +146,8 @@ namespace UberFrba.Abm_Automovil
             {
                 String idAutomovilTurno = dataGridView_Automovil.Rows[e.RowIndex].Cells["Auto N°"].Value.ToString();
                 //MessageBox.Show(idAutomovilTurno);
-                new TurnosDeUnAutomovil(idAutomovilTurno,true,0).ShowDialog();
+                //new TurnosDeUnAutomovil(idAutomovilTurno,true,0).ShowDialog();
+                new TurnosDeUnAutomovil(idAutomovilTurno, true).ShowDialog();
                 
             //    //Boolean resultado = mapper.EliminarAutomovil(Convert.ToInt32(idAutomovilAEliminar), "Auto");
             //    //dataGridView_Automovil.Rows[e.RowIndex].Cells["Habilitado"].Value = false;

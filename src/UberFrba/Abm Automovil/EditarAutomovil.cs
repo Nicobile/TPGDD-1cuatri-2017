@@ -117,7 +117,7 @@ namespace UberFrba.Abm_Automovil
                 string horaInicio = fila["turno_hora_inicio"].ToString();
                 string horaFin = fila["turno_hora_fin"].ToString();
                 string idTurnoCombo = fila["turno_id"].ToString();
-                comboBox_Turno.Items.Add("El turno N° " + idTurnoCombo + " comienza a las " + horaInicio + " y finaliza a las " + horaFin);
+                comboBox_Turno.Items.Add("El turno N° " + "("+idTurnoCombo +")"+ " comienza a las " + horaInicio + " y finaliza a las " + horaFin);
 
             }
 
@@ -127,7 +127,8 @@ namespace UberFrba.Abm_Automovil
         private void turnoActulaes_Click(object sender, EventArgs e)
         {
    
-            new TurnosDeUnAutomovil(this.idAutomovilString,false,this.idAutomovil).ShowDialog();
+            //new TurnosDeUnAutomovil(this.idAutomovilString,false,this.idAutomovil).ShowDialog();
+            new TurnosDeUnAutomovil(this.idAutomovilString, false).ShowDialog();
         }
 
         private void button_Guardar_Click(object sender, EventArgs e)
@@ -135,10 +136,10 @@ namespace UberFrba.Abm_Automovil
             // Guarda en variables todos los campos de entrada
             String Marca = comboBox_Marca.Text;
             String Modelo = textBox_Modelo.Text;
-            String Patente = textBox_Modelo.Text;
+            String Patente = textBox_Patente.Text;
             String TurnoSeleccionado = comboBox_Turno.Text;
             String DniChofer = textBox_Chofer.Text;
-            Boolean activo = checkBox_Habilitado.Checked; //La variable activo que esta en el checkbox es para saber si esta habilitado a nivel usuario --> ESTO QUE HICO EL PIBE NO ME CABE NI UN POCO
+            Boolean activo = checkBox_Habilitado.Checked; 
             Boolean pudoModificar;
             Boolean checkBoxActivoDeshabilitar_Chofer = checkBoxDeshabilitar_chofer.Checked;
             Boolean existeTurnoAutomovil;
@@ -146,11 +147,6 @@ namespace UberFrba.Abm_Automovil
 
             try
             {
-                if (TurnoSeleccionado != "Ninguno")
-                {
-                    String IDTurno = comboBox_Turno.Text.Substring(12, 1); //lo hago aca para capturar la excepcion que lanza el substring al ser vacio el comboBox_turno
-                    this.SetIdTurno(IDTurno);
-                }
                 
                 Automoviles auto = new Automoviles();
 
@@ -161,8 +157,20 @@ namespace UberFrba.Abm_Automovil
                 
                 this.SetIdChofer(DniChofer);
 
+                if (TurnoSeleccionado != "Ninguno" && TurnoSeleccionado != "")
+                {
+                    //String IDTurno = comboBox_Turno.Text.Substring(12, 1); //lo hago aca para capturar la excepcion que lanza el substring al ser vacio el comboBox_turno
+                    String IDTurno = this.obtenerIdTurnoaPartirDeCombobox(comboBox_Turno.Text);
+                    this.SetIdTurno(IDTurno);
+                }
+                else
+                {
 
-                //pudoModificar = mapper.Modificar(idAutomovil, auto);
+                    throw new CampoVacioException("Turno , si no desea agregar un turno seleccione ninguno");
+
+                }
+
+                //pudoModificar = mapper.Modificar(idAutomovil, auto); DEJAR COMENTADO
 
                 existeTurnoAutomovil = mapper.ExisteEstadoTunoAutomovil(this.idAutomovil, idTurno);
 
@@ -317,9 +325,7 @@ namespace UberFrba.Abm_Automovil
                 
         public void SetIdTurno(String idTurno)
         {
-            if (idTurno == "") throw new CampoVacioException("Turno");
             int existe = Convert.ToInt32(mapper.SelectFromWhere("COUNT(*)", "Turno", "turno_id", Convert.ToInt32(idTurno)));
-            if (existe == 0) throw new TurnoInexistenteException("No existe un Turno con N° ");
             this.idTurno = Convert.ToInt32(idTurno);
         }
 
@@ -330,6 +336,18 @@ namespace UberFrba.Abm_Automovil
             this.idChofer = idChoferObtenidoApartirDelDNI;
         }
 
+        public String obtenerIdTurnoaPartirDeCombobox(String turno)
+        {
+            if (turno == "")
+            {
+                throw new CampoVacioException("Turno");
+            }
+            string[] turnoSeparado1;
+            string[] turnoSeparado2;
+            turnoSeparado1 = turno.Split('(');
+            turnoSeparado2 = turnoSeparado1[1].Split(')');
+            return turnoSeparado2[0];
+        }
       
 
 

@@ -245,7 +245,6 @@
       <DependentUpon>MenuPrincipal.cs</DependentUpon>
     </Compile>
     <Compile Include="Modelo\Automoviles.cs" />
-    <Compile Include="Modelo\campoVacioException.cs" />
     <Compile Include="Modelo\Choferes.cs" />
     <Compile Include="Modelo\Clientes.cs" />
     <Compile Include="Modelo\Factura.cs" />
