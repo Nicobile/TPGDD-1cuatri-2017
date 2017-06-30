@@ -159,7 +159,6 @@ namespace UberFrba.Abm_Automovil
 
                 if (TurnoSeleccionado != "Ninguno" && TurnoSeleccionado != "")
                 {
-                    //String IDTurno = comboBox_Turno.Text.Substring(12, 1); //lo hago aca para capturar la excepcion que lanza el substring al ser vacio el comboBox_turno
                     String IDTurno = this.obtenerIdTurnoaPartirDeCombobox(comboBox_Turno.Text);
                     this.SetIdTurno(IDTurno);
                 }
@@ -276,23 +275,11 @@ namespace UberFrba.Abm_Automovil
                 MessageBox.Show("Datos mal ingresados en: " + exception.Message);
                 return;
             }
-            catch (ArgumentOutOfRangeException exceptionNoSeIngresoUnTurno) {
-
-                MessageBox.Show("Falta completar campo : Turno");
-                return;
-
-            }
-            catch (FormatException exceptionNoSeIngresoUnTurno)
-            {
-
-                MessageBox.Show("Si no desea agregar ningun Turno seleccione Ninguno");
-                return;
-
-            }
+            
             catch (ChoferInexistenteException exceptionChoferNoexite)
             {
 
-                MessageBox.Show(exceptionChoferNoexite.Message + DniChofer);
+                MessageBox.Show(exceptionChoferNoexite.Message );
                 return;
 
             }
@@ -319,10 +306,6 @@ namespace UberFrba.Abm_Automovil
             
         }
 
-
-
-
-                
         public void SetIdTurno(String idTurno)
         {
             int existe = Convert.ToInt32(mapper.SelectFromWhere("COUNT(*)", "Turno", "turno_id", Convert.ToInt32(idTurno)));
