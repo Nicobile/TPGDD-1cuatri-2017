@@ -857,6 +857,7 @@ namespace UberFrba
               + filtro);
         }
 
+
         /* Automovil */
 
         public DataTable SelectAutomovilParaFiltro()
@@ -871,7 +872,20 @@ namespace UberFrba
               , "a.auto_id = p.auto_id AND c.chofer_id = p.chofer_id " + filtro + "ORDER BY 'Auto N°'");
         }
 
+        public DataTable ObtenerTurnosHabilitadosAutmovilParaRegistroViaje(int idAutomovil)
+        {
 
+            DataSet turnosAutomovil = new DataSet();
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            parametros = new List<SqlParameter>();
+            parametros.Clear();
+            parametros.Add(new SqlParameter("@idAutomovil", idAutomovil));
+            command = QueryBuilder.Instance.build("SELECT t.turno_id 'Turno N°',t.turno_hora_inicio 'Hora Inicio',t.turno_hora_fin 'Hora Fin',t.turno_descripcion 'Descripcion',t.turno_valor_Kilometro 'Valor Kilometro',t.turno_precio_base 'Precio Base',(t.turno_habilitado & A.auto_turno_estado) 'Habilitado'FROM  PUSH_IT_TO_THE_LIMIT.Turno t JOIN    PUSH_IT_TO_THE_LIMIT.AutoporTurno A ON(T.turno_id=A.turno_id) where t.turno_id IN (SELECT turno_id FROM PUSH_IT_TO_THE_LIMIT.AutoporTurno WHERE auto_id=@idAutomovil) AND auto_id=@idAutomovil AND auto_turno_estado=1 AND t.turno_habilitado=1", parametros);
+            adapter.SelectCommand = command;
+            adapter.Fill(turnosAutomovil);
+            return turnosAutomovil.Tables[0];
+
+        }
 
 
 

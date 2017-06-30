@@ -31,13 +31,13 @@ namespace UberFrba.Login
             //Validamos que ingrese usuario y contraseña
             if (this.textBoxUsuario.Text == "")
             {
-                MessageBox.Show("Debe ingresar un usuario");
+                MessageBox.Show("Debe ingresar un usuario","Error en el login", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             if (this.textBoxContaseña.Text == "")
             {
-                MessageBox.Show("Debe ingresar una contraseña");
+                MessageBox.Show("Debe ingresar una contraseña", "Error en el login", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -57,7 +57,8 @@ namespace UberFrba.Login
             //Chequea el ingreso
             if (QueryHelper.Instance.readFrom(reader))
             {
-                MessageBox.Show("Bienvenido " + reader["usuario_name"] + "!");
+                 //MessageBox.Show("Bienvenido " + reader["usuario_name"] + "!");
+                 MessageBox.Show("Bienvenido " + reader["usuario_name"] + "!", "Bienvenido", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 UsuarioSesion.Usuario.nombre = (String)reader["usuario_name"];
                 UsuarioSesion.Usuario.id = (Int32)reader["usuario_id"];

@@ -87,14 +87,6 @@ namespace UberFrba.Listado_Estadistico
             new MenuPrincipal().ShowDialog();
             this.Close();
         }
-   
-        
-       
-     
- 
-
-
-  
 
     }
 }

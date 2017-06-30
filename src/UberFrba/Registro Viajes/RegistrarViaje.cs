@@ -118,17 +118,10 @@ namespace UberFrba.Registro_Viajes
         }
 
 
-
-
-
-
-
-
-
         private void CargarComboBoxTurnosDeAutomovil(int idAutomovilSeleccionado)
         {
-            comboBox_TurnosAutmovilSeleccionado.Items.Clear(); 
-            DataTable turnosAutomovil = mapper.ObtenerTurnosHabilitadosAutmovil(idAutomovilSeleccionado);
+            comboBox_TurnosAutmovilSeleccionado.Items.Clear();
+            DataTable turnosAutomovil = mapper.ObtenerTurnosHabilitadosAutmovilParaRegistroViaje(idAutomovilSeleccionado);
 
 
             foreach (DataRow fila in turnosAutomovil.Rows)
