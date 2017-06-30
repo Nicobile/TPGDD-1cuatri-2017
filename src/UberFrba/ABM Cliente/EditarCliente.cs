@@ -126,17 +126,17 @@ namespace UberFrba.ABM_Cliente
                 MessageBox.Show("Datos mal ingresados en: " + exception.Message);
                 return;
             }
-            catch (ClienteYaExisteException exception)
+            catch (ClienteYaExisteException )
             {
                 MessageBox.Show("El documento ya existe");
                 return;
             }
-            catch (TelefonoYaExisteException exception)
+            catch (TelefonoYaExisteException)
             {
                 MessageBox.Show("El telefono ya existe");
                 return;
             }
-            catch (FechaInvalidaException exception)
+            catch (FechaInvalidaException )
             {
                 MessageBox.Show("Fecha no valida");
                 return;
@@ -147,7 +147,7 @@ namespace UberFrba.ABM_Cliente
                 {
                     case 2627: MessageBox.Show("El DNI ya se encuentra registrado", "DNI Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Error); //Violacion de restriccion UNIQUE 
                         return;
-                        break;
+                     
                     case 8114: MessageBox.Show("Error de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); break; //ERROR de conversion de datos
                 }
             }

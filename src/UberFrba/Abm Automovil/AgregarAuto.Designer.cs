@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AgregarAuto));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBox_Turno = new System.Windows.Forms.ComboBox();
-            this.textBox_Chofer = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox_Patente = new System.Windows.Forms.TextBox();
@@ -44,14 +43,15 @@
             this.button_Cancelar = new System.Windows.Forms.Button();
             this.button_Limpiar = new System.Windows.Forms.Button();
             this.button_Guardar = new System.Windows.Forms.Button();
+            this.combo_Chofer = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Wheat;
+            this.groupBox1.Controls.Add(this.combo_Chofer);
             this.groupBox1.Controls.Add(this.comboBox_Turno);
-            this.groupBox1.Controls.Add(this.textBox_Chofer);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.textBox_Patente);
@@ -76,13 +76,6 @@
             this.comboBox_Turno.Name = "comboBox_Turno";
             this.comboBox_Turno.Size = new System.Drawing.Size(271, 21);
             this.comboBox_Turno.TabIndex = 23;
-            // 
-            // textBox_Chofer
-            // 
-            this.textBox_Chofer.Location = new System.Drawing.Point(91, 134);
-            this.textBox_Chofer.Name = "textBox_Chofer";
-            this.textBox_Chofer.Size = new System.Drawing.Size(271, 20);
-            this.textBox_Chofer.TabIndex = 22;
             // 
             // label4
             // 
@@ -191,6 +184,15 @@
             this.button_Guardar.UseVisualStyleBackColor = true;
             this.button_Guardar.Click += new System.EventHandler(this.button_Guardar_Click);
             // 
+            // combo_Chofer
+            // 
+            this.combo_Chofer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.combo_Chofer.FormattingEnabled = true;
+            this.combo_Chofer.Location = new System.Drawing.Point(91, 126);
+            this.combo_Chofer.Name = "combo_Chofer";
+            this.combo_Chofer.Size = new System.Drawing.Size(271, 21);
+            this.combo_Chofer.TabIndex = 24;
+            // 
             // AgregarAuto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -222,7 +224,6 @@
         private System.Windows.Forms.TextBox textBox_Modelo;
         private System.Windows.Forms.TextBox textBox_Patente;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox_Chofer;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label14;
@@ -230,6 +231,7 @@
         private System.Windows.Forms.Button button_Limpiar;
         private System.Windows.Forms.Button button_Guardar;
         private System.Windows.Forms.ComboBox comboBox_Turno;
+        private System.Windows.Forms.ComboBox combo_Chofer;
 
     }
 }

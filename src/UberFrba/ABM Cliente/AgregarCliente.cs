@@ -54,7 +54,7 @@ namespace UberFrba.ABM_Cliente
             String nombre = textBox_Nombre.Text;
             String apellido = textBox_Apellido.Text;
             String numeroDeDocumento = textBox_DNI.Text;
-            MessageBox.Show(numeroDeDocumento);
+            MessageBox.Show("¿Es correcto el DNI"+numeroDeDocumento+"?");
             DateTime fechaDeNacimiento;
             DateTime.TryParse(textBox_FechaDeNacimiento.Text, out fechaDeNacimiento);
             String mail = textBox_Mail.Text;
@@ -68,11 +68,7 @@ namespace UberFrba.ABM_Cliente
             try
             {
                 Clientes cliente = new Clientes();
-                Usuarios usuario = new Usuarios();
-
-             
-                
-                
+                Usuarios usuario = new Usuarios();     
            
                 
                 cliente.SetNombre(nombre);
@@ -101,17 +97,17 @@ namespace UberFrba.ABM_Cliente
                 MessageBox.Show("Datos mal ingresados en: " + exception.Message);
                 return;
             }
-            catch (ClienteYaExisteException exception)
+            catch (ClienteYaExisteException )
             {
                 MessageBox.Show("El documento ya existe");
                 return;
             }
-            catch (TelefonoYaExisteException exception)
+            catch (TelefonoYaExisteException )
             {
                 MessageBox.Show("El telefono ya existe");
                 return;
             }
-            catch (FechaInvalidaException exception)
+            catch (FechaInvalidaException )
             {
                 MessageBox.Show("Fecha no valida");
                 return;
@@ -123,7 +119,7 @@ namespace UberFrba.ABM_Cliente
                 {
                     case 2627: MessageBox.Show("El DNI ya se encuentra registrado", "DNI Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Error); //Violacion de restriccion UNIQUE 
                         return;
-                        break;
+                  
                     case 8114: MessageBox.Show("Error de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); break; //ERROR de conversion de datos
                 }
             }

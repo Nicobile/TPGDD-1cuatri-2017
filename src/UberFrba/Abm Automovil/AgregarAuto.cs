@@ -44,7 +44,26 @@ namespace UberFrba.Abm_Automovil
         {
             cargarComboboxMarca();
             CargarComboBoxTurno();
+            CargarComboBoxChoferes();
 
+        }
+
+       
+
+
+
+        private void CargarComboBoxChoferes()
+        {
+
+            DataTable dniChoferes = mapper.SelectDataTable("chofer_dni", "PUSH_IT_TO_THE_LIMIT.Chofer", " chofer_id IN (SELECT chofer_id FROM PUSH_IT_TO_THE_LIMIT.ChoferporAuto  WHERE auto_chofer_estado=0)");
+
+
+            foreach (DataRow fila in dniChoferes.Rows)
+            {
+                string chofer_dni = fila["chofer_dni"].ToString();
+                combo_Chofer.Items.Add(chofer_dni);
+
+            }
 
         }
 
@@ -69,7 +88,7 @@ namespace UberFrba.Abm_Automovil
             //String Chofer = textBox_Chofer.Text;
             //String IDTurno = comboBox_Turno.Text.Substring(12,1);
             //MessageBox.Show(IDTurno);
-            String DniChofer = textBox_Chofer.Text;
+            String DniChofer = combo_Chofer.Text;
 
            
 
@@ -133,7 +152,7 @@ namespace UberFrba.Abm_Automovil
                     case 51005: MessageBox.Show(error.Message+" para agregarlo ingresarlo desmarcar el casillero de Habilitado", "Coche activo ya asignado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         mapper.EliminarAutoFisicamenteDelaBase(idAuto, "Auto");//esto es para eliminar el auto que se agrego arriba por que a pesar de que falle al agregar AutoChofer al al auto lo agrega
                         return;
-                        break;
+                     
 
                 }
             }
@@ -151,7 +170,7 @@ namespace UberFrba.Abm_Automovil
             textBox_Patente.Text = "";
             comboBox_Turno.Items.Clear();
             CargarComboBoxTurno();
-            textBox_Chofer.Text = "";
+            combo_Chofer.Text = "";
 
         }
 

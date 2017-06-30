@@ -121,6 +121,8 @@
             this.textBox_HoraFin.Name = "textBox_HoraFin";
             this.textBox_HoraFin.Size = new System.Drawing.Size(250, 20);
             this.textBox_HoraFin.TabIndex = 3;
+            this.textBox_HoraFin.Tag = "";
+            this.textBox_HoraFin.Text = "Ingrese la hora en formato hh";
             // 
             // label2
             // 
@@ -137,6 +139,7 @@
             this.textBox_HoraInicio.Name = "textBox_HoraInicio";
             this.textBox_HoraInicio.Size = new System.Drawing.Size(250, 20);
             this.textBox_HoraInicio.TabIndex = 1;
+            this.textBox_HoraInicio.Text = "Ingrese la hora en formato hh";
             // 
             // label1
             // 

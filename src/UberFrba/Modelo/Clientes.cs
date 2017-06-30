@@ -71,6 +71,7 @@ namespace UberFrba.Modelo
         {
             if (telefono == "")
                 throw new CampoVacioException("Numero de telefono");
+           
             if (!esNumero(telefono))
                 throw new FormatoInvalidoException("Numero de telefono. Ingrese todos los numeros seguidos.");
             this.telefono = Convert.ToInt32(telefono);
