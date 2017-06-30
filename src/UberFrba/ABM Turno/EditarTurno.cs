@@ -99,14 +99,19 @@ namespace UberFrba.ABM_Turno
                 switch (error.Number)
                 {
                     case 51000: MessageBox.Show("El turno ingresado se superpone con otro", "Turno Superpuesto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                         break;
                     case 51001: MessageBox.Show("El turno ingresado se superpone con otro", "Turno Superpuesto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                         break;
                     case 51002: MessageBox.Show("El turno ingresado ya existe y esta Activo", "Turno Existente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                         break;
                     case 51003: MessageBox.Show("El turno ingresado ya existe y esta Deshabilitado", "Turno Existente Deshabilitado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                         break;
                     case 51004: MessageBox.Show("El horario ingresado es mayor a un dia o es invalido", "Turno Horario Invalido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                         break;
                 }
             }
