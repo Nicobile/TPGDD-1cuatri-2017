@@ -32,27 +32,31 @@ namespace UberFrba.Listado_Estadistico
 
         private void button1_Click(object sender, EventArgs e)
         {
+            try
+            {
+
+            if (SeleccionEstadistica.Text == "") 
+            {
+                throw new CampoVacioException("Estadistica");
             
+            }
+            if (seleccionTrimestre.Text == "") 
+            {
+                throw new CampoVacioException("Trimestre");
+            
+            }
+
+
             String funcion = this.getTipoEstadistica();
             int trimestre = this.getTrimestre();
-            String error = errorEnCampo(trimestre,funcion);
-            
-                
-            if (error==""){
 
-               
-                    listado.DataSource = mapper.AplicarEstadistica(seleccionAño.Value.Year, trimestre, funcion);     
-               
+            listado.DataSource = mapper.AplicarEstadistica(seleccionAño.Value.Year, trimestre, funcion);
             }
-            else {
-                MessageBox.Show(error, "Faltan completar campos", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            } 
-        }
-        private String errorEnCampo(int trimestre, String estadistica){
-            String error = "";
-            if (trimestre==-1) { error+="-Debe ingresar un trimestre\n";}
-            if (estadistica ==null) { error += "-Debe ingresar una estadistica\n"; }
-            return error;
+            catch (CampoVacioException exception)
+            {
+                MessageBox.Show("Falta completar campo: " + exception.Message);
+                return;
+            }
         }
 
         private int getTrimestre()
@@ -86,6 +90,36 @@ namespace UberFrba.Listado_Estadistico
             this.Hide();
             new MenuPrincipal().ShowDialog();
             this.Close();
+        }
+
+        private void button_Limpiar_Click(object sender, EventArgs e)
+        {
+            SeleccionEstadistica.Items.Clear();
+            CargarSeleccionEstadistica();
+            seleccionTrimestre.Items.Clear();
+            CargarSeleccionTrimestre();
+            listado.DataSource = null;
+            DateTime FECHA_ACTUAL = DateTime.Today;
+            seleccionAño.MaxDate = FECHA_ACTUAL;// para que no se puedan hacer rendiciones mas alla del dia de hoy
+            seleccionAño.Value = FECHA_ACTUAL;
+           
+            
+        }
+
+        public void CargarSeleccionEstadistica() { 
+
+           SeleccionEstadistica.Items.Add("Choferes con mayor recaudación");
+           SeleccionEstadistica.Items.Add("Choferes que realizaron viajes más largos");
+           SeleccionEstadistica.Items.Add("Clientes de mayor consumo");
+           SeleccionEstadistica.Items.Add("Clientes que viajaron mayor cantidad de veces en un mismo auto");     
+        }
+
+        public void CargarSeleccionTrimestre()
+        {
+            seleccionTrimestre.Items.Add("Primer trimestre");
+            seleccionTrimestre.Items.Add("Segundo trimestre");
+            seleccionTrimestre.Items.Add("Tercer trimestre");
+            seleccionTrimestre.Items.Add("Cuarto trimestre");
         }
 
     }
