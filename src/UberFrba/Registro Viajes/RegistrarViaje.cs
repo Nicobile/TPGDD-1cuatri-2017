@@ -155,12 +155,12 @@ namespace UberFrba.Registro_Viajes
             TimeSpan horarioFin = horaFin.Value.TimeOfDay;
             String DNIChofer = comboBox_chofer.Text;
             String PatenteAuto = textBox_Automovil.Text;
-            String idTurnoSeleccionado = this.obtenerIdTurnoaPartirDeCombobox(comboBox_TurnosAutmovilSeleccionado.Text);
+          
 
             //Crear RegistroViaje
             try
             {
-
+                String idTurnoSeleccionado = this.obtenerIdTurnoaPartirDeCombobox(comboBox_TurnosAutmovilSeleccionado.Text);
 
                 RegistroViaje registroViaje = new RegistroViaje();
                 registroViaje.SetIdChofer(DNIChofer);

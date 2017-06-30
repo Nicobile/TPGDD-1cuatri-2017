@@ -149,10 +149,13 @@ namespace UberFrba.Abm_Automovil
 
                 switch (error.Number)
                 {
-                    case 51005: MessageBox.Show(error.Message+" para agregarlo ingresarlo desmarcar el casillero de Habilitado", "Coche activo ya asignado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    case 51005: MessageBox.Show(error.Message + " para agregarlo ingresarlo desmarcar el casillero de Habilitado", "Coche activo ya asignado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         mapper.EliminarAutoFisicamenteDelaBase(idAuto, "Auto");//esto es para eliminar el auto que se agrego arriba por que a pesar de que falle al agregar AutoChofer al al auto lo agrega
                         return;
-                     
+
+                    case 2627: MessageBox.Show("La patente ya se encuentra registrada", "Patente Invalida", MessageBoxButtons.OK, MessageBoxIcon.Error); //Violacion de restriccion UNIQUE 
+                        return;
+
 
                 }
             }
