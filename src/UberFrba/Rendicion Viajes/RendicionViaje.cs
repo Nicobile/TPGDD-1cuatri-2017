@@ -62,6 +62,12 @@ namespace UberFrba.Rendicion_Viajes
 
         private void button_Limpiar_Click(object sender, EventArgs e)
         {
+            LimpiarDatos();
+        }
+
+
+        public void LimpiarDatos() 
+        {
             textBox_Fecha.Text = "";
             comboBox_chofer.Items.Clear();
             this.CargarComboBoxChoferes();
@@ -69,6 +75,7 @@ namespace UberFrba.Rendicion_Viajes
             this.CargarComboBoxTurnos();
             textBox_importe.Text = "";
         }
+
 
         private void button_Cancelar_Click(object sender, EventArgs e)
         {
@@ -148,6 +155,15 @@ namespace UberFrba.Rendicion_Viajes
                 MessageBox.Show("Falta completar campo: " + exception.Message);
                 return;
             }
+            catch (NoHayViajesException exception)
+            {
+                MessageBox.Show(exception.Message);
+                return;
+            }
+
+
+
+            
         
         }
 
@@ -177,12 +193,22 @@ namespace UberFrba.Rendicion_Viajes
        
         private void cargarTurnos()
         {
+
+            try
+            {
                 String DNIChofer = this.obtenerDNIaPartirDetextBox(comboBox_chofer.Text);
                 int idChofer = mapper.obtenerIdChoferApartirDelDNI(DNIChofer);
-                this.ideTurno = this.obtenerIdTurnoaPartirDeCombobox(comboBox_Turnos.Text);       
+                this.ideTurno = this.obtenerIdTurnoaPartirDeCombobox(comboBox_Turnos.Text);
                 dataGridView_Viajes_Rendidos.DataSource = mapper.SelectDataTableRegistroViajeparaRendi(textBox_Fecha.Text, idChofer, ideTurno);
                 OcultarColumnasQueNoDebenVerse();
                 textBox_importe.Text = mapper.TotalRendicion(textBox_Fecha.Text, idChofer, ideTurno);
+            }
+            catch (CampoVacioException exception)
+            {
+                MessageBox.Show("Falta completar campo: " + exception.Message);
+                LimpiarDatos();               
+                return;
+            }
         }
 
         private void comboBox_Turnos_SelectedIndexChanged(object sender, EventArgs e)

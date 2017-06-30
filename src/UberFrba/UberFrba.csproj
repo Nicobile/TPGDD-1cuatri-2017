@@ -211,6 +211,7 @@
     <Compile Include="Exceptions\ExisteChoferAutomovilHabilitadoException.cs" />
     <Compile Include="Exceptions\FechaInvalidaException.cs" />
     <Compile Include="Exceptions\FormatoInvalidoException.cs" />
+    <Compile Include="Exceptions\NoHayViajesException.cs" />
     <Compile Include="Exceptions\PatenteAutomovilInexistente.cs" />
     <Compile Include="Exceptions\TelefonoYaExisteException.cs" />
     <Compile Include="Exceptions\TurnoInexistenteException.cs" />

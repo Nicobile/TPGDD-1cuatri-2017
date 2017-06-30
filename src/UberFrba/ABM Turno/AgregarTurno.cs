@@ -74,75 +74,21 @@ namespace UberFrba.ABM_Turno
                 switch (error.Number)
                 {
                     case 51000: MessageBox.Show("El turno ingresado se superpone con otro", "Turno Superpuesto", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    case 51001: MessageBox.Show("El turno ingresado se superpone con otro", "Turno Superpuesto", MessageBoxButtons.OK, MessageBoxIcon.Error); 
-                        break;
+                        return;
+                    case 51001: MessageBox.Show("El turno ingresado se superpone con otro", "Turno Superpuesto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                     case 51002: MessageBox.Show("El turno ingresado ya existe y esta Activo", "Turno Existente", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
+                        return;
                     case 51003: MessageBox.Show("El turno ingresado ya existe y esta Deshabilitado", "Turno Existente Deshabilitado", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
+                        return;
                     case 51004: MessageBox.Show("El horario ingresado es mayor a un dia o es invalido", "Turno Horario Invalido", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
+                        return;
                 }
             }
     
 
-          /*Excepciones no creadas, hay que verlo tambien, realmente quiero estar muerto*/
-
-          /*  catch (CuitYaExisteException exceptionCuit)
-            {
-                MessageBox.Show("Cuit ya existe");
-                return;
-            }                             
-            catch (RazonSocialYaExisteException exceptionRazonSocial)
-            {
-                MessageBox.Show("RazonSocial ya existe");
-                return;
-            } */
- 
-
-            // Si al turno lo crea el admin, crea un nuevo usuario predeterminado.
-   /*         if (idUsuario == 0)
-            {
-                idUsuario = CrearUsuario();
-                Boolean resultado = mapper.AsignarUsuarioAChofer(idChofer, idUsuario);
-                if (resultado) MessageBox.Show("El usuario fue creado correctamente");
-            }
-
-            mapper.AsignarRolAUsuario(this.idUsuario, "Chofer");
-            */
             VolverAlMenu();
         }
-   /*     private int CrearUsuario()
-        {
-            if (username == "choferCreadoPorAdmin")
-            {
-                return mapper.CrearUsuario(); //Se crean con los parametros default
-            }
-            else
-            {
-                return mapper.CrearUsuarioConValores(username, contrasena); //Si es por registro de usuario, segun los parametros dados
-            }
-        }
-    */
-
-       /* private void CargarRubros()
-        {
-            string query = "SELECT rubro_id, rubro_desc_larga from NET_A_CERO.Rubros";
-
-            SqlCommand cmd = new SqlCommand(query, ConnectionManager.Instance.getConnection());
-
-            SqlDataAdapter data_adapter = new SqlDataAdapter(cmd);
-            DataTable rubros = new DataTable();
-            data_adapter.Fill(rubros);
-
-            comboBox_Direccion.ValueMember = "rubro_id";
-            comboBox_Direccion.DisplayMember = "rubro_desc_larga";
-            comboBox_Direccion.DataSource = rubros;
-            comboBox_Direccion.SelectedIndex = -1;
-        }
-        */
-               
 
         private void VolverAlMenu()
         {

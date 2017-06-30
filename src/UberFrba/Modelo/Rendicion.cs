@@ -74,7 +74,15 @@ namespace UberFrba.Modelo
 
         public void SetImporteTotalRendicion(String TotalRendicion)
         {
-            this.importeTotalRendicion = Convert.ToSingle(TotalRendicion);
+            if (TotalRendicion == "")
+            {
+
+                throw new NoHayViajesException("No posee viajes registrados en la fecha");
+            }
+            else
+            {
+                this.importeTotalRendicion = Convert.ToSingle(TotalRendicion);
+            }
         }
 
         public Double GetImporteTotalRendicion()
