@@ -157,16 +157,10 @@ namespace UberFrba.Abm_Automovil
                 
                 this.SetIdChofer(DniChofer);
 
-                if (TurnoSeleccionado != "Ninguno" && TurnoSeleccionado != "")
+                if (TurnoSeleccionado != "Ninguno" )
                 {
                     String IDTurno = this.obtenerIdTurnoaPartirDeCombobox(comboBox_Turno.Text);
                     this.SetIdTurno(IDTurno);
-                }
-                else
-                {
-
-                    throw new CampoVacioException("Turno , si no desea agregar un turno seleccione ninguno");
-
                 }
 
                 //pudoModificar = mapper.Modificar(idAutomovil, auto); DEJAR COMENTADO
@@ -323,7 +317,7 @@ namespace UberFrba.Abm_Automovil
         {
             if (turno == "")
             {
-                throw new CampoVacioException("Turno");
+                throw new CampoVacioException("Turno , si no desea agregar un turno seleccione Ninguno");
             }
             string[] turnoSeparado1;
             string[] turnoSeparado2;
