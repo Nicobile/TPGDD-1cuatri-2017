@@ -100,7 +100,7 @@ namespace UberFrba.ABM_Rol
             parametros.Add(new SqlParameter("@rol", rolAEditar));
 
             String consulta = "SELECT COUNT(DISTINCT rol_nombre) FROM PUSH_IT_TO_THE_LIMIT.Rol WHERE rol_nombre = @rol and rol_estado = 1";
-            int estadoRol = (int)QueryBuilder.Instance.build(consulta, parametros).ExecuteScalar();
+            int estadoRol = (int)ConstructorQuery.Instance.build(consulta, parametros).ExecuteScalar();
 
             if (estadoRol == 1)
             {
@@ -117,7 +117,7 @@ namespace UberFrba.ABM_Rol
             DataSet funcionalidades = new DataSet();
             SqlDataAdapter adapter = new SqlDataAdapter();
             parametros = new List<SqlParameter>();
-            command = QueryBuilder.Instance.build("SELECT DISTINCT funcionalidad_descripcion FROM PUSH_IT_TO_THE_LIMIT.Funcionalidad", parametros);
+            command = ConstructorQuery.Instance.build("SELECT DISTINCT funcionalidad_descripcion FROM PUSH_IT_TO_THE_LIMIT.Funcionalidad", parametros);
             adapter.SelectCommand = command;
             adapter.Fill(funcionalidades);
             checkedListBoxFuncionalidades.DataSource = funcionalidades.Tables[0].DefaultView;
@@ -169,7 +169,7 @@ namespace UberFrba.ABM_Rol
             parametros.Add(new SqlParameter("@nombre_nuevo", nuevoNombreRol));
 
             String queryUpdateRol = "UPDATE PUSH_IT_TO_THE_LIMIT.Rol SET rol_nombre = @nombre_nuevo WHERE rol_nombre = @nombre_viejo";
-            QueryBuilder.Instance.build(queryUpdateRol, parametros).ExecuteNonQuery();
+            ConstructorQuery.Instance.build(queryUpdateRol, parametros).ExecuteNonQuery();
             
             MessageBox.Show("El rol " + rolAEditar + " fue renombrado como " + nuevoNombreRol);            
         }
@@ -191,7 +191,7 @@ namespace UberFrba.ABM_Rol
 
                     String queryRolXFuncionalidad = "INSERT INTO PUSH_IT_TO_THE_LIMIT.RolporFunciones(funcionalidad_id, rol_id) VALUES ((SELECT f.funcionalidad_id FROM PUSH_IT_TO_THE_LIMIT.Funcionalidad f WHERE f.funcionalidad_descripcion = @funcionalidad), (SELECT r.rol_id FROM PUSH_IT_TO_THE_LIMIT.Rol r WHERE r.rol_nombre = @rol))";
 
-                    QueryBuilder.Instance.build(queryRolXFuncionalidad, parametros).ExecuteNonQuery();
+                    ConstructorQuery.Instance.build(queryRolXFuncionalidad, parametros).ExecuteNonQuery();
                 }
             }
         }
@@ -203,7 +203,7 @@ namespace UberFrba.ABM_Rol
             parametros.Add(new SqlParameter("@funcionalidad", funcionalidad));
 
             String queryCantidadRolXFuncionalidad = "SELECT COUNT(*) FROM PUSH_IT_TO_THE_LIMIT.RolporFunciones rxf WHERE rxf.funcionalidad_id = (SELECT f.funcionalidad_id FROM PUSH_IT_TO_THE_LIMIT.Funcionalidad f WHERE f.funcionalidad_descripcion = @funcionalidad) AND rxf.rol_id = (SELECT r.rol_id FROM PUSH_IT_TO_THE_LIMIT.Rol r WHERE r.rol_nombre = @rol)";
-            int tieneLaFuncionalidad = (int)QueryBuilder.Instance.build(queryCantidadRolXFuncionalidad, parametros).ExecuteScalar();
+            int tieneLaFuncionalidad = (int)ConstructorQuery.Instance.build(queryCantidadRolXFuncionalidad, parametros).ExecuteScalar();
 
                 if (tieneLaFuncionalidad == 1)
                 {
@@ -231,7 +231,7 @@ namespace UberFrba.ABM_Rol
 
                     String queryBorrarRolXFuncionalidad = "DELETE PUSH_IT_TO_THE_LIMIT.RolporFunciones WHERE funcionalidad_id = (SELECT f.funcionalidad_id FROM PUSH_IT_TO_THE_LIMIT.Funcionalidad f WHERE f.funcionalidad_descripcion = @funcionalidad) AND rol_id = (SELECT r.rol_id FROM PUSH_IT_TO_THE_LIMIT.Rol r WHERE r.rol_nombre = @rol)";
 
-                    QueryBuilder.Instance.build(queryBorrarRolXFuncionalidad, parametros).ExecuteNonQuery();
+                    ConstructorQuery.Instance.build(queryBorrarRolXFuncionalidad, parametros).ExecuteNonQuery();
                 }
             }
         }
@@ -243,7 +243,7 @@ namespace UberFrba.ABM_Rol
 
             String queryHabilitarRol = "UPDATE PUSH_IT_TO_THE_LIMIT.Rol SET rol_estado = 1 WHERE rol_nombre = @nombre";
 
-            QueryBuilder.Instance.build(queryHabilitarRol, parametros).ExecuteNonQuery();
+            ConstructorQuery.Instance.build(queryHabilitarRol, parametros).ExecuteNonQuery();
         }
                
         

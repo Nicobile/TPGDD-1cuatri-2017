@@ -17,7 +17,7 @@ namespace UberFrba.Rendicion_Viajes
 {
     public partial class RendicionViaje : Form
     {
-        private DBMapper mapper = new DBMapper();
+        private Mapper mapper = new Mapper();
         String ideTurno ;
 
         public RendicionViaje()

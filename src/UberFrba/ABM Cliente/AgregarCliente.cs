@@ -21,7 +21,7 @@ namespace UberFrba.ABM_Cliente
         private IList<SqlParameter> parametros = new List<SqlParameter>();
         private String username;
         private String contrasena;
-        private DBMapper mapper = new DBMapper();
+        private Mapper mapper = new Mapper();
         private int idUsuario;
         private int idCliente;
         private Boolean creadoDesdeRegistrarUsuario;

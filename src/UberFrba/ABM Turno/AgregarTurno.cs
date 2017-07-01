@@ -19,7 +19,7 @@ namespace UberFrba.ABM_Turno
 
         private String username;
         private String contrasena;
-        private DBMapper mapper = new DBMapper();
+        private Mapper mapper = new Mapper();
         private int idTurno;
         private int idUsuario;
 

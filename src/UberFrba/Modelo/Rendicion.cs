@@ -10,7 +10,7 @@ namespace UberFrba.Modelo
 {
     class Rendicion : Objeto, Mapeable
     {
-        private DBMapper mapper = new DBMapper();
+        private Mapper mapper = new Mapper();
         DateTime fechaRendicion;
         int idChofer;
         int idTurno;

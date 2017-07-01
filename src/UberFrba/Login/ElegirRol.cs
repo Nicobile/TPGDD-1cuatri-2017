@@ -15,7 +15,7 @@ namespace UberFrba.Login
     {
         private SqlCommand command { get; set; }
         private IList<SqlParameter> parametros = new List<SqlParameter>();
-        private DBMapper mapper = new DBMapper();
+        private Mapper mapper = new Mapper();
         private int IDUsuario;
 
 

@@ -32,7 +32,7 @@ namespace UberFrba.ABM_Rol
             DataSet funcionalidades = new DataSet();
             SqlDataAdapter adapter = new SqlDataAdapter();
             parametros = new List<SqlParameter>();
-            command = QueryBuilder.Instance.build("SELECT DISTINCT funcionalidad_descripcion FROM PUSH_IT_TO_THE_LIMIT.Funcionalidad", parametros);
+            command = ConstructorQuery.Instance.build("SELECT DISTINCT funcionalidad_descripcion FROM PUSH_IT_TO_THE_LIMIT.Funcionalidad", parametros);
             adapter.SelectCommand = command;
             adapter.Fill(funcionalidades);
             checkedListBoxFuncionalidades.DataSource = funcionalidades.Tables[0].DefaultView;
@@ -52,7 +52,7 @@ namespace UberFrba.ABM_Rol
             String nombreRol = this.textBoxRol.Text;
             parametros.Clear();
             parametros.Add(new SqlParameter("@rol", nombreRol));
-            QueryBuilder.Instance.build(queryRol, parametros).ExecuteNonQuery();
+            ConstructorQuery.Instance.build(queryRol, parametros).ExecuteNonQuery();
 
             foreach (DataRowView funcionalidad in this.checkedListBoxFuncionalidades.CheckedItems)
             {
@@ -62,7 +62,7 @@ namespace UberFrba.ABM_Rol
 
                 String queryRolFuncionalidad = "INSERT INTO PUSH_IT_TO_THE_LIMIT.RolporFunciones(funcionalidad_id, rol_id) VALUES ((SELECT funcionalidad_id FROM PUSH_IT_TO_THE_LIMIT.Funcionalidad WHERE funcionalidad_descripcion = @funcionalidad), (SELECT  rol_id FROM PUSH_IT_TO_THE_LIMIT.Rol WHERE rol_nombre = @rol))";
                                 
-                QueryBuilder.Instance.build(queryRolFuncionalidad, parametros).ExecuteNonQuery();                                
+                ConstructorQuery.Instance.build(queryRolFuncionalidad, parametros).ExecuteNonQuery();                                
             }
             MessageBox.Show("El rol " + nombreRol + " fue creado");
             BorrarDatosIngresados();

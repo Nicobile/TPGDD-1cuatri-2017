@@ -15,7 +15,7 @@ namespace UberFrba.Abm_Automovil
     public partial class TurnosDeUnAutomovil : Form
     {
 
-        private DBMapper mapper = new DBMapper();
+        private Mapper mapper = new Mapper();
         private int idAutomovilTurno;
         private String idAutomovilt;
         private SqlCommand command { get; set; }
@@ -58,7 +58,7 @@ namespace UberFrba.Abm_Automovil
             parametros = new List<SqlParameter>();            
             parametros.Clear();
             parametros.Add(new SqlParameter("@idAutomovil", this.idAutomovilt));
-            command = QueryBuilder.Instance.build("SELECT t.turno_id 'Turno N°',t.turno_hora_inicio 'Hora Inicio',t.turno_hora_fin 'Hora Fin',t.turno_descripcion 'Descripcion',t.turno_valor_Kilometro 'Valor Kilometro',t.turno_precio_base 'Precio Base',(t.turno_habilitado & A.auto_turno_estado) 'Habilitado'FROM  PUSH_IT_TO_THE_LIMIT.Turno t JOIN    PUSH_IT_TO_THE_LIMIT.AutoporTurno A ON(T.turno_id=A.turno_id) where t.turno_id IN (SELECT turno_id FROM PUSH_IT_TO_THE_LIMIT.AutoporTurno WHERE auto_id=@idAutomovil) AND auto_id=@idAutomovil", parametros);
+            command = ConstructorQuery.Instance.build("SELECT t.turno_id 'Turno N°',t.turno_hora_inicio 'Hora Inicio',t.turno_hora_fin 'Hora Fin',t.turno_descripcion 'Descripcion',t.turno_valor_Kilometro 'Valor Kilometro',t.turno_precio_base 'Precio Base',(t.turno_habilitado & A.auto_turno_estado) 'Habilitado'FROM  PUSH_IT_TO_THE_LIMIT.Turno t JOIN    PUSH_IT_TO_THE_LIMIT.AutoporTurno A ON(T.turno_id=A.turno_id) where t.turno_id IN (SELECT turno_id FROM PUSH_IT_TO_THE_LIMIT.AutoporTurno WHERE auto_id=@idAutomovil) AND auto_id=@idAutomovil", parametros);
             adapter.SelectCommand = command;
             adapter.Fill(turnosAutomovil);
             dataGridView_Automovil_Turnos_Actuales.DataSource = turnosAutomovil.Tables[0].DefaultView;

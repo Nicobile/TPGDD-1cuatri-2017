@@ -10,7 +10,7 @@ namespace UberFrba.Modelo
 {
     class Factura : Objeto, Mapeable
     {
-        private DBMapper mapper = new DBMapper();
+        private Mapper mapper = new Mapper();
         DateTime fechaInicioFactura;
         DateTime fechaFinFactura;
         int idCliente;

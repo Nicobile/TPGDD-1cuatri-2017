@@ -15,7 +15,7 @@ namespace UberFrba.Facturacion
     public partial class CrearFacturaCliente : Form
     {
 
-        private DBMapper mapper = new DBMapper();
+        private Mapper mapper = new Mapper();
         public CrearFacturaCliente()
         {
             InitializeComponent();

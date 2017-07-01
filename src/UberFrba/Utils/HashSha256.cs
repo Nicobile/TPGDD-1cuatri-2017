@@ -6,7 +6,7 @@ using System.Text;
 
 namespace UberFrba.Utils
 {
-    class HashSha256
+    class AlgoritmoSha256
     {
         public static String getHash(String password)
         {

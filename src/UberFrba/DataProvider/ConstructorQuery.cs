@@ -7,28 +7,28 @@ using System.Data.SqlClient;
 
 namespace UberFrba.DataProvider
 {
-    class QueryBuilder
+    class ConstructorQuery
     {
 
         /// <summary>
         /// Singleton attribute
         /// </summary>
-        private static QueryBuilder instance;
+        private static ConstructorQuery instance;
 
-        public static QueryBuilder Instance
+        public static ConstructorQuery Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new QueryBuilder();
+                    instance = new ConstructorQuery();
                 }
                 return instance;
             }
         }
 
         private SqlCommand command { get; set; }
-        private ConnectionManager conexion = new ConnectionManager();
+        private AdministradorDeConexion conexion = new AdministradorDeConexion();
 
         public SqlCommand build(string sqlText, IList<SqlParameter> parameters)
         {

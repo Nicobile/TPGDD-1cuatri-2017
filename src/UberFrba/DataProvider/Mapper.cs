@@ -12,7 +12,7 @@ using System.Configuration;
 using System.Windows.Forms;
 namespace UberFrba
 {
-    class DBMapper
+    class Mapper
     {
         private String query;
         private IList<SqlParameter> parametros = new List<SqlParameter>();
@@ -35,7 +35,7 @@ namespace UberFrba
             parametroOutput = new SqlParameter("@id", SqlDbType.Int);
             parametroOutput.Direction = ParameterDirection.Output;
             parametros.Add(parametroOutput);
-            command = QueryBuilder.Instance.build(query, parametros);
+            command = ConstructorQuery.Instance.build(query, parametros);
             command.CommandType = CommandType.StoredProcedure;
             command.ExecuteNonQuery();
             return (int)parametroOutput.Value;
@@ -48,7 +48,7 @@ namespace UberFrba
             parametros = objeto.GetParametros();
             parametros.Add(new SqlParameter("@id", id));
             
-            int filasAfectadas = QueryBuilder.Instance.build(query, parametros).ExecuteNonQuery();
+            int filasAfectadas = ConstructorQuery.Instance.build(query, parametros).ExecuteNonQuery();
             if (filasAfectadas == 1) return true;
             if (filasAfectadas == 2) return true;
             if (filasAfectadas == 3) return true;
@@ -62,7 +62,7 @@ namespace UberFrba
             query = objeto.GetQueryObtener();
             parametros.Clear();
             parametros.Add(new SqlParameter("@id", id));
-            SqlDataReader reader = QueryBuilder.Instance.build(query, parametros).ExecuteReader();
+            SqlDataReader reader = ConstructorQuery.Instance.build(query, parametros).ExecuteReader();
             if (reader.Read())
             {
                 objeto.CargarInformacion(reader);
@@ -84,7 +84,7 @@ namespace UberFrba
                 parametroOutput = new SqlParameter("@usuario_id", SqlDbType.Int);
                 parametroOutput.Direction = ParameterDirection.Output;
                 parametros.Add(parametroOutput);
-                command = QueryBuilder.Instance.build(query, parametros);
+                command = ConstructorQuery.Instance.build(query, parametros);
                 command.CommandType = CommandType.StoredProcedure;
                 command.ExecuteNonQuery();
                 return (int)parametroOutput.Value;
@@ -98,9 +98,9 @@ namespace UberFrba
             parametroOutput = new SqlParameter("@usuario_id", SqlDbType.Int);
             parametroOutput.Direction = ParameterDirection.Output;
             parametros.Add(new SqlParameter("@username", username));
-            parametros.Add(new SqlParameter("@password", HashSha256.getHash(password)));
+            parametros.Add(new SqlParameter("@password", AlgoritmoSha256.getHash(password)));
             parametros.Add(parametroOutput);
-            command = QueryBuilder.Instance.build(query, parametros);
+            command = ConstructorQuery.Instance.build(query, parametros);
             command.CommandType = CommandType.StoredProcedure;
             command.ExecuteNonQuery();
             return (int)parametroOutput.Value;
@@ -111,14 +111,14 @@ namespace UberFrba
 
         public void ActualizarUsuarioyPassword(int idUsuario, String nombre, String password)
         {
-            String contrasenia = HashSha256.getHash(password);
+            String contrasenia = AlgoritmoSha256.getHash(password);
 
             query = "PUSH_IT_TO_THE_LIMIT.pr_usuario_nombre_password";
             parametros.Clear();
             parametros.Add(new SqlParameter("@idUsuario", idUsuario));
             parametros.Add(new SqlParameter("@nombreUsuario", nombre));
             parametros.Add(new SqlParameter("@passwordUsuario", contrasenia));
-            command = QueryBuilder.Instance.build(query, parametros);
+            command = ConstructorQuery.Instance.build(query, parametros);
             command.CommandType = CommandType.StoredProcedure;
             command.ExecuteNonQuery();
         }
@@ -133,7 +133,7 @@ namespace UberFrba
             parametros.Add(new SqlParameter("@FechaInicio", fechaInicio));
             parametros.Add(new SqlParameter("@FechaFin", fechaFin));
             parametros.Add(new SqlParameter("@idCliente", idCliente));
-            command = QueryBuilder.Instance.build(query, parametros);
+            command = ConstructorQuery.Instance.build(query, parametros);
             command.CommandType = CommandType.StoredProcedure;
             command.ExecuteNonQuery();
         }
@@ -149,7 +149,7 @@ namespace UberFrba
             parametros.Add(new SqlParameter("@Fecha", fecha));
             parametros.Add(new SqlParameter("@idChofer", idChofer));
             parametros.Add(new SqlParameter("@idTurno",IDTurno));
-            command = QueryBuilder.Instance.build(query, parametros);
+            command = ConstructorQuery.Instance.build(query, parametros);
             command.CommandType = CommandType.StoredProcedure;
             command.ExecuteNonQuery();
         }
@@ -160,7 +160,7 @@ namespace UberFrba
             parametros.Clear();
             parametros.Add(new SqlParameter("@idTurno",idTurno));
             parametros.Add(new SqlParameter("@idChofer", idCliente));
-            command = QueryBuilder.Instance.build("select viaje_id 'Viaje N°',chofer_id,auto_id,factura_id,T.turno_id,viaje_cantidad_km 'Cantidad Km',rendicion_id,viaje_fecha'Fecha',viaje_hora_inicio'Hora Inicio',viaje_hora_fin'Hora Fin',cliente_id ,'Total Viaje'=CASE WHEN (viaje_cantidad_km * T.turno_valor_kilometro) < T.turno_precio_base THEN T.turno_precio_base ELSE viaje_cantidad_km * T.turno_valor_kilometro	END,T.turno_descripcion 'Turno'	from PUSH_IT_TO_THE_LIMIT.RegistroViaje R JOIN PUSH_IT_TO_THE_LIMIT.Turno T ON(R.turno_id = T.turno_id) WHERE (@idTurno = turno_id) AND  AND factura_id IS NULL AND chofer_id =@idChofer", parametros);
+            command = ConstructorQuery.Instance.build("select viaje_id 'Viaje N°',chofer_id,auto_id,factura_id,T.turno_id,viaje_cantidad_km 'Cantidad Km',rendicion_id,viaje_fecha'Fecha',viaje_hora_inicio'Hora Inicio',viaje_hora_fin'Hora Fin',cliente_id ,'Total Viaje'=CASE WHEN (viaje_cantidad_km * T.turno_valor_kilometro) < T.turno_precio_base THEN T.turno_precio_base ELSE viaje_cantidad_km * T.turno_valor_kilometro	END,T.turno_descripcion 'Turno'	from PUSH_IT_TO_THE_LIMIT.RegistroViaje R JOIN PUSH_IT_TO_THE_LIMIT.Turno T ON(R.turno_id = T.turno_id) WHERE (@idTurno = turno_id) AND  AND factura_id IS NULL AND chofer_id =@idChofer", parametros);
             DataSet datos = new DataSet();
             SqlDataAdapter adapter = new SqlDataAdapter();
             adapter.SelectCommand = command;
@@ -172,7 +172,7 @@ namespace UberFrba
            
           
 
-            SqlCommand command = QueryBuilder.Instance.build("SELECT * From [PUSH_IT_TO_THE_LIMIT]." + funcion + "(@anio, @trimestre)", parametros);
+            SqlCommand command = ConstructorQuery.Instance.build("SELECT * From [PUSH_IT_TO_THE_LIMIT]." + funcion + "(@anio, @trimestre)", parametros);
             
 
             command.Parameters.AddWithValue("@anio", anio);
@@ -193,7 +193,7 @@ namespace UberFrba
             parametros.Clear();            
             parametros.Add(new SqlParameter("@fecha", fecha));
             parametros.Add(new SqlParameter("@idchofer", idchofer));
-            int filasAfectadas = Convert.ToInt32(QueryBuilder.Instance.build(this.query, parametros).ExecuteScalar());
+            int filasAfectadas = Convert.ToInt32(ConstructorQuery.Instance.build(this.query, parametros).ExecuteScalar());
             if (filasAfectadas == 0)
                 return false;
             else
@@ -332,7 +332,7 @@ namespace UberFrba
             query = "UPDATE PUSH_IT_TO_THE_LIMIT." + enDonde + " SET cliente_estado = 0 WHERE cliente_id = @id";
             parametros.Clear();
             parametros.Add(new SqlParameter("@id", id));
-            int filasAfectadas = QueryBuilder.Instance.build(query, parametros).ExecuteNonQuery();
+            int filasAfectadas = ConstructorQuery.Instance.build(query, parametros).ExecuteNonQuery();
             if (filasAfectadas == 1) return true;
             return false;
         }
@@ -342,7 +342,7 @@ namespace UberFrba
             query = "UPDATE PUSH_IT_TO_THE_LIMIT." + enDonde + " SET chofer_estado = 0 WHERE chofer_id = @id";
             parametros.Clear();
             parametros.Add(new SqlParameter("@id", id));
-            int filasAfectadas = QueryBuilder.Instance.build(query, parametros).ExecuteNonQuery();
+            int filasAfectadas = ConstructorQuery.Instance.build(query, parametros).ExecuteNonQuery();
             if (filasAfectadas == 1) return true;
             return false;
         }
@@ -352,7 +352,7 @@ namespace UberFrba
             query = "UPDATE PUSH_IT_TO_THE_LIMIT." + enDonde + " SET turno_habilitado = 0 WHERE turno_id = @id";
             parametros.Clear();
             parametros.Add(new SqlParameter("@id", id));
-            int filasAfectadas = QueryBuilder.Instance.build(query, parametros).ExecuteNonQuery();
+            int filasAfectadas = ConstructorQuery.Instance.build(query, parametros).ExecuteNonQuery();
             if (filasAfectadas == 2)//dejar en dos es la cantidad que retorna la base (lo volvi a poner en 1 por que el triger actualizacion turno no esta funcionando)
             {
                 return true;
@@ -365,7 +365,7 @@ namespace UberFrba
             query = "UPDATE PUSH_IT_TO_THE_LIMIT." + enDonde + " SET auto_estado = 0 WHERE auto_id = @id";
             parametros.Clear();
             parametros.Add(new SqlParameter("@id", id));
-            int filasAfectadas = QueryBuilder.Instance.build(query, parametros).ExecuteNonQuery();
+            int filasAfectadas = ConstructorQuery.Instance.build(query, parametros).ExecuteNonQuery();
             if (filasAfectadas == 1)
             {
                 return true;
@@ -388,7 +388,7 @@ namespace UberFrba
             query = "DELETE PUSH_IT_TO_THE_LIMIT." + enDonde + " WHERE auto_id = @id";
             parametros.Clear();
             parametros.Add(new SqlParameter("@id", id));
-            int filasAfectadas = QueryBuilder.Instance.build(query, parametros).ExecuteNonQuery();
+            int filasAfectadas = ConstructorQuery.Instance.build(query, parametros).ExecuteNonQuery();
             if (filasAfectadas == 1)
             {
                 return true;
@@ -406,7 +406,7 @@ namespace UberFrba
              parametros.Add(new SqlParameter("@fechaInicio", fechaInicio));
              parametros.Add(new SqlParameter("@fechaFin", fechaFin));
              parametros.Add(new SqlParameter("@idCliente", idCliente));
-             command = QueryBuilder.Instance.build("select viaje_id 'Viaje N°',chofer_id,auto_id,factura_id,T.turno_id,viaje_cantidad_km 'Cantidad Km',rendicion_id,viaje_fecha'Fecha',viaje_hora_inicio'Hora Inicio',viaje_hora_fin'Hora Fin',cliente_id ,'Total Viaje'=CASE WHEN (viaje_cantidad_km * T.turno_valor_kilometro) < T.turno_precio_base THEN T.turno_precio_base ELSE viaje_cantidad_km * T.turno_valor_kilometro	END,T.turno_descripcion 'Turno'	from PUSH_IT_TO_THE_LIMIT.RegistroViaje R JOIN PUSH_IT_TO_THE_LIMIT.Turno T ON(R.turno_id = T.turno_id) WHERE viaje_fecha>=@fechaInicio AND viaje_fecha<=@fechaFin AND factura_id IS NULL AND cliente_id =@idCliente", parametros);
+             command = ConstructorQuery.Instance.build("select viaje_id 'Viaje N°',chofer_id,auto_id,factura_id,T.turno_id,viaje_cantidad_km 'Cantidad Km',rendicion_id,viaje_fecha'Fecha',viaje_hora_inicio'Hora Inicio',viaje_hora_fin'Hora Fin',cliente_id ,'Total Viaje'=CASE WHEN (viaje_cantidad_km * T.turno_valor_kilometro) < T.turno_precio_base THEN T.turno_precio_base ELSE viaje_cantidad_km * T.turno_valor_kilometro	END,T.turno_descripcion 'Turno'	from PUSH_IT_TO_THE_LIMIT.RegistroViaje R JOIN PUSH_IT_TO_THE_LIMIT.Turno T ON(R.turno_id = T.turno_id) WHERE viaje_fecha>=@fechaInicio AND viaje_fecha<=@fechaFin AND factura_id IS NULL AND cliente_id =@idCliente", parametros);
              DataSet datos = new DataSet();
              SqlDataAdapter adapter = new SqlDataAdapter();
              adapter.SelectCommand = command;
@@ -423,7 +423,7 @@ namespace UberFrba
             parametros.Add(new SqlParameter("@fecha", fecha));
             parametros.Add(new SqlParameter("@idChofer", idChofer));
             parametros.Add(new SqlParameter("@idTurno", IDTurno));
-            command = QueryBuilder.Instance.build("select viaje_id 'Viaje N°',chofer_id,auto_id,factura_id,T.turno_id,viaje_cantidad_km 'Cantidad Km',rendicion_id,viaje_fecha'Fecha',viaje_hora_inicio'Hora Inicio',viaje_hora_fin'Hora Fin',cliente_id ,'Total Viaje'=CASE WHEN (viaje_cantidad_km * T.turno_valor_kilometro) < T.turno_precio_base THEN T.turno_precio_base ELSE viaje_cantidad_km * T.turno_valor_kilometro	END,T.turno_descripcion 'Turno'	from PUSH_IT_TO_THE_LIMIT.RegistroViaje R JOIN PUSH_IT_TO_THE_LIMIT.Turno T ON R.turno_id = T.turno_id AND R.turno_id = @idTurno AND T.turno_id = @idTurno WHERE viaje_fecha = @fecha AND rendicion_id IS NULL AND chofer_id = @idChofer", parametros);
+            command = ConstructorQuery.Instance.build("select viaje_id 'Viaje N°',chofer_id,auto_id,factura_id,T.turno_id,viaje_cantidad_km 'Cantidad Km',rendicion_id,viaje_fecha'Fecha',viaje_hora_inicio'Hora Inicio',viaje_hora_fin'Hora Fin',cliente_id ,'Total Viaje'=CASE WHEN (viaje_cantidad_km * T.turno_valor_kilometro) < T.turno_precio_base THEN T.turno_precio_base ELSE viaje_cantidad_km * T.turno_valor_kilometro	END,T.turno_descripcion 'Turno'	from PUSH_IT_TO_THE_LIMIT.RegistroViaje R JOIN PUSH_IT_TO_THE_LIMIT.Turno T ON R.turno_id = T.turno_id AND R.turno_id = @idTurno AND T.turno_id = @idTurno WHERE viaje_fecha = @fecha AND rendicion_id IS NULL AND chofer_id = @idChofer", parametros);
             DataSet datos = new DataSet();
             SqlDataAdapter adapter = new SqlDataAdapter();
             adapter.SelectCommand = command;
@@ -449,7 +449,7 @@ namespace UberFrba
             {
                 query = "UPDATE PUSH_IT_TO_THE_LIMIT.Chofer SET chofer_estado = 0 WHERE chofer_id = 8";
             }
-            int filasAfectadas = QueryBuilder.Instance.build(query, parametros).ExecuteNonQuery();
+            int filasAfectadas = ConstructorQuery.Instance.build(query, parametros).ExecuteNonQuery();
                 
             if (filasAfectadas == 1) return true;
             return false;
@@ -462,7 +462,7 @@ namespace UberFrba
             parametros.Add(new SqlParameter("@idTurno", idTurno));
             parametros.Add(new SqlParameter("@estado",estado));
             query = "UPDATE PUSH_IT_TO_THE_LIMIT.AutoporTurno SET auto_turno_estado =@estado WHERE auto_id=@idAutomovil AND turno_id=@idTurno";
-            int filasAfectadas = QueryBuilder.Instance.build(query, parametros).ExecuteNonQuery();
+            int filasAfectadas = ConstructorQuery.Instance.build(query, parametros).ExecuteNonQuery();
 
             if (filasAfectadas == 1) return true;
             return false;
@@ -475,7 +475,7 @@ namespace UberFrba
             parametros.Add(new SqlParameter("@idAutomovil", idAutomovil));
             parametros.Add(new SqlParameter("@idTurno", idTurno));
             query = "SELECT COUNT(*) FROM PUSH_IT_TO_THE_LIMIT.AutoporTurno WHERE auto_id=@idAutomovil AND turno_id=@idTurno";
-            object existe=  QueryBuilder.Instance.build(query, parametros).ExecuteScalar();
+            object existe=  ConstructorQuery.Instance.build(query, parametros).ExecuteScalar();
              existe.ToString();
 
             if (existe.ToString() == "1") return true;
@@ -490,7 +490,7 @@ namespace UberFrba
             parametros.Add(new SqlParameter("@fechaFin", fechaFin));
             parametros.Add(new SqlParameter("@idCliente", idCliente));
             query = "SELECT COUNT(*) FROM (SELECT viaje_id 'Viaje N°',chofer_id,auto_id,factura_id,turno_id,viaje_cantidad_km 'Cantidad Km',rendicion_id,viaje_fecha'Fecha',viaje_hora_inicio'Hora Inicio',viaje_hora_fin'Hora Fin',cliente_id from PUSH_IT_TO_THE_LIMIT.RegistroViaje WHERE viaje_fecha>=@fechaInicio AND viaje_fecha<=@fechaFin AND factura_id IS NULL AND cliente_id =@idCliente) viajes ";
-            object cantidadViajes = QueryBuilder.Instance.build(query, parametros).ExecuteScalar();
+            object cantidadViajes = ConstructorQuery.Instance.build(query, parametros).ExecuteScalar();
               String viajes = cantidadViajes.ToString();
 
             return viajes;
@@ -503,7 +503,7 @@ namespace UberFrba
             parametros.Add(new SqlParameter("@fechaFin", fechaFin));
             parametros.Add(new SqlParameter("@idCliente", idCliente));
             query = "SELECT SUM(VIAJES.[Total Viaje]) FROM (select viaje_id 'Viaje N°',chofer_id,auto_id,factura_id,T.turno_id,viaje_cantidad_km 'Cantidad Km',rendicion_id,viaje_fecha'Fecha',viaje_hora_inicio'Hora Inicio',viaje_hora_fin'Hora Fin',cliente_id ,'Total Viaje'= CASE WHEN (viaje_cantidad_km * T.turno_valor_kilometro) < T.turno_precio_base THEN T.turno_precio_base ELSE viaje_cantidad_km * T.turno_valor_kilometro END from PUSH_IT_TO_THE_LIMIT.RegistroViaje R JOIN PUSH_IT_TO_THE_LIMIT.Turno T ON(R.turno_id = T.turno_id) WHERE viaje_fecha>=@fechaInicio AND viaje_fecha<=@fechaFin AND factura_id IS NULL AND cliente_id =@idCliente) VIAJES";
-            object cantidadViajes = QueryBuilder.Instance.build(query, parametros).ExecuteScalar();
+            object cantidadViajes = ConstructorQuery.Instance.build(query, parametros).ExecuteScalar();
             String viajes = cantidadViajes.ToString();
             return viajes;
         }
@@ -516,7 +516,7 @@ namespace UberFrba
             parametros.Add(new SqlParameter("@idChofer", idChofer));
             parametros.Add(new SqlParameter("@idTurno", IDTurno));
             query = "SELECT (SUM(VIAJES.[Total Viaje]))*0.3 FROM (select viaje_id 'Viaje N°',chofer_id,auto_id,factura_id,T.turno_id,viaje_cantidad_km 'Cantidad Km',rendicion_id,viaje_fecha'Fecha',viaje_hora_inicio'Hora Inicio',viaje_hora_fin'Hora Fin',cliente_id ,'Total Viaje'= CASE WHEN (viaje_cantidad_km * T.turno_valor_kilometro) < T.turno_precio_base THEN T.turno_precio_base ELSE viaje_cantidad_km * T.turno_valor_kilometro END from PUSH_IT_TO_THE_LIMIT.RegistroViaje R JOIN PUSH_IT_TO_THE_LIMIT.Turno T ON(R.turno_id = T.turno_id AND R.turno_id = @idTurno AND T.turno_id = @idTurno) WHERE @fecha = viaje_fecha AND rendicion_id IS NULL AND chofer_id =@idChofer) VIAJES";
-            object cantidadViajes = QueryBuilder.Instance.build(query, parametros).ExecuteScalar();
+            object cantidadViajes = ConstructorQuery.Instance.build(query, parametros).ExecuteScalar();
             String viajes = cantidadViajes.ToString();
             return viajes;
         }
@@ -530,7 +530,7 @@ namespace UberFrba
             parametros.Clear();
             parametros.Add(new SqlParameter("@idChofer", idChofer));
             query = "SELECT auto_patente FROM PUSH_IT_TO_THE_LIMIT.Auto WHERE auto_id = (SELECT auto_id FROM PUSH_IT_TO_THE_LIMIT.ChoferporAuto where chofer_id=@idChofer AND auto_chofer_estado=1)";
-            object patenteAutomovil = QueryBuilder.Instance.build(query, parametros).ExecuteScalar();
+            object patenteAutomovil = ConstructorQuery.Instance.build(query, parametros).ExecuteScalar();
             return patenteAutomovil.ToString();
         }
 
@@ -544,7 +544,7 @@ namespace UberFrba
             parametros.Add(new SqlParameter("@idAutomovil", idAutomovil));
             parametros.Add(new SqlParameter("@idChofer", idChofer));
             query = "SELECT COUNT(*) FROM PUSH_IT_TO_THE_LIMIT.ChoferporAuto WHERE auto_id=@idAutomovil AND chofer_id=@idChofer";
-            object existe = QueryBuilder.Instance.build(query, parametros).ExecuteScalar();
+            object existe = ConstructorQuery.Instance.build(query, parametros).ExecuteScalar();
             existe.ToString();
 
             if (existe.ToString() == "1") return true;
@@ -557,7 +557,7 @@ namespace UberFrba
             parametros.Add(new SqlParameter("@estado", estado));
             parametros.Add(new SqlParameter("@idAutomovil", idAutomovil));
             query = "SELECT COUNT(*) FROM PUSH_IT_TO_THE_LIMIT.ChoferporAuto WHERE  chofer_id=@idChofer AND auto_chofer_estado=@estado AND auto_id <> @idAutomovil";
-            object existe = QueryBuilder.Instance.build(query, parametros).ExecuteScalar();
+            object existe = ConstructorQuery.Instance.build(query, parametros).ExecuteScalar();
             existe.ToString();
 
             if (existe.ToString() == "1") return true;
@@ -572,7 +572,7 @@ namespace UberFrba
             parametros.Add(new SqlParameter("@idChofer", idChofer));
             parametros.Add(new SqlParameter("@estado", estado));
             query = "UPDATE PUSH_IT_TO_THE_LIMIT.ChoferporAuto SET auto_chofer_estado =@estado WHERE auto_id=@idAutomovil AND chofer_id=@idChofer";
-            int filasAfectadas = QueryBuilder.Instance.build(query, parametros).ExecuteNonQuery();
+            int filasAfectadas = ConstructorQuery.Instance.build(query, parametros).ExecuteNonQuery();
 
             if (filasAfectadas == 1) return true;
             return false;
@@ -587,7 +587,7 @@ namespace UberFrba
 
             query = "INSERT INTO PUSH_IT_TO_THE_LIMIT.ChoferporAuto (auto_id,chofer_id) values(@idAutomovil,@idChofer)";
 
-            int filasAfectadas = QueryBuilder.Instance.build(query, parametros).ExecuteNonQuery();
+            int filasAfectadas = ConstructorQuery.Instance.build(query, parametros).ExecuteNonQuery();
             if (filasAfectadas == 1) return true;
             return false;
         }
@@ -634,7 +634,7 @@ namespace UberFrba
             parametros.Clear();
             parametros.Add(new SqlParameter("@idUsuario", idUsuario));
             parametros.Add(new SqlParameter("@idCliente", idCliente));
-            command = QueryBuilder.Instance.build(query, parametros);
+            command = ConstructorQuery.Instance.build(query, parametros);
             int filasAfectadas = command.ExecuteNonQuery();
             if (filasAfectadas == 1) return true;
             return false;
@@ -645,7 +645,7 @@ namespace UberFrba
             parametros.Clear();
             parametros.Add(new SqlParameter("@idUsuario", idUsuario));
             parametros.Add(new SqlParameter("@idChofer", idChofer));
-            command = QueryBuilder.Instance.build(query, parametros);
+            command = ConstructorQuery.Instance.build(query, parametros);
             int filasAfectadas = command.ExecuteNonQuery();
             if (filasAfectadas == 1) return true;
             return false;
@@ -659,7 +659,7 @@ namespace UberFrba
             parametros.Clear();
             parametros.Add(new SqlParameter("@usuario_id", idUsuario));
             parametros.Add(new SqlParameter("@rol_id", idRol));
-            command = QueryBuilder.Instance.build(query, parametros);
+            command = ConstructorQuery.Instance.build(query, parametros);
             command.CommandType = CommandType.StoredProcedure;
             int filasAfectadas = command.ExecuteNonQuery();
             if (filasAfectadas == 1) return true;
@@ -678,7 +678,7 @@ namespace UberFrba
             parametros.Clear();
             parametros.Add(new SqlParameter("@turno_id", idTurno));
             parametros.Add(new SqlParameter("@auto_id", idAuto));
-            command = QueryBuilder.Instance.build(query, parametros);
+            command = ConstructorQuery.Instance.build(query, parametros);
             command.CommandType = CommandType.StoredProcedure;
             int filasAfectadas = command.ExecuteNonQuery();
             if (filasAfectadas == 1) return true;
@@ -692,7 +692,7 @@ namespace UberFrba
             parametros.Clear();
             parametros.Add(new SqlParameter("@chofer_id", idChofer));
             parametros.Add(new SqlParameter("@auto_id", idAuto));
-            command = QueryBuilder.Instance.build(query, parametros);
+            command = ConstructorQuery.Instance.build(query, parametros);
             command.CommandType = CommandType.StoredProcedure;
             int filasAfectadas = command.ExecuteNonQuery();
             if (filasAfectadas == 1) return true;
@@ -708,7 +708,7 @@ namespace UberFrba
             
             query = "INSERT INTO PUSH_IT_TO_THE_LIMIT.AutoporTurno (auto_id,turno_id) values(@idAutomovil,@idTurno)";
 
-            int filasAfectadas = QueryBuilder.Instance.build(query, parametros).ExecuteNonQuery();
+            int filasAfectadas = ConstructorQuery.Instance.build(query, parametros).ExecuteNonQuery();
             if (filasAfectadas == 1) return true;
             return false;
         }
@@ -729,7 +729,7 @@ namespace UberFrba
             query = "SELECT " + que + " FROM PUSH_IT_TO_THE_LIMIT." + deDonde + " WHERE " + param1 + " = @" + param1;
             parametros.Clear();
             parametros.Add(new SqlParameter("@" + param1, param2));
-            return QueryBuilder.Instance.build(query, parametros).ExecuteScalar();
+            return ConstructorQuery.Instance.build(query, parametros).ExecuteScalar();
         }
 
         public Object SelectFromWhere(String que, String deDonde, String param1, Decimal param2)
@@ -737,7 +737,7 @@ namespace UberFrba
             query = "SELECT " + que + " FROM PUSH_IT_TO_THE_LIMIT." + deDonde + " WHERE " + param1 + " = @" + param1;
             parametros.Clear();
             parametros.Add(new SqlParameter("@" + param1, param2));
-            return QueryBuilder.Instance.build(query, parametros).ExecuteScalar();
+            return ConstructorQuery.Instance.build(query, parametros).ExecuteScalar();
         }
 
         public Object SelectFromWhere(String que, String deDonde, String param1, int param2)
@@ -745,13 +745,13 @@ namespace UberFrba
             query = "SELECT " + que + " FROM PUSH_IT_TO_THE_LIMIT." + deDonde + " WHERE " + param1 + " = @" + param1;
             parametros.Clear();
             parametros.Add(new SqlParameter("@" + param1, param2));
-            return QueryBuilder.Instance.build(query, parametros).ExecuteScalar();
+            return ConstructorQuery.Instance.build(query, parametros).ExecuteScalar();
         }
 
         public DataTable SelectDataTable(String que, String deDonde)
         {
             parametros.Clear();
-            command = QueryBuilder.Instance.build("SELECT " + que + " FROM " + deDonde, parametros);
+            command = ConstructorQuery.Instance.build("SELECT " + que + " FROM " + deDonde, parametros);
             DataSet datos = new DataSet();
             SqlDataAdapter adapter = new SqlDataAdapter();
             adapter.SelectCommand = command;
@@ -769,7 +769,7 @@ namespace UberFrba
         {
             parametros.Clear();
             parametros.Add(new SqlParameter("@idUsuario", UsuarioSesion.Usuario.id));
-            command = QueryBuilder.Instance.build("SELECT " + que + " FROM " + deDonde + " WHERE " + condiciones, parametros);
+            command = ConstructorQuery.Instance.build("SELECT " + que + " FROM " + deDonde + " WHERE " + condiciones, parametros);
             command.CommandTimeout = 0;
             DataSet datos = new DataSet();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -787,7 +787,7 @@ namespace UberFrba
             parametros = new List<SqlParameter>();
             parametros.Clear();
             parametros.Add(new SqlParameter("@idAutomovil",idAutomovil));
-            command = QueryBuilder.Instance.build("SELECT t.turno_id 'Turno N°',t.turno_hora_inicio 'Hora Inicio',t.turno_hora_fin 'Hora Fin',t.turno_descripcion 'Descripcion',t.turno_valor_Kilometro 'Valor Kilometro',t.turno_precio_base 'Precio Base',(t.turno_habilitado & A.auto_turno_estado) 'Habilitado'FROM  PUSH_IT_TO_THE_LIMIT.Turno t JOIN    PUSH_IT_TO_THE_LIMIT.AutoporTurno A ON(T.turno_id=A.turno_id) where t.turno_id IN (SELECT turno_id FROM PUSH_IT_TO_THE_LIMIT.AutoporTurno WHERE auto_id=@idAutomovil) AND auto_id=@idAutomovil AND auto_turno_estado=1 ", parametros);
+            command = ConstructorQuery.Instance.build("SELECT t.turno_id 'Turno N°',t.turno_hora_inicio 'Hora Inicio',t.turno_hora_fin 'Hora Fin',t.turno_descripcion 'Descripcion',t.turno_valor_Kilometro 'Valor Kilometro',t.turno_precio_base 'Precio Base',(t.turno_habilitado & A.auto_turno_estado) 'Habilitado'FROM  PUSH_IT_TO_THE_LIMIT.Turno t JOIN    PUSH_IT_TO_THE_LIMIT.AutoporTurno A ON(T.turno_id=A.turno_id) where t.turno_id IN (SELECT turno_id FROM PUSH_IT_TO_THE_LIMIT.AutoporTurno WHERE auto_id=@idAutomovil) AND auto_id=@idAutomovil AND auto_turno_estado=1 ", parametros);
             adapter.SelectCommand = command;
             adapter.Fill(turnosAutomovil);
             return turnosAutomovil.Tables[0];
@@ -801,7 +801,7 @@ namespace UberFrba
             SqlDataAdapter adapter = new SqlDataAdapter();
             parametros = new List<SqlParameter>();
             parametros.Clear();
-            command = QueryBuilder.Instance.build("SELECT cliente_dni,cliente_nombre,cliente_apellido FROM PUSH_IT_TO_THE_LIMIT.Cliente WHERE cliente_estado=1", parametros);
+            command = ConstructorQuery.Instance.build("SELECT cliente_dni,cliente_nombre,cliente_apellido FROM PUSH_IT_TO_THE_LIMIT.Cliente WHERE cliente_estado=1", parametros);
             adapter.SelectCommand = command;
             adapter.Fill(turnosAutomovil);
             return turnosAutomovil.Tables[0];
@@ -879,7 +879,7 @@ namespace UberFrba
             parametros = new List<SqlParameter>();
             parametros.Clear();
             parametros.Add(new SqlParameter("@idAutomovil", idAutomovil));
-            command = QueryBuilder.Instance.build("SELECT t.turno_id 'Turno N°',t.turno_hora_inicio 'Hora Inicio',t.turno_hora_fin 'Hora Fin',t.turno_descripcion 'Descripcion',t.turno_valor_Kilometro 'Valor Kilometro',t.turno_precio_base 'Precio Base',(t.turno_habilitado & A.auto_turno_estado) 'Habilitado'FROM  PUSH_IT_TO_THE_LIMIT.Turno t JOIN    PUSH_IT_TO_THE_LIMIT.AutoporTurno A ON(T.turno_id=A.turno_id) where t.turno_id IN (SELECT turno_id FROM PUSH_IT_TO_THE_LIMIT.AutoporTurno WHERE auto_id=@idAutomovil) AND auto_id=@idAutomovil AND auto_turno_estado=1 AND t.turno_habilitado=1", parametros);
+            command = ConstructorQuery.Instance.build("SELECT t.turno_id 'Turno N°',t.turno_hora_inicio 'Hora Inicio',t.turno_hora_fin 'Hora Fin',t.turno_descripcion 'Descripcion',t.turno_valor_Kilometro 'Valor Kilometro',t.turno_precio_base 'Precio Base',(t.turno_habilitado & A.auto_turno_estado) 'Habilitado'FROM  PUSH_IT_TO_THE_LIMIT.Turno t JOIN    PUSH_IT_TO_THE_LIMIT.AutoporTurno A ON(T.turno_id=A.turno_id) where t.turno_id IN (SELECT turno_id FROM PUSH_IT_TO_THE_LIMIT.AutoporTurno WHERE auto_id=@idAutomovil) AND auto_id=@idAutomovil AND auto_turno_estado=1 AND t.turno_habilitado=1", parametros);
             adapter.SelectCommand = command;
             adapter.Fill(turnosAutomovil);
             return turnosAutomovil.Tables[0];
@@ -894,7 +894,7 @@ namespace UberFrba
             parametros = new List<SqlParameter>();
             parametros.Clear();
             parametros.Add(new SqlParameter("@idUsuario",IdUsuario));
-            command = QueryBuilder.Instance.build("select rol_nombre from PUSH_IT_TO_THE_LIMIT.rol r join PUSH_IT_TO_THE_LIMIT.RolporUsuario p on(r.rol_id=p.rol_id) join PUSH_IT_TO_THE_LIMIT.Usuario u ON(p.usuario_id = u.usuario_id) where u.usuario_id=@idUsuario AND r.rol_estado=1", parametros);
+            command = ConstructorQuery.Instance.build("select rol_nombre from PUSH_IT_TO_THE_LIMIT.rol r join PUSH_IT_TO_THE_LIMIT.RolporUsuario p on(r.rol_id=p.rol_id) join PUSH_IT_TO_THE_LIMIT.Usuario u ON(p.usuario_id = u.usuario_id) where u.usuario_id=@idUsuario AND r.rol_estado=1", parametros);
             adapter.SelectCommand = command;
             adapter.Fill(turnosAutomovil);
             return turnosAutomovil.Tables[0];
@@ -907,7 +907,7 @@ namespace UberFrba
            SqlDataAdapter adapter = new SqlDataAdapter();
            parametros = new List<SqlParameter>();
            parametros.Clear();
-           command = QueryBuilder.Instance.build("SELECT usuario_name FROM PUSH_IT_TO_THE_LIMIT.Usuario WHERE usuario_habilitado=1", parametros);
+           command = ConstructorQuery.Instance.build("SELECT usuario_name FROM PUSH_IT_TO_THE_LIMIT.Usuario WHERE usuario_habilitado=1", parametros);
            adapter.SelectCommand = command;
            adapter.Fill(turnosAutomovil);
            return turnosAutomovil.Tables[0];
@@ -921,7 +921,7 @@ namespace UberFrba
            SqlDataAdapter adapter = new SqlDataAdapter();
            parametros = new List<SqlParameter>();
            parametros.Clear();
-           command = QueryBuilder.Instance.build("SELECT rol_nombre FROM PUSH_IT_TO_THE_LIMIT.Rol WHERE rol_estado=1", parametros);
+           command = ConstructorQuery.Instance.build("SELECT rol_nombre FROM PUSH_IT_TO_THE_LIMIT.Rol WHERE rol_estado=1", parametros);
            adapter.SelectCommand = command;
            adapter.Fill(turnosAutomovil);
            return turnosAutomovil.Tables[0];
@@ -939,7 +939,7 @@ namespace UberFrba
 
         private bool ControlDeUnicidad(String query, IList<SqlParameter> parametros)
         {
-            int cantidad = (int)QueryBuilder.Instance.build(query, parametros).ExecuteScalar();
+            int cantidad = (int)ConstructorQuery.Instance.build(query, parametros).ExecuteScalar();
             if (cantidad > 0)
             {
                 return false;

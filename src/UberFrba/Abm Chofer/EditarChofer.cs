@@ -19,7 +19,7 @@ namespace UberFrba.ABM_Chofer
         private int idContacto = 0;
         private int idUsuario = 0;
         String dniViejo;
-        private DBMapper mapper = new DBMapper();
+        private Mapper mapper = new Mapper();
 
         public EditarChofer(String idChofer,String idUsuarioChofer)
         {

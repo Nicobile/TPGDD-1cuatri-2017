@@ -32,7 +32,7 @@ namespace UberFrba.DataProvider
         /// <returns>Returns the reader with the results of the query</returns>
         public SqlDataReader exec(String query, IList<SqlParameter> parameters)
         {
-            SqlCommand command = QueryBuilder.Instance.build(query, parameters);
+            SqlCommand command = ConstructorQuery.Instance.build(query, parameters);
             SqlDataReader reader = command.ExecuteReader();
             return reader;
         }

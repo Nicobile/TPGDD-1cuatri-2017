@@ -17,7 +17,7 @@ namespace UberFrba.ABM_Turno
     {
         private int idTurno;
         
-        private DBMapper mapper = new DBMapper();
+        private Mapper mapper = new Mapper();
 
         public EditarTurno(String idTurno)
         {

@@ -15,7 +15,7 @@ namespace UberFrba.ABM_Cliente
 {
     public partial class FiltroCliente : Form
     {
-        private DBMapper mapper = new DBMapper();
+        private Mapper mapper = new Mapper();
 
         public FiltroCliente()
         {

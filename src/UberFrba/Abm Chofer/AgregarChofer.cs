@@ -17,7 +17,7 @@ namespace UberFrba.ABM_Chofer
     {
         private String username;
         private String contrasena;
-        private DBMapper mapper = new DBMapper();
+        private Mapper mapper = new Mapper();
         private int idUsuario;
         private int idChofer;
         private Boolean creadoDesdeRegistrarUsuario;

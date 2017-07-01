@@ -15,7 +15,7 @@ namespace UberFrba.Login
     public partial class LoginForm : Form
     {
 
-        private DBMapper mapper = new DBMapper();
+        private Mapper mapper = new Mapper();
 
         public LoginForm()
         {
@@ -49,7 +49,7 @@ namespace UberFrba.Login
 
             String usuario = this.textBoxUsuario.Text;
             // valida contraseña encriptada
-            String contraseña = HashSha256.getHash(this.textBoxContaseña.Text);
+            String contraseña = AlgoritmoSha256.getHash(this.textBoxContaseña.Text);
             IList<SqlParameter> parametros = new List<SqlParameter>();
             parametros.Add(new SqlParameter("@username", usuario));
             parametros.Add(new SqlParameter("@password", contraseña));
@@ -68,13 +68,13 @@ namespace UberFrba.Login
                 parametros.Clear();
                 parametros.Add(new SqlParameter("@username", usuario));
                 String clearIntentosFallidos = "UPDATE PUSH_IT_TO_THE_LIMIT.Usuario SET usuario_intentos = 0 WHERE usuario_name = @username";
-                QueryBuilder.Instance.build(clearIntentosFallidos, parametros).ExecuteNonQuery();
+                ConstructorQuery.Instance.build(clearIntentosFallidos, parametros).ExecuteNonQuery();
                 
                 parametros.Clear();
                 parametros.Add(new SqlParameter("@username", usuario));
 
                 String consultaRoles = "SELECT COUNT(rol_id) FROM PUSH_IT_TO_THE_LIMIT.RolporUsuario WHERE (SELECT usuario_id FROM PUSH_IT_TO_THE_LIMIT.Usuario WHERE usuario_name =@username) = usuario_id";
-                int cantidadDeRoles = (int)QueryBuilder.Instance.build(consultaRoles, parametros).ExecuteScalar();
+                int cantidadDeRoles = (int)ConstructorQuery.Instance.build(consultaRoles, parametros).ExecuteScalar();
 
                int idUsuario=Convert.ToInt32(mapper.SelectFromWhere("usuario_id", "Usuario", "usuario_name", textBoxUsuario.Text));
 
@@ -89,7 +89,7 @@ namespace UberFrba.Login
                     parametros.Clear();
                     parametros.Add(new SqlParameter("@username", usuario));
                     String rolDeUsuario = "SELECT r.rol_nombre FROM PUSH_IT_TO_THE_LIMIT.Rol r, PUSH_IT_TO_THE_LIMIT.RolporUsuario ru, PUSH_IT_TO_THE_LIMIT.Usuario u WHERE r.rol_id = ru.rol_id AND ru.usuario_id = u.usuario_id AND u.usuario_name = @username";
-                    String rolUser = (String)QueryBuilder.Instance.build(rolDeUsuario, parametros).ExecuteScalar();
+                    String rolUser = (String)ConstructorQuery.Instance.build(rolDeUsuario, parametros).ExecuteScalar();
 
                     UsuarioSesion.Usuario.rol = rolUser;
                     if(UsuarioSesion.Usuario.rol == null)
@@ -111,7 +111,7 @@ namespace UberFrba.Login
                 parametros.Clear();
                 parametros.Add(new SqlParameter("@username", usuario));
                 String buscaUsuario = "SELECT * FROM PUSH_IT_TO_THE_LIMIT.Usuario WHERE usuario_name = @username";
-                SqlDataReader lector = QueryBuilder.Instance.build(buscaUsuario, parametros).ExecuteReader();
+                SqlDataReader lector = ConstructorQuery.Instance.build(buscaUsuario, parametros).ExecuteReader();
 
                 if (lector.Read())
                 {
@@ -122,7 +122,7 @@ namespace UberFrba.Login
                     parametros.Add(new SqlParameter("@password", contraseña));
                     String estaDeshabilitado = "SELECT * FROM PUSH_IT_TO_THE_LIMIT.Usuario WHERE usuario_name = @username AND usuario_habilitado = 0";
 
-                    SqlDataReader userDeshabilitado = QueryBuilder.Instance.build(estaDeshabilitado, parametros).ExecuteReader();
+                    SqlDataReader userDeshabilitado = ConstructorQuery.Instance.build(estaDeshabilitado, parametros).ExecuteReader();
 
                     if (userDeshabilitado.Read())
                     {
@@ -134,21 +134,21 @@ namespace UberFrba.Login
                     parametros.Clear();
                     parametros.Add(new SqlParameter("@username", usuario));
                     String sumaFallido = "UPDATE PUSH_IT_TO_THE_LIMIT.Usuario SET usuario_intentos = usuario_intentos + 1 WHERE usuario_name = @username";
-                    QueryBuilder.Instance.build(sumaFallido, parametros).ExecuteNonQuery();
+                    ConstructorQuery.Instance.build(sumaFallido, parametros).ExecuteNonQuery();
 
 
                     // Si es el tercer fallido se deshabilita al usuario
                     parametros.Clear();
                     parametros.Add(new SqlParameter("@username", usuario));
                     String cantidadFallidos = "SELECT usuario_intentos FROM PUSH_IT_TO_THE_LIMIT.Usuario WHERE usuario_name = @username";
-                    int intentosFallidos = Convert.ToInt32(QueryBuilder.Instance.build(cantidadFallidos, parametros).ExecuteScalar());
+                    int intentosFallidos = Convert.ToInt32(ConstructorQuery.Instance.build(cantidadFallidos, parametros).ExecuteScalar());
 
                     if (intentosFallidos == 3)
                     {
                         parametros.Clear();
                         parametros.Add(new SqlParameter("@username", usuario));
                         String deshabilitar = "UPDATE PUSH_IT_TO_THE_LIMIT.Usuario SET usuario_habilitado = 0 WHERE usuario_name = @username";
-                        QueryBuilder.Instance.build(deshabilitar, parametros).ExecuteNonQuery();
+                        ConstructorQuery.Instance.build(deshabilitar, parametros).ExecuteNonQuery();
                     }
                     MessageBox.Show("Contraseña incorrecta , Fallidos del usuario: " + intentosFallidos+"  (Al tercer intento sera bloqueado)");
                 }

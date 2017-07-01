@@ -12,7 +12,7 @@ namespace UberFrba.Modelo
     {
 
 
-        private DBMapper mapper = new DBMapper();
+        private Mapper mapper = new Mapper();
         int cantidadKm;
         DateTime fechaViaje;
         TimeSpan horarioInicio;

@@ -25,7 +25,7 @@ namespace UberFrba.Modelo
  
 
         private IList<SqlParameter> parametros = new List<SqlParameter>();
-        private DBMapper mapper = new DBMapper();
+        private Mapper mapper = new Mapper();
         
 
         public void SetId(int id) // Deberia haber una excepcion por ID repetido ya que es unique

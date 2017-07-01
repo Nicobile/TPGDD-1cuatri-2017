@@ -15,7 +15,7 @@ namespace UberFrba.Abm_Automovil
 {
     public partial class AgregarAuto : Form
     {
-        private DBMapper mapper = new DBMapper();
+        private Mapper mapper = new Mapper();
         private int idAuto;
         private int idTurno;
         private int idChofer;

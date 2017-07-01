@@ -17,7 +17,7 @@ namespace UberFrba.Registro_Viajes
     public partial class RegistrarViaje : Form
     {
 
-        private DBMapper mapper = new DBMapper();
+        private Mapper mapper = new Mapper();
         int idAutomovilSeleccionado;
 
 

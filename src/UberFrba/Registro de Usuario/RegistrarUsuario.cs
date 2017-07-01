@@ -15,7 +15,7 @@ namespace UberFrba.Registro_de_Usuario
     {
         private SqlCommand command { get; set; }
         private IList<SqlParameter> parametros = new List<SqlParameter>();
-        private DBMapper mapper = new DBMapper();
+        private Mapper mapper = new Mapper();
 
         public Object SelectedItem { get; set; }
 
@@ -34,7 +34,7 @@ namespace UberFrba.Registro_de_Usuario
             DataSet roles = new DataSet();
             SqlDataAdapter adapter = new SqlDataAdapter();
             parametros = new List<SqlParameter>();
-            command = QueryBuilder.Instance.build("SELECT DISTINCT rol_nombre FROM PUSH_IT_TO_THE_LIMIT.Rol WHERE rol_estado = 1 AND rol_nombre != 'Administrador'", parametros);
+            command = ConstructorQuery.Instance.build("SELECT DISTINCT rol_nombre FROM PUSH_IT_TO_THE_LIMIT.Rol WHERE rol_estado = 1 AND rol_nombre != 'Administrador'", parametros);
             adapter.SelectCommand = command;
             adapter.Fill(roles, "Rol");
             comboBoxRol.DataSource = roles.Tables[0].DefaultView;
@@ -86,7 +86,7 @@ namespace UberFrba.Registro_de_Usuario
             // Buscamos si el username ya se encuentra registrado
             String queryUsuario = "SELECT usuario_id FROM PUSH_IT_TO_THE_LIMIT.Usuario WHERE usuario_name= @username";
 
-            SqlDataReader reader = QueryBuilder.Instance.build(queryUsuario, parametros).ExecuteReader();
+            SqlDataReader reader = ConstructorQuery.Instance.build(queryUsuario, parametros).ExecuteReader();
 
             if (reader.Read())
             {
@@ -107,7 +107,7 @@ namespace UberFrba.Registro_de_Usuario
                 // Limpio parametros
                 parametros.Clear();
 
-                int id = (int)QueryBuilder.Instance.build(idUsuario, parametros).ExecuteScalar();
+                int id = (int)ConstructorQuery.Instance.build(idUsuario, parametros).ExecuteScalar();
 
                 UsuarioSesion.Usuario.id = id;
 

@@ -16,7 +16,7 @@ namespace UberFrba.Abm_Rol
     public partial class AsignarRolesUsuario : Form
     {
 
-        private DBMapper mapper = new DBMapper();
+        private Mapper mapper = new Mapper();
         IList<SqlParameter> parametros = new List<SqlParameter>();
         int IDUSUARIO;
 
@@ -112,7 +112,7 @@ namespace UberFrba.Abm_Rol
              parametros.Add(new SqlParameter("@rol", rol));
 
              String queryCantidadRolXUsuario = "SELECT COUNT(*) from PUSH_IT_TO_THE_LIMIT.rol r join PUSH_IT_TO_THE_LIMIT.RolporUsuario p on(r.rol_id=p.rol_id) join PUSH_IT_TO_THE_LIMIT.Usuario u ON(p.usuario_id = u.usuario_id) where u.usuario_id=@idUsuario and r.rol_nombre=@rol";
-             int tieneElRol = (int)QueryBuilder.Instance.build(queryCantidadRolXUsuario, parametros).ExecuteScalar();
+             int tieneElRol = (int)ConstructorQuery.Instance.build(queryCantidadRolXUsuario, parametros).ExecuteScalar();
 
              if (tieneElRol == 1)
              {
@@ -156,7 +156,7 @@ namespace UberFrba.Abm_Rol
 
                      String queryRolXUsuario = "INSERT INTO PUSH_IT_TO_THE_LIMIT.RolporUsuario(usuario_id, rol_id) VALUES (@idUsuario,(SELECT r.rol_id FROM PUSH_IT_TO_THE_LIMIT.Rol r WHERE r.rol_nombre=@rol))";
 
-                     QueryBuilder.Instance.build(queryRolXUsuario, parametros).ExecuteNonQuery();
+                     ConstructorQuery.Instance.build(queryRolXUsuario, parametros).ExecuteNonQuery();
                  }
              }
          }
@@ -176,7 +176,7 @@ namespace UberFrba.Abm_Rol
 
                      String queryBorrarRolXUsuario = "DELETE PUSH_IT_TO_THE_LIMIT.RolporUsuario WHERE rol_id = (SELECT r.rol_id FROM PUSH_IT_TO_THE_LIMIT.Rol r WHERE r.rol_nombre = @rol) AND usuario_id =@idUsuario";
 
-                     QueryBuilder.Instance.build(queryBorrarRolXUsuario, parametros).ExecuteNonQuery();
+                     ConstructorQuery.Instance.build(queryBorrarRolXUsuario, parametros).ExecuteNonQuery();
                  }
              }
          }

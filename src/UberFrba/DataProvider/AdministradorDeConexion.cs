@@ -10,7 +10,7 @@ using System.Configuration;
 
 namespace UberFrba.DataProvider
 {
-    class ConnectionManager
+    class AdministradorDeConexion
     {
 
         private static String CONNECTION_STRING = "gd1C2017";
@@ -21,15 +21,15 @@ namespace UberFrba.DataProvider
         /// <summary>
         /// Singleton attribute
         /// </summary>
-        private static ConnectionManager instance;
+        private static AdministradorDeConexion instance;
 
-        public static ConnectionManager Instance
+        public static AdministradorDeConexion Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new ConnectionManager();
+                    instance = new AdministradorDeConexion();
                 }
                 return instance;
             }

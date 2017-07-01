@@ -170,7 +170,7 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].RolporFunciones(
 	idFuncXRol int identity(1,1) NOT NULL,
 	[rol_id] INTEGER not null,
 	[funcionalidad_id] INTEGER not null,
-	--PRIMARY KEY (rol_id, funcionalidad_id)
+	PRIMARY KEY (rol_id, funcionalidad_id)
 )
 
 

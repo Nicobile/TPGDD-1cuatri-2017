@@ -13,7 +13,7 @@ namespace UberFrba.ABM_Turno
 {
     public partial class FiltroTurno : Form
     {
-        private DBMapper mapper = new DBMapper();
+        private Mapper mapper = new Mapper();
         public FiltroTurno()
         {
             InitializeComponent();

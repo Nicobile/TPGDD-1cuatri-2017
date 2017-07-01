@@ -12,7 +12,7 @@ namespace UberFrba.ABM_Chofer
 {
     public partial class FiltroChofer : Form
     {
-        private DBMapper mapper = new DBMapper();
+        private Mapper mapper = new Mapper();
 
         public FiltroChofer()
         {

@@ -43,7 +43,7 @@ namespace UberFrba.ABM_Rol
             parametros.Clear();
            
 
-            command = QueryBuilder.Instance.build("SELECT rol_id 'ID' , rol_nombre 'Nombre Rol', rol_estado 'Habilitado' FROM PUSH_IT_TO_THE_LIMIT.Rol", parametros);
+            command = ConstructorQuery.Instance.build("SELECT rol_id 'ID' , rol_nombre 'Nombre Rol', rol_estado 'Habilitado' FROM PUSH_IT_TO_THE_LIMIT.Rol", parametros);
             adapter.SelectCommand = command;
             adapter.Fill(roles);
             dataGridViewResultadosBusqueda.DataSource = roles.Tables[0].DefaultView;
@@ -59,7 +59,7 @@ namespace UberFrba.ABM_Rol
                 parametros = new List<SqlParameter>();
                 parametros.Clear();
                 parametros.Add(new SqlParameter("@nombre_Rol", textBox_NombreRol.Text));
-                command = QueryBuilder.Instance.build("SELECT rol_id 'ID' , rol_nombre 'Nombre Rol', rol_estado 'Habilitado' FROM PUSH_IT_TO_THE_LIMIT.Rol WHERE rol_nombre=@nombre_rol ", parametros);
+                command = ConstructorQuery.Instance.build("SELECT rol_id 'ID' , rol_nombre 'Nombre Rol', rol_estado 'Habilitado' FROM PUSH_IT_TO_THE_LIMIT.Rol WHERE rol_nombre=@nombre_rol ", parametros);
                 adapter.SelectCommand = command;
                 adapter.Fill(roles);
                 dataGridViewResultadosBusqueda.DataSource = roles.Tables[0].DefaultView;

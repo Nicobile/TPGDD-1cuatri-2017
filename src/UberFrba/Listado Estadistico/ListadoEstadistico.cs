@@ -16,7 +16,7 @@ namespace UberFrba.Listado_Estadistico
 {
     public partial class ListadoEstadistico : Form
     {
-        private DBMapper mapper = new DBMapper();
+        private Mapper mapper = new Mapper();
        
         public ListadoEstadistico()
         {

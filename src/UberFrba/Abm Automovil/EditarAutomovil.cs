@@ -18,7 +18,7 @@ namespace UberFrba.Abm_Automovil
         private int idAutomovil;
         private String dniChoferAutomovil;
         private String idAutomovilString;
-        private DBMapper mapper = new DBMapper();
+        private Mapper mapper = new Mapper();
         private int idTurno;
         private int idChofer;
         Boolean choferAutoAgregado;

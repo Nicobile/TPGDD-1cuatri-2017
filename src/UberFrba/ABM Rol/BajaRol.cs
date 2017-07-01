@@ -34,7 +34,7 @@ namespace UberFrba.ABM_Rol
             DataSet roles = new DataSet();
             SqlDataAdapter adapter = new SqlDataAdapter();
             parametros = new List<SqlParameter>();
-            command = QueryBuilder.Instance.build("SELECT DISTINCT rol_nombre FROM PUSH_IT_TO_THE_LIMIT.Rol WHERE rol_estado = 1", parametros);
+            command = ConstructorQuery.Instance.build("SELECT DISTINCT rol_nombre FROM PUSH_IT_TO_THE_LIMIT.Rol WHERE rol_estado = 1", parametros);
             adapter.SelectCommand = command;
             adapter.Fill(roles);
             comboBoxRol.DataSource = roles.Tables[0].DefaultView;
@@ -60,7 +60,7 @@ namespace UberFrba.ABM_Rol
 
             int filasAfectadas = 0;
                         
-            filasAfectadas = QueryBuilder.Instance.build(sql, parametros).ExecuteNonQuery();
+            filasAfectadas = ConstructorQuery.Instance.build(sql, parametros).ExecuteNonQuery();
             if (filasAfectadas != -1)
             {
                 MessageBox.Show("El rol " + rolElegido + " fue deshabilitado");
@@ -76,7 +76,7 @@ namespace UberFrba.ABM_Rol
             // Borramos el rol en los usuarios que lo tienen
             String queryBorrarRolUsuario = "DELETE PUSH_IT_TO_THE_LIMIT.RolporUsuario WHERE rol_id = (SELECT rol_id FROM PUSH_IT_TO_THE_LIMIT.Rol WHERE rol_nombre = @nombre AND rol_estado = 0)"; 
 
-            filasAfectadas = QueryBuilder.Instance.build(queryBorrarRolUsuario, parametros).ExecuteNonQuery();
+            filasAfectadas = ConstructorQuery.Instance.build(queryBorrarRolUsuario, parametros).ExecuteNonQuery();
             if (filasAfectadas != -1)
             {
                 MessageBox.Show("Se elimino el rol " + rolElegido + " de " + filasAfectadas + " usuarios ya que fue deshabilitado");

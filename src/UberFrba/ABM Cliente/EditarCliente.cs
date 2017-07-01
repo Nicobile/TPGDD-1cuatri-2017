@@ -20,7 +20,7 @@ namespace UberFrba.ABM_Cliente
         private int idContacto = 0;
         private int idUsuario = 0;
         private String dniViejo;
-        private DBMapper mapper = new DBMapper();
+        private Mapper mapper = new Mapper();
         private IList<SqlParameter> parametros = new List<SqlParameter>();
         
         public EditarCliente(String idCliente)

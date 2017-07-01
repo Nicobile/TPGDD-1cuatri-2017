@@ -13,7 +13,7 @@ namespace UberFrba.Abm_Automovil
     public partial class FiltroAutomovil : Form
     {
 
-        private DBMapper mapper = new DBMapper();
+        private Mapper mapper = new Mapper();
         public FiltroAutomovil()
         {
             InitializeComponent();
