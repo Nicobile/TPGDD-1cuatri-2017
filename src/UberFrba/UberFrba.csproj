@@ -287,7 +287,7 @@
       <DependentUpon>RendicionViaje.cs</DependentUpon>
     </Compile>
     <Compile Include="UsuarioSesion.cs" />
-    <Compile Include="Utils\HashSha256.cs" />
+    <Compile Include="Utils\AlgoritmoSha256.cs" />
     <EmbeddedResource Include="Abm Automovil\AgregarAuto.resx">
       <DependentUpon>AgregarAuto.cs</DependentUpon>
     </EmbeddedResource>
