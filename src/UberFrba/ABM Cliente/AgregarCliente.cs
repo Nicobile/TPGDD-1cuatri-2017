@@ -22,30 +22,23 @@ namespace UberFrba.ABM_Cliente
         private String username;
         private String contrasena;
         private DBMapper mapper = new DBMapper();
-        private int idContacto;
         private int idUsuario;
         private int idCliente;
-       
+        private Boolean creadoDesdeRegistrarUsuario;
 
-        public AgregarCliente(String username, String contrasena)
+        public AgregarCliente(String username, String contrasena,Boolean creadoDesdeRegistrar)
         {
             InitializeComponent();
             this.username = username;
             this.contrasena = contrasena;
-           
+            this.creadoDesdeRegistrarUsuario = creadoDesdeRegistrar;
             this.idUsuario = 0;
         }
 
         private void AgregarCliente_Load(object sender, EventArgs e)
         {
-          //  CargarDocumento();
         }
 
-     /*   public void CargarDocumento()
-        {
-            textBox_DNI.Add("DNI - Documento Nacional de Identidad");
-      
-        } */
 
         private void button_Guardar_Click(object sender, EventArgs e)
         {
@@ -54,7 +47,6 @@ namespace UberFrba.ABM_Cliente
             String nombre = textBox_Nombre.Text;
             String apellido = textBox_Apellido.Text;
             String numeroDeDocumento = textBox_DNI.Text;
-            //MessageBox.Show("¿Es correcto el DNI"+numeroDeDocumento+"?");
             DateTime fechaDeNacimiento;
             DateTime.TryParse(textBox_FechaDeNacimiento.Text, out fechaDeNacimiento);
             String mail = textBox_Mail.Text;
@@ -93,7 +85,10 @@ namespace UberFrba.ABM_Cliente
                 
                 cliente.SetIdUsuario(idUsuario);
                 idCliente = mapper.CrearCliente(cliente);
-                if (idCliente > 0) MessageBox.Show("Se agrego el cliente correctamente");
+                if (idCliente > 0) 
+                { 
+                    MessageBox.Show("Se agrego el cliente correctamente"); 
+                }
             }
             catch (CampoVacioException exception)
             {
@@ -122,18 +117,17 @@ namespace UberFrba.ABM_Cliente
             }
             catch (SqlException error)
             {
-                //MessageBox.Show("Usuario ya existente");
                 switch (error.Number)
                 {
                     case 2627: MessageBox.Show("El DNI o el Telefono ya se encuentra registrado", "DNI Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Error); //Violacion de restriccion UNIQUE 
                         return;
                   
                     case 8114: MessageBox.Show("Error de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); break; //ERROR de conversion de datos
+                        return;
                 }
             }
 
 
-            // Si el cliente lo crea el admin, crea un nuevo usuario predeterminado. Si lo crea un nuevo registro de usuario, usa el que viene por parametro
             if (idUsuario == 0)
             {
                 idUsuario = CrearUsuario();
@@ -150,7 +144,24 @@ namespace UberFrba.ABM_Cliente
 
             }
 
-            VolverAlMenu();
+            if (creadoDesdeRegistrarUsuario)
+            {
+
+                this.Hide();
+                new Login.LoginForm().ShowDialog();
+                this.Close();
+            }
+            else
+            {
+
+                VolverAlMenu();
+            }
+
+
+
+
+
+
         }
 
         private int CrearUsuario()

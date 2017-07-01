@@ -73,11 +73,6 @@ namespace UberFrba.Registro_de_Usuario
                 return;
             }
 
-            //if (contraseña.Length < 8)
-            //{
-            //    MessageBox.Show("La contraseña debe tener por lo menos 8 caracteres");
-            //    return;
-            //}
 
             if (textBoxPass.Text != textBoxPass2.Text)
             {
@@ -119,12 +114,13 @@ namespace UberFrba.Registro_de_Usuario
                 if (rolElegido == "Cliente")
                 {
                     UsuarioSesion.Usuario.rol = "Cliente";
-                    new ABM_Cliente.AgregarCliente(usuario, contraseña).ShowDialog();
+                    new ABM_Cliente.AgregarCliente(usuario, contraseña,true).ShowDialog();
                 }
                 else if (rolElegido == "Chofer")
                 {
                     UsuarioSesion.Usuario.rol = "Chofer";
-                    new ABM_Chofer.AgregarChofer(usuario, contraseña).ShowDialog();
+
+                    new ABM_Chofer.AgregarChofer(usuario, contraseña,true).ShowDialog();
                 }
 
             }

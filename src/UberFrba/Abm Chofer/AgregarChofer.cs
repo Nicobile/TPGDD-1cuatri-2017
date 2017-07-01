@@ -20,13 +20,15 @@ namespace UberFrba.ABM_Chofer
         private DBMapper mapper = new DBMapper();
         private int idUsuario;
         private int idChofer;
+        private Boolean creadoDesdeRegistrarUsuario;
 
-        public AgregarChofer(String username, String contrasena)
+        public AgregarChofer(String username, String contrasena,Boolean creadoDesdeRegistrar)
         {
             InitializeComponent();
             this.username = username;
             this.contrasena = contrasena;
             this.idUsuario = 0;
+            this.creadoDesdeRegistrarUsuario = creadoDesdeRegistrar;
         }
 
           private void AgregarChofer_Load(object sender, EventArgs e)
@@ -46,38 +48,7 @@ namespace UberFrba.ABM_Chofer
             DateTime fechaDeNacimiento;
             DateTime.TryParse(textBox_FechaDeNacimiento.Text, out fechaDeNacimiento);
            
-           /*
-            // Crea una contacto y se guarda su id
-            Contacto contacto = new Contacto();
-            try
-            {
-                contacto.setMail(mail);
-                contacto.setTelefono(telefono);
-                contacto.SetCalle(calle);
-                contacto.SetNumeroCalle(numeroCalle);
-                contacto.SetPiso(piso);
-                contacto.SetDepartamento(departamento);
-                contacto.SetLocalidad(localidad);
-                contacto.SetCodigoPostal(codigoPostal);
-
-            }
-            catch (CampoVacioException exception)
-            {
-                MessageBox.Show("Falta completar campo: " + exception.Message);
-                return;
-            }
-            catch (FormatoInvalidoException exception)
-            {
-                MessageBox.Show("Los datos fueron mal ingresados en: " + exception.Message);
-                return;
-            }
-
-            // Controla que no se haya creado ya el contacto
-            if (this.idContacto == 0)
-            {
-                this.idContacto = mapper.CrearContacto(contacto);
-            }
-            */
+           
 
             // Crea Chofer
 
@@ -111,14 +82,11 @@ namespace UberFrba.ABM_Chofer
                 
 
                 if (idChofer > 0)
+                {
                     MessageBox.Show("Chofer agregado correctamente");
-                    
+                
+                }
             }
-
-
-
-
-
 
             catch (CampoVacioException exceptionCampoVacio)
             {
@@ -137,48 +105,36 @@ namespace UberFrba.ABM_Chofer
             }
             catch (SqlException error)
             {
-                //MessageBox.Show("Usuario ya existente");
                 switch (error.Number)
                 {
                     case 2627: MessageBox.Show("El DNI o el Telefono ya se encuentra registrado", "DNI Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Error); //Violacion de restriccion UNIQUE 
                         break;
                     case 8114: MessageBox.Show("Error de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); break; //ERROR de conversion de datos
+                        return;
                 }
             }
 
-         /*Excepciones no creadas, hay que verlo tambien, realmente quiero estar muerto*/
-
-          /*  catch (CuitYaExisteException exceptionCuit)
-            {
-                MessageBox.Show("Cuit ya existe");
-                return;
-            }                             
-            catch (RazonSocialYaExisteException exceptionRazonSocial)
-            {
-                MessageBox.Show("RazonSocial ya existe");
-                return;
-            } */
             catch (FechaInvalidaException exceptionFecha)
             {
                 MessageBox.Show("Fecha no valida");
                 return;
             }
-
-            // Si al chofer lo crea el admin, crea un nuevo usuario predeterminado.
-            //if (idUsuario == 0)
-            //{
-            //    idUsuario = CrearUsuario();
-            //    Boolean resultado = mapper.AsignarUsuarioAChofer(idChofer, idUsuario);
-            //    if (resultado) MessageBox.Show("El usuario fue creado correctamente");
-            //}
-
             if (idUsuario != 0)
             {
                 mapper.AsignarRolAUsuario(this.idUsuario, "Chofer");
 
             }
 
-            VolverAlMenu();
+            if (creadoDesdeRegistrarUsuario)
+            {
+                this.Hide();
+                new Login.LoginForm().ShowDialog();
+                this.Close();
+            }
+            else
+            {
+                VolverAlMenu();
+            }
         }
 
         private int CrearUsuario()

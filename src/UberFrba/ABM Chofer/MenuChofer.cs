@@ -26,7 +26,7 @@ namespace UberFrba.ABM_Chofer
         private void botonAgregarChofer_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new AgregarChofer("","").ShowDialog();
+            new AgregarChofer("","",false).ShowDialog();
             this.Close();
         }
 
