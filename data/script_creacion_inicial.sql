@@ -982,8 +982,7 @@ GO
 
 --Funciones para listado estadistico
 
---  Para cada chofer se selecciona su viaje mas largo (mayor cantidad de kilometros)
---  Se ordenan de forma descendente
+--  Para cada chofer se selecciona su viaje mas largo (mayor cantidad de kilometros) y luego se ordenan de forma descendente
 
 
 CREATE FUNCTION PUSH_IT_TO_THE_LIMIT.fx_Top5choferesViajesMasLargosEnUnTrimestre(@anio int,@trimestre int)
@@ -997,9 +996,7 @@ RETURN(
 )
 GO
 
---  Se agrupan las rendiciones por chofer
---  Se suman los importes de cada una de la rendicion 
--- Se ordenan de forma descendente según el Total (quedaran primeros los de mayor recaudación)
+--  Se agrupan las rendiciones por chofer luego se suman los importes de cada una de la rendicion pr ultimo se ordenan de forma descendente según el total 
  
 CREATE FUNCTION PUSH_IT_TO_THE_LIMIT.fx_Top5DechoferesMayorRecaudacionEnUnTrimeste(@anio int, @trimestre int)
 RETURNS TABLE
@@ -1013,8 +1010,7 @@ RETURN(
 			order by sum(rendicion_importe_total) desc
 )
 GO
---  Los viajes se ordenan, para cada cliente, en forma descendente segun la cantidad de veces que utilizó el mismo auto	
---   Se selecciona de los 5 primeros clientes el vehículo con el que mayor viajes realizó (fila 1).
+--  Los viajes se ordenan, para cada cliente, en forma descendente segun la cantidad de veces que utilizó el mismo auto	y se selecciona el vehículo, de los 5 primerosc clientes, con el que mayor viajes realizó.
 
 CREATE FUNCTION PUSH_IT_TO_THE_LIMIT.fx_Top5clientesQueviajaronEnUnMismoAutoEnUnTrimestre(@anio int,@trimestre int)
 RETURNS TABLE
@@ -1033,9 +1029,7 @@ RETURN(
 )
 GO
 
---  Se agrupan las facturas por cliente
---  Para cada cliente se suman los importes de cada una de estas facturas
---  Se ordenan de mayor a menor según el total de cada cliente 
+--  Se agrupan las facturas por cliente  luego para cada cliente se suman los importes de cada una de estas facturas  y ordenan de mayor a menor según el total de cada cliente 
 
 CREATE FUNCTION PUSH_IT_TO_THE_LIMIT.fx_Top5clientesMayorConsumoEnUnTrimestre(@anio int,@trimestre int)
 RETURNS TABLE
