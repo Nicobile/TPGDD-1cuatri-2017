@@ -167,21 +167,19 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].Rol(
 
 /*RolporFunciones*/
 CREATE TABLE [PUSH_IT_TO_THE_LIMIT].RolporFunciones(
-	idFuncXRol int identity(1,1) NOT NULL,
 	[rol_id] INTEGER not null,
 	[funcionalidad_id] INTEGER not null,
 	PRIMARY KEY (rol_id, funcionalidad_id)
 )
 
 
-
+/*Usuario*/
 CREATE TABLE [PUSH_IT_TO_THE_LIMIT].Usuario(
 	[usuario_id] INT IDENTITY(1,1) PRIMARY KEY,
 	[usuario_name] VARCHAR(255) UNIQUE NOT NULL,
 	[usuario_password] NVARCHAR(255) NOT NULL,
 	[usuario_habilitado] [BIT] NOT NULL DEFAULT 1,
-	[usuario_intentos] [TINYINT] DEFAULT 0,
-	[usuario_admin] [BIT] NOT NULL DEFAULT 0,
+	[usuario_intentos] [TINYINT] DEFAULT 0
 )
 
 
@@ -305,9 +303,9 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[ChoferporAuto](
 /* Agregamos las FKs */
 
 --Creamos las fk de RolporFunciones
---ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RolporFunciones] ADD CONSTRAINT RolporFunciones_Funcionalidad FOREIGN KEY (funcionalidad_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Funcionalidad](funcionalidad_id)
+ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RolporFunciones] ADD CONSTRAINT RolporFunciones_Funcionalidad FOREIGN KEY (funcionalidad_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Funcionalidad](funcionalidad_id)
 
---ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RolporFunciones] ADD CONSTRAINT RolporFunciones_Rol FOREIGN KEY (rol_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Rol](rol_id)
+ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RolporFunciones] ADD CONSTRAINT RolporFunciones_Rol FOREIGN KEY (rol_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Rol](rol_id)
 
 --Creamos las Fk de RolporUSuario
 ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[RolporUsuario] ADD CONSTRAINT RolporUsuario_Rol FOREIGN KEY (rol_id) REFERENCES [PUSH_IT_TO_THE_LIMIT].[Rol](rol_id)
@@ -366,24 +364,19 @@ insert into [PUSH_IT_TO_THE_LIMIT].Rol (rol_nombre) values
 
 
 insert into [PUSH_IT_TO_THE_LIMIT].Funcionalidad (funcionalidad_descripcion) values
-('ABM de Rol'),                            --1
-('ABM de Clientes'),                       --3
-('ABM de Automoviles'),                    --4
-('ABM de Turnos'),                         --5
-('ABM de Choferes'),                       --6
-('Registro de Viajes'),                    --7
-('Rendicion de Viajes'),                   --8
-('Facturacion de Clientes'),               --9
-('Listado Estadistico');                   --10
+('ABM de Rol'),                            
+('ABM de Clientes'),                       
+('ABM de Automoviles'),                    
+('ABM de Turnos'),                         
+('ABM de Choferes'),                       
+('Registro de Viajes'),                    
+('Rendicion de Viajes'),                   
+('Facturacion de Clientes'),               
+('Listado Estadistico');                   
 
 
 /*RolXFuncionalidad*/
-/*
-insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones (rol_id, funcionalidad_id) values
-(1,1), (1,2), (1,3), (1,4),(1,5),(1,6),(1,7),(2,8),(3,9),(1,10),(2,10),(3,10); */
-
-/*RolXFuncionalidad*/
---Administrativo
+--Administrador
 insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones (rol_id,funcionalidad_id)
 	select distinct R.rol_id, F.funcionalidad_id from [PUSH_IT_TO_THE_LIMIT].Rol R,[PUSH_IT_TO_THE_LIMIT].Funcionalidad F
 	where R.rol_nombre = 'Administrador' and
@@ -641,7 +634,7 @@ declare @respuesta int
 begin tran ta
 begin try
 insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones(rol_id,funcionalidad_id) values(@rol,@funcionalidad);
-set @respuesta =(select idFuncXRol from [PUSH_IT_TO_THE_LIMIT].RolporFunciones   where rol_id = @rol and funcionalidad_id = @funcionalidad)
+set @respuesta =(select funcionalidad_id from [PUSH_IT_TO_THE_LIMIT].RolporFunciones   where rol_id = @rol and funcionalidad_id = @funcionalidad)
 select @respuesta as respuesta
 commit tran ta
 end try
@@ -674,18 +667,6 @@ select @respuesta as respuesta
 end catch
 end
 GO
-
-/*
-pr_crear_usuario
-
-chofer_estado
-
-pr_agregar_rol_a_usuario
-*/
-
-
-
-
 
 ------------------------------------------------
 --Procedure para crear un chofer 
@@ -815,7 +796,6 @@ CREATE PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_agregar_chofer_a_automovil
     @auto_id int
 AS
 BEGIN
-	--if((SELECT COUNT(*) FROM PUSH_IT_TO_THE_LIMIT.ChoferporAuto C JOIN PUSH_IT_TO_THE_LIMIT.AUTO A ON (A.auto_id=C.auto_id) WHERE A.auto_estado=1 AND  chofer_id=@chofer_id)=0)    
 	if((SELECT COUNT(*) FROM PUSH_IT_TO_THE_LIMIT.ChoferporAuto C JOIN PUSH_IT_TO_THE_LIMIT.AUTO A ON (A.auto_id=C.auto_id) WHERE A.auto_estado=1 AND  chofer_id=@chofer_id AND auto_chofer_estado=1)=0)  
 		BEGIN 
 			INSERT INTO PUSH_IT_TO_THE_LIMIT.ChoferporAuto
@@ -824,12 +804,8 @@ BEGIN
 			(@chofer_id, @auto_id)
 		END
 	ELSE 
-		--BEGIN
-			--rollback transaction;
-
-			throw 51005,'El Chofer ya tiene un Coche activo asignado ',1;
+		throw 51005,'El Chofer ya tiene un Coche activo asignado ',1;
 	
-		--END 
 END
 GO
 
@@ -845,22 +821,7 @@ GO
   @idTurno int,
   @id int OUTPUT
   AS
-BEGIN
-
- --   if exists(select 1 from [PUSH_IT_TO_THE_LIMIT].RegistroViaje where(chofer_id = @idChofer AND
-	--((@HoraInicio <= viaje_hora_fin AND @HoraInicio >= viaje_hora_inicio) OR (@HoraFin <= viaje_hora_fin AND @HoraFin >= viaje_hora_inicio))
-	--AND viaje_fecha = @fecha)) throw 51015,'EL chofer ya tiene otro viaje registrado en ese horario',16;
-
-	--if exists(select 1 from [PUSH_IT_TO_THE_LIMIT].RegistroViaje 
-	--where(cliente_id = @idCliente AND
-	--((@HoraInicio <= viaje_hora_fin AND @HoraInicio >= viaje_hora_inicio)
-	--OR 
-	--(@HoraFin <= viaje_hora_fin AND @HoraFin >= viaje_hora_inicio)) OR((viaje_hora_fin>=@HoraInicio AND viaje_hora_fin<=@HoraFin)OR (viaje_hora_inicio>=@HoraInicio AND viaje_hora_inicio<=@HoraFin))
-	--AND viaje_fecha = @fecha)
-	
-	--) throw 51016,'EL cliente ya tiene otro viaje registrado en ese horario',16;
-
-	
+BEGIN	
 	if exists(select 1 from [PUSH_IT_TO_THE_LIMIT].RegistroViaje where(chofer_id = @idChofer AND
 	@HoraInicio >= viaje_hora_inicio AND @HoraFin <= viaje_hora_fin 
 	AND viaje_fecha = @fecha)) throw 51015,'EL chofer ya tiene otro viaje registrado en ese horario',16;

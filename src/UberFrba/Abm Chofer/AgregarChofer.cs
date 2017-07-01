@@ -167,16 +167,7 @@ namespace UberFrba.ABM_Chofer
 
         private void button_Cancelar_Click(object sender, EventArgs e)
         {
-            if (UsuarioSesion.Usuario.rol != "Administrativo")
-            {
-                this.Hide();
-                new Registro_de_Usuario.RegistrarUsuario().ShowDialog();
-                this.Close();
-            }
-            else
-            {
-                VolverAlMenu();
-            }
+              VolverAlMenu();
         }
 
         private void VolverAlMenu()
