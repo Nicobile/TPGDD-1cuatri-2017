@@ -89,10 +89,12 @@ namespace UberFrba.ABM_Chofer
                 pudoModificar = mapper.Modificar(idChofer, chofer);
                 if (pudoModificar) {
                     MessageBox.Show("Chofer modificado correctamente");
-                    if (DNI != this.dniViejo)
+                      String usernameIgualAlDNI = Convert.ToString(mapper.SelectFromWhere("usuario_name", "Usuario", "usuario_id", this.idUsuario));
+                    if (DNI != this.dniViejo && dniViejo==usernameIgualAlDNI)
                     {
-                        MessageBox.Show("Contraseña modificada");
-                        mapper.ActualizarUsuarioyPassword(this.idUsuario, DNI, DNI);
+                        mapper.ActualizarUsuarioyPassword(this.idUsuario, DNI, DNI);//solo le cambio usuario y contraseña cuando se modifica el dni de alguno de los choferes migrados ,cualquier chofer agregado a la migracion no 
+                        MessageBox.Show("Contraseña modificada", "Actulizacion Contraseña", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        
                     
                     }
                 }

@@ -106,8 +106,8 @@ namespace UberFrba.ABM_Cliente
                 if (pudoModificar)
                 {
                     MessageBox.Show("El cliente se modifico correctamente");
-
-                    if (dniViejo != numeroDeDocumento) {
+                    String usernameIgualAlDNI = Convert.ToString(mapper.SelectFromWhere("usuario_name", "Usuario", "usuario_id", this.idUsuario));
+                    if (dniViejo != numeroDeDocumento && numeroDeDocumento==usernameIgualAlDNI) {
 
                         mapper.ActualizarUsuarioyPassword(this.idUsuario, numeroDeDocumento, numeroDeDocumento);
                                             
