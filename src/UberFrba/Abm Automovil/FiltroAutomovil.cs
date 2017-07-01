@@ -31,6 +31,8 @@ namespace UberFrba.Abm_Automovil
             comboBox_Marca.Items.Add("Volkswagen");
             comboBox_Marca.Items.Add("Toyota");
             comboBox_Marca.Items.Add("Citroën");
+            comboBox_Marca.Items.Add("Ferrari");
+
         }
         
 
