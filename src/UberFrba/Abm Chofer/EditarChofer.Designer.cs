@@ -162,7 +162,7 @@
             // 
             // monthCalendar_FechaDeCreacion
             // 
-            this.monthCalendar_FechaDeCreacion.Location = new System.Drawing.Point(126, 19);
+            this.monthCalendar_FechaDeCreacion.Location = new System.Drawing.Point(126, 25);
             this.monthCalendar_FechaDeCreacion.Name = "monthCalendar_FechaDeCreacion";
             this.monthCalendar_FechaDeCreacion.TabIndex = 5;
             this.monthCalendar_FechaDeCreacion.Visible = false;

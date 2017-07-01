@@ -17,18 +17,12 @@ namespace UberFrba.ABM_Turno
     public partial class AgregarTurno : Form
     {
 
-        private String username;
-        private String contrasena;
         private Mapper mapper = new Mapper();
         private int idTurno;
-        private int idUsuario;
 
         public AgregarTurno()
         {
             InitializeComponent();
-            //this.username = username;
-            //this.contrasena = contrasena;
-            //this.idUsuario = 0;
         }
 
         private void button_Guardar_Click_1(object sender, EventArgs e)
@@ -43,7 +37,7 @@ namespace UberFrba.ABM_Turno
             Boolean Habilitado = checkBox_Habilitado.Checked;
 
 
-            // Crea Chofer
+            // Crea Turno
             try
             {
                 Turnos turno = new Turnos();

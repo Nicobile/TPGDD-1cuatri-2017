@@ -17,7 +17,6 @@ namespace UberFrba.ABM_Cliente
     public partial class EditarCliente : Form
     {
         private int idCliente = 0;
-        private int idContacto = 0;
         private int idUsuario = 0;
         private String dniViejo;
         private Mapper mapper = new Mapper();
@@ -31,21 +30,13 @@ namespace UberFrba.ABM_Cliente
 
         private void EditarCliente_Load(object sender, EventArgs e)
         {
-          //  CargarDocumento(); 
             CargarDatos();
         }
-
-  /*      private void CargarDocumento()
-        {
-            comboBox_DNI.Items.Add("DNI - Documento Nacional de Identidad");
-           
-        } */
 
         private void CargarDatos()
         {
             Clientes cliente = mapper.ObtenerCliente(idCliente);
          
-            //Me guardo el id contacto y usuario
             idUsuario = cliente.GetIdUsuario();
 
             textBox_Nombre.Text = cliente.GetNombre();
@@ -98,7 +89,6 @@ namespace UberFrba.ABM_Cliente
                 cliente.SetCodigoPostal(codigoPostal);
                 cliente.SetActivo(true); 
 
-                /** La fecha de alta no se actualiza en la DB **/
 
                 mapper.ActualizarEstadoUsuario(idUsuario, activo);
 
@@ -149,7 +139,8 @@ namespace UberFrba.ABM_Cliente
                     case 2627: MessageBox.Show("El DNI o el Telefono ya se encuentra registrado", "DNI Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Error); //Violacion de restriccion UNIQUE 
                         return;
                      
-                    case 8114: MessageBox.Show("Error de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); break; //ERROR de conversion de datos
+                    case 8114: MessageBox.Show("Error de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); //ERROR de conversion de datos
+                        return;
                 }
             }
 

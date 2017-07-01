@@ -80,7 +80,12 @@ namespace UberFrba.Facturacion
                 MessageBox.Show("Falta completar campo: " + exception.Message);
                 return;
             }
-
+            catch (NoHayViajesException exception)
+            {
+                MessageBox.Show(exception.Message,"Error al crear Factura",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                LimpiarDatosVista();
+                return;
+            }
 
 
         }

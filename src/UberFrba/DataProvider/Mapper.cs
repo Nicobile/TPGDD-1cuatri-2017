@@ -169,17 +169,9 @@ namespace UberFrba
         }
         public DataTable AplicarEstadistica(int anio, int trimestre, String funcion)
         {
-           
-          
-
             SqlCommand command = ConstructorQuery.Instance.build("SELECT * From [PUSH_IT_TO_THE_LIMIT]." + funcion + "(@anio, @trimestre)", parametros);
-            
-
             command.Parameters.AddWithValue("@anio", anio);
-
-
             command.Parameters.AddWithValue("@trimestre", trimestre);
-            /*para mostrar el resultado*/
             DataTable tabla = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter(command);
             adapter.Fill(tabla);
@@ -211,10 +203,6 @@ namespace UberFrba
 
         public int CrearCliente(Clientes cliente)
         {
-
-     /*       if (!esClienteUnico(cliente.GetTipoDeDocumento(), cliente.GetId()))
-                throw new ClienteYaExisteException();    */
-
             return this.Crear(cliente);
 
         }
@@ -223,8 +211,6 @@ namespace UberFrba
 
         public int CrearChofer(Choferes chofer)
         {
-
-
             return this.Crear(chofer);
         }
 
@@ -294,36 +280,6 @@ namespace UberFrba
         }
 
 
-        
-
-
-
-
-
-
-
-
-
-
-
-        /** Contacto **/
-/*
-        public Contacto ObtenerContacto(int idContacto)
-        {
-            Contacto objeto = new Contacto();
-            Type clase = objeto.GetType();
-            return (Contacto)this.Obtener(idContacto, clase);
-        }
-
-
-*/
-
-        /* 
-        * 
-        *   DELETE QUERYS
-        *
-        */
-
 
         /** Clientes **/
 
@@ -353,7 +309,7 @@ namespace UberFrba
             parametros.Clear();
             parametros.Add(new SqlParameter("@id", id));
             int filasAfectadas = ConstructorQuery.Instance.build(query, parametros).ExecuteNonQuery();
-            if (filasAfectadas == 2)//dejar en dos es la cantidad que retorna la base (lo volvi a poner en 1 por que el triger actualizacion turno no esta funcionando)
+            if (filasAfectadas == 1)
             {
                 return true;
             }
@@ -372,15 +328,6 @@ namespace UberFrba
             }
             return false;
         }
-
-
-
-
-
-
-
-
-
 
 
         public Boolean EliminarAutoFisicamenteDelaBase(int id, String enDonde)
@@ -667,11 +614,6 @@ namespace UberFrba
         }
 
 
-
-
-
-
-
         public Boolean AsignarTurnoaAutomovil(int idAuto, int idTurno)
         {
             query = "PUSH_IT_TO_THE_LIMIT.pr_agregar_turno_a_automovil";
@@ -927,15 +869,6 @@ namespace UberFrba
            return turnosAutomovil.Tables[0];
 
        }
-
-
-
-
-        /*
-        *
-        *   TABLE UNIQUE CONTROL 
-        *
-        */
 
         private bool ControlDeUnicidad(String query, IList<SqlParameter> parametros)
         {

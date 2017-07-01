@@ -53,7 +53,6 @@ namespace UberFrba.ABM_Cliente
             String telefono = textBox_Telefono.Text;
             String direccion = textBox_Direccion.Text;
             String codigoPostal = textBox_CodigoPostal.Text;
-          //  Boolean activo = checkBox_Habilitado.Checked; //La variable activo que esta en el checkbox es para saber si esta habilitado a nivel usuario
 
             
             // Crear cliente
@@ -122,7 +121,7 @@ namespace UberFrba.ABM_Cliente
                     case 2627: MessageBox.Show("El DNI o el Telefono ya se encuentra registrado", "DNI Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Error); //Violacion de restriccion UNIQUE 
                         return;
                   
-                    case 8114: MessageBox.Show("Error de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); break; //ERROR de conversion de datos
+                    case 8114: MessageBox.Show("Error de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);  //ERROR de conversion de datos
                         return;
                 }
             }

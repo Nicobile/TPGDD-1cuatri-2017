@@ -57,8 +57,6 @@ namespace UberFrba.Modelo
 
         public void SetMail(String mail)
         {
-          /*  if (mail == "")
-                throw new CampoVacioException("Mail"); */          /*Saco la excepcion de que el mail este vacio porque puede ser null*/
             this.mail = mail;
         }
 

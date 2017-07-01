@@ -22,6 +22,11 @@ namespace UberFrba.Abm_Automovil
         private void FiltroAutomovil_Load(object sender, EventArgs e)
         {
             CargarAutomoviles();
+            CargarComboboxMarcas();            
+        }
+
+        private void CargarComboboxMarcas() {
+
             comboBox_Marca.Items.Add("Porsche");
             comboBox_Marca.Items.Add("Chevrolet");
             comboBox_Marca.Items.Add("Renault");
@@ -32,9 +37,9 @@ namespace UberFrba.Abm_Automovil
             comboBox_Marca.Items.Add("Toyota");
             comboBox_Marca.Items.Add("Citroën");
             comboBox_Marca.Items.Add("Ferrari");
-
         }
-        
+
+
 
         private void button_Cancelar_Click(object sender, EventArgs e)
         {
@@ -46,7 +51,8 @@ namespace UberFrba.Abm_Automovil
 
         private void button_Limpiar_Click(object sender, EventArgs e)
         {
-            comboBox_Marca.Text = "";
+            comboBox_Marca.Items.Clear();
+            CargarComboboxMarcas();
             textBox_Modelo.Text = "";
             textBox_Patente.Text = "";
             textBox_Chofer_Dni.Text = "";
@@ -126,7 +132,6 @@ namespace UberFrba.Abm_Automovil
             {
                 String idAutomovilAModificar = dataGridView_Automovil.Rows[e.RowIndex].Cells["Auto N°"].Value.ToString();
                 String dniChoferAutomovilAModificar = dataGridView_Automovil.Rows[e.RowIndex].Cells["DNI chofer"].Value.ToString();
-               // int idChoferObtenidoApartirDelDNI = Convert.ToInt32(mapper.SelectFromWhere("chofer_id", "Chofer", "chofer_dni", Convert.ToInt32(dniChoferAutomovilAModificar)));
 
                 new EditarAutomovil(idAutomovilAModificar,dniChoferAutomovilAModificar).ShowDialog();
                 CargarAutomoviles();
@@ -147,25 +152,10 @@ namespace UberFrba.Abm_Automovil
             if (e.ColumnIndex == dataGridView_Automovil.Columns["Turnos"].Index && e.RowIndex >= 0)
             {
                 String idAutomovilTurno = dataGridView_Automovil.Rows[e.RowIndex].Cells["Auto N°"].Value.ToString();
-                //MessageBox.Show(idAutomovilTurno);
-                //new TurnosDeUnAutomovil(idAutomovilTurno,true,0).ShowDialog();
                 new TurnosDeUnAutomovil(idAutomovilTurno, true).ShowDialog();
-                
-            //    //Boolean resultado = mapper.EliminarAutomovil(Convert.ToInt32(idAutomovilAEliminar), "Auto");
-            //    //dataGridView_Automovil.Rows[e.RowIndex].Cells["Habilitado"].Value = false;
-            //    //if (resultado) MessageBox.Show("Se elimino correctamente");
-            //    //CargarAutomoviles();
-            //    return;
             }
 
-                      
-
         }
-
-
-
-
-
 
     }
 }

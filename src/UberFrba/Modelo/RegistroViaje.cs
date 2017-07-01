@@ -175,7 +175,7 @@ namespace UberFrba.Modelo
                 
         public string GetQueryModificar()
         {
-            throw new NotImplementedException();//
+            throw new NotImplementedException();
 
         }
 

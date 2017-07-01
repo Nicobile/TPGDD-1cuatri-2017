@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace UberFrba.Modelo
 {
     class Choferes : Objeto, Mapeable
-    {/* getters y setters*/
+    {
         private int id;
         private int DNI;
         private String nombre;
@@ -28,7 +28,7 @@ namespace UberFrba.Modelo
         private Mapper mapper = new Mapper();
         
 
-        public void SetId(int id) // Deberia haber una excepcion por ID repetido ya que es unique
+        public void SetId(int id) 
         {
             this.id = id;
         }
@@ -137,7 +137,7 @@ namespace UberFrba.Modelo
             if (fechaDeNacimiento.Equals(DateTime.MinValue))
                 throw new CampoVacioException("Fecha De Nacimiento");
 
-            if (!esFechaPasada(fechaDeNacimiento)) // Revisar funcion
+            if (!esFechaPasada(fechaDeNacimiento)) 
                 throw new FechaInvalidaException();
 
             this.fechaDeNacimiento = fechaDeNacimiento;

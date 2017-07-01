@@ -36,7 +36,6 @@ namespace UberFrba.ABM_Turno
             Turnos turno = mapper.ObtenerTurnos(idTurno);
 
 
-            // idUsuario = chofer.GetIdUsuario();
 
 
             textBox_HoraInicio.Text = Convert.ToString(turno.GetHoraInicio());
@@ -74,7 +73,6 @@ namespace UberFrba.ABM_Turno
                 turno.SetValorKilometro(valor_Kilometro);
                 turno.SetPrecioBaseTurno(precio_base);
                 turno.SetActivo(activo);
-                //MessageBox.Show(hora_inicio + " " + hora_fin + " " + descripcion + " " + valor_Kilometro + " " + precio_base + " " + activo);   
                 
                 pudoModificar = mapper.Modificar(idTurno, turno);
                 
@@ -100,19 +98,15 @@ namespace UberFrba.ABM_Turno
                 {
                     case 51000: MessageBox.Show("El turno ingresado se superpone con otro", "Turno Superpuesto", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
-                        break;
+                        
                     case 51001: MessageBox.Show("El turno ingresado se superpone con otro", "Turno Superpuesto", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
-                        break;
                     case 51002: MessageBox.Show("El turno ingresado ya existe y esta Activo", "Turno Existente", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
-                        break;
                     case 51003: MessageBox.Show("El turno ingresado ya existe y esta Deshabilitado", "Turno Existente Deshabilitado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
-                        break;
                     case 51004: MessageBox.Show("El horario ingresado es mayor a un dia o es invalido", "Turno Horario Invalido", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
-                        break;
                 }
             }
             this.Close();

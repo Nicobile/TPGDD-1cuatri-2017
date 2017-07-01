@@ -24,16 +24,11 @@ namespace UberFrba.ABM_Cliente
 
         private void FiltroCliente_Load(object sender, EventArgs e)
         {
-          //  CargarDocumento();
             CargarClientes();
             OcultarColumnasQueNoDebenVerse();
         }
 
-        private void CargarDocumento()
-        {          
-           // comboBox_Dni.Items.Add("DNI - Documento Nacional de Identidad");
-                
-        }
+        
 
         private void OcultarColumnasQueNoDebenVerse()
         {

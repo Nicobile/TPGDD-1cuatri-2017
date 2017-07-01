@@ -57,7 +57,6 @@ namespace UberFrba.ABM_Chofer
             DataGridViewButtonColumn botonColumnaEliminar = new DataGridViewButtonColumn();
             botonColumnaEliminar.Text = "Eliminar";
             botonColumnaEliminar.Name = "Eliminar";
-            //dataGridView_Chofer.Columns["Habilitado"].;
             botonColumnaEliminar.UseColumnTextForButtonValue = true;
             dataGridView_Chofer.Columns.Add(botonColumnaEliminar);
         }

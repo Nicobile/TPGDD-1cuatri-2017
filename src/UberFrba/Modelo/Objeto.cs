@@ -10,13 +10,13 @@ namespace UberFrba.Modelo
         public Boolean esNumero(String numString)
         {
             long number1 = 0;
-            return long.TryParse(numString, out number1); // devuelve true si pudo convertirlo, es decir, es numeroCalle
+            return long.TryParse(numString, out number1); 
         }
 
         public Boolean esDouble(String numString)
         {
             Double number1 = 0;
-            return Double.TryParse(numString, out number1); // devuelve true si pudo convertirlo, es decir, es numeroCalle
+            return Double.TryParse(numString, out number1); 
         }
 
  
@@ -41,16 +41,6 @@ namespace UberFrba.Modelo
             }
         }
 
-        public Boolean esCuit(String cuit)
-        {
-            if (cuit.Length < 14) return false;
-            String primerosDosNumeros = cuit.Substring(0, 2);
-            String primerGuion = cuit.Substring(2, 1);
-            String ochoNumeros = cuit.Substring(3, 8);
-            String segundoGuion = cuit.Substring(11, 1);
-            String segundosDosNumeros = cuit.Substring(12, 2);
-
-            return this.esNumero(primerosDosNumeros) && primerGuion == "-" && this.esNumero(ochoNumeros) && segundoGuion == "-" && this.esNumero(segundosDosNumeros);
-        }
+        
     }
 }

@@ -16,7 +16,6 @@ namespace UberFrba.ABM_Chofer
     public partial class EditarChofer : Form
     {
         private int idChofer;
-        private int idContacto = 0;
         private int idUsuario = 0;
         String dniViejo;
         private Mapper mapper = new Mapper();
@@ -39,8 +38,6 @@ namespace UberFrba.ABM_Chofer
             Choferes chofer = mapper.ObtenerChofer(idChofer);
 
            
-           // idUsuario = chofer.GetIdUsuario();
-
 
             textBox_Nombre.Text = chofer.GetNombre();
             textBox_Mail.Text = chofer.GetMail();
@@ -66,7 +63,7 @@ namespace UberFrba.ABM_Chofer
             DateTime fechaDeNacimiento;
             DateTime.TryParse(textBox_FechaDeNacimiento.Text, out fechaDeNacimiento);
             String telefono = textBox_Telefono.Text;
-            Boolean activo = checkBox_Habilitado.Checked; //La variable activo que esta en el checkbox es para saber si esta habilitado a nivel usuario --> ESTO QUE HICO EL PIBE NO ME CABE NI UN POCO
+            Boolean activo = checkBox_Habilitado.Checked; //La variable activo que esta en el checkbox es para saber si esta habilitado a nivel usuario 
             Boolean pudoModificar;
             String Direccion = textBox_Direccion.Text;
    
@@ -128,13 +125,12 @@ namespace UberFrba.ABM_Chofer
             }
             catch (SqlException error)
             {
-                //MessageBox.Show("Usuario ya existente");
                 switch (error.Number)
                 {
                     case 2627: MessageBox.Show("El DNI o el Telefono ya se encuentra registrado", "DNI Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Error); //Violacion de restriccion UNIQUE 
                         return;
-                        break;
-                    case 8114: MessageBox.Show("Error de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); break; //ERROR de conversion de datos
+                    case 8114: MessageBox.Show("Error de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); //ERROR de conversion de datos
+                        return;
                 }
             }
 

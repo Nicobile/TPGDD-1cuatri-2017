@@ -105,8 +105,7 @@ namespace UberFrba.Abm_Automovil
             CargarDatos();
         }
 
-        private void CargarComboBoxTurno()
-        {//ComboBox comboTurno) {
+        private void CargarComboBoxTurno(){
 
             //DataTable turnos = mapper.SelectDataTable("*", "PUSH_IT_TO_THE_LIMIT.Turno");//aca traigo todos los turnos habilitados o deshabilitados , si se quiere traer solo los habilitados descomentar la linea de abajo
             DataTable turnos = mapper.SelectDataTable("*", "PUSH_IT_TO_THE_LIMIT.Turno","turno_habilitado = 1");//aca traigo los turnos habilitados nada mas , si se quiere esta opcion comentar la linea de arriba y  descomentar esta
@@ -127,7 +126,6 @@ namespace UberFrba.Abm_Automovil
         private void turnoActulaes_Click(object sender, EventArgs e)
         {
    
-            //new TurnosDeUnAutomovil(this.idAutomovilString,false,this.idAutomovil).ShowDialog();
             new TurnosDeUnAutomovil(this.idAutomovilString, false).ShowDialog();
         }
 
@@ -163,7 +161,6 @@ namespace UberFrba.Abm_Automovil
                     this.SetIdTurno(IDTurno);
                 }
 
-                //pudoModificar = mapper.Modificar(idAutomovil, auto); DEJAR COMENTADO
 
                 existeTurnoAutomovil = mapper.ExisteEstadoTunoAutomovil(this.idAutomovil, idTurno);
 
@@ -292,7 +289,6 @@ namespace UberFrba.Abm_Automovil
                 {
                     case 51005: MessageBox.Show(error.Message , "Coche activo ya asignado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
-                        break;
 
                 }
             }

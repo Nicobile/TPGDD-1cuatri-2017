@@ -157,7 +157,7 @@ namespace UberFrba.Rendicion_Viajes
             }
             catch (NoHayViajesException exception)
             {
-                MessageBox.Show(exception.Message);
+                MessageBox.Show(exception.Message,"Error al registrar",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 return;
             }
 

@@ -98,7 +98,7 @@ namespace UberFrba.ABM_Chofer
                 MessageBox.Show("Los datos fueron mal ingresados en: " + exceptionFormato.Message);
                 return;
             }
-            catch (TelefonoYaExisteException exceptionTelefono)
+            catch (TelefonoYaExisteException )
             {
                 MessageBox.Show("Telefono ya existe");
                 return;
@@ -108,13 +108,14 @@ namespace UberFrba.ABM_Chofer
                 switch (error.Number)
                 {
                     case 2627: MessageBox.Show("El DNI o el Telefono ya se encuentra registrado", "DNI Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Error); //Violacion de restriccion UNIQUE 
-                        break;
-                    case 8114: MessageBox.Show("Error de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); break; //ERROR de conversion de datos
                         return;
+                    case 8114: MessageBox.Show("Error de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); //ERROR de conversion de datos
+                        return;
+                       
                 }
             }
 
-            catch (FechaInvalidaException exceptionFecha)
+            catch (FechaInvalidaException )
             {
                 MessageBox.Show("Fecha no valida");
                 return;
@@ -148,23 +149,6 @@ namespace UberFrba.ABM_Chofer
                 return mapper.CrearUsuarioConValores(username, contrasena); //Si es por registro de usuario, segun los parametros dados
             }
         }
-
-       /* private void CargarRubros()
-        {
-            string query = "SELECT rubro_id, rubro_desc_larga from NET_A_CERO.Rubros";
-
-            SqlCommand cmd = new SqlCommand(query, ConnectionManager.Instance.getConnection());
-
-            SqlDataAdapter data_adapter = new SqlDataAdapter(cmd);
-            DataTable rubros = new DataTable();
-            data_adapter.Fill(rubros);
-
-            comboBox_Direccion.ValueMember = "rubro_id";
-            comboBox_Direccion.DisplayMember = "rubro_desc_larga";
-            comboBox_Direccion.DataSource = rubros;
-            comboBox_Direccion.SelectedIndex = -1;
-        }
-        */
         private void button_Limpiar_Click(object sender, EventArgs e)
         {
             textBox_Nombre.Text = "";

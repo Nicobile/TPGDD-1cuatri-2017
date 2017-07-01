@@ -180,35 +180,12 @@ namespace UberFrba.Abm_Rol
                  }
              }
          }
-
-
-
-
          public void volverAlMenuTurno() {
              
              this.Hide();
              new RolForm().ShowDialog();
              this.Close();
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         
     }
 }

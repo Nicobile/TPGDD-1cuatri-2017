@@ -38,12 +38,7 @@ namespace UberFrba.Modelo
 
         public void SetIdChofer(String DniChofer)
         {
-
-            
-            
                 this.idChofer = mapper.obtenerIdChoferApartirDelDNI(DniChofer);
-
-            
         }
 
         public int GetIdChofer()
@@ -77,7 +72,7 @@ namespace UberFrba.Modelo
             if (TotalRendicion == "")
             {
 
-                throw new NoHayViajesException("No posee viajes registrados en la fecha");
+                throw new NoHayViajesException("No posee viajes registrados en la fecha o ya fueron Rendidos");
             }
             else
             {

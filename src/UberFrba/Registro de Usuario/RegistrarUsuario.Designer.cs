@@ -108,7 +108,7 @@ namespace UberFrba.Registro_de_Usuario
             // botonSiguiente
             // 
             this.botonSiguiente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonSiguiente.Location = new System.Drawing.Point(240, 217);
+            this.botonSiguiente.Location = new System.Drawing.Point(255, 243);
             this.botonSiguiente.Name = "botonSiguiente";
             this.botonSiguiente.Size = new System.Drawing.Size(108, 50);
             this.botonSiguiente.TabIndex = 11;
@@ -118,6 +118,7 @@ namespace UberFrba.Registro_de_Usuario
             // 
             // comboBoxRol
             // 
+            this.comboBoxRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxRol.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxRol.FormattingEnabled = true;
             this.comboBoxRol.Location = new System.Drawing.Point(138, 172);
@@ -139,7 +140,7 @@ namespace UberFrba.Registro_de_Usuario
             // 
             this.labelAclaracion.AutoSize = true;
             this.labelAclaracion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelAclaracion.Location = new System.Drawing.Point(18, 217);
+            this.labelAclaracion.Location = new System.Drawing.Point(85, 217);
             this.labelAclaracion.Name = "labelAclaracion";
             this.labelAclaracion.Size = new System.Drawing.Size(126, 15);
             this.labelAclaracion.TabIndex = 14;

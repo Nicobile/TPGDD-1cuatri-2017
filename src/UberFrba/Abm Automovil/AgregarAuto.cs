@@ -37,7 +37,6 @@ namespace UberFrba.Abm_Automovil
         public AgregarAuto()
         {
             InitializeComponent();
-            //CargarComboBoxTurno();
         }
 
         private void AgregarAuto_Load(object sender, EventArgs e)
@@ -47,9 +46,6 @@ namespace UberFrba.Abm_Automovil
             CargarComboBoxChoferes();
 
         }
-
-       
-
 
 
         private void CargarComboBoxChoferes()
@@ -84,10 +80,6 @@ namespace UberFrba.Abm_Automovil
             String Marca =comboBox_Marca.Text;
             String Modelo = textBox_Modelo.Text;
             String Patente = textBox_Patente.Text;
-            //String Turno = textBox_Turno.Text;
-            //String Chofer = textBox_Chofer.Text;
-            //String IDTurno = comboBox_Turno.Text.Substring(12,1);
-            //MessageBox.Show(IDTurno);
             String DniChofer = combo_Chofer.Text;
 
            
@@ -104,7 +96,6 @@ namespace UberFrba.Abm_Automovil
                 String IDTurno = obtenerIdTurnoaPartirDeCombobox(comboBox_Turno.Text);
                 this.SetIdTurno(IDTurno);
                 this.SetIdChofer(DniChofer);
-                //MessageBox.Show(Convert.ToString(idChofer));
                 idAuto = mapper.CrearAutomoviles(auto);
                 
 
@@ -139,11 +130,6 @@ namespace UberFrba.Abm_Automovil
                 MessageBox.Show(exceptionChofer.Message);
                 return;
             }
-            //catch (TurnoInexistenteException exceptionTurno)
-            //{
-            //    MessageBox.Show(exceptionTurno.Message + IDTurno);
-            //    return;
-            //}
             catch (SqlException error)
             {
 
@@ -173,7 +159,9 @@ namespace UberFrba.Abm_Automovil
             textBox_Patente.Text = "";
             comboBox_Turno.Items.Clear();
             CargarComboBoxTurno();
-            combo_Chofer.Text = "";
+            combo_Chofer.Items.Clear();
+            CargarComboBoxChoferes();
+            
 
         }
 
@@ -211,7 +199,7 @@ namespace UberFrba.Abm_Automovil
             this.Close();
         }
 
-        private void CargarComboBoxTurno(){//ComboBox comboTurno) {
+        private void CargarComboBoxTurno(){
 
             DataTable turnos = mapper.SelectDataTable("*", "PUSH_IT_TO_THE_LIMIT.Turno");//aca traigo todos los turnos habilitados o deshabilitados , si se quiere traer solo los habilitados descomentar la linea de abajo
             //DataTable turnos = mapper.SelectDataTable("*", "PUSH_IT_TO_THE_LIMIT.Turno","turno_habilitado = 1");aca traigo los turnos habilitados nada mas , si se quiere esta opcion comentar la linea de arriba y  descomentar esta
@@ -241,12 +229,5 @@ namespace UberFrba.Abm_Automovil
             turnoSeparado2 = turnoSeparado1[1].Split(')');
             return turnoSeparado2[0];
         }
-
-
-
-
-
-
-
     }
 }

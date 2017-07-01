@@ -62,7 +62,7 @@ namespace UberFrba
                 funcionalidades[accionElegida].ShowDialog();
                 this.Close();
             }
-            catch (NullReferenceException exceptionAccionElegida) { 
+            catch (NullReferenceException ) { 
             
                 MessageBox.Show("La opcion ingresada es incorrecta","Accion elegida Incorrecta",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }

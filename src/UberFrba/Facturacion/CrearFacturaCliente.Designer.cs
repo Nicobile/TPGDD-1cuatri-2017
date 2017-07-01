@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CrearFacturaCliente));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.textBox_CantidadViajes = new System.Windows.Forms.TextBox();
             this.textBox_TotalFactutado = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -49,7 +50,7 @@
             this.button_limpiar = new System.Windows.Forms.Button();
             this.button_volver = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Viajes_Facturados)).BeginInit();
             this.SuspendLayout();
@@ -57,6 +58,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Wheat;
+            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.textBox_CantidadViajes);
             this.groupBox1.Controls.Add(this.textBox_TotalFactutado);
@@ -72,10 +74,20 @@
             this.groupBox1.Controls.Add(this.comboBox_Cliente);
             this.groupBox1.Location = new System.Drawing.Point(27, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(449, 202);
+            this.groupBox1.Size = new System.Drawing.Size(449, 203);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Factura";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.Red;
+            this.label7.Location = new System.Drawing.Point(24, 169);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(130, 13);
+            this.label7.TabIndex = 48;
+            this.label7.Text = "*Cargar todos los campos ";
             // 
             // textBox_CantidadViajes
             // 
@@ -235,7 +247,7 @@
             // 
             // button_volver
             // 
-            this.button_volver.Location = new System.Drawing.Point(27, 455);
+            this.button_volver.Location = new System.Drawing.Point(16, 455);
             this.button_volver.Name = "button_volver";
             this.button_volver.Size = new System.Drawing.Size(100, 30);
             this.button_volver.TabIndex = 53;
@@ -253,15 +265,15 @@
             this.label4.TabIndex = 44;
             this.label4.Text = "Viajes a Facturar :";
             // 
-            // label7
+            // label8
             // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(39, 182);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(127, 13);
-            this.label7.TabIndex = 48;
-            this.label7.Text = "*Cargar todos los campos";
+            this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.Color.Red;
+            this.label8.Location = new System.Drawing.Point(24, 182);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(379, 13);
+            this.label8.TabIndex = 49;
+            this.label8.Text = "Aviso :Total Facturado Y Cantidad viajes se cargaran al seleccionar Fecha Fin ";
             // 
             // CrearFacturaCliente
             // 
@@ -312,5 +324,6 @@
         private System.Windows.Forms.TextBox textBox_TotalFactutado;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
     }
 }

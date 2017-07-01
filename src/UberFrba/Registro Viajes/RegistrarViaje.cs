@@ -192,7 +192,6 @@ namespace UberFrba.Registro_Viajes
                 if (idRegistroViaje > 0)
                 {
                     MessageBox.Show("Registro de viaje agregado correctamente");
-                    //this.Close();
                     this.Hide();
                     new MenuPrincipal().ShowDialog();
                     this.Close();
@@ -230,36 +229,42 @@ namespace UberFrba.Registro_Viajes
             catch (DuracionViajeInvalidaException error) {
 
                 MessageBox.Show(error.Message, "Error al registrar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             
             }
             catch (PatenteAutomovilInexistente error)
             {
 
                 MessageBox.Show(error.Message, "Error al registrar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
 
             }
             catch (ChoferInexistenteException error)
             {
 
                 MessageBox.Show(error.Message, "Error al registrar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
 
             }
             catch (CantidaKilometrosInvalidoException error)
             {
 
                 MessageBox.Show(error.Message, "Error al registrar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
 
             }
             catch (ClienteInhabilitadoException error)
             {
 
                 MessageBox.Show(error.Message, "Error al registrar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
 
             }
             catch (HorarioNoCoincideConTurno error)
             {
 
                 MessageBox.Show(error.Message, "Error horario no coincide con el turno", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
 
             }
 

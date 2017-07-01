@@ -21,19 +21,13 @@ namespace UberFrba.Abm_Automovil
         private SqlCommand command { get; set; }
         private IList<SqlParameter> parametros = new List<SqlParameter>();
         private Boolean ocultarBotonDeshabilitarTurno;
-        //private int idAutomovilSeleccionado;
 
-        public TurnosDeUnAutomovil(String idAutomovil,Boolean botonDeshabilitarTurno)//,int idAutomovilSeleccionado) me parece que no es necesario DEJAR ASI 
+        public TurnosDeUnAutomovil(String idAutomovil,Boolean botonDeshabilitarTurno)
         {
             InitializeComponent();
             this.idAutomovilt = idAutomovil;
             this.idAutomovilTurno = Convert.ToInt32(idAutomovil);
             this.ocultarBotonDeshabilitarTurno = botonDeshabilitarTurno;
-            //if (idAutomovilSeleccionado != 0)
-            //{
-            //    this.idAutomovilSeleccionado = idAutomovilSeleccionado;
-            //}
-            //this.OcultarColumnasQueNoDebenVerse("Deshabilitar  Turno al Automovil");
         }
 
         private void TurnosDeUnAutomovil_Load(object sender, EventArgs e)
@@ -48,10 +42,6 @@ namespace UberFrba.Abm_Automovil
 
         private void CargarTurnoAutomovil()
         {
-            //dataGridView_Automovil.DataSource = mapper.SelectTurnosParaFiltroConFiltro("WHERE turno_id IN (SELECT turno_id FROM PUSH_IT_TO_THE_LIMIT.AutoporTurno WHERE auto_id=)"+this.idAutomovilTurno);
-            //dataGridView_Automovil.DataSource = mapper.SelectTurnoParaFiltro();
-           // dataGridView_Automovil.DataSource =mapper.SelectDataTable("*","PUSH_IT_TO_THE_LIMIT.AutoporTurn"," turno_id IN (SELECT turno_id FROM PUSH_IT_TO_THE_LIMIT.AutoporTurno WHERE auto_id=)"+this.idAutomovilTurno);
-
                        
             DataSet turnosAutomovil = new DataSet();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -98,7 +88,6 @@ namespace UberFrba.Abm_Automovil
             {
                 
                 String idTurnoAModificar = dataGridView_Automovil_Turnos_Actuales.Rows[e.RowIndex].Cells["Turno N°"].Value.ToString();
-                //Boolean pudoModificar=mapper.ActualizarEstadoTurnoAutomovil(this.idAutomovilSeleccionado, Convert.ToInt32(idTurnoAModificar),0);
                 Boolean pudoModificar = mapper.ActualizarEstadoTurnoAutomovil(this.idAutomovilTurno, Convert.ToInt32(idTurnoAModificar), 0);
                 if (pudoModificar) MessageBox.Show("Turno deshabilitado del automovil correctamente");
                 dataGridView_Automovil_Turnos_Actuales.Rows[e.RowIndex].Cells["Habilitado"].Value = false;

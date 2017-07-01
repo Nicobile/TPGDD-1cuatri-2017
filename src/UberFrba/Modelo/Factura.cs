@@ -74,7 +74,17 @@ namespace UberFrba.Modelo
         }
         public void SetImporteTotalFactura(String TotalFactura)
         {
-            this.importeTotalFactura=Convert.ToSingle(TotalFactura);
+
+            if (TotalFactura == "")
+            {
+
+                throw new NoHayViajesException("No posee viajes registrados en esas fecha o ya fueron Facturados");
+            }
+            else
+            {
+                this.importeTotalFactura = Convert.ToSingle(TotalFactura);
+            } 
+            
         }
 
         public Double GetImporteTotalFactura()
