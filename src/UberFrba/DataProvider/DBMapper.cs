@@ -169,18 +169,11 @@ namespace UberFrba
         }
         public DataTable AplicarEstadistica(int anio, int trimestre, String funcion)
         {
-            /* me conectto con la base para obtener el resultado de aplocar la funcion*/
-            String config = ConfigurationManager.AppSettings["archConexionConSQL"];
-            SqlConnection conexion = new SqlConnection(config);
-                 try
-            {
-                conexion.Open();
-            }
-            catch (Exception) { MessageBox.Show("Error en conexion"); }
+           
+          
 
-
-            string query = "SELECT * From [PUSH_IT_TO_THE_LIMIT]." + funcion + "(@anio, @trimestre)";
-            SqlCommand command = new SqlCommand(query, conexion);
+            SqlCommand command = QueryBuilder.Instance.build("SELECT * From [PUSH_IT_TO_THE_LIMIT]." + funcion + "(@anio, @trimestre)", parametros);
+            
 
             command.Parameters.AddWithValue("@anio", anio);
 
