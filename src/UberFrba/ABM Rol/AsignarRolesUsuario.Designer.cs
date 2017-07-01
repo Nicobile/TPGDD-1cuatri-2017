@@ -31,10 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AsignarRolesUsuario));
             this.labelRol = new System.Windows.Forms.Label();
             this.comboBox_Usuarios = new System.Windows.Forms.ComboBox();
-            this.checkedListBoxFuncionalidades = new System.Windows.Forms.CheckedListBox();
+            this.checkedListBoxRoles = new System.Windows.Forms.CheckedListBox();
             this.labelFuncionalidades = new System.Windows.Forms.Label();
             this.botonVolver = new System.Windows.Forms.Button();
-            this.botonLimpiar = new System.Windows.Forms.Button();
             this.botonGuardar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -57,14 +56,14 @@
             this.comboBox_Usuarios.TabIndex = 0;
             this.comboBox_Usuarios.SelectedIndexChanged += new System.EventHandler(this.comboBox_Usuarios_SelectedIndexChanged);
             // 
-            // checkedListBoxFuncionalidades
+            // checkedListBoxRoles
             // 
-            this.checkedListBoxFuncionalidades.BackColor = System.Drawing.Color.Wheat;
-            this.checkedListBoxFuncionalidades.FormattingEnabled = true;
-            this.checkedListBoxFuncionalidades.Location = new System.Drawing.Point(203, 67);
-            this.checkedListBoxFuncionalidades.Name = "checkedListBoxFuncionalidades";
-            this.checkedListBoxFuncionalidades.Size = new System.Drawing.Size(193, 199);
-            this.checkedListBoxFuncionalidades.TabIndex = 4;
+            this.checkedListBoxRoles.BackColor = System.Drawing.Color.Wheat;
+            this.checkedListBoxRoles.FormattingEnabled = true;
+            this.checkedListBoxRoles.Location = new System.Drawing.Point(203, 67);
+            this.checkedListBoxRoles.Name = "checkedListBoxRoles";
+            this.checkedListBoxRoles.Size = new System.Drawing.Size(193, 199);
+            this.checkedListBoxRoles.TabIndex = 4;
             // 
             // labelFuncionalidades
             // 
@@ -87,23 +86,15 @@
             this.botonVolver.UseVisualStyleBackColor = true;
             this.botonVolver.Click += new System.EventHandler(this.botonVolver_Click);
             // 
-            // botonLimpiar
-            // 
-            this.botonLimpiar.Location = new System.Drawing.Point(205, 305);
-            this.botonLimpiar.Name = "botonLimpiar";
-            this.botonLimpiar.Size = new System.Drawing.Size(96, 30);
-            this.botonLimpiar.TabIndex = 7;
-            this.botonLimpiar.Text = "Limpiar";
-            this.botonLimpiar.UseVisualStyleBackColor = true;
-            // 
             // botonGuardar
             // 
-            this.botonGuardar.Location = new System.Drawing.Point(355, 306);
+            this.botonGuardar.Location = new System.Drawing.Point(315, 307);
             this.botonGuardar.Name = "botonGuardar";
             this.botonGuardar.Size = new System.Drawing.Size(96, 30);
             this.botonGuardar.TabIndex = 8;
             this.botonGuardar.Text = "Guardar";
             this.botonGuardar.UseVisualStyleBackColor = true;
+            this.botonGuardar.Click += new System.EventHandler(this.botonGuardar_Click);
             // 
             // AsignarRolesUsuario
             // 
@@ -112,10 +103,9 @@
             this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
             this.ClientSize = new System.Drawing.Size(463, 352);
             this.Controls.Add(this.botonGuardar);
-            this.Controls.Add(this.botonLimpiar);
             this.Controls.Add(this.botonVolver);
             this.Controls.Add(this.labelFuncionalidades);
-            this.Controls.Add(this.checkedListBoxFuncionalidades);
+            this.Controls.Add(this.checkedListBoxRoles);
             this.Controls.Add(this.comboBox_Usuarios);
             this.Controls.Add(this.labelRol);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -131,10 +121,9 @@
 
         private System.Windows.Forms.Label labelRol;
         private System.Windows.Forms.ComboBox comboBox_Usuarios;
-        private System.Windows.Forms.CheckedListBox checkedListBoxFuncionalidades;
+        private System.Windows.Forms.CheckedListBox checkedListBoxRoles;
         private System.Windows.Forms.Label labelFuncionalidades;
         private System.Windows.Forms.Button botonVolver;
-        private System.Windows.Forms.Button botonLimpiar;
         private System.Windows.Forms.Button botonGuardar;
     }
 }

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UberFrba.ABM_Rol;
 using UberFrba.DataProvider;
 
 namespace UberFrba.Abm_Rol
@@ -16,7 +17,8 @@ namespace UberFrba.Abm_Rol
     {
 
         private DBMapper mapper = new DBMapper();
-
+        IList<SqlParameter> parametros = new List<SqlParameter>();
+        int IDUSUARIO;
 
         public AsignarRolesUsuario()
         {
@@ -25,13 +27,13 @@ namespace UberFrba.Abm_Rol
 
         private void botonVolver_Click(object sender, EventArgs e)
         {
-
+            this.volverAlMenuTurno();
         }
 
         private void AsignarRolesUsuario_Load(object sender, EventArgs e)
         {
             CargarComboBoxUsuarios();
-            CargarFuncionalidades();
+            CargarRoles();
         }
 
         public void CargarComboBoxUsuarios()
@@ -46,72 +48,73 @@ namespace UberFrba.Abm_Rol
                 }
 
         }
-        private void CargarFuncionalidades()
+        private void CargarRoles()
         {
             DataTable rolesHabilitados = mapper.obtenerRolesHabilitados();
-            checkedListBoxFuncionalidades.DataSource = rolesHabilitados.DefaultView;
-            checkedListBoxFuncionalidades.ValueMember = "rol_nombre";
+            checkedListBoxRoles.DataSource = rolesHabilitados.DefaultView;
+            checkedListBoxRoles.ValueMember = "rol_nombre";
         }
 
 
 
         private void comboBox_Usuarios_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MarcarFuncionalidades();
+            this.IDUSUARIO = Convert.ToInt32(mapper.SelectFromWhere("usuario_id", "Usuario", "usuario_name", comboBox_Usuarios.Text));
+            MarcarRoles();
+
         }
         
         
 
-         private void MarcarFuncionalidades()
+         private void MarcarRoles()
          {
-             int idUsuario = Convert.ToInt32(mapper.SelectFromWhere("usuario_id", "Usuario", "usuario_name", comboBox_Usuarios.Text));
-             IList<SqlParameter> parametros = new List<SqlParameter>();
+             parametros = new List<SqlParameter>();
              SqlDataAdapter adapter = new SqlDataAdapter();
-             List<int> funcionalidadesAMarcar = new List<int>();
-             DesmarcarFuncionalidades();
+             List<int> rolesAMarcar = new List<int>();
+             DesmarcarRoles();
 
-             foreach (DataRowView funcionalidad in this.checkedListBoxFuncionalidades.Items)
+             foreach (DataRowView rol in this.checkedListBoxRoles.Items)
              {
                  parametros.Clear();
-                 parametros.Add(new SqlParameter("@funcionalidad", funcionalidad.Row["rol_nombre"] as String));
+                 parametros.Add(new SqlParameter("@rol", rol.Row["rol_nombre"] as String));
 
-                 if (verificarSiLaTiene(funcionalidad.Row["rol_nombre"] as String,idUsuario))
+                 if (verificarSiLaTiene(rol.Row["rol_nombre"] as String,IDUSUARIO))
                  {
-                     int i = checkedListBoxFuncionalidades.Items.IndexOf(funcionalidad);
-                     funcionalidadesAMarcar.Add(i);
+                     int i = checkedListBoxRoles.Items.IndexOf(rol);
+                     rolesAMarcar.Add(i);
 
                  }
              }
 
-             foreach (int index in funcionalidadesAMarcar)
+             foreach (int index in rolesAMarcar)
              {
-                 checkedListBoxFuncionalidades.SetItemChecked(index, true);
+                 checkedListBoxRoles.SetItemChecked(index, true);
              }
          }
 
 
 
-         private void DesmarcarFuncionalidades()
+         private void DesmarcarRoles()
          {
-             for (int i = 0; i < checkedListBoxFuncionalidades.Items.Count; i++)
+             for (int i = 0; i < checkedListBoxRoles.Items.Count; i++)
              {
-                 checkedListBoxFuncionalidades.SetItemChecked(i, false);
+                 checkedListBoxRoles.SetItemChecked(i, false);
              }
          }
 
 
 
-         private bool verificarSiLaTiene(String funcionalidad,int IDUsuario)
+         private bool verificarSiLaTiene(String rol,int IDUsuario)
          {
-             IList<SqlParameter> parametros = new List<SqlParameter>();
+             parametros = new List<SqlParameter>();
              parametros.Clear();
              parametros.Add(new SqlParameter("@idUsuario", IDUsuario));
-             parametros.Add(new SqlParameter("@funcionalidad", funcionalidad));
+             parametros.Add(new SqlParameter("@rol", rol));
 
-             String queryCantidadRolXFuncionalidad = "SELECT COUNT(*) from PUSH_IT_TO_THE_LIMIT.rol r join PUSH_IT_TO_THE_LIMIT.RolporUsuario p on(r.rol_id=p.rol_id) join PUSH_IT_TO_THE_LIMIT.Usuario u ON(p.usuario_id = u.usuario_id) where u.usuario_id=@idUsuario and r.rol_nombre=@funcionalidad";
-             int tieneLaFuncionalidad = (int)QueryBuilder.Instance.build(queryCantidadRolXFuncionalidad, parametros).ExecuteScalar();
+             String queryCantidadRolXUsuario = "SELECT COUNT(*) from PUSH_IT_TO_THE_LIMIT.rol r join PUSH_IT_TO_THE_LIMIT.RolporUsuario p on(r.rol_id=p.rol_id) join PUSH_IT_TO_THE_LIMIT.Usuario u ON(p.usuario_id = u.usuario_id) where u.usuario_id=@idUsuario and r.rol_nombre=@rol";
+             int tieneElRol = (int)QueryBuilder.Instance.build(queryCantidadRolXUsuario, parametros).ExecuteScalar();
 
-             if (tieneLaFuncionalidad == 1)
+             if (tieneElRol == 1)
              {
                  return true;
              }
@@ -120,6 +123,91 @@ namespace UberFrba.Abm_Rol
                  return false;
              }
          }
+
+         private void botonGuardar_Click(object sender, EventArgs e)
+         {
+             if (comboBox_Usuarios.Text == "")
+             {
+                 MessageBox.Show("Falta selecionar el campo usuario", "Error al agregar roles", MessageBoxButtons.OK, MessageBoxIcon.Error);
+             }
+             else
+             {
+                 AgregarRoles();
+                 QuitarRoles();
+                 MessageBox.Show("Roles asignados correctamente al usuario con Username  : " + comboBox_Usuarios.Text, "Roles agregados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                 this.volverAlMenuTurno();
+             }
+         }
+
+         private void AgregarRoles()
+         {
+
+             foreach (DataRowView rol in this.checkedListBoxRoles.CheckedItems)
+             {
+                 if (verificarSiLaTiene(rol.Row["rol_nombre"] as String,IDUSUARIO))
+                 {
+
+                 }
+                 else
+                 {
+                     parametros.Clear();
+                     parametros.Add(new SqlParameter("@idUsuario",this.IDUSUARIO));
+                     parametros.Add(new SqlParameter("@rol", rol.Row["rol_nombre"] as String));
+
+                     String queryRolXUsuario = "INSERT INTO PUSH_IT_TO_THE_LIMIT.RolporUsuario(usuario_id, rol_id) VALUES (@idUsuario,(SELECT r.rol_id FROM PUSH_IT_TO_THE_LIMIT.Rol r WHERE r.rol_nombre=@rol))";
+
+                     QueryBuilder.Instance.build(queryRolXUsuario, parametros).ExecuteNonQuery();
+                 }
+             }
+         }
+         private void QuitarRoles()
+         {
+
+             foreach (DataRowView rol in this.checkedListBoxRoles.Items)
+             {
+                 int index = checkedListBoxRoles.Items.IndexOf(rol);
+                 String estado = this.checkedListBoxRoles.GetItemCheckState(index).ToString();
+
+                 if (estado == "Unchecked")
+                 {
+                     parametros.Clear();
+                     parametros.Add(new SqlParameter("@idUsuario", this.IDUSUARIO));
+                     parametros.Add(new SqlParameter("@rol", rol.Row["rol_nombre"] as String));
+
+                     String queryBorrarRolXUsuario = "DELETE PUSH_IT_TO_THE_LIMIT.RolporUsuario WHERE rol_id = (SELECT r.rol_id FROM PUSH_IT_TO_THE_LIMIT.Rol r WHERE r.rol_nombre = @rol) AND usuario_id =@idUsuario";
+
+                     QueryBuilder.Instance.build(queryBorrarRolXUsuario, parametros).ExecuteNonQuery();
+                 }
+             }
+         }
+
+
+
+
+         public void volverAlMenuTurno() {
+             
+             this.Hide();
+             new RolForm().ShowDialog();
+             this.Close();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         
     }

@@ -266,7 +266,6 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[Auto](
 	[auto_patente] VARCHAR(10) UNIQUE NOT NULL,
 	[auto_marca] VARCHAR(255) NOT NULL,
 	[auto_modelo] VARCHAR(255) NOT NULL,
-	--[chofer_id] int NOT NULL,								
 	[auto_estado] BIT not null DEFAULT 1,
 	[auto_licencia] VARCHAR(255),
 	[auto_rodado] VARCHAR(10),
@@ -368,7 +367,6 @@ insert into [PUSH_IT_TO_THE_LIMIT].Rol (rol_nombre) values
 
 insert into [PUSH_IT_TO_THE_LIMIT].Funcionalidad (funcionalidad_descripcion) values
 ('ABM de Rol'),                            --1
---('Registro de Usuarios'),                  --2
 ('ABM de Clientes'),                       --3
 ('ABM de Automoviles'),                    --4
 ('ABM de Turnos'),                         --5
@@ -388,7 +386,7 @@ insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones (rol_id, funcionalidad_id) va
 --Administrativo
 insert into [PUSH_IT_TO_THE_LIMIT].RolporFunciones (rol_id,funcionalidad_id)
 	select distinct R.rol_id, F.funcionalidad_id from [PUSH_IT_TO_THE_LIMIT].Rol R,[PUSH_IT_TO_THE_LIMIT].Funcionalidad F
-	where R.rol_nombre = 'Administrativo' and
+	where R.rol_nombre = 'Administrador' and
 			F.funcionalidad_descripcion in ('ABM de Rol','Facturacion de Clientes','ABM de Clientes','ABM de Automoviles','ABM de turnos','ABM de choferes','Registro de viajes','Listado estadistico','Rendicion de viajes');
 
 --Chofer
@@ -447,8 +445,13 @@ where  cast( m.chofer_dni as varchar(255)) = u.usuario_name
 order by usuario_ID
 
 /*RolporUsuario*/
+/*Admin*/
 insert into PUSH_IT_TO_THE_LIMIT.RolporUsuario(usuario_id, rol_id) 
 values (1,1)
+insert into PUSH_IT_TO_THE_LIMIT.RolporUsuario(usuario_id, rol_id) 
+values (1,2)
+insert into PUSH_IT_TO_THE_LIMIT.RolporUsuario(usuario_id, rol_id) 
+values (1,3)
 /*clienteporusuario*/
 insert into [PUSH_IT_TO_THE_LIMIT].RolporUsuario( usuario_Id, rol_id)
 select distinct u.usuario_ID, r.rol_ID

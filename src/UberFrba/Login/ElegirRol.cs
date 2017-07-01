@@ -48,13 +48,22 @@ namespace UberFrba.Login
 
         private void botonAceptar_Click(object sender, EventArgs e)
         {
-            String rolElegido = comboBoxRol.Text;
+            if (comboBoxRol.Text == "")
+            {
+                MessageBox.Show("Debe ingresar un rol para poder continuar", "Seleccionar Rol", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
 
-            UsuarioSesion.Usuario.rol = rolElegido;
+            }
+            else
+            {
+                String rolElegido = comboBoxRol.Text;
 
-            this.Hide();
-            new MenuPrincipal().ShowDialog();
-            this.Close();
+                UsuarioSesion.Usuario.rol = rolElegido;
+
+                this.Hide();
+                new MenuPrincipal().ShowDialog();
+                this.Close();
+            }
         }
 
     }

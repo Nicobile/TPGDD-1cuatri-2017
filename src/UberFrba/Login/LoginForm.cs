@@ -59,7 +59,6 @@ namespace UberFrba.Login
             //Chequea el ingreso
             if (QueryHelper.Instance.readFrom(reader))
             {
-                 //MessageBox.Show("Bienvenido " + reader["usuario_name"] + "!");
                  MessageBox.Show("Bienvenido " + reader["usuario_name"] + "!", "Bienvenido", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 UsuarioSesion.Usuario.nombre = (String)reader["usuario_name"];
@@ -70,24 +69,11 @@ namespace UberFrba.Login
                 parametros.Add(new SqlParameter("@username", usuario));
                 String clearIntentosFallidos = "UPDATE PUSH_IT_TO_THE_LIMIT.Usuario SET usuario_intentos = 0 WHERE usuario_name = @username";
                 QueryBuilder.Instance.build(clearIntentosFallidos, parametros).ExecuteNonQuery();
-
-                //// Se fija si es el primer inicio de sesion del usuario
-                //parametros.Clear();
-                //parametros.Add(new SqlParameter("@username", usuario));
-                //String sesion = "SELECT usuario_password FROM PUSH_IT_TO_THE_LIMIT.Usuario WHERE usuario_name = @username"; 
-                //String primerInicio = (String)QueryBuilder.Instance.build(sesion, parametros).ExecuteScalar();
-                ////El primer inicio la contraseña es fija (OK)
-                //if (primerInicio == "565339bc4d33d72817b583024112eb7f5cdf3e5eef0252d6ec1b9c9a94e12bb3") //  QUEDA PENDIENTE PONER ACA LA CONTRASEÑA QUE VIENE POR DEFECTO EN LA BASE!!!!!!!!!!!
-                //{
-                //    this.Hide();
-                //    //new CambiarContrasena().ShowDialog();
-                //    this.Close();
-                //}
-
+                
                 parametros.Clear();
                 parametros.Add(new SqlParameter("@username", usuario));
 
-                String consultaRoles = "SELECT COUNT(rol_id) FROM PUSH_IT_TO_THE_LIMIT.RolporUsuario WHERE (SELECT usuario_id FROM PUSH_IT_TO_THE_LIMIT.Usuario WHERE usuario_name = 'admin') = usuario_id";
+                String consultaRoles = "SELECT COUNT(rol_id) FROM PUSH_IT_TO_THE_LIMIT.RolporUsuario WHERE (SELECT usuario_id FROM PUSH_IT_TO_THE_LIMIT.Usuario WHERE usuario_name =@username) = usuario_id";
                 int cantidadDeRoles = (int)QueryBuilder.Instance.build(consultaRoles, parametros).ExecuteScalar();
 
                int idUsuario=Convert.ToInt32(mapper.SelectFromWhere("usuario_id", "Usuario", "usuario_name", textBoxUsuario.Text));
@@ -112,7 +98,6 @@ namespace UberFrba.Login
                         return;
                     }
                   
-                    // Para testear si elige bien el rol: MessageBox.Show("Rol: " + UsuarioSesion.Usuario.rol);
 
                     this.Hide();
                     new MenuPrincipal().ShowDialog();
@@ -165,11 +150,11 @@ namespace UberFrba.Login
                         String deshabilitar = "UPDATE PUSH_IT_TO_THE_LIMIT.Usuario SET usuario_habilitado = 0 WHERE usuario_name = @username";
                         QueryBuilder.Instance.build(deshabilitar, parametros).ExecuteNonQuery();
                     }
-                    MessageBox.Show("Contraseña incorrecta." + '\n' + '\n' + "La contraseña distingue mayusculas y minusculas." + '\n' + '\n' + "Fallidos del usuario: " + intentosFallidos);
+                    MessageBox.Show("Contraseña incorrecta , Fallidos del usuario: " + intentosFallidos+"  (Al tercer intento sera bloqueado)");
                 }
                 else 
                 {
-                    MessageBox.Show("El usuario no existe");
+                    MessageBox.Show("El usuario no existe","Error en el login",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 }
        
                 
