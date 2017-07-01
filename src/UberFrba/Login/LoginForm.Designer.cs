@@ -61,7 +61,7 @@ namespace UberFrba.Login
             this.textBoxUsuario.Name = "textBoxUsuario";
             this.textBoxUsuario.Size = new System.Drawing.Size(100, 21);
             this.textBoxUsuario.TabIndex = 1;
-            this.textBoxUsuario.TextChanged += new System.EventHandler(this.textBoxUsuario_TextChanged);
+            //this.textBoxUsuario.TextChanged += new System.EventHandler(this.textBoxUsuario_TextChanged);
             // 
             // labelUsuario
             // 
@@ -92,7 +92,7 @@ namespace UberFrba.Login
             this.textBoxContaseña.Size = new System.Drawing.Size(100, 21);
             this.textBoxContaseña.TabIndex = 4;
             this.textBoxContaseña.UseSystemPasswordChar = true;
-            this.textBoxContaseña.TextChanged += new System.EventHandler(this.textBoxContaseña_TextChanged);
+            //this.textBoxContaseña.TextChanged += new System.EventHandler(this.textBoxContaseña_TextChanged);
             // 
             // labelTitulo
             // 
