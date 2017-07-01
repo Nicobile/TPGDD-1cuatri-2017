@@ -92,7 +92,19 @@ namespace UberFrba.ABM_Chofer
                 chofer.SetTelefono(Telefono);
                 chofer.SetMail(Mail);
                 chofer.SetActivo(true);
-                idUsuario = mapper.CrearUsuarioConValores(DNI, DNI);
+                if (username != "" && contrasena != "")
+                {
+
+
+                    idUsuario = mapper.CrearUsuarioConValores(username, contrasena);
+
+                }
+                else 
+                {
+                    idUsuario = mapper.CrearUsuarioConValores(DNI, DNI);
+                
+                }
+               
                 chofer.SetFechaDeNacimiento(fechaDeNacimiento);
                 chofer.SetIdUsuario(idUsuario);
                 idChofer = mapper.CrearChofer(chofer);

@@ -673,6 +673,12 @@ namespace UberFrba
             return false;
         }
 
+
+
+
+
+
+
         public Boolean AsignarTurnoaAutomovil(int idAuto, int idTurno)
         {
             query = "PUSH_IT_TO_THE_LIMIT.pr_agregar_turno_a_automovil";
@@ -886,6 +892,23 @@ namespace UberFrba
             return turnosAutomovil.Tables[0];
 
         }
+        //Usuarios 
+
+       public DataTable obtenerRolesDeUnUsuario(int IdUsuario) { 
+
+            DataSet turnosAutomovil = new DataSet();
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            parametros = new List<SqlParameter>();
+            parametros.Clear();
+            parametros.Add(new SqlParameter("@idUsuario",IdUsuario));
+            command = QueryBuilder.Instance.build("select rol_nombre from PUSH_IT_TO_THE_LIMIT.rol r join PUSH_IT_TO_THE_LIMIT.RolporUsuario p on(r.rol_id=p.rol_id) join PUSH_IT_TO_THE_LIMIT.Usuario u ON(p.usuario_id = u.usuario_id) where u.usuario_id=@idUsuario", parametros);
+            adapter.SelectCommand = command;
+            adapter.Fill(turnosAutomovil);
+            return turnosAutomovil.Tables[0];
+        
+        }
+
+
 
 
 

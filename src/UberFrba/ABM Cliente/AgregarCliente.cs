@@ -54,7 +54,7 @@ namespace UberFrba.ABM_Cliente
             String nombre = textBox_Nombre.Text;
             String apellido = textBox_Apellido.Text;
             String numeroDeDocumento = textBox_DNI.Text;
-            MessageBox.Show("¿Es correcto el DNI"+numeroDeDocumento+"?");
+            //MessageBox.Show("¿Es correcto el DNI"+numeroDeDocumento+"?");
             DateTime fechaDeNacimiento;
             DateTime.TryParse(textBox_FechaDeNacimiento.Text, out fechaDeNacimiento);
             String mail = textBox_Mail.Text;
@@ -82,7 +82,15 @@ namespace UberFrba.ABM_Cliente
                 cliente.SetCodigoPostal(codigoPostal);
                 cliente.SetIdUsuario(idUsuario);
                 cliente.SetActivo(true);
-                idUsuario = mapper.CrearUsuarioConValores(numeroDeDocumento, numeroDeDocumento);
+                if (username != "" && contrasena != "")
+                {
+                    idUsuario = mapper.CrearUsuarioConValores(username, contrasena);
+                }
+                else
+                {
+                    idUsuario = mapper.CrearUsuarioConValores(numeroDeDocumento, numeroDeDocumento); 
+                }
+                
                 cliente.SetIdUsuario(idUsuario);
                 idCliente = mapper.CrearCliente(cliente);
                 if (idCliente > 0) MessageBox.Show("Se agrego el cliente correctamente");

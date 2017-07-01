@@ -73,11 +73,11 @@ namespace UberFrba.Registro_de_Usuario
                 return;
             }
 
-            if (contraseña.Length < 8)
-            {
-                MessageBox.Show("La contraseña debe tener por lo menos 8 caracteres");
-                return;
-            }
+            //if (contraseña.Length < 8)
+            //{
+            //    MessageBox.Show("La contraseña debe tener por lo menos 8 caracteres");
+            //    return;
+            //}
 
             if (textBoxPass.Text != textBoxPass2.Text)
             {
@@ -95,7 +95,7 @@ namespace UberFrba.Registro_de_Usuario
 
             if (reader.Read())
             {
-                MessageBox.Show("El usuario ya existe");
+                MessageBox.Show("El usuario ya existe","Error al Registrar",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 return;
             }
 

@@ -14,7 +14,9 @@ namespace UberFrba.Login
 {
     public partial class LoginForm : Form
     {
-        
+
+        private DBMapper mapper = new DBMapper();
+
         public LoginForm()
         {
             InitializeComponent();
@@ -88,10 +90,12 @@ namespace UberFrba.Login
                 String consultaRoles = "SELECT COUNT(rol_id) FROM PUSH_IT_TO_THE_LIMIT.RolporUsuario WHERE (SELECT usuario_id FROM PUSH_IT_TO_THE_LIMIT.Usuario WHERE usuario_name = 'admin') = usuario_id";
                 int cantidadDeRoles = (int)QueryBuilder.Instance.build(consultaRoles, parametros).ExecuteScalar();
 
+               int idUsuario=Convert.ToInt32(mapper.SelectFromWhere("usuario_id", "Usuario", "usuario_name", textBoxUsuario.Text));
+
                 if(cantidadDeRoles > 1)
                 {
                     this.Hide();
-                    new ElegirRol().ShowDialog();
+                    new ElegirRol(idUsuario).ShowDialog();
                     this.Close();
                 }
                 else

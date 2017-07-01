@@ -15,12 +15,18 @@ namespace UberFrba.Login
     {
         private SqlCommand command { get; set; }
         private IList<SqlParameter> parametros = new List<SqlParameter>();
+        private DBMapper mapper = new DBMapper();
+        private int IDUsuario;
+
+
         
         public Object SelectedItem { get; set; }
 
-        public ElegirRol()
+        public ElegirRol(int IdUsuario)
         {
             InitializeComponent();
+            this.IDUsuario = IdUsuario;
+
             
         }
 
@@ -31,20 +37,19 @@ namespace UberFrba.Login
 
         private void CargarRoles()
         {
-            DataSet rolesUsuario = new DataSet();
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            parametros = new List<SqlParameter>();
-            parametros.Add(new SqlParameter("@username", UsuarioSesion.usuario.nombre));
-            command = QueryBuilder.Instance.build("SELECT r.rol_nombre from PUSH_IT_TO_THE_LIMIT.Rol r, PUSH_IT_TO_THE_LIMIT.RolporUsuario ru WHERE r.rol_habilitado = 1 AND (SELECT usuario_id FROM PUSH_IT_TO_THE_LIMIT.Usuario WHERE usuario_name = @username) = ru.usuario_id AND r.rol_id = ru.rol_id ", parametros);
-            adapter.SelectCommand = command;
-            adapter.Fill(rolesUsuario, "Rol");
-            comboBoxRol.DataSource = rolesUsuario.Tables[0].DefaultView;
-            comboBoxRol.ValueMember = "rol_nombre";
+            DataTable rolesUsuario = mapper.obtenerRolesDeUnUsuario(IDUsuario);
+
+            foreach (DataRow fila in rolesUsuario.Rows)
+            {
+                string nombre_rol = fila["rol_nombre"].ToString();
+                comboBoxRol.Items.Add(nombre_rol);
+            }
         }
 
         private void botonAceptar_Click(object sender, EventArgs e)
         {
-            String rolElegido = comboBoxRol.SelectedValue.ToString();
+            String rolElegido = comboBoxRol.Text;
+
             UsuarioSesion.Usuario.rol = rolElegido;
 
             this.Hide();

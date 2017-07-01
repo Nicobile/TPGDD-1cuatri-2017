@@ -26,7 +26,7 @@ namespace UberFrba.Abm_Cliente
         private void botonAgregarCliente_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new AgregarCliente("cliente", "ok").ShowDialog();
+            new AgregarCliente("", "").ShowDialog();
             this.Close();
         }
 

@@ -29,11 +29,6 @@ namespace UberFrba
             funcionalidades.Add("Registro de Viajes", new Registro_Viajes.RegistrarViaje()); 
             funcionalidades.Add("Rendicion de Viajes", new Rendicion_Viajes.RendicionViaje());
             funcionalidades.Add("Facturacion de Clientes", new Facturacion.CrearFacturaCliente());
-            /*funcionalidades.Add("Editar Visibilidad", new ABM_Visibilidad.FiltroVisibilidad());
-            funcionalidades.Add("Consulta de facturas", new Consulta_Facturas_Vendedor.ListadoFacturas()); 
-            funcionalidades.Add("Listado Estadistico", new Listado_Estadistico.Estadisticas());
-            funcionalidades.Add("Ver Historial", new Historial_Cliente.Historial());
-            funcionalidades.Add("Cambiar Contraseña", new Login.CambiarContrasena()); */
             funcionalidades.Add("Listado Estadistico", new Listado_Estadistico.ListadoEstadistico());
             funcionalidades.Add("Registro de Usuario", new Registro_de_Usuario.RegistrarUsuario());
 
