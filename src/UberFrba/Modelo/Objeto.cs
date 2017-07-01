@@ -22,7 +22,7 @@ namespace UberFrba.Modelo
  
         public Boolean esFechaPasada(DateTime dateTime)
         {
-            DateTime dateNow = DateConfig.getInstance().getCurrentDate();
+            DateTime dateNow = ConfigFecha.getInstance().getCurrentDate();
             int comparacion = dateTime.CompareTo(dateNow);
             if (comparacion >= 0)
                 return false;

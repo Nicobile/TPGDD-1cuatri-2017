@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Configuration;
 
+
 namespace UberFrba
 {
-    public class DateConfig
+    public class ConfigFecha
     {
-        private static DateConfig instance;
+        private static ConfigFecha instance;
         
-        public static DateConfig getInstance()
+        public static ConfigFecha getInstance()
         {
             if (instance == null)
             {
-                instance = new DateConfig();
+                instance = new ConfigFecha();
             }
 
             return instance;
@@ -24,7 +25,7 @@ namespace UberFrba
        
         public DateTime getCurrentDate()
         {
-          if(!String.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["CurrentDate"]))
+            if (!String.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["CurrentDate"]))
           {
               return DateTime.Parse(ConfigurationManager.AppSettings["CurrentDate"]);
           }

@@ -200,11 +200,11 @@
     <Compile Include="ABM Turno\MenuTurno.Designer.cs">
       <DependentUpon>MenuTurno.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataProvider\ConnectionManager.cs" />
-    <Compile Include="DataProvider\DBMapper.cs" />
-    <Compile Include="DataProvider\QueryBuilder.cs" />
+    <Compile Include="DataProvider\AdministradorDeConexion.cs" />
+    <Compile Include="DataProvider\ConstructorQuery.cs" />
+    <Compile Include="DataProvider\Mapper.cs" />
     <Compile Include="DataProvider\QueryHelper.cs" />
-    <Compile Include="DateConfig.cs" />
+    <Compile Include="ConfigFecha.cs" />
     <Compile Include="Exceptions\CampoVacioException.cs" />
     <Compile Include="Exceptions\CantidaKilometrosInvalidoException.cs" />
     <Compile Include="Exceptions\ChoferInexistenteException.cs" />
@@ -288,7 +288,6 @@
     </Compile>
     <Compile Include="UsuarioSesion.cs" />
     <Compile Include="Utils\HashSha256.cs" />
-    <Compile Include="Utils\Utils.cs" />
     <EmbeddedResource Include="Abm Automovil\AgregarAuto.resx">
       <DependentUpon>AgregarAuto.cs</DependentUpon>
     </EmbeddedResource>
