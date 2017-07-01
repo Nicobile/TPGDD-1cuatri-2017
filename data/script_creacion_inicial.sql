@@ -965,7 +965,7 @@ GO
 
 
 
---Procedure de atualizacion usuario y contraseña
+--Procedure de actualizacion usuario y contraseña
 CREATE PROCEDURE PUSH_IT_TO_THE_LIMIT.pr_usuario_nombre_password
   @idUsuario INT,
   @nombreUsuario NVARCHAR(255),
@@ -982,6 +982,9 @@ GO
 
 --Funciones para listado estadistico
 
+--  Para cada chofer se selecciona su viaje mas largo (mayor cantidad de kilometros)
+--  Se ordenan de forma descendente
+
 
 CREATE FUNCTION PUSH_IT_TO_THE_LIMIT.fx_Top5choferesViajesMasLargosEnUnTrimestre(@anio int,@trimestre int)
 RETURNS TABLE
@@ -994,6 +997,10 @@ RETURN(
 )
 GO
 
+--  Se agrupan las rendiciones por chofer
+--  Se suman los importes de cada una de la rendicion 
+-- Se ordenan de forma descendente según el Total (quedaran primeros los de mayor recaudación)
+ 
 CREATE FUNCTION PUSH_IT_TO_THE_LIMIT.fx_Top5DechoferesMayorRecaudacionEnUnTrimeste(@anio int, @trimestre int)
 RETURNS TABLE
 AS
@@ -1006,6 +1013,8 @@ RETURN(
 			order by sum(rendicion_importe_total) desc
 )
 GO
+--  Los viajes se ordenan, para cada cliente, en forma descendente segun la cantidad de veces que utilizó el mismo auto	
+--   Se selecciona de los 5 primeros clientes el vehículo con el que mayor viajes realizó (fila 1).
 
 CREATE FUNCTION PUSH_IT_TO_THE_LIMIT.fx_Top5clientesQueviajaronEnUnMismoAutoEnUnTrimestre(@anio int,@trimestre int)
 RETURNS TABLE
@@ -1024,6 +1033,9 @@ RETURN(
 )
 GO
 
+--  Se agrupan las facturas por cliente
+--  Para cada cliente se suman los importes de cada una de estas facturas
+--  Se ordenan de mayor a menor según el total de cada cliente 
 
 CREATE FUNCTION PUSH_IT_TO_THE_LIMIT.fx_Top5clientesMayorConsumoEnUnTrimestre(@anio int,@trimestre int)
 RETURNS TABLE
@@ -1036,7 +1048,7 @@ RETURN(
 		ORDER BY ConsumoCliente Desc
 )
 GO
-
+--me fijo si el chofer ya tiene una rendicion en esa fecha. si no tiene el count devuelve 0 y le puedo crear una rendicion
 CREATE FUNCTION PUSH_IT_TO_THE_LIMIT.fx_verificarRendicion(@fecha nvarchar(15),@idchofer int)
 RETURNS TABLE
 as
