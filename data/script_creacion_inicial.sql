@@ -356,7 +356,7 @@ ALTER TABLE [PUSH_IT_TO_THE_LIMIT].[ChoferporAuto] ADD CONSTRAINT ChoferporAuto_
 
 /*Rol*/
 insert into [PUSH_IT_TO_THE_LIMIT].Rol (rol_nombre) values
-('Administrativo'), 
+('Administrador'), 
 ('Chofer'), 
 ('Cliente');
 

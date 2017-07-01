@@ -53,7 +53,7 @@ namespace UberFrba.ABM_Rol
             // 
             this.checkedListBoxFuncionalidades.BackColor = System.Drawing.Color.Wheat;
             this.checkedListBoxFuncionalidades.FormattingEnabled = true;
-            this.checkedListBoxFuncionalidades.Location = new System.Drawing.Point(132, 77);
+            this.checkedListBoxFuncionalidades.Location = new System.Drawing.Point(146, 77);
             this.checkedListBoxFuncionalidades.Name = "checkedListBoxFuncionalidades";
             this.checkedListBoxFuncionalidades.Size = new System.Drawing.Size(193, 199);
             this.checkedListBoxFuncionalidades.TabIndex = 1;
@@ -63,15 +63,15 @@ namespace UberFrba.ABM_Rol
             // 
             this.labelRol.AutoSize = true;
             this.labelRol.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelRol.Location = new System.Drawing.Point(80, 28);
+            this.labelRol.Location = new System.Drawing.Point(25, 28);
             this.labelRol.Name = "labelRol";
-            this.labelRol.Size = new System.Drawing.Size(33, 20);
+            this.labelRol.Size = new System.Drawing.Size(101, 20);
             this.labelRol.TabIndex = 2;
-            this.labelRol.Text = "Rol";
+            this.labelRol.Text = "Nombre Rol :";
             // 
             // textBoxRol
             // 
-            this.textBoxRol.Location = new System.Drawing.Point(132, 28);
+            this.textBoxRol.Location = new System.Drawing.Point(146, 28);
             this.textBoxRol.Name = "textBoxRol";
             this.textBoxRol.Size = new System.Drawing.Size(94, 20);
             this.textBoxRol.TabIndex = 3;
@@ -79,11 +79,12 @@ namespace UberFrba.ABM_Rol
             // labelFuncionalidades
             // 
             this.labelFuncionalidades.AutoSize = true;
-            this.labelFuncionalidades.Location = new System.Drawing.Point(29, 77);
+            this.labelFuncionalidades.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFuncionalidades.Location = new System.Drawing.Point(21, 77);
             this.labelFuncionalidades.Name = "labelFuncionalidades";
-            this.labelFuncionalidades.Size = new System.Drawing.Size(84, 13);
+            this.labelFuncionalidades.Size = new System.Drawing.Size(119, 17);
             this.labelFuncionalidades.TabIndex = 4;
-            this.labelFuncionalidades.Text = "Funcionalidades";
+            this.labelFuncionalidades.Text = "Funcionalidades :";
             // 
             // botonGuardar
             // 

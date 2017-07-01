@@ -901,14 +901,39 @@ namespace UberFrba
             parametros = new List<SqlParameter>();
             parametros.Clear();
             parametros.Add(new SqlParameter("@idUsuario",IdUsuario));
-            command = QueryBuilder.Instance.build("select rol_nombre from PUSH_IT_TO_THE_LIMIT.rol r join PUSH_IT_TO_THE_LIMIT.RolporUsuario p on(r.rol_id=p.rol_id) join PUSH_IT_TO_THE_LIMIT.Usuario u ON(p.usuario_id = u.usuario_id) where u.usuario_id=@idUsuario", parametros);
+            command = QueryBuilder.Instance.build("select rol_nombre from PUSH_IT_TO_THE_LIMIT.rol r join PUSH_IT_TO_THE_LIMIT.RolporUsuario p on(r.rol_id=p.rol_id) join PUSH_IT_TO_THE_LIMIT.Usuario u ON(p.usuario_id = u.usuario_id) where u.usuario_id=@idUsuario AND r.rol_estado=1", parametros);
             adapter.SelectCommand = command;
             adapter.Fill(turnosAutomovil);
             return turnosAutomovil.Tables[0];
         
         }
+       public DataTable obtenerUsuariosHabilitados()
+       {
 
+           DataSet turnosAutomovil = new DataSet();
+           SqlDataAdapter adapter = new SqlDataAdapter();
+           parametros = new List<SqlParameter>();
+           parametros.Clear();
+           command = QueryBuilder.Instance.build("SELECT usuario_name FROM PUSH_IT_TO_THE_LIMIT.Usuario WHERE usuario_habilitado=1", parametros);
+           adapter.SelectCommand = command;
+           adapter.Fill(turnosAutomovil);
+           return turnosAutomovil.Tables[0];
 
+       }
+
+       public DataTable obtenerRolesHabilitados()
+       {
+
+           DataSet turnosAutomovil = new DataSet();
+           SqlDataAdapter adapter = new SqlDataAdapter();
+           parametros = new List<SqlParameter>();
+           parametros.Clear();
+           command = QueryBuilder.Instance.build("SELECT rol_nombre FROM PUSH_IT_TO_THE_LIMIT.Rol WHERE rol_estado=1", parametros);
+           adapter.SelectCommand = command;
+           adapter.Fill(turnosAutomovil);
+           return turnosAutomovil.Tables[0];
+
+       }
 
 
 

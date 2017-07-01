@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using UberFrba.Abm_Rol;
 
 namespace UberFrba.ABM_Rol
 {
@@ -46,6 +47,14 @@ namespace UberFrba.ABM_Rol
             this.Hide();
             new MenuPrincipal().ShowDialog();
             this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new AsignarRolesUsuario().ShowDialog();
+            this.Close();
+
         }
     }
 }

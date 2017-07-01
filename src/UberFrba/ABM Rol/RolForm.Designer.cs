@@ -35,6 +35,7 @@ namespace UberFrba.ABM_Rol
             this.botonAgregarRol = new System.Windows.Forms.Button();
             this.botonVolver = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,7 +84,7 @@ namespace UberFrba.ABM_Rol
             // 
             // botonVolver
             // 
-            this.botonVolver.Location = new System.Drawing.Point(15, 321);
+            this.botonVolver.Location = new System.Drawing.Point(12, 380);
             this.botonVolver.Name = "botonVolver";
             this.botonVolver.Size = new System.Drawing.Size(144, 35);
             this.botonVolver.TabIndex = 8;
@@ -102,12 +103,24 @@ namespace UberFrba.ABM_Rol
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(83, 306);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(135, 54);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "Asignar Roles";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // RolForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::UberFrba.Properties.Resources.HUAYI_triaxial_space_wood_floor_photography_backdrops_font_b_pine_b_font_font_b_plank_b;
-            this.ClientSize = new System.Drawing.Size(309, 386);
+            this.ClientSize = new System.Drawing.Size(309, 427);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.botonVolver);
             this.Controls.Add(this.labelRoles);
@@ -132,5 +145,6 @@ namespace UberFrba.ABM_Rol
         private System.Windows.Forms.Button botonAgregarRol;
         private System.Windows.Forms.Button botonVolver;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button button1;
     }
 }

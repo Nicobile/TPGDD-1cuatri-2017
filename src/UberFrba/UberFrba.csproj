@@ -146,6 +146,12 @@
     <Compile Include="Abm Rol\AgregarRol.Designer.cs">
       <DependentUpon>AgregarRol.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Rol\AsignarRolesUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\AsignarRolesUsuario.Designer.cs">
+      <DependentUpon>AsignarRolesUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Rol\BajaRol.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -324,6 +330,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\AgregarRol.resx">
       <DependentUpon>AgregarRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Rol\AsignarRolesUsuario.resx">
+      <DependentUpon>AsignarRolesUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\BajaRol.resx">
       <DependentUpon>BajaRol.cs</DependentUpon>
