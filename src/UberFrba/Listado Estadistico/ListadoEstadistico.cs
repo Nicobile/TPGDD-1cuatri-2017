@@ -21,9 +21,10 @@ namespace UberFrba.Listado_Estadistico
         public ListadoEstadistico()
         {
             InitializeComponent();
-            DateTime FECHA_ACTUAL = DateTime.Today;
-            seleccionAño.MaxDate = FECHA_ACTUAL;// para que no se puedan hacer rendiciones mas alla del dia de hoy
+           DateTime FECHA_ACTUAL = DateTime.Parse(ConfigurationManager.AppSettings["Fecha"]);
+            seleccionAño.MaxDate = FECHA_ACTUAL;
             seleccionAño.Value = FECHA_ACTUAL;
+        
             seleccionTrimestre.Text = "";
             SeleccionEstadistica.Text = "";
 

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using UberFrba.Exceptions;
 using UberFrba.DataProvider;
 using UberFrba.Modelo;
-
+using System.Configuration;
 namespace UberFrba.Registro_Viajes
 {
     public partial class RegistrarViaje : Form
@@ -24,6 +24,8 @@ namespace UberFrba.Registro_Viajes
         public RegistrarViaje()
         {
             InitializeComponent();
+            DateTime FECHA_ACTUAL = DateTime.Parse(ConfigurationManager.AppSettings["Fecha"]);
+            this.monthCalendar_FechaDeViaje.MaxDate = FECHA_ACTUAL;
         }
 
         private void button_Cancelar_Click(object sender, EventArgs e)

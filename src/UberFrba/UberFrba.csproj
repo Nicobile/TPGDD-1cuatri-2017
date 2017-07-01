@@ -204,7 +204,6 @@
     <Compile Include="DataProvider\ConstructorQuery.cs" />
     <Compile Include="DataProvider\Mapper.cs" />
     <Compile Include="DataProvider\QueryHelper.cs" />
-    <Compile Include="ConfigFecha.cs" />
     <Compile Include="Exceptions\CampoVacioException.cs" />
     <Compile Include="Exceptions\CantidaKilometrosInvalidoException.cs" />
     <Compile Include="Exceptions\ChoferInexistenteException.cs" />

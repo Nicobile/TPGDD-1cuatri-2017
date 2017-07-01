@@ -20,11 +20,7 @@ namespace UberFrba
         private SqlCommand command;
 
 
-        /*
-        *
-        *   GENERIC CRUD
-        *
-        */
+   
 
 
         public int Crear(Mapeable objeto)

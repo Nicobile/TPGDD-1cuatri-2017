@@ -11,7 +11,7 @@ using UberFrba.Modelo;
 using UberFrba.Exceptions;
 using UberFrba.ABM_Cliente;
 using UberFrba.DataProvider;
-
+using System.Configuration;
 namespace UberFrba.ABM_Cliente
 {
     public partial class EditarCliente : Form
@@ -25,6 +25,8 @@ namespace UberFrba.ABM_Cliente
         public EditarCliente(String idCliente)
         {
             InitializeComponent();
+            DateTime FECHA_ACTUAL = DateTime.Parse(ConfigurationManager.AppSettings["Fecha"]);
+            this.monthCalendar_FechaDeNacimiento.MaxDate = FECHA_ACTUAL;
             this.idCliente = Convert.ToInt32(idCliente);
         }
 

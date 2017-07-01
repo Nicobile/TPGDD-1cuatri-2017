@@ -12,6 +12,7 @@ using UberFrba.Exceptions;
 using UberFrba.Utils;
 using UberFrba.DataProvider;
 using UberFrba.Abm_Cliente;
+using System.Configuration;
 namespace UberFrba.ABM_Cliente
 {
 
@@ -29,6 +30,8 @@ namespace UberFrba.ABM_Cliente
         public AgregarCliente(String username, String contrasena,Boolean creadoDesdeRegistrar)
         {
             InitializeComponent();
+            DateTime FECHA_ACTUAL = DateTime.Parse(ConfigurationManager.AppSettings["Fecha"]);
+            this.monthCalendar_FechaDeNacimiento.MaxDate = FECHA_ACTUAL;
             this.username = username;
             this.contrasena = contrasena;
             this.creadoDesdeRegistrarUsuario = creadoDesdeRegistrar;

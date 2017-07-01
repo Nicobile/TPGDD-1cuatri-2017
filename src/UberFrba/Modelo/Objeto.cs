@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Configuration;
 namespace UberFrba.Modelo
 {
     class Objeto
@@ -20,10 +20,10 @@ namespace UberFrba.Modelo
         }
 
  
-        public Boolean esFechaPasada(DateTime dateTime)
+        public Boolean esFechaPasada(DateTime dateTime) // modificado habria que ver que siga funcionando
         {
-            DateTime dateNow = ConfigFecha.getInstance().getCurrentDate();
-            int comparacion = dateTime.CompareTo(dateNow);
+              DateTime FECHA_ACTUAL = DateTime.Parse(ConfigurationManager.AppSettings["Fecha"]);
+            int comparacion = dateTime.CompareTo(FECHA_ACTUAL);
             if (comparacion >= 0)
                 return false;
             else

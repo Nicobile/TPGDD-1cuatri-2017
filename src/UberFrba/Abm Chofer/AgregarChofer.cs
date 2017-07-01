@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 using UberFrba.Modelo;
 using UberFrba.Exceptions;
 using UberFrba.DataProvider;
+using System.Configuration;
 
 namespace UberFrba.ABM_Chofer
 {
@@ -25,6 +26,8 @@ namespace UberFrba.ABM_Chofer
         public AgregarChofer(String username, String contrasena,Boolean creadoDesdeRegistrar)
         {
             InitializeComponent();
+            DateTime FECHA_ACTUAL = DateTime.Parse(ConfigurationManager.AppSettings["Fecha"]);
+            this.monthCalendar_FechaDeNacimiento.MaxDate = FECHA_ACTUAL;
             this.username = username;
             this.contrasena = contrasena;
             this.idUsuario = 0;

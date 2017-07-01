@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 using UberFrba.Modelo;
 using UberFrba.Exceptions;
 using UberFrba.DataProvider;
-
+using System.Configuration;
 namespace UberFrba.ABM_Chofer
 {
     public partial class EditarChofer : Form
@@ -23,6 +23,8 @@ namespace UberFrba.ABM_Chofer
         public EditarChofer(String idChofer,String idUsuarioChofer)
         {
             InitializeComponent();
+            DateTime FECHA_ACTUAL = DateTime.Parse(ConfigurationManager.AppSettings["Fecha"]);
+            this.monthCalendar_FechaDeCreacion.MaxDate = FECHA_ACTUAL;
             this.idChofer = Convert.ToInt32(idChofer);
             this.idUsuario = Convert.ToInt32(idUsuarioChofer);
         }

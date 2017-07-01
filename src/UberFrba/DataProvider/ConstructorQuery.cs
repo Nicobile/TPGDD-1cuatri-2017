@@ -10,9 +10,7 @@ namespace UberFrba.DataProvider
     class ConstructorQuery
     {
 
-        /// <summary>
-        /// Singleton attribute
-        /// </summary>
+
         private static ConstructorQuery instance;
 
         public static ConstructorQuery Instance

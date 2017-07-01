@@ -23,6 +23,8 @@ namespace UberFrba.Rendicion_Viajes
         public RendicionViaje()
         {
             InitializeComponent();
+            DateTime FECHA_ACTUAL = DateTime.Parse(ConfigurationManager.AppSettings["Fecha"]);
+            this.monthCalendar_Fecha.MaxDate = FECHA_ACTUAL;
         }
 
         public void RendicionViaje_Load(object sender, EventArgs e)

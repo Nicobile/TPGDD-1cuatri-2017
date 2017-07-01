@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UberFrba.Exceptions;
 using UberFrba.Modelo;
-
+using System.Configuration;
 namespace UberFrba.Facturacion
 {
     public partial class CrearFacturaCliente : Form
@@ -19,6 +19,9 @@ namespace UberFrba.Facturacion
         public CrearFacturaCliente()
         {
             InitializeComponent();
+            DateTime FECHA_ACTUAL = DateTime.Parse(ConfigurationManager.AppSettings["Fecha"]);
+            this.monthCalendar_FechaDeFacturaInicio.MaxDate = FECHA_ACTUAL;
+            this.monthCalendar_FechaDeFacturaFin.MaxDate = FECHA_ACTUAL;
         }
         
         private void CrearFacturaCliente_Load(object sender, EventArgs e)
