@@ -179,6 +179,7 @@ namespace UberFrba.ABM_Cliente
             // 
             this.textBox_FechaDeNacimiento.Location = new System.Drawing.Point(112, 97);
             this.textBox_FechaDeNacimiento.Name = "textBox_FechaDeNacimiento";
+            this.textBox_FechaDeNacimiento.ReadOnly = true;
             this.textBox_FechaDeNacimiento.Size = new System.Drawing.Size(164, 20);
             this.textBox_FechaDeNacimiento.TabIndex = 6;
             // 

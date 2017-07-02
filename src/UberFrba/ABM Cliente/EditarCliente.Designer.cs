@@ -34,6 +34,7 @@ namespace UberFrba.ABM_Cliente
             this.button_Limpiar = new System.Windows.Forms.Button();
             this.checkBox_Habilitado = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.monthCalendar_FechaDeNacimiento = new System.Windows.Forms.MonthCalendar();
             this.textBox_CodigoPostal = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.textBox_Telefono = new System.Windows.Forms.TextBox();
@@ -41,7 +42,6 @@ namespace UberFrba.ABM_Cliente
             this.textBox_Mail = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_Direccion = new System.Windows.Forms.TextBox();
-            this.monthCalendar_FechaDeNacimiento = new System.Windows.Forms.MonthCalendar();
             this.label11 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.button_FechaDeNacimiento = new System.Windows.Forms.Button();
@@ -123,6 +123,14 @@ namespace UberFrba.ABM_Cliente
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos";
             // 
+            // monthCalendar_FechaDeNacimiento
+            // 
+            this.monthCalendar_FechaDeNacimiento.Location = new System.Drawing.Point(124, 19);
+            this.monthCalendar_FechaDeNacimiento.Name = "monthCalendar_FechaDeNacimiento";
+            this.monthCalendar_FechaDeNacimiento.TabIndex = 13;
+            this.monthCalendar_FechaDeNacimiento.Visible = false;
+            this.monthCalendar_FechaDeNacimiento.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar_FechaDeNacimiento_DateSelected);
+            // 
             // textBox_CodigoPostal
             // 
             this.textBox_CodigoPostal.Location = new System.Drawing.Point(112, 220);
@@ -178,14 +186,6 @@ namespace UberFrba.ABM_Cliente
             this.textBox_Direccion.Size = new System.Drawing.Size(250, 20);
             this.textBox_Direccion.TabIndex = 14;
             // 
-            // monthCalendar_FechaDeNacimiento
-            // 
-            this.monthCalendar_FechaDeNacimiento.Location = new System.Drawing.Point(124, 19);
-            this.monthCalendar_FechaDeNacimiento.Name = "monthCalendar_FechaDeNacimiento";
-            this.monthCalendar_FechaDeNacimiento.TabIndex = 13;
-            this.monthCalendar_FechaDeNacimiento.Visible = false;
-            this.monthCalendar_FechaDeNacimiento.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar_FechaDeNacimiento_DateSelected);
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -218,6 +218,7 @@ namespace UberFrba.ABM_Cliente
             // 
             this.textBox_FechaDeNacimiento.Location = new System.Drawing.Point(112, 97);
             this.textBox_FechaDeNacimiento.Name = "textBox_FechaDeNacimiento";
+            this.textBox_FechaDeNacimiento.ReadOnly = true;
             this.textBox_FechaDeNacimiento.Size = new System.Drawing.Size(164, 20);
             this.textBox_FechaDeNacimiento.TabIndex = 6;
             // 
