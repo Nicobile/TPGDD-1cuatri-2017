@@ -61,10 +61,6 @@ IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'PUSH_IT_TO_TH
 
 	
 /*Validacion Triggers*/
-IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.actualizacion_turno') IS NOT NULL
-		DROP TRIGGER PUSH_IT_TO_THE_LIMIT.actualizacion_turno
-Go
-
 IF OBJECT_ID('PUSH_IT_TO_THE_LIMIT.insertar_Turno') IS NOT NULL
 		DROP TRIGGER PUSH_IT_TO_THE_LIMIT.insertar_Turno
 Go

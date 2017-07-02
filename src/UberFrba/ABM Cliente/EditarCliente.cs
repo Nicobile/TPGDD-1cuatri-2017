@@ -99,7 +99,7 @@ namespace UberFrba.ABM_Cliente
                 {
                     MessageBox.Show("El cliente se modifico correctamente");
                     String usernameIgualAlDNI = Convert.ToString(mapper.SelectFromWhere("usuario_name", "Usuario", "usuario_id", this.idUsuario));
-                    if (dniViejo != numeroDeDocumento && numeroDeDocumento==usernameIgualAlDNI) {
+                    if (dniViejo != numeroDeDocumento && dniViejo==usernameIgualAlDNI) {
 
                         mapper.ActualizarUsuarioyPassword(this.idUsuario, numeroDeDocumento, numeroDeDocumento);//solo le cambio usuario y contraseña cuando se modifica el dni de alguno de los clientes migrados ,cualquier cliente agregado a la migracion no 
                         MessageBox.Show("Contraseña modificada","Actulizacion Contraseña",MessageBoxButtons.OK,MessageBoxIcon.Information);
