@@ -21,7 +21,9 @@ namespace UberFrba.Facturacion
             InitializeComponent();
             DateTime FECHA_ACTUAL = DateTime.Parse(ConfigurationManager.AppSettings["Fecha"]);
             this.monthCalendar_FechaDeFacturaInicio.MaxDate = FECHA_ACTUAL;
+            this.monthCalendar_FechaDeFacturaInicio.TodayDate = FECHA_ACTUAL;
             this.monthCalendar_FechaDeFacturaFin.MaxDate = FECHA_ACTUAL;
+            this.monthCalendar_FechaDeFacturaFin.TodayDate = FECHA_ACTUAL;
         }
         
         private void CrearFacturaCliente_Load(object sender, EventArgs e)

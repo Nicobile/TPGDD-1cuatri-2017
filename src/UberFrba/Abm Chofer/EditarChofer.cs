@@ -25,6 +25,7 @@ namespace UberFrba.ABM_Chofer
             InitializeComponent();
             DateTime FECHA_ACTUAL = DateTime.Parse(ConfigurationManager.AppSettings["Fecha"]);
             this.monthCalendar_FechaDeCreacion.MaxDate = FECHA_ACTUAL;
+            this.monthCalendar_FechaDeCreacion.TodayDate = FECHA_ACTUAL;
             this.idChofer = Convert.ToInt32(idChofer);
             this.idUsuario = Convert.ToInt32(idUsuarioChofer);
         }

@@ -96,12 +96,12 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Wheat;
+            this.groupBox1.Controls.Add(this.monthCalendar_FechaDeCreacion);
             this.groupBox1.Controls.Add(this.textBox_Telefono);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.textBox_Direccion);
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Controls.Add(this.monthCalendar_FechaDeCreacion);
             this.groupBox1.Controls.Add(this.textBox_Mail);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.textBox_Apellido);

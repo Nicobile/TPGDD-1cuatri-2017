@@ -28,6 +28,7 @@ namespace UberFrba.ABM_Chofer
             InitializeComponent();
             DateTime FECHA_ACTUAL = DateTime.Parse(ConfigurationManager.AppSettings["Fecha"]);
             this.monthCalendar_FechaDeNacimiento.MaxDate = FECHA_ACTUAL;
+            this.monthCalendar_FechaDeNacimiento.TodayDate= FECHA_ACTUAL;
             this.username = username;
             this.contrasena = contrasena;
             this.idUsuario = 0;

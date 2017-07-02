@@ -98,6 +98,7 @@ namespace UberFrba.ABM_Cliente
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Wheat;
+            this.groupBox1.Controls.Add(this.monthCalendar_FechaDeNacimiento);
             this.groupBox1.Controls.Add(this.textBox_CodigoPostal);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.textBox_Telefono);
@@ -105,7 +106,6 @@ namespace UberFrba.ABM_Cliente
             this.groupBox1.Controls.Add(this.textBox_Mail);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.textBox_Direccion);
-            this.groupBox1.Controls.Add(this.monthCalendar_FechaDeNacimiento);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.button_FechaDeNacimiento);
@@ -180,7 +180,7 @@ namespace UberFrba.ABM_Cliente
             // 
             // monthCalendar_FechaDeNacimiento
             // 
-            this.monthCalendar_FechaDeNacimiento.Location = new System.Drawing.Point(162, 19);
+            this.monthCalendar_FechaDeNacimiento.Location = new System.Drawing.Point(124, 19);
             this.monthCalendar_FechaDeNacimiento.Name = "monthCalendar_FechaDeNacimiento";
             this.monthCalendar_FechaDeNacimiento.TabIndex = 13;
             this.monthCalendar_FechaDeNacimiento.Visible = false;

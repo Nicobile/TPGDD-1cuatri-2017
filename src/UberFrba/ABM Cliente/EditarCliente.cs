@@ -27,6 +27,7 @@ namespace UberFrba.ABM_Cliente
             InitializeComponent();
             DateTime FECHA_ACTUAL = DateTime.Parse(ConfigurationManager.AppSettings["Fecha"]);
             this.monthCalendar_FechaDeNacimiento.MaxDate = FECHA_ACTUAL;
+            this.monthCalendar_FechaDeNacimiento.TodayDate = FECHA_ACTUAL;
             this.idCliente = Convert.ToInt32(idCliente);
         }
 

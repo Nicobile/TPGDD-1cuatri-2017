@@ -25,6 +25,7 @@ namespace UberFrba.Registro_Viajes
         {
             InitializeComponent();
             DateTime FECHA_ACTUAL = DateTime.Parse(ConfigurationManager.AppSettings["Fecha"]);
+            this.monthCalendar_FechaDeViaje.TodayDate = FECHA_ACTUAL;
             this.monthCalendar_FechaDeViaje.MaxDate = FECHA_ACTUAL;
         }
 
