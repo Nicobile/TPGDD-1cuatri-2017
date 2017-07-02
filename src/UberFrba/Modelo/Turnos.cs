@@ -32,6 +32,10 @@ namespace UberFrba.Modelo
             {
                 throw new CampoVacioException("Hora inicio");
             }
+              
+            if (!esNumero(hora)){
+                throw new FormatoInvalidoException("Hora Inicio");
+                 }
            this.horaInicio = Convert.ToInt32(hora);
         }
 
@@ -42,8 +46,14 @@ namespace UberFrba.Modelo
         public void SetHoraFin(String hora)
         {
             if (hora == "")
+            {
                 throw new CampoVacioException("Hora fin");
+            }
 
+            if (!esNumero(hora))
+            {
+                throw new FormatoInvalidoException("Hora FIn");
+            }
             this.horaFin = Convert.ToInt32(hora);
   
         }
