@@ -76,7 +76,7 @@ namespace UberFrba.Registro_Viajes
         private void CargarComboBoxChoferes()
         {
             
-            DataTable dniChoferes = mapper.SelectDataTable("chofer_dni", "PUSH_IT_TO_THE_LIMIT.Chofer", " chofer_id IN (SELECT chofer_id FROM PUSH_IT_TO_THE_LIMIT.ChoferporAuto WHERE auto_chofer_estado=1)");
+            DataTable dniChoferes = mapper.SelectDataTable("chofer_dni", "PUSH_IT_TO_THE_LIMIT.Chofer", " chofer_id IN (SELECT chofer_id FROM PUSH_IT_TO_THE_LIMIT.ChoferporAuto WHERE auto_chofer_estado=1) AND Chofer.chofer_estado=1");
 
 
             foreach (DataRow fila in dniChoferes.Rows)
@@ -91,7 +91,7 @@ namespace UberFrba.Registro_Viajes
         private void CargarComboBoxClientes()
         {
 
-            DataTable dniClientes = mapper.SelectDataTable("cliente_dni", "PUSH_IT_TO_THE_LIMIT.Cliente c", "  c.cliente_id IN (SELECT c.cliente_id FROM PUSH_IT_TO_THE_LIMIT.Usuario u WHERE u.usuario_habilitado=1 and c.cliente_id=u.usuario_id)");
+            DataTable dniClientes = mapper.SelectDataTable("cliente_dni", "PUSH_IT_TO_THE_LIMIT.Cliente c", "  c.cliente_id IN (SELECT c.cliente_id FROM PUSH_IT_TO_THE_LIMIT.Usuario u WHERE u.usuario_habilitado=1 and c.cliente_id=u.usuario_id) AND c.cliente_estado=1");
 
 
             foreach (DataRow fila in dniClientes.Rows)
