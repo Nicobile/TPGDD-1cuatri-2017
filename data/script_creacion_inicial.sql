@@ -261,7 +261,7 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].[Auto](
 	[auto_marca] VARCHAR(255) NOT NULL,
 	[auto_modelo] VARCHAR(255) NOT NULL,
 	[auto_estado] BIT not null DEFAULT 1,
-	[auto_licencia] VARCHAR(255),
+	[auto_licencia] VARCHAR(26),
 	[auto_rodado] VARCHAR(10),
 )
 
@@ -281,7 +281,7 @@ create table [PUSH_IT_TO_THE_LIMIT].RegistroViaje(
 	[turno_id] INT NOT NULL ,                           
 	[viaje_cantidad_km] NUMERIC(18,0) NOT NULL, 
 	[rendicion_id] NUMERIC(18,0),                                                             
-	[viaje_fecha] date NOT NULL,
+	[viaje_fecha] DATETIME NOT NULL,
 	[viaje_hora_inicio] time(0)  ,
 	[viaje_hora_fin] time(0)  ,
 	[cliente_id] INT NOT NULL ,
