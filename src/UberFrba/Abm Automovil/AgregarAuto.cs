@@ -51,7 +51,7 @@ namespace UberFrba.Abm_Automovil
         private void CargarComboBoxChoferes()
         {
 
-            DataTable dniChoferes = mapper.SelectDataTable("chofer_dni", "PUSH_IT_TO_THE_LIMIT.Chofer", " chofer_id IN (SELECT chofer_id FROM PUSH_IT_TO_THE_LIMIT.ChoferporAuto  WHERE auto_chofer_estado=0)");
+            DataTable dniChoferes = mapper.SelectDataTable("chofer_dni", "PUSH_IT_TO_THE_LIMIT.Chofer", " chofer_id IN (SELECT c.chofer_id  FROM PUSH_IT_TO_THE_LIMIT.ChoferporAuto ca Right join PUSH_IT_TO_THE_LIMIT.Chofer c on(ca.chofer_id = c.chofer_id) WHERE auto_chofer_estado=0 or auto_chofer_estado IS NULL )");
 
 
             foreach (DataRow fila in dniChoferes.Rows)
