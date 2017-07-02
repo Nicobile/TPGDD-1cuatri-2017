@@ -270,6 +270,11 @@ namespace UberFrba.Registro_Viajes
                 return;
 
             }
+            catch (FormatoInvalidoException exceptionFormato)
+            {
+                MessageBox.Show("Los datos fueron mal ingresados en: " + exceptionFormato.Message);
+                return;
+            }
                         
         }
 
