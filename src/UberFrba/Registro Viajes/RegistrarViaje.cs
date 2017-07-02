@@ -162,11 +162,12 @@ namespace UberFrba.Registro_Viajes
             //Crear RegistroViaje
             try
             {
-                String idTurnoSeleccionado = this.obtenerIdTurnoaPartirDeCombobox(comboBox_TurnosAutmovilSeleccionado.Text);
+                
 
                 RegistroViaje registroViaje = new RegistroViaje();
                 registroViaje.SetIdChofer(DNIChofer);
                 registroViaje.SetIdAuto(PatenteAuto);
+                String idTurnoSeleccionado = this.obtenerIdTurnoaPartirDeCombobox(comboBox_TurnosAutmovilSeleccionado.Text);
                 registroViaje.SetIdTurno(idTurnoSeleccionado);
                 registroViaje.SetCantidadKm(CantKm);
                 registroViaje.SetFechaViaje(fecha);
@@ -269,7 +270,7 @@ namespace UberFrba.Registro_Viajes
                 return;
 
             }
-
+                        
         }
 
        
