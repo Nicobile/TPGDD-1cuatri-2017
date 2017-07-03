@@ -209,7 +209,7 @@ CREATE TABLE [PUSH_IT_TO_THE_LIMIT].Factura(
 	[factura_fecha_inicio] DATETIME , 
 	[factura_fecha_fin] DATETIME ,
 	[factura_id] numeric(18,0) IDENTITY(1,1) PRIMARY KEY,
-	[cliente_id] INT NOT NULL REFERENCES [PUSH_IT_TO_THE_LIMIT].Cliente,
+	[cliente_id] INT NOT NULL ,
 	[factura_importe_total] NUMERIC(18,2) ,
 	)
 
