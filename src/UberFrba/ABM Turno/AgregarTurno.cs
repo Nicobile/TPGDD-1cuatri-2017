@@ -107,6 +107,11 @@ namespace UberFrba.ABM_Turno
 
         }
 
+        private void AgregarTurno_Load(object sender, EventArgs e)
+        {
+            this.checkBox_Habilitado.Checked = true;
+        }
+
 
     
     }

@@ -819,13 +819,13 @@ GO
   AS
 BEGIN	
 	if exists(select 1 from [PUSH_IT_TO_THE_LIMIT].RegistroViaje where(chofer_id = @idChofer AND
-	@HoraInicio >= viaje_hora_inicio AND @HoraFin <= viaje_hora_fin 
+	(@HoraInicio >= viaje_hora_inicio OR @HoraFin <= viaje_hora_fin )
 	AND viaje_fecha = @fecha)) throw 51015,'EL chofer ya tiene otro viaje registrado en ese horario',16;
 
 	
 	if exists(select 1 from [PUSH_IT_TO_THE_LIMIT].RegistroViaje 
 	where(cliente_id = @idCliente AND
-	@HoraInicio >= viaje_hora_inicio AND @HoraFin <= viaje_hora_fin
+	(@HoraInicio >= viaje_hora_inicio OR @HoraFin <= viaje_hora_fin)
 	AND viaje_fecha = @fecha)
 	
 	) throw 51016,'EL cliente ya tiene otro viaje registrado en ese horario',16;

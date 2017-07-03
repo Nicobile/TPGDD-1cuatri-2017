@@ -204,6 +204,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AgregarTurno";
             this.Text = "AgregarTurno";
+            this.Load += new System.EventHandler(this.AgregarTurno_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
